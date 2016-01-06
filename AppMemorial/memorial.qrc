@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/">
+        <file>src/qml/main.qml</file>
+        <file>src/qml/TabWidget.qml</file>
+        <file>src/image/tab.png</file>
+    </qresource>
+</RCC>
