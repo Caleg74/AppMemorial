@@ -47,7 +47,6 @@ Window {
     height: 480
     visible: true
     title: qsTr("Memorial Gander")
-    color: "#F0F0F0"
 
     TabWidget {
         id: tabs
@@ -57,13 +56,13 @@ Window {
         Rectangle {
             property string title: "Red"
             anchors.fill: parent
-            color: "#e3e3e3"
+            color: "#d0d0d0"
 
             Rectangle {
                 anchors.fill: parent; anchors.margins: 20
-                color: "#ff7f7f"
+                color: "#d0d0d0"
                 Text {
-                    height: parent.height - 20
+                    width: parent.width - 20
                     anchors.centerIn: parent; horizontalAlignment: Qt.AlignHCenter
                     text: "Roses are red"
                     font.pixelSize: 20
@@ -75,11 +74,11 @@ Window {
         Rectangle {
             property string title: "Green"
             anchors.fill: parent
-            color: "#e3e3e3"
+            color: "#d0d0d0"
 
             Rectangle {
                 anchors.fill: parent; anchors.margins: 20
-                color: "#7fff7f"
+                color: "#d0d0d0"
                 Text {
                     width: parent.width - 20
                     anchors.centerIn: parent; horizontalAlignment: Qt.AlignHCenter
@@ -92,11 +91,11 @@ Window {
 
         Rectangle {
             property string title: "Blue"
-            anchors.fill: parent; color: "#e3e3e3"
+            anchors.fill: parent; color: "#d0d0d0"
 
             Rectangle {
                 anchors.fill: parent; anchors.margins: 20
-                color: "#7f7fff"
+                color: "#d0d0d0"
                 Text {
                     width: parent.width - 20
                     anchors.centerIn: parent; horizontalAlignment: Qt.AlignHCenter

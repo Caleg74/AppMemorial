@@ -71,23 +71,28 @@ Item {
                 height: tabWidget.height / stack.children.length;
 
                 Rectangle {
-                    width: parent.width ; height: 0
+                    width: parent.width ; height: parent.height
                     anchors { left: parent.left; rightMargin: 1 }
-                    color: "#acb2c2"
+                    color: (tabWidget.current == index) ? "#072c49" : "#0a3f60"
                 }
-                BorderImage {
-                    anchors { fill: parent; leftMargin: 2; topMargin: 5; rightMargin: 0 }
-                    border { top: 7; bottom: 7 }
-                    source: "/src/image/tab.png"
-                    visible: tabWidget.current == index
-                }
+
                 Text {
                     horizontalAlignment: Qt.AlignHCenter; verticalAlignment: Qt.AlignVCenter
                     anchors.fill: parent
                     text: stack.children[index].title
                     elide: Text.ElideRight
                     font.bold: tabWidget.current == index
+                    color: (tabWidget.current == index) ? "#FFFFFF" : "#83d1f5"
                 }
+
+                Image {
+                    width: 20 ; height: 20
+                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.right: parent.right
+                    source: "/src/image/selectedTab.svg"
+                    opacity: (tabWidget.current == index) ? 1 : 0
+                }
+
                 MouseArea {
                     anchors.fill: parent
                     onClicked: tabWidget.current = index
