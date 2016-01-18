@@ -67,7 +67,7 @@ Item {
             model: stack.children.length
             delegate: Rectangle {
 
-                width: 100
+                width: 150
                 height: tabWidget.height / stack.children.length;
 
                 Rectangle {
@@ -82,6 +82,7 @@ Item {
                     text: stack.children[index].title
                     elide: Text.ElideRight
                     font.bold: tabWidget.current == index
+                    font.pixelSize: 16
                     color: (tabWidget.current == index) ? "#FFFFFF" : "#83d1f5"
                 }
 
@@ -89,7 +90,7 @@ Item {
                     width: 20 ; height: 20
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.right: parent.right
-                    source: "/src/image/selectedTab.svg"
+                    source: "qrc:/images/selectedTab.svg"
                     opacity: (tabWidget.current == index) ? 1 : 0
                 }
 

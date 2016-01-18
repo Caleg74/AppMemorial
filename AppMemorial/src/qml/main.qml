@@ -40,6 +40,7 @@
 
 import QtQuick 2.0
 import QtQuick.Window 2.2
+import "qrc:/qml"
 
 Window {
     id: window
@@ -54,7 +55,7 @@ Window {
         height: parent.height
 
         Rectangle {
-            property string title: "Red"
+            property string title: "Registra \nGinnasti"
             anchors.fill: parent
             color: "#d0d0d0"
 
@@ -67,12 +68,19 @@ Window {
                     text: "Roses are red"
                     font.pixelSize: 20
                     wrapMode: Text.WordWrap
+
+                    GymnastData
+                    {
+                        width: parent.width
+                        height: parent.height
+                        anchors.top: parent.top
+                    }
                 }
             }
         }
 
         Rectangle {
-            property string title: "Green"
+            property string title: "Classifica \nSingola \nMaschile"
             anchors.fill: parent
             color: "#d0d0d0"
 
@@ -90,7 +98,7 @@ Window {
         }
 
         Rectangle {
-            property string title: "Blue"
+            property string title: "Classifica \nSingola \nFemminile"
             anchors.fill: parent; color: "#d0d0d0"
 
             Rectangle {
@@ -100,6 +108,23 @@ Window {
                     width: parent.width - 20
                     anchors.centerIn: parent; horizontalAlignment: Qt.AlignHCenter
                     text: "Violets are blue"
+                    font.pixelSize: 20
+                    wrapMode: Text.WordWrap
+                }
+            }
+        }
+
+        Rectangle {
+            property string title: "Classifica \nGenerale"
+            anchors.fill: parent; color: "#d0d0d0"
+
+            Rectangle {
+                anchors.fill: parent; anchors.margins: 20
+                color: "#d0d0d0"
+                Text {
+                    width: parent.width - 20
+                    anchors.centerIn: parent; horizontalAlignment: Qt.AlignHCenter
+                    text: "Classifica Generale"
                     font.pixelSize: 20
                     wrapMode: Text.WordWrap
                 }

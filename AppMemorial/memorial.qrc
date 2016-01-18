@@ -1,7 +1,17 @@
 <RCC>
-    <qresource prefix="/">
-        <file>src/qml/main.qml</file>
-        <file>src/qml/TabWidget.qml</file>
-        <file>src/image/selectedTab.svg</file>
+    <qresource prefix="/qml">
+        <file alias="main.qml">src/qml/main.qml</file>
+        <file alias="TabWidget.qml">src/qml/TabWidget.qml</file>
+        <file alias="GymnastData.qml">src/qml/GymnastData.qml</file>
+    </qresource>
+    <qresource prefix="/images">
+        <file alias="add_icon.png">src/image/add_icon.png</file>
+        <file alias="add_icon_pressed.png">src/image/add_icon_pressed.png</file>
+        <file alias="delegate.png">src/image/delegate.png</file>
+        <file alias="delegate_pressed.png">src/image/delegate_pressed.png</file>
+        <file alias="delegate_icon.png">src/image/delete_icon.png</file>
+        <file alias="delegate_icon_pressed.png">src/image/delete_icon_pressed.png</file>
+        <file alias="selectedTab.svg">src/image/selectedTab.svg</file>
+        <file alias="textfield.png">src/image/textfield.png</file>
     </qresource>
 </RCC>
