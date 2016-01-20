@@ -2,7 +2,7 @@
     <qresource prefix="/qml">
         <file alias="main.qml">src/qml/main.qml</file>
         <file alias="TabWidget.qml">src/qml/TabWidget.qml</file>
-        <file alias="GymnastData.qml">src/qml/GymnastData.qml</file>
+        <file alias="GymnastInfo.qml">src/qml/GymnastInfo.qml</file>
     </qresource>
     <qresource prefix="/images">
         <file alias="add_icon.png">src/image/add_icon.png</file>

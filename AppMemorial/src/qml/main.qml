@@ -69,7 +69,7 @@ Window {
                     font.pixelSize: 20
                     wrapMode: Text.WordWrap
 
-                    GymnastData
+                    GymnastInfo
                     {
                         width: parent.width
                         height: parent.height

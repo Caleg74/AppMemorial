@@ -107,7 +107,7 @@ Item {
                         verticalAlignment: Text.AlignVCenter
                         visible: !(parent.text.length || parent.inputMethodComposing)
                         font: parent.font
-                        text: "New todo..."
+                        text: "Nome.."
                         color: "#aaa"
                     }
                     onAccepted: {
