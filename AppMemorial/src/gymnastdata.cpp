@@ -69,3 +69,19 @@ QString GymnastData::Sex() const
 {
     return m_sex;
 }
+
+
+bool operator== (const GymnastData& lhs, const GymnastData& rhs)
+{
+    if ( (lhs.FirstName() == rhs.FirstName())
+      && (lhs.LastName() == rhs.LastName())
+      && (lhs.Country() == rhs.Country())
+      && (lhs.Sex() == rhs.Sex()))
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}

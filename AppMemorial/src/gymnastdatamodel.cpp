@@ -1,16 +1,47 @@
 #include "gymnastdatamodel.h"
 
+//**** STATIC MEMBER INITIALIZATION *********************
+GymnastDataModel* GymnastDataModel::sm_pInstance = NULL;
+
+
+//*******************************************************
+
+GymnastDataModel* GymnastDataModel::Instance()
+{
+    if (sm_pInstance == NULL)
+    {
+        sm_pInstance = new GymnastDataModel();
+    }
+
+    return sm_pInstance;
+}
 
 GymnastDataModel::GymnastDataModel(QObject *parent)
     : QAbstractListModel(parent)
 {
 }
 
-void GymnastDataModel::addGymnast(const GymnastData &gymnast)
+void GymnastDataModel::addItem(QString firstName,
+                                  QString lastName,
+                                  QString country,
+                                  QString sex)
 {
+    GymnastData cNewGymnast(firstName, lastName, country, sex);
+
     beginInsertRows(QModelIndex(), rowCount(), rowCount());
-    m_gymnastList << gymnast;
+    m_gymnastList << cNewGymnast;
     endInsertRows();
+}
+
+void GymnastDataModel::removeItem(QString firstName, QString lastName)
+{
+    GymnastData* pItem = GetItem(firstName, lastName);
+
+    QModelIndex pIndex = indexFromItem(pItem);
+
+    beginRemoveRows(QModelIndex(), pIndex.row(), pIndex.row());
+    m_gymnastList.removeAt(pIndex.row());
+    endRemoveRows();
 }
 
 int GymnastDataModel::rowCount(const QModelIndex & parent) const {
@@ -44,3 +75,24 @@ QHash<int, QByteArray> GymnastDataModel::roleNames() const {
     return roles;
 }
 
+QModelIndex GymnastDataModel::indexFromItem(const GymnastData* item) const
+{
+    Q_ASSERT(item);
+    for(int row=0; row<m_gymnastList.size(); ++row)
+    {
+        if(m_gymnastList.at(row) == (*item)) return index(row);
+    }
+    return QModelIndex();
+}
+
+GymnastData* GymnastDataModel::GetItem(QString& firstName, QString& lastName)
+{
+    QList<GymnastData>::const_iterator iter;
+    for (iter = m_gymnastList.constBegin(); iter != m_gymnastList.constEnd(); ++iter)
+    {
+        if (((iter)->FirstName() == firstName) && ((iter)->LastName() == lastName))
+            return (GymnastData*)iter.i->v;
+    }
+
+    return NULL;
+}

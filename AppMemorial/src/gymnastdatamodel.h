@@ -2,7 +2,7 @@
 #define GYMNASTDATAMODEL_H
 
 #include <QAbstractListModel>
-#include <QStringList>
+#include <QList>
 #include "gymnastdata.h"
 
 class GymnastDataModel : public QAbstractListModel
@@ -16,17 +16,38 @@ public:
         SexRole
     };
 
-    GymnastDataModel(QObject *parent = 0);
-
-    void addGymnast(const GymnastData &gymnast);
+    /** Singleton */
+    static GymnastDataModel* Instance();
 
     int rowCount(const QModelIndex & parent = QModelIndex()) const;
 
     QVariant data(const QModelIndex & index, int role = Qt::DisplayRole) const;
 
+//    bool insertRow(int row, const QModelIndex & parent = QModelIndex());
+
+
+public slots:
+
+    void addItem(QString firstName,
+                    QString lastName,
+                    QString country,
+                    QString sex);
+
+    void removeItem(QString firstName, QString lastName);
+
 protected:
     QHash<int, QByteArray> roleNames() const;
+
 private:
+
+    GymnastData* GetItem(QString& firstName, QString& lastName);
+
+    QModelIndex indexFromItem( const GymnastData* item) const;
+
+    GymnastDataModel(QObject *parent = 0);
+
+    static GymnastDataModel* sm_pInstance;   ///< Singleton
+
     QList<GymnastData> m_gymnastList;
 };
 

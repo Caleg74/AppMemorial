@@ -1,223 +1,164 @@
 import QtQuick 2.0
+import QtQuick.Controls 1.4
+import QtQuick.Controls.Styles 1.1
 
 Item {
-//    width: parent.width
-//    height: parent.height
+    width: parent.width
+    height: parent.height
+
 
     Rectangle {
+        height: parent.height
+        width: parent.width
         id: root
-        color: "#f4f4f4"
+        color: "#d0d0d0"
         anchors.fill: parent
 //        opacity: 1 - backendHelper.opacity
 
-        // A simple layout:
-        // a listview and a line edit with button to add to the list
+
         Rectangle {
-            id: header
-            anchors.top: parent.top
+            id: addGymnastSpace
             width: parent.width
+            y: 50
             height: 70
-            color: "white"
+            border.width: 5
+            border.color: "#d0d0d0"
+            radius: 1
+            color: "#d0d0d0"
 
-            Row {
-                id: logo
+
+            Row
+            {
+                spacing: 10
                 anchors.centerIn: parent
-                anchors.horizontalCenterOffset: -4
-                spacing: 4
-//                Image {
-//                    source: "qrc:images/enginio.png"
-//                    width: 160 ; height: 60
-//                    fillMode: Image.PreserveAspectFit
-//                }
-//                Text {
-//                    text: "Todos"
-//                    anchors.verticalCenter: parent.verticalCenter
-//                    anchors.verticalCenterOffset: -3
-//                    font.bold: true
-//                    font.pixelSize: 46
-//                    color: "#555"
-//                }
-            }
-            Rectangle {
-                width: parent.width ; height: 1
-                anchors.bottom: parent.bottom
-                color: "#bbb"
-            }
-        }
-
-        //![view]
-//        ListView {
-//            id: listview
-//            model: enginioModel
-//            delegate: listItemDelegate
-//            anchors.top: header.bottom
-//            anchors.bottom: footer.top
-//            width: parent.width
-//            clip: true
-
-//            // Animations
-//            add: Transition { NumberAnimation { properties: "y"; from: root.height; duration: 250 } }
-//            removeDisplaced: Transition { NumberAnimation { properties: "y"; duration: 150 } }
-//            remove: Transition { NumberAnimation { property: "opacity"; to: 0; duration: 150 } }
-//        }
-        //![view]
-
-        BorderImage {
-            id: footer
-
-            width: parent.width
-            anchors.bottom: parent.bottom
-            source: "qrc:/images/delegate.png"
-            border.left: 5; border.top: 5
-            border.right: 5; border.bottom: 5
-
-            Rectangle {
-                y: -1 ; height: 1
-                width: parent.width
-                color: "#bbb"
-            }
-            Rectangle {
-                y: 0 ; height: 1
-                width: parent.width
-                color: "white"
-            }
-
-            //![append]
-
-            BorderImage {
-
-                anchors.left: parent.left
-                anchors.right: addButton.left
                 anchors.verticalCenter: parent.verticalCenter
-                anchors.margins: 16
-                source:"qrc:/images/textfield.png"
-                border.left: 14 ; border.right: 14 ; border.top: 8 ; border.bottom: 8
 
-                TextInput{
-                    id: textInput
-                    anchors.fill: parent
-                    clip: true
-                    anchors.leftMargin: 14
-                    anchors.rightMargin: 14
-                    verticalAlignment: Text.AlignVCenter
-                    font.pixelSize: 22
-                    Text {
-                        id: placeholderText
+                TextField {
+                    id: txtFirstName
+                    width: parent.parent.width/4 - 50
+                    activeFocusOnPress: true
+                    style:textEditMGStyle
+                    placeholderText: "Nome.."
+                    font.pointSize: 15
+                }
+
+
+                TextField {
+                    id: txtLastName
+                    width: parent.parent.width/4 - 50
+                    activeFocusOnPress: true
+                    style:textEditMGStyle
+                    placeholderText: "Cognome.."
+                    font.pointSize: 15
+                }
+
+                ComboBox {
+                    id: cbbCountry
+                    width: parent.parent.width/4 - 50
+                    activeFocusOnPress: true
+                    style:comboBoxMGStyle
+                    currentIndex: 0
+
+                    model: ListModel {
+                        id: cbbCountryItem
+                        ListElement { text: "Nazione.."}
+                        ListElement { text: "Svizzera" }
+                        ListElement { text: "Francia" }
+                        ListElement { text: "Italia" }
+                    }
+                }
+
+                ComboBox {
+                    id: cbbSex
+                    width: parent.parent.width/4 - 50
+                    activeFocusOnPress: true
+                    style:comboBoxMGStyle
+                    currentIndex: 0
+
+                    model: ListModel {
+                        id: cbbSexItem
+                        ListElement { text: "Sesso.."}
+                        ListElement { text: "Uomo" }
+                        ListElement { text: "Donna" }
+                    }
+
+
+                }
+                Item {
+                    id: btnAddGymnast
+                    objectName: "btnAddGymnast"
+
+                    width: 40 ; height: 40
+                    enabled: (txtFirstName.text.length) && (txtLastName.text.length)
+                            && (cbbCountry.currentIndex > 0) && (cbbSex.currentIndex > 0)
+                    Image {
+                        source: addMouseArea.pressed ? "qrc:images/add_icon_pressed.png" : "qrc:images/add_icon.png"
+                        anchors.centerIn: parent
+                        opacity: enabled ? 1 : 0.5
+                    }
+                    MouseArea {
+                        id: addMouseArea
                         anchors.fill: parent
-                        verticalAlignment: Text.AlignVCenter
-                        visible: !(parent.text.length || parent.inputMethodComposing)
-                        font: parent.font
-                        text: "Nome.."
-                        color: "#aaa"
-                    }
-                    onAccepted: {
-                        enginioModel.append({"title": textInput.text, "completed": false})
-                        textInput.text = ""
-                    }
-                }
-            }
-
-            Item {
-                id: addButton
-
-                width: 40 ; height: 40
-                anchors.margins: 20
-                anchors.right: parent.right
-                anchors.verticalCenter: parent.verticalCenter
-                enabled: textInput.text.length
-                Image {
-                    source: addMouseArea.pressed ? "qrc:images/add_icon_pressed.png" : "qrc:images/add_icon.png"
-                    anchors.centerIn: parent
-                    opacity: enabled ? 1 : 0.5
-                }
-                MouseArea {
-                    id: addMouseArea
-                    anchors.fill: parent
-                    onClicked: textInput.accepted()
-                }
-            }
-        }
-        //![append]
-
-        Component {
-            id: listItemDelegate
-
-            BorderImage {
-                id: item
-
-                width: parent.width ; height: 70
-                source: mouse.pressed ? "qrc:images/delegate_pressed.png" : "qrc:images/delegate.png"
-                border.left: 5; border.top: 5
-                border.right: 5; border.bottom: 5
-
-                Image {
-                    id: shadow
-                    anchors.top: parent.bottom
-                    width: parent.width
-                    visible: !mouse.pressed
-                    source: "qrc:images/shadow.png"
-                }
-
-                //![setProperty]
-                MouseArea {
-                    id: mouse
-                    anchors.fill: parent
-                    hoverEnabled: true
-                    onClicked: {
-                        if (index !== -1 && _synced) {
-                            enginioModel.setProperty(index, "completed", !completed)
+                        onClicked: {
+                            GymnastDataModel.addItem(txtFirstName.text, txtLastName.text,
+                                                        cbbCountry.currentText, cbbSex.currentText)
+                            // remove fields for next input
+                            txtFirstName.text = ""
+                            txtLastName.text = ""
+                            cbbCountry.currentIndex = 0
+                            cbbSex.currentIndex = 0
                         }
                     }
                 }
-                //![setProperty]
-//                Image {
-//                    id: checkbox
-//                    anchors.left: parent.left
-//                    anchors.leftMargin: 16
-//                    width: 32
-//                    fillMode: Image.PreserveAspectFit
-//                    anchors.verticalCenter: parent.verticalCenter
-//                    source: completed ? "qrc:images/checkmark.png" : ""
-//                }
+            }
+        }
 
-                //![delegate-properties]
-                Text {
-                    id: todoText
-                    text: title
-                    font.pixelSize: 26
-                    color: "#333"
+        ScrollView {
+            width: parent.width
+            height: parent.height
+            anchors.top: addGymnastSpace.bottom
+            anchors.bottom: root.bottom
 
-                    anchors.verticalCenter: parent.verticalCenter
-                    anchors.left: checkbox.right
-                    anchors.right: parent.right
-                    anchors.leftMargin: 12
-                    anchors.rightMargin: 40
-                    elide: Text.ElideRight
-                }
-                //![delegate-properties]
+            flickableItem.interactive: true
 
-                // Show a delete button when the mouse is over the delegate
-                //![sync]
-                Image {
-                    id: removeIcon
+            ListView {
+    //            width: 200; height: 250
+                id: listviewinput
+                model: GymnastDataModel
+                delegate: GymnastDelegate { }
+                anchors.fill: parent
+                width: parent.width
+                clip: true
 
-                    source: removeMouseArea.pressed ? "qrc:icons/delete_icon_pressed.png" : "qrc:icons/delete_icon.png"
-                    anchors.margins: 20
-                    anchors.verticalCenter: parent.verticalCenter
-                    anchors.right: parent.right
-                    opacity: enabled ? 1 : 0.5
-                    Behavior on opacity {NumberAnimation{duration: 100}}
-                    //![remove]
-                    MouseArea {
-                        id: removeMouseArea
+
+                // Animations
+                add: Transition { NumberAnimation { properties: "y"; from:-50 ; duration: 500 } }
+                removeDisplaced: Transition { NumberAnimation { properties: "y"; duration: 150 } }
+                remove: Transition { NumberAnimation { property: "opacity"; to: 0; duration: 200 } }
+            }
+
+            style: ScrollViewStyle {
+                transientScrollBars: true
+                handle: Item {
+                    implicitWidth: 14
+                    implicitHeight: 26
+                    Rectangle {
+                        color: "grey"
                         anchors.fill: parent
-                        onClicked: enginioModel.remove(index)
+                        anchors.topMargin: 6
+                        anchors.leftMargin: 4
+                        anchors.rightMargin: 4
+                        anchors.bottomMargin: 6
                     }
-                    //![remove]
                 }
-                //![sync]
+                scrollBarBackground: Item {
+                    implicitWidth: 14
+                    implicitHeight: 26
+                }
             }
         }
     }
+
+
 }
 

@@ -5,7 +5,9 @@ CONFIG += c++11
 
 SOURCES += src/main.cpp \
     src/gymnastdata.cpp \
-    src/gymnastdatamodel.cpp
+    src/gymnastdatamodel.cpp \
+    src/coreapplication.cpp \
+    src/server/serverapp.cpp
 
 RESOURCES += memorial.qrc
 
@@ -24,7 +26,16 @@ include(deployment.pri)
 
 HEADERS += \
     src/gymnastdata.h \
-    src/gymnastdatamodel.h
+    src/gymnastdatamodel.h \
+    src/coreapplication.h \
+    src/server/serverapp.h
+
+INCLUDEPATH += src/server
 
 DISTFILES += \
-    src/qml/GymnastInfo.qml
+    src/qml/GymnastInfo.qml \
+    src/qml/StyleMGComboBox.qml \
+    src/qml/StyleMGTextInput.qml \
+    src/qml/GymnastDelegate.qml
+
+DEFINES += SERVER

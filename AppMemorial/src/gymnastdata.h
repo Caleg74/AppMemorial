@@ -56,6 +56,8 @@ public:
     QString Country() const;
     QString Sex() const;
 
+    friend bool operator== (const GymnastData& lhs, const GymnastData& rhs);
+
 private:
     QString m_firstName;
     QString m_lastName;

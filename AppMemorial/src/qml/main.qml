@@ -44,10 +44,13 @@ import "qrc:/qml"
 
 Window {
     id: window
-    width: 640
+    width: 768
     height: 480
     visible: true
     title: qsTr("Memorial Gander")
+
+    StyleMGComboBox{ id: comboBoxMGStyle}
+    StyleMGTextInput { id: textEditMGStyle}
 
     TabWidget {
         id: tabs
@@ -62,19 +65,12 @@ Window {
             Rectangle {
                 anchors.fill: parent; anchors.margins: 20
                 color: "#d0d0d0"
-                Text {
-                    width: parent.width - 20
-                    anchors.centerIn: parent; horizontalAlignment: Qt.AlignHCenter
-                    text: "Roses are red"
-                    font.pixelSize: 20
-                    wrapMode: Text.WordWrap
 
-                    GymnastInfo
-                    {
-                        width: parent.width
-                        height: parent.height
-                        anchors.top: parent.top
-                    }
+                GymnastInfo
+                {
+                    width: parent.width
+                    height: parent.height
+                    anchors.centerIn: parent
                 }
             }
         }
