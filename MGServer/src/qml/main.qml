@@ -51,8 +51,8 @@ Window {
 
     StyleMGComboBox{ id: comboBoxMGStyle}
     StyleMGTextInput { id: textEditMGStyle}
-
-    TabWidget {
+    StyleMGPushButton { id: buttonMGStyle}
+    StyleMGTabWidget {
         id: tabs
         width: parent.width
         height: parent.height
@@ -123,6 +123,13 @@ Window {
                     text: "Classifica Generale"
                     font.pixelSize: 20
                     wrapMode: Text.WordWrap
+                }
+
+                Ranking {
+
+                    width: parent.width
+                    height: parent.height
+                    anchors.centerIn: parent
                 }
             }
         }

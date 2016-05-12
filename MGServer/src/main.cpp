@@ -1,7 +1,7 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include "CoreApplication.h"
-
+#include "countrylist.h"
 
 int main(int argc, char *argv[])
 {
@@ -11,6 +11,9 @@ int main(int argc, char *argv[])
 
     CoreApplication cCoreApp;
     cCoreApp.Init(engine);
+
+    CountryList cCountryList;
+    cCountryList.Init(engine);
 
     engine.load(QUrl(QStringLiteral("qrc:qml/main.qml")));
 

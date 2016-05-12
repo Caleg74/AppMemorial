@@ -54,18 +54,19 @@ Item {
 
                 ComboBox {
                     id: cbbCountry
+                    model: comboModel.comboList
                     width: parent.parent.width/4 - 50
                     activeFocusOnPress: true
                     style:comboBoxMGStyle
                     currentIndex: 0
 
-                    model: ListModel {
-                        id: cbbCountryItem
-                        ListElement { text: "Nazione.."}
-                        ListElement { text: "Svizzera" }
-                        ListElement { text: "Francia" }
-                        ListElement { text: "Italia" }
-                    }
+//                    model: ListModel {
+//                        id: cbbCountryItem
+//                        ListElement { text: "Nazione.."}
+//                        ListElement { text: "Svizzera" }
+//                        ListElement { text: "Francia" }
+//                        ListElement { text: "Italia" }
+//                    }
                 }
 
                 ComboBox {
