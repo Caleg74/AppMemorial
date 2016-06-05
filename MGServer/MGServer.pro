@@ -42,5 +42,3 @@ OTHER_FILES += \
     src/qml/GymnastInfo.qml \
     src/qml/main.qml \
     src/qml/Ranking.qml
-
-DEFINES += SERVER

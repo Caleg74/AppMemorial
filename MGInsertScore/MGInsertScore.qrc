@@ -1,0 +1,11 @@
+<RCC>
+    <qresource prefix="/qml">
+        <file alias="StyleMGTabWidget.qml">../MGCommon/qml-styles/StyleMGTabWidget.qml</file>
+        <file alias="StyleMGComboBox.qml">../MGCommon/qml-styles/StyleMGComboBox.qml</file>
+        <file alias="StyleMGTextInput.qml">../MGCommon/qml-styles/StyleMGTextInput.qml</file>
+        <file alias="StyleMGPushButton.qml">../MGCommon/qml-styles/StyleMGPushButton.qml</file>
+<file alias="InsertScore.qml">src/qml/InsertScore.qml</file>
+        <file alias="main.qml">src/qml/main.qml</file>
+    </qresource>
+    <qresource prefix="/images"/>
+</RCC>
