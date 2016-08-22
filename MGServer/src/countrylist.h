@@ -15,6 +15,7 @@ public:
     void FillList();
 
 private:
+
     ComboBoxModel m_cCbbModel;
 };
 

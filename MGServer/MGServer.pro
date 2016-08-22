@@ -1,15 +1,16 @@
 TEMPLATE = app
 
-QT += qml quick
+QT += sql qml quick widgets
 CONFIG += c++11
 
 SOURCES += src/main.cpp \
     src/gymnastdata.cpp \
     src/gymnastdatamodel.cpp \
     src/coreapplication.cpp \
-    src/server/serverapp.cpp \
     src/comboboxmodel.cpp \
-    src/countrylist.cpp
+    src/countrylist.cpp \
+    src/dbinterface.cpp \
+    src/dbconnection.cpp
 
 RESOURCES += MGServer.qrc
 
@@ -27,9 +28,10 @@ HEADERS += \
     src/gymnastdata.h \
     src/gymnastdatamodel.h \
     src/coreapplication.h \
-    src/server/serverapp.h \
     src/comboboxmodel.h \
-    src/countrylist.h
+    src/countrylist.h \
+    src/dbinterface.h \
+    src/dbconnection.h
 
 INCLUDEPATH += src/server
 
@@ -42,3 +44,6 @@ OTHER_FILES += \
     src/qml/GymnastInfo.qml \
     src/qml/main.qml \
     src/qml/Ranking.qml
+
+DISTFILES += \
+    src/qml/EventData.qml

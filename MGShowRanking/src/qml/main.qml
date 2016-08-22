@@ -58,7 +58,7 @@ Window {
         height: parent.height
 
         Rectangle {
-            property string title: "Registra \nGinnasti"
+            property string title: "Classifica \nMaschile"
             anchors.fill: parent
             color: "#d0d0d0"
 
@@ -66,17 +66,17 @@ Window {
                 anchors.fill: parent; anchors.margins: 20
                 color: "#d0d0d0"
 
-                GymnastInfo
-                {
-                    width: parent.width
-                    height: parent.height
-                    anchors.centerIn: parent
-                }
+//                GymnastInfo
+//                {
+//                    width: parent.width
+//                    height: parent.height
+//                    anchors.centerIn: parent
+//                }
             }
         }
 
         Rectangle {
-            property string title: "Dati\n Evento"
+            property string title: "Classifica \nFemminile"
             anchors.fill: parent
             color: "#d0d0d0"
 
@@ -84,17 +84,11 @@ Window {
                 anchors.fill: parent; anchors.margins: 20
                 color: "#d0d0d0"
 
-                EventData
-                {
-                    width: parent.width
-                    height: parent.height
-                    anchors.centerIn: parent
-                }
             }
         }
 
         Rectangle {
-            property string title: "Classifica \nGenerale"
+            property string title: "Classifica \nSingoli \nAttrezzi"
             anchors.fill: parent; color: "#d0d0d0"
 
             Rectangle {
@@ -108,12 +102,12 @@ Window {
                     wrapMode: Text.WordWrap
                 }
 
-                Ranking {
+//                Ranking {
 
-                    width: parent.width
-                    height: parent.height
-                    anchors.centerIn: parent
-                }
+//                    width: parent.width
+//                    height: parent.height
+//                    anchors.centerIn: parent
+//                }
             }
         }
     }

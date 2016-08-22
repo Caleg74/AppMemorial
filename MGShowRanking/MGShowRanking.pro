@@ -6,7 +6,7 @@ CONFIG += c++11
 
 SOURCES += src/main.cpp
 
-RESOURCES += MGInsertScore.qrc
+RESOURCES += MGShowRanking.qrc
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH = src/qml
@@ -21,5 +21,4 @@ OTHER_FILES += \
     ../MGCommon/qml-styles/StyleMGComboBox.qml \
     ../MGCommon/qml-styles/StyleMGTextInput.qml \
     ../MGCommon/qml-styles/StyleMGPushButton.qml \
-    src/qml/InsertScore.qml \
     src/qml/main.qml

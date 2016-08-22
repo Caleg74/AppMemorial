@@ -44,16 +44,8 @@ Item {
                 width: parent.parent.width/4
                 activeFocusOnPress: true
                 style:textEditMGStyle
-                placeholderText: "Final Score.."
+                placeholderText: "Start Score.."
                 font.pointSize: 15
-            }
-
-            StyleMGPushButton {
-               id:btnSaveScore
-                width: 100
-                buttonText: "Registra"
-                enabled: (txtStartScore.text.length) && (txtFinalScore.text.length)
-                         && (cbbGymnast.currentIndex >= 0)
             }
         }
     }

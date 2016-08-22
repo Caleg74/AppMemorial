@@ -3,7 +3,6 @@
 
 #include <QObject>
 #include <QQmlApplicationEngine>
-#include "serverapp.h"
 
 class CoreApplication : public QObject
 {
@@ -25,8 +24,6 @@ public slots:
 
 private:
     QQmlApplicationEngine* m_pAppEngine;
-
-    ServerApp m_qServer;
 
 };
 
