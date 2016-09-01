@@ -22,10 +22,13 @@ void CoreApplication::Init(QQmlApplicationEngine& p_qEngine)
     {
 //            QMessageBox::question(NULL, QString("Test"), QString("Quit?"), QMessageBox::Close);
     }
+    else
+    {
+        return;
+    }
 
     // initialize the database
-    QSqlError err = dbInterface::Instance()->initDb();
-    if (err.type() != QSqlError::NoError)
+    if (!dbInterface::Instance()->initDb())
     {
         return;
     }

@@ -20,14 +20,16 @@ bool dBConnection::loadDriver()
     {
         bRet = true;
     }
+    else
+    {
+        qCritical() << "Database driver not loaded";
+    }
 
     return bRet;
 }
 
-QSqlError dBConnection::initDb()
+bool dBConnection::initDb()
 {
-    QSqlError err;
-
     QSqlDatabase db = QSqlDatabase::addDatabase("QODBC", "ConnMG");
     db.setDatabaseName("PostgreSQL35W");
     db.setHostName("localhost");
@@ -39,12 +41,13 @@ QSqlError dBConnection::initDb()
     }
     else
     {
-        err = db.lastError();
+        m_bInitialized = false;
+        qCritical() << "DbError: " << db.lastError();
         db = QSqlDatabase();
         QSqlDatabase::removeDatabase(QString("ConnMG"));
     }
 
     //    connectionWidget->refresh();
 
-    return err;
+    return m_bInitialized;
 }

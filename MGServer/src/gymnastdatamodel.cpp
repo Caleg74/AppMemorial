@@ -1,4 +1,5 @@
 #include "gymnastdatamodel.h"
+#include "dbinterface.h"
 
 //**** STATIC MEMBER INITIALIZATION *********************
 GymnastDataModel* GymnastDataModel::sm_pInstance = NULL;
@@ -19,14 +20,42 @@ GymnastDataModel* GymnastDataModel::Instance()
 GymnastDataModel::GymnastDataModel(QObject *parent)
     : QAbstractListModel(parent)
 {
+    RetrieveGymnastList();
+}
+
+void GymnastDataModel::RetrieveGymnastList()
+{
+    QString firstName;
+    QString lastName;
+    QString country;
+    QString sex;
+
+    QList<QStringList> p_strGymnList;
+    dbInterface::Instance()->RetrieveGymnastFromDb(p_strGymnList);
+
+    for (int i = 0; i < p_strGymnList.size();i++)
+    {
+        GymnastData cNewGymnast(p_strGymnList.at(i)[0], p_strGymnList.at(i)[1],
+                p_strGymnList.at(i)[2], p_strGymnList.at(i)[3]);
+
+        beginInsertRows(QModelIndex(), rowCount(), rowCount());
+        m_gymnastList << cNewGymnast;
+        endInsertRows();
+    }
 }
 
 void GymnastDataModel::addItem(QString firstName,
-                                  QString lastName,
-                                  QString country,
-                                  QString sex)
+                               QString lastName,
+                               QString country,
+                               QString sex)
 {
+
+    int iNationId = dbInterface::Instance()->getNationId(country);
+
     GymnastData cNewGymnast(firstName, lastName, country, sex);
+
+    // add it to the database
+    dbInterface::Instance()->insertGymnast(firstName, lastName, sex, iNationId);
 
     beginInsertRows(QModelIndex(), rowCount(), rowCount());
     m_gymnastList << cNewGymnast;
@@ -38,6 +67,9 @@ void GymnastDataModel::removeItem(QString firstName, QString lastName)
     GymnastData* pItem = GetItem(firstName, lastName);
 
     QModelIndex pIndex = indexFromItem(pItem);
+
+    // add it to the database
+    dbInterface::Instance()->deleteGymnast(firstName, lastName);
 
     beginRemoveRows(QModelIndex(), pIndex.row(), pIndex.row());
     m_gymnastList.removeAt(pIndex.row());

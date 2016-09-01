@@ -46,6 +46,8 @@ private:
 
     GymnastDataModel(QObject *parent = 0);
 
+    void RetrieveGymnastList();
+
     static GymnastDataModel* sm_pInstance;   ///< Singleton
 
     QList<GymnastData> m_gymnastList;

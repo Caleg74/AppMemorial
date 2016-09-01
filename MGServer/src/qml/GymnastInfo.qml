@@ -79,8 +79,8 @@ Item {
                     model: ListModel {
                         id: cbbSexItem
                         ListElement { text: "Sesso.."}
-                        ListElement { text: "Uomo" }
-                        ListElement { text: "Donna" }
+                        ListElement { text: "M" }
+                        ListElement { text: "F" }
                     }
 
 

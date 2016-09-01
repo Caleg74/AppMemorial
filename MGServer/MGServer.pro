@@ -3,14 +3,15 @@ TEMPLATE = app
 QT += sql qml quick widgets
 CONFIG += c++11
 
-SOURCES += src/main.cpp \
+SOURCES += \
+    ../MGCommon/src/db/dbconnection.cpp \
+    src/main.cpp \
     src/gymnastdata.cpp \
     src/gymnastdatamodel.cpp \
     src/coreapplication.cpp \
     src/comboboxmodel.cpp \
     src/countrylist.cpp \
-    src/dbinterface.cpp \
-    src/dbconnection.cpp
+    src/dbinterface.cpp
 
 RESOURCES += MGServer.qrc
 
@@ -25,15 +26,16 @@ include(deployment.pri)
 #    src/qml/GymnastData.qml
 
 HEADERS += \
+    ../MGCommon/src/db/dbconnection.h \
     src/gymnastdata.h \
     src/gymnastdatamodel.h \
     src/coreapplication.h \
     src/comboboxmodel.h \
     src/countrylist.h \
-    src/dbinterface.h \
-    src/dbconnection.h
+    src/dbinterface.h
 
-INCLUDEPATH += src/server
+INCLUDEPATH += \
+    ../MGCommon/src/db
 
 OTHER_FILES += \
     ../MGCommon/qml-styles/StyleMGTabWidget.qml \

@@ -12,7 +12,7 @@ public:
 
     ~dBConnection();
 
-    QSqlError initDb();
+    bool initDb();
 
     bool loadDriver();
 
