@@ -8,14 +8,19 @@ class dbInterface : public dBConnection
 {
 public:
 
+    enum NationInfo
+    {
+        NI_Nicename,
+        NI_ShortName
+    };
+
     static dbInterface* Instance();
 
+    // for cbb
     void getCountriesList(QStringList *p_pList);
 
-    /** Returns the gymnasts for this year.
-     *  The year is determined by reading the PC date
-     */
-    void getGymnastList(QStringList* p_pList);
+    // for cbb
+    void getRegisterdGymnastList(QStringList* p_pList);
 
     void insertGymnast(QString& p_strFirstName,
                        QString& p_strLastName,
@@ -24,11 +29,24 @@ public:
 
     void deleteGymnast(QString& p_strFirstName, QString& p_strLastName);
 
-    void RetrieveGymnastFromDb(QList<QStringList> &p_strGymnList);
+    int getGymnastId(QString& p_firstName, QString& p_lastName);
+
+    void retrieveRegisteredGymnastList(QList<QStringList> &p_strGymnList);
+
+    void retrieveGymnastSubscriptionList(QList<QStringList> &p_strGymnList);
+
+    void subscribeGymnasttoEvent(int athleteId, int eventId);
+
+    void deleteGymnastSubsscription(int athleteId, int eventId);
+
+    bool isGymnastAlreadyRegistered(int p_iAthleteId, int p_iEventId);
 
     int getNationId(QString& p_strNiceName);
 
-    QString getNationNicename(int p_iNationId);
+    QString getNationName(int p_iNationId, enum NationInfo infoType);
+
+    /** returns the eventId for the current event (based on year) */
+    int getCurrentEventId();
 
 private:
 

@@ -1,5 +1,5 @@
-#ifndef GYMNASTDATA_H
-#define GYMNASTDATA_H
+#ifndef GYMNASTSELECTDATA_H
+#define GYMNASTSELECTDATA_H
 
 /****************************************************************************
 **
@@ -43,26 +43,23 @@
 
 #include <QString>
 
-class GymnastData
+class GymnastSelectData
 {
 public:
-    GymnastData(const QString &firstName,
-                const QString &lastName,
-                const QString &country,
-                const QString &sex);
+    GymnastSelectData(const int gymnastId,
+                      const int eventId,
+                      const QString &gymnastFullTxt);
 
-    QString FirstName() const;
-    QString LastName() const;
-    QString Country() const;
-    QString Sex() const;
+    int GymnastId() const;
+    int EventId() const;
+    QString GymnastFullTxt() const;
 
-    friend bool operator== (const GymnastData& lhs, const GymnastData& rhs);
+    friend bool operator== (const GymnastSelectData& lhs, const GymnastSelectData& rhs);
 
 private:
-    QString m_firstName;
-    QString m_lastName;
-    QString m_country;
-    QString m_sex;
+    int m_gymnastId;
+    int m_eventId;
+    QString m_gymnastFullTxt;
 };
 
-#endif // GYMNASTDATA_H
+#endif // GYMNASTSELECTDATA_H

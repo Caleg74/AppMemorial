@@ -21,6 +21,7 @@ Item {
 
             Row
             {
+                spacing: 30
                 Text {
                     id: eventYear
                     width: 100

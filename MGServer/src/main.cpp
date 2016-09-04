@@ -2,6 +2,7 @@
 #include <QQmlApplicationEngine>
 #include "CoreApplication.h"
 #include "countrylist.h"
+#include "gymnastselectionlist.h"
 
 int main(int argc, char *argv[])
 {
@@ -14,6 +15,9 @@ int main(int argc, char *argv[])
 
     CountryList cCountryList;
     cCountryList.Init(engine);
+
+    GymnastSelectionList cGymnSelectList;
+    cGymnSelectList.Init(engine);
 
     engine.load(QUrl(QStringLiteral("qrc:qml/main.qml")));
 

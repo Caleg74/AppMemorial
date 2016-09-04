@@ -10,7 +10,7 @@ class GymnastDataModel : public QAbstractListModel
     Q_OBJECT
 public:
     enum GymnastRoles {
-        FirsNameRole = Qt::UserRole + 1,
+        FirstNameRole = Qt::UserRole + 1,
         LastNameRole,
         CountryRole,
         SexRole

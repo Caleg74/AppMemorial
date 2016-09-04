@@ -1,6 +1,7 @@
 #include "coreapplication.h"
 #include <QQmlContext>
 #include "gymnastdatamodel.h"
+#include "gymnastselectmodel.h"
 #include "dbinterface.h"
 
 
@@ -18,9 +19,9 @@ CoreApplication::~CoreApplication()
 
 void CoreApplication::Init(QQmlApplicationEngine& p_qEngine)
 {
-    if (!dbInterface::Instance()->loadDriver())
+    if (dbInterface::Instance()->loadDriver())
     {
-//            QMessageBox::question(NULL, QString("Test"), QString("Quit?"), QMessageBox::Close);
+        qInfo() << "QOBCD driver loaded successfully";
     }
     else
     {
@@ -36,6 +37,7 @@ void CoreApplication::Init(QQmlApplicationEngine& p_qEngine)
     // save it as a class member
     m_pAppEngine = &p_qEngine;
     GymnastDataModel* pGymModel = GymnastDataModel::Instance();
+    GymnastSelectModel* pGymSelModel = GymnastSelectModel::Instance();
 
     QQmlContext *ctxt = p_qEngine.rootContext();
 //    m_qProxyModel = new FilterData(this);
@@ -43,7 +45,7 @@ void CoreApplication::Init(QQmlApplicationEngine& p_qEngine)
 //    m_qProxyModel->setFilterRole(GymnastDataModel::SignalSection);
 //    m_qProxyModel->setFilterRegExp("0");    // enum value of "SignalDoor"
     ctxt->setContextProperty("GymnastDataModel", pGymModel);
-
+    ctxt->setContextProperty("GymnastSelectModel", pGymSelModel);
 //    connect(pGymModel, SIGNAL(OutputChanged(unsigned int)),
 //            &m_cIoWrap, SLOT(SetOutput(unsigned int)));
 }

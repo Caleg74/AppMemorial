@@ -10,14 +10,14 @@ Item {
     Rectangle {
         height: parent.height
         width: parent.width
-        id: root
+        id: rootGS
         color: "#d0d0d0"
         anchors.fill: parent
 //        opacity: 1 - backendHelper.opacity
 
 
         Rectangle {
-            id: addGymnastSpace
+            id: selectGymnastSpace
             width: parent.width
             y: 50
             height: 70
@@ -26,72 +26,27 @@ Item {
             radius: 1
             color: "#d0d0d0"
 
-
             Row
             {
                 spacing: 10
-                anchors.centerIn: parent
+                anchors.left: parent.left
                 anchors.verticalCenter: parent.verticalCenter
 
-                TextField {
-                    id: txtFirstName
-                    width: parent.parent.width/4 - 50
-                    activeFocusOnPress: true
-                    style:textEditMGStyle
-                    placeholderText: "Nome.."
-                    font.pointSize: 15
-                }
-
-
-                TextField {
-                    id: txtLastName
-                    width: parent.parent.width/4 - 50
-                    activeFocusOnPress: true
-                    style:textEditMGStyle
-                    placeholderText: "Cognome.."
-                    font.pointSize: 15
-                }
-
                 ComboBox {
-                    id: cbbCountry
-                    model: countryListModel.comboList
-                    width: parent.parent.width/4 - 50
+                    id: cbbGymnastSelection
+                    model: gymnastRegisteredModel.comboList
+                    width: parent.parent.width/2 - 50
                     activeFocusOnPress: true
                     style:comboBoxMGStyle
                     currentIndex: 0
-
-//                    model: ListModel {
-//                        id: cbbCountryItem
-//                        ListElement { text: "Nazione.."}
-//                        ListElement { text: "Svizzera" }
-//                        ListElement { text: "Francia" }
-//                        ListElement { text: "Italia" }
-//                    }
                 }
 
-                ComboBox {
-                    id: cbbSex
-                    width: parent.parent.width/4 - 50
-                    activeFocusOnPress: true
-                    style:comboBoxMGStyle
-                    currentIndex: 0
-
-                    model: ListModel {
-                        id: cbbSexItem
-                        ListElement { text: "Sesso.."}
-                        ListElement { text: "M" }
-                        ListElement { text: "F" }
-                    }
-
-
-                }
                 Item {
-                    id: btnAddGymnast
-                    objectName: "btnAddGymnast"
+                    id: btnAddGymnastToEvent
+                    objectName: "btnAddGymnasttoevent"
 
                     width: 40 ; height: 40
-                    enabled: (txtFirstName.text.length) && (txtLastName.text.length)
-                            && (cbbCountry.currentIndex > 0) && (cbbSex.currentIndex > 0)
+                    enabled: (cbbGymnastSelection.currentIndex > 0)
                     Image {
                         source: addMouseArea.pressed ? "qrc:images/add_icon_pressed.png" : "qrc:images/add_icon.png"
                         anchors.centerIn: parent
@@ -101,13 +56,9 @@ Item {
                         id: addMouseArea
                         anchors.fill: parent
                         onClicked: {
-                            GymnastDataModel.addItem(txtFirstName.text, txtLastName.text,
-                                                        cbbCountry.currentText, cbbSex.currentText)
+                            GymnastSelectModel.addItem(cbbGymnastSelection.currentText)
                             // remove fields for next input
-                            txtFirstName.text = ""
-                            txtLastName.text = ""
-                            cbbCountry.currentIndex = 0
-                            cbbSex.currentIndex = 0
+                            cbbGymnastSelection.currentIndex = 0
                         }
                     }
                 }
@@ -117,16 +68,16 @@ Item {
         ScrollView {
             width: parent.width
             height: parent.height
-            anchors.top: addGymnastSpace.bottom
-            anchors.bottom: root.bottom
+            anchors.top: selectGymnastSpace.bottom
+            anchors.bottom: rootGS.bottom
 
             flickableItem.interactive: true
 
             ListView {
     //            width: 200; height: 250
                 id: listviewinput
-                model: GymnastDataModel
-                delegate: GymnastInfoDelegate { }
+                model: GymnastSelectModel
+                delegate: GymnastSelectionDelegate { }
                 anchors.fill: parent
                 width: parent.width
                 clip: true

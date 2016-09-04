@@ -1,6 +1,3 @@
-#ifndef GYMNASTDATA_H
-#define GYMNASTDATA_H
-
 /****************************************************************************
 **
 ** Copyright (C) 2015 The Qt Company Ltd.
@@ -40,29 +37,42 @@
 ** $QT_END_LICENSE$
 **
 ****************************************************************************/
+#include "gymnastselectdata.h"
 
-#include <QString>
-
-class GymnastData
+GymnastSelectData::GymnastSelectData(const int gymnastId,
+                         const int eventId,
+                         const QString &gymnastFullTxt)
+    : m_gymnastId(gymnastId)
+    , m_eventId(eventId)
+    , m_gymnastFullTxt(gymnastFullTxt)
 {
-public:
-    GymnastData(const QString &firstName,
-                const QString &lastName,
-                const QString &country,
-                const QString &sex);
+}
 
-    QString FirstName() const;
-    QString LastName() const;
-    QString Country() const;
-    QString Sex() const;
+int GymnastSelectData::GymnastId() const
+{
+    return m_gymnastId;
+}
 
-    friend bool operator== (const GymnastData& lhs, const GymnastData& rhs);
+int GymnastSelectData::EventId() const
+{
+    return m_eventId;
+}
 
-private:
-    QString m_firstName;
-    QString m_lastName;
-    QString m_country;
-    QString m_sex;
-};
+QString GymnastSelectData::GymnastFullTxt() const
+{
+    return m_gymnastFullTxt;
+}
 
-#endif // GYMNASTDATA_H
+bool operator== (const GymnastSelectData& lhs, const GymnastSelectData& rhs)
+{
+    if ( (lhs.GymnastId() == rhs.GymnastId())
+      && (lhs.EventId() == rhs.EventId())
+      && (lhs.GymnastFullTxt() == rhs.GymnastFullTxt()))
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}

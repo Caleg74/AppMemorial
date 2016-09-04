@@ -12,7 +12,7 @@ void CountryList::Init(QQmlApplicationEngine &p_qEngine)
 {
 
     QQmlContext* pComboContext = p_qEngine.rootContext();
-    pComboContext->setContextProperty("comboModel", &m_cCbbModel);
+    pComboContext->setContextProperty("countryListModel", &m_cCbbModel);
 
     // move after mySQL read-out
     FillList();

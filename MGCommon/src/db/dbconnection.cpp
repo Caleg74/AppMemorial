@@ -16,13 +16,13 @@ bool dBConnection::loadDriver()
     bool bRet = false;
 
     // OCDB with conection name
-    if (QSqlDatabase::drivers().contains("QOCDB"))
+    if (QSqlDatabase::drivers().contains("QODBC"))
     {
         bRet = true;
     }
     else
     {
-        qCritical() << "Database driver not loaded";
+        qCritical() << "Database driver QODBC not loaded";
     }
 
     return bRet;

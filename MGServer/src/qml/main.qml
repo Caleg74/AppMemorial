@@ -44,7 +44,7 @@ import "qrc:/qml"
 
 Window {
     id: window
-    width: 768
+    width: 900
     height: 480
     visible: true
     title: qsTr("Memorial Gander")
@@ -76,6 +76,24 @@ Window {
         }
 
         Rectangle {
+            property string title: "Seleziona \nGinnasti"
+            anchors.fill: parent
+            color: "#d0d0d0"
+
+            Rectangle {
+                anchors.fill: parent; anchors.margins: 20
+                color: "#d0d0d0"
+
+                GymnastSelection
+                {
+                    width: parent.width
+                    height: parent.height
+                    anchors.centerIn: parent
+                }
+            }
+        }
+
+        Rectangle {
             property string title: "Dati\n Evento"
             anchors.fill: parent
             color: "#d0d0d0"
@@ -94,7 +112,7 @@ Window {
         }
 
         Rectangle {
-            property string title: "Classifica \nGenerale"
+            property string title: "Stampa"
             anchors.fill: parent; color: "#d0d0d0"
 
             Rectangle {
@@ -103,7 +121,7 @@ Window {
                 Text {
                     width: parent.width - 20
                     anchors.centerIn: parent; horizontalAlignment: Qt.AlignHCenter
-                    text: "Classifica Generale"
+                    text: "Stampa"
                     font.pixelSize: 20
                     wrapMode: Text.WordWrap
                 }

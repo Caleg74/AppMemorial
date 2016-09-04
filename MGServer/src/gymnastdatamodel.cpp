@@ -31,7 +31,7 @@ void GymnastDataModel::RetrieveGymnastList()
     QString sex;
 
     QList<QStringList> p_strGymnList;
-    dbInterface::Instance()->RetrieveGymnastFromDb(p_strGymnList);
+    dbInterface::Instance()->retrieveRegisteredGymnastList(p_strGymnList);
 
     for (int i = 0; i < p_strGymnList.size();i++)
     {
@@ -86,7 +86,7 @@ QVariant GymnastDataModel::data(const QModelIndex & index, int role) const {
         return QVariant();
 
     const GymnastData &gymnast = m_gymnastList[index.row()];
-    if (role == FirsNameRole)
+    if (role == FirstNameRole)
         return gymnast.FirstName();
     else if (role == LastNameRole)
         return gymnast.LastName();
@@ -99,10 +99,10 @@ QVariant GymnastDataModel::data(const QModelIndex & index, int role) const {
 
 QHash<int, QByteArray> GymnastDataModel::roleNames() const {
     QHash<int, QByteArray> roles;
-    roles[FirsNameRole] = "FirstName";
-    roles[LastNameRole] = "LastName";
-    roles[CountryRole]  = "Country";
-    roles[SexRole]      = "Sex";
+    roles[FirstNameRole] = "FirstName";
+    roles[LastNameRole]  = "LastName";
+    roles[CountryRole]   = "Country";
+    roles[SexRole]       = "Sex";
 
     return roles;
 }
