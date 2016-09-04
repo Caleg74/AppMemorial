@@ -4,8 +4,8 @@ import "qrc:/qml"
 
 Window {
     id: window
-    width: 768
-    height: 480
+    width: 640
+    height: 320
     visible: true
     title: qsTr("Memorial Gander - Insert Score")
 

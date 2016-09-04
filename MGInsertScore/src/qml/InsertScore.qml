@@ -13,6 +13,7 @@ Item {
         id: root
         color: "#d0d0d0"
         anchors.fill: parent
+        anchors.leftMargin: 20
 
         Column
         {
@@ -27,8 +28,8 @@ Item {
 
 
                 ComboBox {
-                    id: cbbGymnast
-                    model: gymnastModel.comboList
+                    id: cbbGymnastSelection
+                    model: gymnastRegisteredModel.comboList
                     width: parent.parent.width/3
                     activeFocusOnPress: true
                     style:comboBoxMGStyle
@@ -37,7 +38,7 @@ Item {
 
                 ComboBox {
                     id: cbbAppartus
-                    model: gymnastModel.comboList
+                    model: apparatusModel.comboList
                     width: parent.parent.width/3
                     activeFocusOnPress: true
                     style:comboBoxMGStyle
@@ -73,7 +74,8 @@ Item {
                     width: 100
                     buttonText: "Registra"
                     enabled: (txtStartScore.text.length) && (txtFinalScore.text.length)
-                             && (cbbGymnast.currentIndex >= 0)
+                             && (cbbGymnastSelection.currentIndex >= 0)
+                             && (cbbAppartus.currentIndex >= 0)
                 }
             }
         }

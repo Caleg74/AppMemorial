@@ -5,32 +5,32 @@ CONFIG += c++11
 
 SOURCES += \
     ../MGCommon/src/db/dbconnection.cpp \
+    ../MGCommon/src/cbbItems/comboboxmodel.cpp \
+    ../MGCommon/src/cbbItems/countrylist.cpp \
+    ../MGCommon/src/cbbItems/gymnastselectionlist.cpp \
     src/main.cpp \
     src/gymnastdata.cpp \
     src/gymnastdatamodel.cpp \
     src/gymnastselectdata.cpp \
     src/gymnastselectmodel.cpp \
     src/coreapplication.cpp \
-    src/cbbItems/comboboxmodel.cpp \
-    src/cbbItems/countrylist.cpp \
-    src/cbbItems/gymnastselectionlist.cpp \
     src/dbinterface.cpp
 
 HEADERS += \
     ../MGCommon/src/db/dbconnection.h \
+    ../MGCommon/src/cbbItems/comboboxmodel.h \
+    ../MGCommon/src/cbbItems/countrylist.h \
+    ../MGCommon/src/cbbItems/gymnastselectionlist.h \
     src/gymnastdata.h \
     src/gymnastdatamodel.h \
     src/gymnastselectdata.h \
     src/gymnastselectmodel.h \
     src/coreapplication.h \
-    src/cbbItems/comboboxmodel.h \
-    src/cbbItems/countrylist.h \
-    src/cbbItems/gymnastselectionlist.h \
     src/dbinterface.h
 
 INCLUDEPATH += \
     ../MGCommon/src/db \
-    src/cbbItems \
+    ../MGCommon/src/cbbItems \
     src/
 
 OTHER_FILES += \

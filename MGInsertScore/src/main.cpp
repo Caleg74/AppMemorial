@@ -1,5 +1,9 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include "coreapplication.h"
+#include "apparatuslist.h"
+#include "gymnastselectionlist.h"
+
 
 int main(int argc, char *argv[])
 {
@@ -7,11 +11,11 @@ int main(int argc, char *argv[])
 
     QQmlApplicationEngine engine;
 
-//    CoreApplication cCoreApp;
-//    cCoreApp.Init(engine);
+    CoreApplication cCoreApp;
+    cCoreApp.Init(engine);
 
-//    CountryList cCountryList;
-//    cCountryList.Init(engine);
+    GymnastSelectionList::Instance()->Init(engine);
+    ApparatusList::Instance()->Init(engine);
 
     engine.load(QUrl(QStringLiteral("qrc:qml/main.qml")));
 

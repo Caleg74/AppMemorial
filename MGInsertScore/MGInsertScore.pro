@@ -1,10 +1,31 @@
 TEMPLATE = app
 
-QT += qml quick
+QT += sql qml quick widgets
 
 CONFIG += c++11
 
-SOURCES += src/main.cpp
+
+HEADERS += \
+    ../MGCommon/src/db/dbconnection.h \
+    ../MGCommon/src/cbbItems/apparatuslist.h \
+    ../MGCommon/src/cbbItems/comboboxmodel.h \
+    ../MGCommon/src/cbbItems/gymnastselectionlist.h \
+    src/coreapplication.h \
+    src/dbinterface.h
+
+SOURCES += \
+    ../MGCommon/src/db/dbconnection.cpp \
+    ../MGCommon/src/cbbItems/apparatuslist.cpp \
+    ../MGCommon/src/cbbItems/comboboxmodel.cpp \
+    ../MGCommon/src/cbbItems/gymnastselectionlist.cpp \
+    src/coreapplication.cpp \
+    src/dbinterface.cpp \
+    src/main.cpp
+
+INCLUDEPATH += \
+    ../MGCommon/src/db \
+    ../MGCommon/src/cbbItems \
+    src/
 
 RESOURCES += MGInsertScore.qrc
 
