@@ -51,12 +51,22 @@ Item {
 
     property int current: 0
 
-    onCurrentChanged: setOpacities()
-    Component.onCompleted: setOpacities()
+    onCurrentChanged: setChildrenState()
+    Component.onCompleted: setChildrenState()
 
-    function setOpacities() {
-        for (var i = 0; i < stack.children.length; ++i) {
-            stack.children[i].opacity = (i == current ? 1 : 0)
+    function setChildrenState() {
+        for (var i = 0; i < stack.children.length; ++i)
+        {
+            if (i == current)
+            {
+                stack.children[i].opacity =  1
+                stack.children[i].enabled =  true
+            }
+            else
+            {
+                stack.children[i].opacity =  0
+                stack.children[i].enabled =  false
+            }
         }
     }
 

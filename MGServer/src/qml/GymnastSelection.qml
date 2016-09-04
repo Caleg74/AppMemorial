@@ -75,7 +75,7 @@ Item {
 
             ListView {
     //            width: 200; height: 250
-                id: listviewinput
+                id: listviewGSinput
                 model: GymnastSelectModel
                 delegate: GymnastSelectionDelegate { }
                 anchors.fill: parent

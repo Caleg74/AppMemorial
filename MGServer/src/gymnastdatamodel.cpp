@@ -1,5 +1,6 @@
 #include "gymnastdatamodel.h"
 #include "dbinterface.h"
+#include "gymnastselectionlist.h"
 
 //**** STATIC MEMBER INITIALIZATION *********************
 GymnastDataModel* GymnastDataModel::sm_pInstance = NULL;
@@ -57,6 +58,9 @@ void GymnastDataModel::addItem(QString firstName,
     // add it to the database
     dbInterface::Instance()->insertGymnast(firstName, lastName, sex, iNationId);
 
+    // update combo box for gymnast selection
+    GymnastSelectionList::Instance()->FillList();
+
     beginInsertRows(QModelIndex(), rowCount(), rowCount());
     m_gymnastList << cNewGymnast;
     endInsertRows();
@@ -70,6 +74,9 @@ void GymnastDataModel::removeItem(QString firstName, QString lastName)
 
     // add it to the database
     dbInterface::Instance()->deleteGymnast(firstName, lastName);
+
+    // update combo box for gymnast selection
+    GymnastSelectionList::Instance()->FillList();
 
     beginRemoveRows(QModelIndex(), pIndex.row(), pIndex.row());
     m_gymnastList.removeAt(pIndex.row());

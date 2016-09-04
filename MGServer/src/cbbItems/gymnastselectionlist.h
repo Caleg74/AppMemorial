@@ -7,7 +7,8 @@
 class GymnastSelectionList
 {
 public:
-    GymnastSelectionList();
+
+    static GymnastSelectionList* Instance();
 
     /** Initializes the core application components */
     void Init(QQmlApplicationEngine &p_qEngine);
@@ -15,6 +16,10 @@ public:
     void FillList();
 
 private:
+
+    GymnastSelectionList();
+
+    static GymnastSelectionList* sm_pInstance;
 
     ComboBoxModel m_cCbbModel;
 };

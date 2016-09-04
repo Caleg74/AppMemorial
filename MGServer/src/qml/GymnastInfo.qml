@@ -42,7 +42,6 @@ Item {
                     font.pointSize: 15
                 }
 
-
                 TextField {
                     id: txtLastName
                     width: parent.parent.width/4 - 50
@@ -85,6 +84,7 @@ Item {
 
 
                 }
+
                 Item {
                     id: btnAddGymnast
                     objectName: "btnAddGymnast"

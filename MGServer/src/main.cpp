@@ -16,8 +16,7 @@ int main(int argc, char *argv[])
     CountryList cCountryList;
     cCountryList.Init(engine);
 
-    GymnastSelectionList cGymnSelectList;
-    cGymnSelectList.Init(engine);
+    GymnastSelectionList::Instance()->Init(engine);
 
     engine.load(QUrl(QStringLiteral("qrc:qml/main.qml")));
 
