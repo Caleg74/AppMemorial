@@ -162,6 +162,65 @@ int dbInterface::getGymnastId(QString& p_firstName, QString& p_lastName)
 
     return athleteId;
 }
+QString dbInterface::getGender(int p_iAthleteId)
+{
+    QString strGender;
+
+    if (m_bInitialized)
+    {
+        QSqlDatabase db = QSqlDatabase::database("ConnMG");
+        QSqlQuery query(db);
+
+        query.exec("SELECT id, gender FROM athlete WHERE id = " + QString::number(p_iAthleteId, 10));
+
+        if (query.first())
+        {
+            strGender = query.value(1).toString();
+        }
+        else
+        {
+            qCritical() << "No gender found for (athleteId)= " << p_iAthleteId;
+        }
+    }
+    else
+    {
+        qInfo() << "dbInterface::getGender(): Db not initialized";
+    }
+
+    return strGender;
+}
+
+int dbInterface::getApparatusId(QString& p_apparatusName, QString& p_gender)
+{
+    int iApparatusId = 0;
+
+    if (m_bInitialized)
+    {
+        QSqlDatabase db = QSqlDatabase::database("ConnMG");
+        QSqlQuery query(db);
+
+        QString strQuery = "SELECT id, name_it FROM apparatus WHERE name_it = '"
+                + p_apparatusName + "' AND gender = '"
+                + p_gender + "'";
+
+        query.exec(strQuery);
+
+        if (query.first())
+        {
+            iApparatusId = query.value(0).toInt();
+        }
+        else
+        {
+            qCritical() << "No Id found for: " << p_apparatusName << ", " << p_gender;
+        }
+    }
+    else
+    {
+        qInfo() << "dbInterface::getApparatusId(): Db not initialized";
+    }
+
+    return iApparatusId;
+}
 
 void dbInterface::retrieveGymnastSubscriptionList(QList<QStringList>& p_strGymnList)
 {
@@ -236,4 +295,48 @@ int dbInterface::getCurrentEventId()
     }
 
     return eventId;
+}
+
+void dbInterface::setScore(const int p_iEventId,
+                           const int p_iAthleteId,
+                           const int p_iApparatusId,
+                           const float p_fStartScore,
+                           const float p_fFinalScore)
+{
+    if (m_bInitialized)
+    {
+        QSqlDatabase db = QSqlDatabase::database("ConnMG");
+        QSqlQuery query(db);
+        query.prepare("INSERT INTO scores (sport_event_id, athlete_id, apparatus_id, start_score, final_score) "
+                           "VALUES (:sport_event_id, :athlete_id, :apparatus_id, :start_score, :final_score)");
+        query.bindValue(":sport_event_id", p_iEventId);
+        query.bindValue(":athlete_id", p_iAthleteId);
+        query.bindValue(":apparatus_id", p_iApparatusId);
+        query.bindValue(":start_score", QString::number(p_fStartScore, 'g', 6));
+        query.bindValue(":final_score", QString::number(p_fFinalScore, 'g', 6));
+
+        bool bRet = query.exec();
+
+        if (bRet)
+        {
+            qInfo() << "Score added: " << p_iEventId << ", "
+                                       << p_iAthleteId << ", "
+                                       << p_iApparatusId << ", "
+                                       << p_fStartScore << ", "
+                                       << p_fFinalScore;
+        }
+        else
+        {
+            qCritical() << "SAcore NOT added: " << p_iEventId << ", "
+                                                << p_iAthleteId << ", "
+                                                << p_iApparatusId << ", "
+                                                << p_fStartScore << ", "
+                                                << p_fFinalScore;
+            qCritical() << query.lastError();
+        }
+    }
+    else
+    {
+        qInfo() << "dbInterface::setScore(): Db not initialized";
+    }
 }

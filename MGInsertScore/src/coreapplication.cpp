@@ -38,7 +38,7 @@ void CoreApplication::Init(QQmlApplicationEngine& p_qEngine)
 
     MessageBox::SetEngine(m_pAppEngine);
 
-    QQmlContext *ctxt = p_qEngine.rootContext();
+//    QQmlContext *ctxt = p_qEngine.rootContext();
 //    m_qProxyModel = new FilterData(this);
 
 //    m_qProxyModel->setFilterRole(GymnastDataModel::SignalSection);

@@ -23,6 +23,10 @@ public:
 
     int getGymnastId(QString& p_firstName, QString& p_lastName);
 
+    QString getGender(int p_iAthleteId);
+
+    int getApparatusId(QString& p_apparatusName, QString &p_gender);
+
     void retrieveGymnastSubscriptionList(QList<QStringList> &p_strGymnList);
 
     int getNationId(QString& p_strNiceName);
@@ -31,6 +35,12 @@ public:
 
     /** returns the eventId for the current event (based on year) */
     int getCurrentEventId();
+
+    void setScore(const int p_iEventId,
+                  const int p_iAthleteId,
+                  const int p_iApparatusId,
+                  const float p_fStartScore,
+                  const float p_fFinalScore);
 
 private:
 

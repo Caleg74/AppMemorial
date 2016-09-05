@@ -18,6 +18,15 @@ public slots:
 private:
     SaveScore(QObject* parent = NULL);
 
+    float CheckStartScore(QString p_strInputVal, bool* bOk);
+
+    float CheckFinalScore(QString p_strInputVal, bool* bOk);
+
+    void SendToDb(QString& p_strGymnastFullTxt,
+                  QString& p_strApparatus,
+                  float p_fStartScore,
+                  float p_fFinalScore);
+
     static SaveScore* sm_instance;
 
     QObject* m_qMsgDialog;  ///< for pop-up

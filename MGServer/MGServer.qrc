@@ -4,6 +4,7 @@
         <file alias="StyleMGComboBox.qml">../MGCommon/qml-styles/StyleMGComboBox.qml</file>
         <file alias="StyleMGTextInput.qml">../MGCommon/qml-styles/StyleMGTextInput.qml</file>
         <file alias="StyleMGPushButton.qml">../MGCommon/qml-styles/StyleMGPushButton.qml</file>
+        <file alias="StyleMGMsgBox.qml">../MGCommon/qml-styles/StyleMGMsgBox.qml</file>
         <file alias="GymnastInfoDelegate.qml">src/qml/GymnastInfoDelegate.qml</file>
         <file alias="GymnastInfo.qml">src/qml/GymnastInfo.qml</file>
         <file alias="GymnastSelectionDelegate.qml">src/qml/GymnastSelectionDelegate.qml</file>
@@ -20,6 +21,6 @@
         <file alias="delete_icon.png">../MGCommon/image/delete_icon.png</file>
         <file alias="delete_icon_pressed.png">../MGCommon/image/delete_icon_pressed.png</file>
         <file alias="selectedTab.svg">../MGCommon/image/selectedTab.svg</file>
-        <file alias="warning-sign.svg">../MGCommon/image/warning-sign.svg</file>
+        <file alias="warning_32x32.png">../MGCommon/image/warning_32x32.png</file>
     </qresource>
 </RCC>
