@@ -6,7 +6,6 @@ Item {
     width: parent.width
     height: parent.height
 
-
     Rectangle {
         height: parent.height
         width: parent.width
@@ -70,14 +69,32 @@ Item {
                 }
 
                 StyleMGPushButton {
-                   id:btnSaveScore
+                    id:btnSaveScore
+                    objectName: "btnSaveScore"
                     width: 100
                     buttonText: "Registra"
+                    signal saveScore(string gymnastName,
+                                     string apparatus,
+                                     string startScore,
+                                     string finalScore)
+
                     enabled: (txtStartScore.text.length) && (txtFinalScore.text.length)
                              && (cbbGymnastSelection.currentIndex >= 0)
                              && (cbbAppartus.currentIndex >= 0)
+                    onClicked: {
+                        saveScore(cbbGymnastSelection.currentText,
+                                  cbbAppartus.currentText,
+                                  txtStartScore.text,
+                                  txtFinalScore.text)
+
+
+                    }
                 }
             }
+        }
+
+        StyleMGMsgBox {
+            visible: false
         }
     }
 }

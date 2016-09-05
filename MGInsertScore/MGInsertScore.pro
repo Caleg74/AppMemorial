@@ -10,21 +10,28 @@ HEADERS += \
     ../MGCommon/src/cbbItems/apparatuslist.h \
     ../MGCommon/src/cbbItems/comboboxmodel.h \
     ../MGCommon/src/cbbItems/gymnastselectionlist.h \
+    ../MGCommon/src/msgBox/messagebox.h \
     src/coreapplication.h \
-    src/dbinterface.h
+    src/dbinterface.h \
+    src/savescore.h \
+    src/messagebox.h
 
 SOURCES += \
     ../MGCommon/src/db/dbconnection.cpp \
     ../MGCommon/src/cbbItems/apparatuslist.cpp \
     ../MGCommon/src/cbbItems/comboboxmodel.cpp \
     ../MGCommon/src/cbbItems/gymnastselectionlist.cpp \
+    ../MGCommon/src/msgBox/messagebox.cpp \
     src/coreapplication.cpp \
     src/dbinterface.cpp \
-    src/main.cpp
+    src/main.cpp \
+    src/savescore.cpp
+
 
 INCLUDEPATH += \
     ../MGCommon/src/db \
     ../MGCommon/src/cbbItems \
+    ../MGCommon/src/msgBox \
     src/
 
 RESOURCES += MGInsertScore.qrc
@@ -42,5 +49,6 @@ OTHER_FILES += \
     ../MGCommon/qml-styles/StyleMGComboBox.qml \
     ../MGCommon/qml-styles/StyleMGTextInput.qml \
     ../MGCommon/qml-styles/StyleMGPushButton.qml \
+    ../MGCommon/qml-styles/StyleMGMsgBox.qml \
     src/qml/InsertScore.qml \
     src/qml/main.qml

@@ -20,5 +20,6 @@
         <file alias="delete_icon.png">../MGCommon/image/delete_icon.png</file>
         <file alias="delete_icon_pressed.png">../MGCommon/image/delete_icon_pressed.png</file>
         <file alias="selectedTab.svg">../MGCommon/image/selectedTab.svg</file>
+        <file alias="warning-sign.svg">../MGCommon/image/warning-sign.svg</file>
     </qresource>
 </RCC>

@@ -1,7 +1,8 @@
 #include "coreapplication.h"
 #include <QQmlContext>
 #include "dbinterface.h"
-
+#include "savescore.h"
+#include "messagebox.h"
 
 CoreApplication::CoreApplication(QObject *parent)
     : QObject(parent)
@@ -35,6 +36,8 @@ void CoreApplication::Init(QQmlApplicationEngine& p_qEngine)
     // save it as a class member
     m_pAppEngine = &p_qEngine;
 
+    MessageBox::SetEngine(m_pAppEngine);
+
     QQmlContext *ctxt = p_qEngine.rootContext();
 //    m_qProxyModel = new FilterData(this);
 
@@ -46,13 +49,11 @@ void CoreApplication::Init(QQmlApplicationEngine& p_qEngine)
 
 void CoreApplication::Connect()
 {
-
     // Add gymnast button (TODO move toserver app)
-//    QObject* addGymnatBtn = m_pAppEngine->rootObjects().first()->findChild<QObject*>("btnAddGymnast");
-//    if (addGymnatBtn)
-//    {
-//        connect(addGymnatBtn, SIGNAL(addGymnast(QString firstName, QString lastName, QString country, QString sex)),
-//                GymnastDataModel::Instance(), SLOT(AddGymnast(QString firstName, QString lastName, QString country, QString sex)));
-//    }
-
+    QObject* saveScoreBtn = m_pAppEngine->rootObjects().first()->findChild<QObject*>("btnSaveScore");
+    if (saveScoreBtn)
+    {
+        connect(saveScoreBtn, SIGNAL(saveScore(QString, QString, QString, QString)),
+                SaveScore::Instance(), SLOT(onSaveScore(QString, QString, QString, QString)));
+    }
 }

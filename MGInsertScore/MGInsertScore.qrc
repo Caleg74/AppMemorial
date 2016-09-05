@@ -4,8 +4,11 @@
         <file alias="StyleMGComboBox.qml">../MGCommon/qml-styles/StyleMGComboBox.qml</file>
         <file alias="StyleMGTextInput.qml">../MGCommon/qml-styles/StyleMGTextInput.qml</file>
         <file alias="StyleMGPushButton.qml">../MGCommon/qml-styles/StyleMGPushButton.qml</file>
-<file alias="InsertScore.qml">src/qml/InsertScore.qml</file>
+        <file alias="StyleMGMsgBox.qml">../MGCommon/qml-styles/StyleMGMsgBox.qml</file>
+        <file alias="InsertScore.qml">src/qml/InsertScore.qml</file>
         <file alias="main.qml">src/qml/main.qml</file>
     </qresource>
-    <qresource prefix="/images"/>
+    <qresource prefix="/images">
+        <file alias="warning_32x32.png">../MGCommon/image/warning_32x32.png</file>
+    </qresource>
 </RCC>
