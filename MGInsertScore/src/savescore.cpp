@@ -109,7 +109,18 @@ void SaveScore::SendToDb(QString& p_strGymnastFullTxt,
     int iEventId = dbInterface::Instance()->getCurrentEventId();
     int iApparatusId = dbInterface::Instance()->getApparatusId(p_strApparatus, strGender);
 
-    dbInterface::Instance()->setScore(iEventId, iAthleteId, iApparatusId,
-                                      p_fStartScore, p_fFinalScore);
+    bool bScorePresent = dbInterface::Instance()->isScorePresent(iEventId, iAthleteId, iApparatusId);
 
+    if (bScorePresent)
+    {
+        // update existing score
+        dbInterface::Instance()->updateScore(iEventId, iAthleteId,
+                                         iApparatusId, p_fStartScore, p_fFinalScore);
+    }
+    else
+    {
+        // insert a new one
+        dbInterface::Instance()->setNewScore(iEventId, iAthleteId,
+                                         iApparatusId, p_fStartScore, p_fFinalScore);
+    }
 }

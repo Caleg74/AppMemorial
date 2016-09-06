@@ -36,12 +36,21 @@ public:
     /** returns the eventId for the current event (based on year) */
     int getCurrentEventId();
 
-    void setScore(const int p_iEventId,
+    void setNewScore(const int p_iEventId,
                   const int p_iAthleteId,
                   const int p_iApparatusId,
                   const float p_fStartScore,
                   const float p_fFinalScore);
 
+    void updateScore(const int p_iEventId,
+                     const int p_iAthleteId,
+                     const int p_iApparatusId,
+                     const float p_fStartScore,
+                     const float p_fFinalScore);
+
+    bool isScorePresent(const int p_iEventId,
+                        const int p_iAthleteId,
+                        const int p_iApparatusId);
 private:
 
     /** Private constructor */

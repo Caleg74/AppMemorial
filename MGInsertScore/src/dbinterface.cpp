@@ -297,7 +297,7 @@ int dbInterface::getCurrentEventId()
     return eventId;
 }
 
-void dbInterface::setScore(const int p_iEventId,
+void dbInterface::setNewScore(const int p_iEventId,
                            const int p_iAthleteId,
                            const int p_iApparatusId,
                            const float p_fStartScore,
@@ -327,7 +327,7 @@ void dbInterface::setScore(const int p_iEventId,
         }
         else
         {
-            qCritical() << "SAcore NOT added: " << p_iEventId << ", "
+            qCritical() << "Score NOT added: " << p_iEventId << ", "
                                                 << p_iAthleteId << ", "
                                                 << p_iApparatusId << ", "
                                                 << p_fStartScore << ", "
@@ -339,4 +339,85 @@ void dbInterface::setScore(const int p_iEventId,
     {
         qInfo() << "dbInterface::setScore(): Db not initialized";
     }
+}
+
+void dbInterface::updateScore(const int p_iEventId,
+                           const int p_iAthleteId,
+                           const int p_iApparatusId,
+                           const float p_fStartScore,
+                           const float p_fFinalScore)
+{
+    if (m_bInitialized)
+    {
+        QSqlDatabase db = QSqlDatabase::database("ConnMG");
+        QSqlQuery query(db);
+        // UPDATE table_name
+        //SET column1=value1,column2=value2,...
+        //WHERE some_column=some_value;
+        query.prepare("UPDATE scores SET start_score = :start_score, final_score = :final_score "
+                      "WHERE sport_event_id=:sport_event_id AND athlete_id=:athlete_id AND apparatus_id=:apparatus_id");
+        query.bindValue(":start_score", QString::number(p_fStartScore, 'g', 6));
+        query.bindValue(":final_score", QString::number(p_fFinalScore, 'g', 6));
+        query.bindValue(":sport_event_id", p_iEventId);
+        query.bindValue(":athlete_id", p_iAthleteId);
+        query.bindValue(":apparatus_id", p_iApparatusId);
+
+        bool bRet = query.exec();
+
+        if (bRet)
+        {
+            qInfo() << "Score updated: " << p_iEventId << ", "
+                                         << p_iAthleteId << ", "
+                                         << p_iApparatusId << ", "
+                                         << p_fStartScore << ", "
+                                         << p_fFinalScore;
+        }
+        else
+        {
+            qCritical() << "Score NOT updated: " << p_iEventId << ", "
+                                                 << p_iAthleteId << ", "
+                                                 << p_iApparatusId << ", "
+                                                 << p_fStartScore << ", "
+                                                 << p_fFinalScore;
+            qCritical() << query.lastError();
+        }
+    }
+    else
+    {
+        qInfo() << "dbInterface::updateScore(): Db not initialized";
+    }
+}
+
+bool dbInterface::isScorePresent(const int p_iEventId,
+                                 const int p_iAthleteId,
+                                 const int p_iApparatusId)
+{
+    bool bEntryPresent = true;
+
+    if (m_bInitialized)
+    {
+        QSqlDatabase db = QSqlDatabase::database("ConnMG");
+        QSqlQuery query(db);
+
+        QString strQuery = "SELECT sport_event_id, athlete_id, apparatus_id FROM scores WHERE"
+                   " sport_event_id = "   + QString::number(p_iEventId, 10) +
+                   " AND athlete_id = "   + QString::number(p_iAthleteId, 10)+
+                   " AND apparatus_id = " + QString::number(p_iApparatusId, 10);
+
+        query.exec(strQuery);
+        bEntryPresent = query.first();
+
+
+        if (bEntryPresent)
+            qInfo() << "Score present";
+        else
+            qInfo() << "Score NOT present";
+
+    }
+    else
+    {
+        qInfo() << "dbInterface::isScorePresent(): Db not initialized";
+    }
+
+    return bEntryPresent;
 }
