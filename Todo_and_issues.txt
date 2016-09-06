@@ -3,8 +3,6 @@ TODO
 
 Date		App			Prio	Description
 ----		---			----	-----------
-2016-09-03	MGServer	Med		Insert gymnast is general, add tab for gymnast selection (current year)
-
 2016-09-03	MGServer	Med		Insert gymnast - erasing works only if the table that uses the gymnast ID are empty
 								Add a pop-up for era confirmation (ex. Attention: erase will remove all data over the previous editions)
 						
@@ -12,3 +10,14 @@ Date		App			Prio	Description
 								At the moment could be done in the DB directly
 
 2016-09-03	MGServer	Low		Tab "dati evento", crea collegamento (x ora solo read) su tabella sport_event
+
+2016-06.06  All			Low		Add application Icons
+
+-------------------------------------------
+
+DONE
+*****
+
+Date		App			Prio	Description
+----		---			----	-----------
+2016-09-03	MGServer	Med		Insert gymnast is general, add tab for gymnast selection (current year)

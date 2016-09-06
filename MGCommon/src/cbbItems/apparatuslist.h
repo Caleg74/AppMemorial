@@ -4,8 +4,9 @@
 #include "comboboxmodel.h"
 #include <QQmlApplicationEngine>
 
-class ApparatusList
+class ApparatusList : public QObject
 {
+    Q_OBJECT
 public:
 
     static ApparatusList* Instance();
@@ -13,7 +14,11 @@ public:
     /** Initializes the core application components */
     void Init(QQmlApplicationEngine &p_qEngine);
 
-    void FillList();
+    void FillList(QString p_strGender);
+
+public slots:
+
+    void onIndexChaned(int index);
 
 private:
 

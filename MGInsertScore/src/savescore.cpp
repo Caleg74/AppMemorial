@@ -101,6 +101,12 @@ void SaveScore::SendToDb(QString& p_strGymnastFullTxt,
                          float p_fFinalScore)
 {
     QStringList strSplit = p_strGymnastFullTxt.split(',');
+    if (strSplit.count() < 2)
+    {
+        qCritical() << "SendToDb(): first/last name formatting error";
+        return;
+    }
+
     QString firstName = strSplit.at(0).trimmed();
     QString lastName =  strSplit.at(1).trimmed();
 

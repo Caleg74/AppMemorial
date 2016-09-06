@@ -21,19 +21,20 @@ dbInterface* dbInterface::Instance()
     return sm_pInstance;
 }
 
-void dbInterface::getApparatusList(QStringList* p_pList)
+void dbInterface::getApparatusList(QStringList* p_pList, QString p_strGender)
 {
-
     if (m_bInitialized)
     {
         QSqlDatabase db = QSqlDatabase::database("ConnMG");
         QSqlQuery query(db);
-        query.exec("SELECT name_it FROM apparatus");
+        query.exec("SELECT name_it, gender FROM apparatus WHERE gender='" + p_strGender + "'");
 
         *p_pList << "Attrezzo..";
         while (query.next())
         {
             QString name = query.value(0).toString();
+            QString gender = query.value(1).toString();
+
             *p_pList << name;
         }
     }

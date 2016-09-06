@@ -29,9 +29,6 @@ signals:
     void comboListChanged();
     void countChanged();
 
-public slots:
-
-
 private:
 
     QStringList m_comboList;

@@ -13,8 +13,7 @@ HEADERS += \
     ../MGCommon/src/msgBox/messagebox.h \
     src/coreapplication.h \
     src/dbinterface.h \
-    src/savescore.h \
-    src/messagebox.h
+    src/savescore.h
 
 SOURCES += \
     ../MGCommon/src/db/dbconnection.cpp \

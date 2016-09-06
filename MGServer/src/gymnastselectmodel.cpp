@@ -47,6 +47,11 @@ void GymnastSelectModel::RetrieveGymnastList()
 void GymnastSelectModel::addItem(QString gymnastFullTxt)
 {
     QStringList strSplit = gymnastFullTxt.split(',');
+    if (strSplit.count() < 2)
+    {
+        qCritical() << "addItem(): first/last name formatting error";
+        return;
+    }
     QString firstName = strSplit.at(0).trimmed();
     QString lastName =  strSplit.at(1).trimmed();
 
@@ -78,6 +83,11 @@ void GymnastSelectModel::removeItem(QString gymnastFullTxt)
 
     // remove it from the db
     QStringList strSplit = gymnastFullTxt.split(',');
+    if (strSplit.count() < 2)
+    {
+        qCritical() << "removeItem(): first/last name formatting error";
+        return;
+    }
     QString firstName = strSplit.at(0).trimmed();
     QString lastName =  strSplit.at(1).trimmed();
 

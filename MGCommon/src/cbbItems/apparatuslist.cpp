@@ -26,14 +26,18 @@ void ApparatusList::Init(QQmlApplicationEngine &p_qEngine)
     pComboContext->setContextProperty("apparatusModel", &m_cCbbModel);
 
     // move after mySQL read-out
-    FillList();
+    // FillList();
 }
 
-void ApparatusList::FillList()
+void ApparatusList::FillList(QString p_strGender)
 {
     QStringList tmp;
-    dbInterface::Instance()->getApparatusList(&tmp);
+    dbInterface::Instance()->getApparatusList(&tmp, p_strGender);
 
     m_cCbbModel.setComboList(tmp);
 }
 
+void ApparatusList::onIndexChaned(int index)
+{
+
+}

@@ -3,6 +3,9 @@
 #include "dbinterface.h"
 #include "savescore.h"
 #include "messagebox.h"
+#include <qquickitem.h>
+#include "apparatuslist.h"
+
 
 CoreApplication::CoreApplication(QObject *parent)
     : QObject(parent)
@@ -49,11 +52,40 @@ void CoreApplication::Init(QQmlApplicationEngine& p_qEngine)
 
 void CoreApplication::Connect()
 {
-    // Add gymnast button (TODO move toserver app)
     QObject* saveScoreBtn = m_pAppEngine->rootObjects().first()->findChild<QObject*>("btnSaveScore");
     if (saveScoreBtn)
     {
         connect(saveScoreBtn, SIGNAL(saveScore(QString, QString, QString, QString)),
                 SaveScore::Instance(), SLOT(onSaveScore(QString, QString, QString, QString)));
+    }
+
+    QQuickItem* cbbGymnast = m_pAppEngine->rootObjects().first()->findChild<QQuickItem*>("cbbGymnastSelection");
+    if (cbbGymnast)
+    {
+        connect(cbbGymnast, SIGNAL(selectedTextChanged(QString)),
+                this, SLOT(onGymnastChanged(QString)));
+    }
+}
+
+void CoreApplication::onGymnastChanged(QString p_currentTxt)
+{
+    QStringList strSplit = p_currentTxt.split(',');
+    if (strSplit.count() < 2)
+    {
+        qDebug() << "onGymnastChanged(): first/last name formatting error";
+    }
+    QString firstName = strSplit.at(0).trimmed();
+    QString lastName =  strSplit.at(1).trimmed();
+
+    if (!firstName.isEmpty() && !lastName.isEmpty())
+    {
+        int iAthleteId = dbInterface::Instance()->getGymnastId(firstName, lastName);
+        QString strGender = dbInterface::Instance()->getGender(iAthleteId);
+
+        ApparatusList::Instance()->FillList(strGender);
+    }
+    else
+    {
+        qDebug() << "onGymnastChanged(): first/last name is empty";
     }
 }

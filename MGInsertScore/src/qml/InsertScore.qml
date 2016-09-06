@@ -28,11 +28,16 @@ Item {
 
                 ComboBox {
                     id: cbbGymnastSelection
+                    objectName: "cbbGymnastSelection"
                     model: gymnastRegisteredModel.comboList
-                    width: parent.parent.width/3
-                    activeFocusOnPress: true
+                    width: parent.parent.width/2
+//                    activeFocusOnPress: true
                     style:comboBoxMGStyle
                     currentIndex: 0
+                    signal selectedTextChanged(string currentTxt)
+                    onCurrentTextChanged: {
+                        selectedTextChanged(currentText)
+                    }
                 }
 
                 ComboBox {
@@ -41,6 +46,7 @@ Item {
                     width: parent.parent.width/3
                     activeFocusOnPress: true
                     style:comboBoxMGStyle
+                    visible: cbbGymnastSelection.currentIndex > 0
                     currentIndex: 0
                 }
 
