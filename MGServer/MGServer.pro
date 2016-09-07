@@ -14,7 +14,8 @@ SOURCES += \
     src/gymnastselectdata.cpp \
     src/gymnastselectmodel.cpp \
     src/coreapplication.cpp \
-    src/dbinterface.cpp
+    src/dbinterface.cpp \
+    src/gymnastsortfilterproxymodel.cpp
 
 HEADERS += \
     ../MGCommon/src/db/dbconnection.h \
@@ -26,7 +27,8 @@ HEADERS += \
     src/gymnastselectdata.h \
     src/gymnastselectmodel.h \
     src/coreapplication.h \
-    src/dbinterface.h
+    src/dbinterface.h \
+    src/gymnastsortfilterproxymodel.h
 
 INCLUDEPATH += \
     ../MGCommon/src/db \

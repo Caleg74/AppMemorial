@@ -70,6 +70,30 @@ QString GymnastData::Sex() const
     return m_sex;
 }
 
+bool GymnastData::operator<(const GymnastData other) const
+{
+    int iCompare = QString::compare(m_firstName, other.m_firstName, Qt::CaseInsensitive);
+    if (iCompare < 0)
+    {
+        return true;
+    }
+    else if (iCompare == 0)
+    {
+        iCompare = QString::compare(m_lastName, other.LastName(), Qt::CaseInsensitive);
+        if (iCompare < 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    else
+    {
+        return false;
+    }
+}
 
 bool operator== (const GymnastData& lhs, const GymnastData& rhs)
 {
@@ -84,4 +108,14 @@ bool operator== (const GymnastData& lhs, const GymnastData& rhs)
     {
         return false;
     }
+}
+
+QDebug &operator<<(QDebug &stream, const GymnastData &obj)
+{
+    stream << "{" << obj.m_firstName << ", ";
+    stream << obj.m_lastName << ", ";
+    stream << obj.m_sex << ", ";
+    stream << obj.m_country << "}\n";
+
+    return stream;
 }

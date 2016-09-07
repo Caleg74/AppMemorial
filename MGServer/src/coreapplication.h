@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QQmlApplicationEngine>
+#include "gymnastsortfilterproxymodel.h"
 
 class CoreApplication : public QObject
 {
@@ -22,9 +23,11 @@ signals:
 
 public slots:
 
+        void onSortClicked();
 private:
     QQmlApplicationEngine* m_pAppEngine;
 
+    GymnastSortFilterProxyModel* m_qSortProxy;
 };
 
 #endif // COREAPPLICATION_H

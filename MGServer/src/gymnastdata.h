@@ -42,6 +42,7 @@
 ****************************************************************************/
 
 #include <QString>
+#include <QtCore>
 
 class GymnastData
 {
@@ -58,11 +59,19 @@ public:
 
     friend bool operator== (const GymnastData& lhs, const GymnastData& rhs);
 
+    friend QDebug& operator<< (QDebug &stream, const GymnastData &obj);
+
+    bool operator<(const GymnastData other) const;
+
+
+
 private:
     QString m_firstName;
     QString m_lastName;
     QString m_country;
     QString m_sex;
 };
+
+
 
 #endif // GYMNASTDATA_H

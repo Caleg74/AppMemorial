@@ -82,7 +82,12 @@ Item {
                         ListElement { text: "F" }
                     }
 
-
+                    StyleMGPushButton {
+                        id:btnSort
+                        objectName: "btnSort"
+                        width: 100
+                        buttonText: "Sort"
+                    }
                 }
 
                 Item {
@@ -130,7 +135,6 @@ Item {
                 anchors.fill: parent
                 width: parent.width
                 clip: true
-
 
                 // Animations
                 add: Transition { NumberAnimation { properties: "y"; from:-50 ; duration: 500 } }

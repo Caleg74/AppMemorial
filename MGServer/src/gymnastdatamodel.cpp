@@ -1,6 +1,8 @@
 #include "gymnastdatamodel.h"
 #include "dbinterface.h"
 #include "gymnastselectionlist.h"
+#include <QAbstractItemModel>
+#include "gymnastsortfilterproxymodel.h"
 
 //**** STATIC MEMBER INITIALIZATION *********************
 GymnastDataModel* GymnastDataModel::sm_pInstance = NULL;
@@ -21,7 +23,7 @@ GymnastDataModel* GymnastDataModel::Instance()
 GymnastDataModel::GymnastDataModel(QObject *parent)
     : QAbstractListModel(parent)
 {
-    RetrieveGymnastList();
+    RetrieveGymnastList();;
 }
 
 void GymnastDataModel::RetrieveGymnastList()
