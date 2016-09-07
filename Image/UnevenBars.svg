@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="800"
+   height="800"
+   viewBox="0 0 799.99998 799.99997"
+   id="svg4146"
+   version="1.1"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="UnevenBars.svg">
+  <defs
+     id="defs4148" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.59455896"
+     inkscape:cx="-211.0817"
+     inkscape:cy="449.21224"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     units="px"
+     inkscape:window-width="1920"
+     inkscape:window-height="1018"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata4151">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-252.36223)">
+    <circle
+       style="fill:#5fd38d;fill-opacity:1;stroke:none;stroke-opacity:1"
+       id="path4694"
+       cx="400"
+       cy="652.36224"
+       r="300" />
+    <rect
+       style="fill:#e3dbdb;fill-opacity:1;stroke:none;stroke-opacity:1"
+       id="rect4696"
+       width="340"
+       height="30"
+       x="230"
+       y="622.36224"
+       ry="12" />
+    <rect
+       style="fill:#e3dbdb;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect4764"
+       width="30"
+       height="180"
+       x="220"
+       y="622.3623"
+       ry="5.202312" />
+    <rect
+       style="fill:#e3dbdb;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect4764-9"
+       width="30"
+       height="180"
+       x="550"
+       y="622.36224"
+       ry="5.2023125" />
+    <rect
+       style="fill:#e3dbdb;fill-opacity:1;stroke:none;stroke-opacity:1"
+       id="rect4696-0"
+       width="240"
+       height="30"
+       x="280"
+       y="492.36224"
+       ry="12" />
+    <rect
+       style="fill:#e3dbdb;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect4764-4"
+       width="30"
+       height="300"
+       x="280"
+       y="502.36224"
+       ry="8.6705198" />
+    <rect
+       style="fill:#e3dbdb;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect4764-9-0"
+       width="30"
+       height="300"
+       x="490"
+       y="502.36224"
+       ry="8.6705208" />
+  </g>
+</svg>
