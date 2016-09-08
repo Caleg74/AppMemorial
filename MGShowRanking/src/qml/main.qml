@@ -43,11 +43,26 @@ import QtQuick.Window 2.2
 import "qrc:/qml"
 
 Window {
-    id: window
+    id: mainWindow
     width: 1024
     height: 640
     visible: true
     title: qsTr("Memorial Gander")
+//    flags: Qt.FramelessWindowHint
+    flags: Qt.Window /*| Qt.FramelessWindowHint*/ // for OSX native behavior support
+
+        MouseArea {
+            anchors.fill: parent
+            onDoubleClicked: {
+                if (mainWindow.visibility === Window.FullScreen) {
+                    mainWindow.visibility = Window.AutomaticVisibility;
+                    flags: Qt.Window
+                } else {
+                    mainWindow.visibility = Window.FullScreen
+                    flags: Qt.FramelessWindowHint
+                }
+            }
+        }
 
     StyleMGComboBox{ id: comboBoxMGStyle}
     StyleMGTextInput { id: textEditMGStyle}
