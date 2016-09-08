@@ -12,29 +12,36 @@ Item {
     height: parent.height
 
     Row {
-        anchors.margins: 10
-        anchors.centerIn: parent
+        width: parent.width
+        height: parent.height
+        anchors.verticalCenter: parent.verticalCenter
+
 
         Text {
-            id: name
+            id: titleItemName
             text: parent.parent.text
             font.pointSize: fontSize
             color: "#0a3f60"
-            width: parent.parent.width - 40
-            anchors.verticalCenter: parent.verticalCenter
+//            anchors.verticalCenter: parent.parent.verticalCenter
+            horizontalAlignment: Text.AlignLeft
+            verticalAlignment: Text.AlignVCenter
+            width: parent.width * 6 /10 - 2
+            height: parent.height
+
         }
 
         Image {
+            id: apparatusImage
             source: imageSource
-            sourceSize.width: fontSize * 3
-            sourceSize.height: fontSize * 3
+            sourceSize.width: parent.width * 3 /10
+            sourceSize.height: parent.width * 3 /10
             anchors.verticalCenter: parent.verticalCenter
         }
 
         Rectangle {
+            id: separator
             width: 2    // just a line
             height: parent.height - 5
-            anchors.verticalCenter: parent.verticalCenter
             color: "#d0d0d0"
             visible: separatorVisible
         }

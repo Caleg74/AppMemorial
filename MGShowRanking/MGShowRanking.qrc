@@ -24,6 +24,7 @@
         <file alias="PommelHorse.svg">../MGCommon/image/PommelHorse.svg</file>
         <file alias="Rings.svg">../MGCommon/image/Rings.svg</file>
         <file alias="UnevenBars.svg">../MGCommon/image/UnevenBars.svg</file>
+        <file alias="Empty.svg">../MGCommon/image/Empty.svg</file>
         <file alias="Vault.svg">../MGCommon/image/Vault.svg</file>
     </qresource>
 </RCC>

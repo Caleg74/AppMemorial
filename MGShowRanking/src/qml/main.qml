@@ -44,8 +44,8 @@ import "qrc:/qml"
 
 Window {
     id: window
-    width: 768
-    height: 480
+    width: 1024
+    height: 640
     visible: true
     title: qsTr("Memorial Gander")
 

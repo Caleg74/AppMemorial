@@ -20,7 +20,7 @@ Item {
             id: menTitleSpace
             width: parent.width
             y: 50
-            height: 60
+            height:  parent.height / 10
             radius: 5
             border.width: 2
             border.color: "#0a3f60"
@@ -31,12 +31,12 @@ Item {
             {
                 anchors.margins: 10
                 anchors.fill: parent
-//                anchors.verticalCenter: parent.verticalCenter
-                property int fontSize: width / 80
+                property int fontSize: Math.max(parent.width / 80, 8)
                 TableTitleItem {
                     text: "Ginnasta"
                     fontSize: parent.fontSize
-                    width: (parent.width / 8) *2
+                    width: (parent.width / 8) * 2
+                    imageSource: "/images/Empty.svg" // no image, but reserve space
                 }
                 TableTitleItem {
                     text: "Suolo"
