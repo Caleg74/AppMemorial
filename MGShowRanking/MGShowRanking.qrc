@@ -4,7 +4,9 @@
         <file alias="StyleMGComboBox.qml">../MGCommon/qml-styles/StyleMGComboBox.qml</file>
         <file alias="StyleMGTextInput.qml">../MGCommon/qml-styles/StyleMGTextInput.qml</file>
         <file alias="StyleMGPushButton.qml">../MGCommon/qml-styles/StyleMGPushButton.qml</file>
-<file alias="InsertScore.qml">src/qml/InsertScore.qml</file>
+        <file alias="MenRanking.qml">src/qml/MenRanking.qml</file>
+        <file alias="MenRankingDelegate.qml">src/qml/MenRankingDelegate.qml</file>
+		<file alias="TableTitleItem.qml">src/qml/TableTitleItem.qml</file>
         <file alias="main.qml">src/qml/main.qml</file>
     </qresource>
     <qresource prefix="/images">
@@ -15,5 +17,13 @@
         <file alias="delete_icon.png">../MGCommon/image/delete_icon.png</file>
         <file alias="delete_icon_pressed.png">../MGCommon/image/delete_icon_pressed.png</file>
         <file alias="selectedTab.svg">../MGCommon/image/selectedTab.svg</file>
+        <file alias="BalanceBeam.svg">../MGCommon/image/BalanceBeam.svg</file>
+        <file alias="Floor.svg">../MGCommon/image/Floor.svg</file>
+        <file alias="HorizontalBar.svg">../MGCommon/image/HorizontalBar.svg</file>
+        <file alias="ParallelBars.svg">../MGCommon/image/ParallelBars.svg</file>
+        <file alias="PommelHorse.svg">../MGCommon/image/PommelHorse.svg</file>
+        <file alias="Rings.svg">../MGCommon/image/Rings.svg</file>
+        <file alias="UnevenBars.svg">../MGCommon/image/UnevenBars.svg</file>
+        <file alias="Vault.svg">../MGCommon/image/Vault.svg</file>
     </qresource>
 </RCC>

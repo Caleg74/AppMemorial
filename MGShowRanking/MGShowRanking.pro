@@ -21,4 +21,7 @@ OTHER_FILES += \
     ../MGCommon/qml-styles/StyleMGComboBox.qml \
     ../MGCommon/qml-styles/StyleMGTextInput.qml \
     ../MGCommon/qml-styles/StyleMGPushButton.qml \
+    src/qml/MenRanking.qml \
+    src/qml/MenRankingDelegate.qml \
+    src/qml/TableTitleItem.qml \
     src/qml/main.qml

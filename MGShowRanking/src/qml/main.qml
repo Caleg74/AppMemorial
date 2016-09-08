@@ -66,12 +66,12 @@ Window {
                 anchors.fill: parent; anchors.margins: 20
                 color: "#d0d0d0"
 
-//                GymnastInfo
-//                {
-//                    width: parent.width
-//                    height: parent.height
-//                    anchors.centerIn: parent
-//                }
+                MenRanking
+                {
+                    width: parent.width
+                    height: parent.height
+                    anchors.centerIn: parent
+                }
             }
         }
 
