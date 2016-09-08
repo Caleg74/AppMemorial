@@ -15,7 +15,7 @@
    id="svg4146"
    version="1.1"
    inkscape:version="0.91 r13725"
-   sodipodi:docname="Floor.svg">
+   sodipodi:docname="Sum.svg">
   <defs
      id="defs4148" />
   <sodipodi:namedview
@@ -26,7 +26,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.42041667"
-     inkscape:cx="-1423.1912"
+     inkscape:cx="-721.50642"
      inkscape:cy="33.18088"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
@@ -56,26 +56,46 @@
      id="layer1"
      transform="translate(0,-252.36223)">
     <circle
-       style="fill:#32bb00;fill-opacity:1;stroke:none;stroke-opacity:1"
+       style="fill:#000080;fill-opacity:1;stroke:none;stroke-opacity:1"
        id="path4694"
        cx="400"
        cy="652.36224"
        r="300" />
     <rect
-       style="fill:#e3dbdb;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       id="rect4696"
-       width="380"
-       height="380"
-       x="210"
-       y="462.36224"
-       ry="68.392471" />
+       style="fill:#e3dbdb;fill-opacity:1;stroke:none;stroke-opacity:1"
+       id="rect4136"
+       width="300"
+       height="40"
+       x="250"
+       y="502.36224"
+       ry="20" />
     <rect
-       style="fill:#e3dbdb;fill-opacity:1;fill-rule:nonzero;stroke:#32bb00;stroke-width:10;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       id="rect4696-8"
-       width="340"
-       height="340"
-       x="230"
-       y="482.36224"
-       ry="61.193264" />
+       style="fill:#e3dbdb;fill-opacity:1;stroke:none;stroke-opacity:1"
+       id="rect4136-8"
+       width="300"
+       height="40"
+       x="250"
+       y="762.36224"
+       ry="20" />
+    <rect
+       style="fill:#e3dbdb;fill-opacity:1;stroke:none;stroke-opacity:1"
+       id="rect4168"
+       width="45.667355"
+       height="198.20876"
+       x="684.61816"
+       y="242.99033"
+       ry="22.833677"
+       transform="matrix(0.77038319,0.63758116,-0.63758116,0.77038319,0,0)"
+       rx="0" />
+    <rect
+       style="fill:#e3dbdb;fill-opacity:1;stroke:none;stroke-opacity:1"
+       id="rect4168-1"
+       width="45.667355"
+       height="198.20876"
+       x="-149.96114"
+       y="-763.47443"
+       ry="22.833677"
+       transform="matrix(0.77038319,-0.63758116,-0.63758116,-0.77038319,0,0)"
+       rx="0" />
   </g>
 </svg>

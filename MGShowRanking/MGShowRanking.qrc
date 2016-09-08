@@ -26,5 +26,6 @@
         <file alias="UnevenBars.svg">../MGCommon/image/UnevenBars.svg</file>
         <file alias="Empty.svg">../MGCommon/image/Empty.svg</file>
         <file alias="Vault.svg">../MGCommon/image/Vault.svg</file>
+        <file alias="Sum.svg">../MGCommon/image/Sum.svg</file>
     </qresource>
 </RCC>

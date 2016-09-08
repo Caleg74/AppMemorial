@@ -22,7 +22,6 @@ Item {
             text: parent.parent.text
             font.pointSize: fontSize
             color: "#0a3f60"
-//            anchors.verticalCenter: parent.parent.verticalCenter
             horizontalAlignment: Text.AlignLeft
             verticalAlignment: Text.AlignVCenter
             width: parent.width * 6 /10 - 2
