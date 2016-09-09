@@ -48,8 +48,7 @@ Window {
     height: 640
     visible: true
     title: qsTr("Memorial Gander")
-//    flags: Qt.FramelessWindowHint
-    flags: Qt.Window /*| Qt.FramelessWindowHint*/ // for OSX native behavior support
+    flags: Qt.Window
 
         MouseArea {
             anchors.fill: parent
@@ -67,6 +66,7 @@ Window {
     StyleMGComboBox{ id: comboBoxMGStyle}
     StyleMGTextInput { id: textEditMGStyle}
     StyleMGPushButton { id: buttonMGStyle}
+
     StyleMGTabWidget {
         id: tabs
         width: parent.width
@@ -81,8 +81,7 @@ Window {
                 anchors.fill: parent; anchors.margins: 20
                 color: "#d0d0d0"
 
-                MenRanking
-                {
+                MenRanking {
                     width: parent.width
                     height: parent.height
                     anchors.centerIn: parent

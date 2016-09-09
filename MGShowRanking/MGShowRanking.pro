@@ -1,15 +1,41 @@
 TEMPLATE = app
 
-QT += qml quick
+QT += sql qml quick widgets
 
 CONFIG += c++11
 
-SOURCES += src/main.cpp
+SOURCES += \
+    ../MGCommon/src/db/dbconnection.cpp \
+    ../MGCommon/src/cbbItems/comboboxmodel.cpp \
+    ../MGCommon/src/cbbItems/countrylist.cpp \
+    ../MGCommon/src/cbbItems/gymnastselectionlist.cpp \
+    src/allroundmendata.cpp \
+    src/allroundmendatamodel.cpp \
+    src/allroundmensortfilterproxymodel.cpp \
+    src/coreapplication.cpp \
+    src/dbinterface.cpp \
+    src/main.cpp
+
+HEADERS += \
+    ../MGCommon/src/db/dbconnection.h \
+    ../MGCommon/src/cbbItems/comboboxmodel.h \
+    ../MGCommon/src/cbbItems/countrylist.h \
+    ../MGCommon/src/cbbItems/gymnastselectionlist.h \
+    src/allroundmendata.h \
+    src/allroundmendatamodel.h \
+    src/allroundmensortfilterproxymodel.h \
+    src/coreapplication.h \
+    src/dbinterface.h
+
+INCLUDEPATH += \
+    ../MGCommon/src/db \
+    ../MGCommon/src/cbbItems \
+    src/
 
 RESOURCES += MGShowRanking.qrc
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
-QML_IMPORT_PATH = src/qml
+#QML_IMPORT_PATH = src/qml
 
 QT_QUICK_CONTROLS_STYLE=Flat ./app
 
@@ -21,7 +47,10 @@ OTHER_FILES += \
     ../MGCommon/qml-styles/StyleMGComboBox.qml \
     ../MGCommon/qml-styles/StyleMGTextInput.qml \
     ../MGCommon/qml-styles/StyleMGPushButton.qml \
+    src/qml/AllroundMDelegate.qml \
     src/qml/MenRanking.qml \
-    src/qml/MenRankingDelegate.qml \
     src/qml/TableTitleItem.qml \
+    src/qml/ApparatusScoreItem.qml \
+    src/qml/TotalScoreItem.qml \
+    src/qml/GymnastPosItem.qml \
     src/qml/main.qml

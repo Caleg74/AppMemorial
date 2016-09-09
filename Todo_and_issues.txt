@@ -11,7 +11,10 @@ Date		App			Prio	Description
 
 2016-09-03	MGServer	Low		Tab "dati evento", crea collegamento (x ora solo read) su tabella sport_event
 
-2016-06.06  All			Low		Add application Icons
+2016-09-06  All			Low		Add application Icons
+
+2016-09-09	All			Low 	File header files (copyright notice for GPL like?) -> Ask Ivan
+
 
 -------------------------------------------
 
