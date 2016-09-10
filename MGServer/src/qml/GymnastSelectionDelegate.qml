@@ -53,7 +53,7 @@ Item {
                 MouseArea {
                     id: removeMouseArea
                     anchors.fill: parent
-                    onClicked: GymnastSelectModel.removeItem(FullName)
+                    onClicked: GymnastSelectModel.sourceModel.removeItem(FullName)
                 }
             }
         }

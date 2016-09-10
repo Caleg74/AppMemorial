@@ -79,7 +79,7 @@ Item {
                 MouseArea {
                     id: removeMouseArea
                     anchors.fill: parent
-                    onClicked: GymnastDataModel.removeItem(FirstName, LastName)
+                    onClicked: GymnastDataModel.sourceModel.removeItem(FirstName, LastName)
                 }
             }
         }

@@ -81,13 +81,6 @@ Item {
                         ListElement { text: "M" }
                         ListElement { text: "F" }
                     }
-
-                    StyleMGPushButton {
-                        id:btnSort
-                        objectName: "btnSort"
-                        width: 100
-                        buttonText: "Sort"
-                    }
                 }
 
                 Item {
@@ -106,7 +99,7 @@ Item {
                         id: addMouseArea
                         anchors.fill: parent
                         onClicked: {
-                            GymnastDataModel.addItem(txtFirstName.text, txtLastName.text,
+                            GymnastDataModel.sourceModel.addItem(txtFirstName.text, txtLastName.text,
                                                         cbbCountry.currentText, cbbSex.currentText)
                             // remove fields for next input
                             txtFirstName.text = ""

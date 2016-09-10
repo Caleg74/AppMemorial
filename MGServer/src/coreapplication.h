@@ -19,15 +19,11 @@ public:
     /** Connectes all UI signals */
     void Connect();
 
-signals:
-
-public slots:
-
-        void onSortClicked();
 private:
     QQmlApplicationEngine* m_pAppEngine;
 
-    GymnastSortFilterProxyModel* m_qSortProxy;
+    GymnastSortFilterProxyModel* m_qSortProxyGymnast;
+    GymnastSortFilterProxyModel* m_qSortProxySelectedGymnast;
 };
 
 #endif // COREAPPLICATION_H

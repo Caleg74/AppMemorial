@@ -23,7 +23,7 @@ GymnastDataModel* GymnastDataModel::Instance()
 GymnastDataModel::GymnastDataModel(QObject *parent)
     : QAbstractListModel(parent)
 {
-    RetrieveGymnastList();;
+    RetrieveGymnastList();
 }
 
 void GymnastDataModel::RetrieveGymnastList()

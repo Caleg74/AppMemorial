@@ -36,20 +36,28 @@ void CoreApplication::Init(QQmlApplicationEngine& p_qEngine)
 
     // save it as a class member
     m_pAppEngine = &p_qEngine;
-    GymnastDataModel* pGymModel = GymnastDataModel::Instance();
-    GymnastSelectModel* pGymSelModel = GymnastSelectModel::Instance();
 
     QQmlContext *ctxt = p_qEngine.rootContext();
 
+    // Create the the model for the gymnasts of every event
+    GymnastDataModel* pGymModel = GymnastDataModel::Instance();
     // Set filter
-    m_qSortProxy = new GymnastSortFilterProxyModel(this);
-    m_qSortProxy->setSortRole(GymnastDataModel::FirstNameRole);
-    m_qSortProxy->setSourceModel(pGymModel);
-    m_qSortProxy->setDynamicSortFilter(true);
+    m_qSortProxyGymnast = new GymnastSortFilterProxyModel(this);
+    m_qSortProxyGymnast->setSortRole(GymnastDataModel::FirstNameRole);
+    m_qSortProxyGymnast->setSourceModel(pGymModel);
+    m_qSortProxyGymnast->setDynamicSortFilter(true);
+    ctxt->setContextProperty("GymnastDataModel", m_qSortProxyGymnast); // Contains the filter, not the model
+    m_qSortProxyGymnast->sort(0);
 
-    ctxt->setContextProperty("GymnastDataModel", m_qSortProxy); // Contains the filter, not the model
-    ctxt->setContextProperty("GymnastSelectModel", pGymSelModel);
-
+    // Create the "registers to this event gymnasts" model
+    GymnastSelectModel* pGymSelModel = GymnastSelectModel::Instance();
+    // Set filter
+    m_qSortProxySelectedGymnast = new GymnastSortFilterProxyModel(this);
+    m_qSortProxySelectedGymnast->setSortRole(GymnastDataModel::FirstNameRole);
+    m_qSortProxySelectedGymnast->setSourceModel(pGymSelModel);
+    m_qSortProxySelectedGymnast->setDynamicSortFilter(true);
+    ctxt->setContextProperty("GymnastSelectModel", m_qSortProxySelectedGymnast);
+    m_qSortProxySelectedGymnast->sort(0);
 
 //    connect(pGymModel, SIGNAL(OutputChanged(unsigned int)),
 //            &m_cIoWrap, SLOT(SetOutput(unsigned int)));
@@ -65,14 +73,5 @@ void CoreApplication::Connect()
 //        connect(addGymnatBtn, SIGNAL(addGymnast(QString firstName, QString lastName, QString country, QString sex)),
 //                GymnastDataModel::Instance(), SLOT(AddGymnast(QString firstName, QString lastName, QString country, QString sex)));
 //    }
-    QQuickItem* qBtnSort = m_pAppEngine->rootObjects().first()->findChild<QQuickItem*>("btnSort");
-    if (qBtnSort)
-    {
-        connect(qBtnSort, SIGNAL(clicked()), this, SLOT(onSortClicked()));
-    }
 }
 
-void CoreApplication::onSortClicked()
-{
-    m_qSortProxy->sort(0);
-}

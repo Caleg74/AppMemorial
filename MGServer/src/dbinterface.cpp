@@ -51,8 +51,6 @@ void dbInterface::getRegisterdGymnastList(QStringList* p_pList)
         QSqlQuery query(db);
         query.exec("SELECT first_name, last_name, gender, nation_id FROM athlete");
 
-        *p_pList << "Seleziona ginnasti..";
-
         while(query.next())
         {
             // Convert NationId to nicename
@@ -62,6 +60,11 @@ void dbInterface::getRegisterdGymnastList(QStringList* p_pList)
                     + query.value(1).toString().trimmed() + ", ("
                     + strNationName.trimmed() + ")";
         }
+
+        qSort(*p_pList);
+
+        // put it at the beginning
+        p_pList->insert(p_pList->begin(), "Seleziona ginnasti..");
     }
     else
     {

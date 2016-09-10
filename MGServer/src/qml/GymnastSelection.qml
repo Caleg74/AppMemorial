@@ -56,7 +56,7 @@ Item {
                         id: addMouseArea
                         anchors.fill: parent
                         onClicked: {
-                            GymnastSelectModel.addItem(cbbGymnastSelection.currentText)
+                            GymnastSelectModel.sourceModel.addItem(cbbGymnastSelection.currentText)
                             // remove fields for next input
                             cbbGymnastSelection.currentIndex = 0
                         }
