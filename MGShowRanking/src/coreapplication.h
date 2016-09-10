@@ -23,7 +23,7 @@ signals:
 
 public slots:
 
-        void onSortClicked();
+        void updateScores();
 private:
     QQmlApplicationEngine* m_pAppEngine;
 

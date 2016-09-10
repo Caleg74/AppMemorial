@@ -3,6 +3,7 @@ import QtQuick.Controls 2.0
 //import QtQuick.Particles 2.0
 
 Item {
+    id: root
     property string finalScore;
     property string startScore;
     property bool separatorVisible: true;
@@ -12,6 +13,8 @@ Item {
     height: parent.height
 
     Row {
+        width: parent.width
+        height: parent.height
 
         Column {
             width: parent.width
@@ -21,7 +24,7 @@ Item {
 
             Text {
                 id: finalScore
-                text: parent.parent.finalScore
+                text: root.finalScore
                 font.pointSize: fontSize
                 color: "#0a3f60"
                 horizontalAlignment: Text.AlignLeft
@@ -32,13 +35,13 @@ Item {
 
             Text {
                 id: startScore
-                text: "(" + parent.parent.startScore + ")"
+                text: root.startScore // root.startScore !== "0" ? "("+ root.startScore +")" : ""
                 font.pointSize: fontSize / 2
                 color: "#0a3f60"
                 horizontalAlignment: Text.AlignLeft
                 verticalAlignment: Text.AlignVCenter
                 width: parent.width - 2
-                height: parent.height
+                height: parent.height / 2
             }
         }
         Rectangle {

@@ -7,15 +7,36 @@
 class AllroundMenData
 {
 public:
-    AllroundMenData(const QString &firstName,
-                const QString &lastName,
-                const QString &country,
-                const QString &sex);
+    enum EApparatus
+    {
+        AFloor,
+        APommelHores,
+        ARings,
+        AVault,
+        AParallelBars,
+        AHorizontalBar,
+        AApparatusMax
+    };
 
-    QString FirstName() const;
-    QString LastName() const;
-    QString Country() const;
-    QString Sex() const;
+    typedef struct
+    {
+        float StartScore;
+        float FinalScore;
+    } SScore;
+
+    AllroundMenData(const QString &fullName);
+
+    void setRank(int p_iRank);
+    QString getRank() const;
+    QString getNameFull() const;
+    void setTotalScore(float p_fTotScore);
+    QString getTotalScore() const;
+    void setStartScore(EApparatus p_eApparatus, float p_fScore);
+    QString getStartScore(EApparatus p_eApparatus) const;
+    void setFinalScore(EApparatus p_eApparatus, float p_fScore);
+    QString getFinalScore(EApparatus p_eApparatus) const;
+
+    void CalculateTotalScore();
 
     friend bool operator== (const AllroundMenData& lhs, const AllroundMenData& rhs);
 
@@ -26,10 +47,10 @@ public:
 
 
 private:
-    QString m_firstName;
-    QString m_lastName;
-    QString m_country;
-    QString m_sex;
+    int m_iRank;
+    QString m_nameFull;
+    float m_fTotalScore;
+    SScore m_aiScore[AApparatusMax];
 };
 
 

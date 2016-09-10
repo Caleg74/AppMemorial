@@ -8,7 +8,7 @@ Item {
     Rectangle {
         width: parent.width
         y: 50
-        height:  parent.height / 12
+        height:  parent.height
         radius: 5
         border.width: 2
         border.color: "#0a3f60"
@@ -23,13 +23,13 @@ Item {
 
             GymnastPosItem {
                 rank: Rank          // roleName
-                nameFull: NameFull  // role name
+                nameFull: NameFull  // roleName
                 fontSize: parent.fontSize
                 width: (parent.width / 18) * 5   // 5/18th th of the space
             }
 
             TotalScoreItem {
-                finalScore: FinalScore_Total
+                finalScore: FinalScore_Total  // roleName
                 fontSize: parent.fontSize
                 width: (parent.width / 18) * 13/7 // use 1/7th of the 13/18th available
             }

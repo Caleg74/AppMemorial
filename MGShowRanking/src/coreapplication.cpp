@@ -36,17 +36,21 @@ void CoreApplication::Init(QQmlApplicationEngine& p_qEngine)
 
     // save it as a class member
     m_pAppEngine = &p_qEngine;
-    AllroundMenDataModel* pGymModel = AllroundMenDataModel::Instance();
+    AllroundMenDataModel* pGymMenModel = AllroundMenDataModel::Instance();
 
     QQmlContext *ctxt = p_qEngine.rootContext();
 
     // Set filter
     m_qSortProxy = new AllroundMenSortFilterProxyModel(this);
-    m_qSortProxy->setSortRole(AllroundMenDataModel::FirstNameRole);
-    m_qSortProxy->setSourceModel(pGymModel);
+    m_qSortProxy->setSortRole(AllroundMenDataModel::RankRole);
+    m_qSortProxy->setSourceModel(pGymMenModel);
     m_qSortProxy->setDynamicSortFilter(true);
 
     ctxt->setContextProperty("AllroundMenDataModel", m_qSortProxy); // Contains the filter, not the model
+
+    QTimer *timer = new QTimer(this);
+    connect(timer, SIGNAL(timeout()), this, SLOT(updateScores()));
+    timer->start(2000); //time specified in ms
 
 //    connect(pGymModel, SIGNAL(OutputChanged(unsigned int)),
 //            &m_cIoWrap, SLOT(SetOutput(unsigned int)));
@@ -69,7 +73,8 @@ void CoreApplication::Connect()
     }
 }
 
-void CoreApplication::onSortClicked()
+void CoreApplication::updateScores()
 {
+    AllroundMenDataModel::Instance()->updateScores();
     m_qSortProxy->sort(0);
 }

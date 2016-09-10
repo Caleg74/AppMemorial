@@ -39,68 +39,120 @@
 ****************************************************************************/
 #include "allroundmendata.h"
 
-AllroundMenData::AllroundMenData(const QString &firstName,
-                         const QString &lastName,
-                         const QString &country,
-                         const QString &sex)
-    : m_firstName(firstName)
-    , m_lastName(lastName)
-    , m_country(country)
-    , m_sex(sex)
+AllroundMenData::AllroundMenData(const QString &fullName)
+    : m_iRank(0)
+    , m_nameFull(fullName)
+    , m_fTotalScore(0)
 {
+    for (int i=0; i<AApparatusMax; i++)
+    {
+        m_aiScore[i].StartScore = 0;
+        m_aiScore[i].FinalScore = 0;
+    }
 }
 
-QString AllroundMenData::FirstName() const
+void AllroundMenData::setRank(int p_iRank)
 {
-    return m_firstName;
+    m_iRank = p_iRank;
 }
 
-QString AllroundMenData::LastName() const
+QString AllroundMenData::getRank() const
 {
-    return m_lastName;
+    return QString::number(m_iRank, 10);
 }
 
-QString AllroundMenData::Country() const
+QString AllroundMenData::getNameFull() const
 {
-    return m_country;
+    return m_nameFull;
 }
 
-QString AllroundMenData::Sex() const
+void AllroundMenData::setTotalScore(float p_fTotScore)
 {
-    return m_sex;
+    m_fTotalScore = p_fTotScore;
+}
+
+QString AllroundMenData::getTotalScore() const
+{
+    return QString::number(m_fTotalScore, 'g', 6);
+}
+
+void AllroundMenData::setStartScore(EApparatus p_eApparatus, float p_fScore)
+{
+    m_aiScore[p_eApparatus].StartScore = p_fScore;
+}
+
+QString AllroundMenData::getStartScore(EApparatus p_eApparatus) const
+{
+    return QString::number(m_aiScore[p_eApparatus].StartScore, 'g', 6);
+}
+
+void AllroundMenData::setFinalScore(EApparatus p_eApparatus, float p_fScore)
+{
+    m_aiScore[p_eApparatus].FinalScore = p_fScore;
+}
+
+QString AllroundMenData::getFinalScore(EApparatus p_eApparatus) const
+{
+    return QString::number(m_aiScore[p_eApparatus].FinalScore, 'g', 6);
+}
+
+void AllroundMenData::CalculateTotalScore()
+{
+    float fTot = 0;
+    for (int i=0; i<AApparatusMax; i++)
+    {
+        fTot += m_aiScore[i].FinalScore;
+    }
+
+    m_fTotalScore = fTot;
 }
 
 bool AllroundMenData::operator<(const AllroundMenData other) const
 {
-    int iCompare = QString::compare(m_firstName, other.m_firstName, Qt::CaseInsensitive);
-    if (iCompare < 0)
+    // the filter model sorts the list with respect to the ranking, prior to that
+    // the list must besorted out of the total score.
+    // For this reason the total score must be calculated prior to this point
+
+    // each return value is ! (inverted), since the sorting is not ascending but descending
+    if (m_fTotalScore < other.m_fTotalScore)
     {
-        return true;
+        return !true;
     }
-    else if (iCompare == 0)
+    else if (m_fTotalScore == other.m_fTotalScore)
     {
-        iCompare = QString::compare(m_lastName, other.LastName(), Qt::CaseInsensitive);
-        if (iCompare < 0)
+        // look for the highest note between the 2
+        QList<int> scoresThis;
+        QList<int> scoresOther;
+
+        for (int i=0; i<AApparatusMax; i++)
         {
-            return true;
+            scoresThis << m_aiScore[i].FinalScore;
+            scoresOther << other.m_aiScore[i].FinalScore;
         }
-        else
+
+        qSort(scoresThis);
+        qSort(scoresOther);
+
+        for (int i=AApparatusMax-1; i!= 0; i--)
         {
-            return false;
+            if (scoresThis.at(i) > scoresOther.at(i))
+                return !false;
+            else if (scoresThis.at(i) < scoresOther.at(i))
+                return !true;
+            // else continue and compare the next score
         }
+
+        return !true;
     }
     else
     {
-        return false;
+        return !false;
     }
 }
 
 bool operator== (const AllroundMenData& lhs, const AllroundMenData& rhs)
 {
-    if ( (lhs.FirstName() == rhs.FirstName())
-      && (lhs.LastName() == rhs.LastName())
-      && (lhs.Country() == rhs.Country())
-      && (lhs.Sex() == rhs.Sex()))
+    if (lhs.getNameFull() == rhs.getNameFull())
     {
         return true;
     }
@@ -112,10 +164,9 @@ bool operator== (const AllroundMenData& lhs, const AllroundMenData& rhs)
 
 QDebug &operator<<(QDebug &stream, const AllroundMenData &obj)
 {
-    stream << "{" << obj.m_firstName << ", ";
-    stream << obj.m_lastName << ", ";
-    stream << obj.m_sex << ", ";
-    stream << obj.m_country << "}\n";
+    stream << "{" << obj.m_nameFull << ", ";
+    stream << obj.m_iRank << ", ";
+    stream << obj.m_fTotalScore << "}\n";
 
     return stream;
 }

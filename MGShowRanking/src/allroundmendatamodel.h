@@ -9,11 +9,22 @@ class AllroundMenDataModel : public QAbstractListModel
 {
     Q_OBJECT
 public:
-    enum GymnastRoles {
-        FirstNameRole = Qt::UserRole + 1,
-        LastNameRole,
-        CountryRole,
-        SexRole
+    enum AllroundMRoles {
+        RankRole = Qt::UserRole + 1,
+        NameFullRole,
+        FinalScoreTotalRole,
+        StartScoreFloorRole,
+        FinalScoreFloorRole,
+        StartScorePHorseRole,
+        FinalScorePHorseRole,
+        StartScoreRingsRole,
+        FinalScoreRingsRole,
+        StartScoreVaultRole,
+        FinalScoreVaultRole,
+        StartScorePBarsRole,
+        FinalScorePBarsRole,
+        StartScoreHbarRole,
+        FinalScoreHbarRole
     };
 
     /** Singleton */
@@ -28,19 +39,18 @@ public:
 
 public slots:
 
-    void addItem(QString firstName,
-                 QString lastName,
-                 QString country,
-                 QString sex);
+    void updateScores();
 
-    void removeItem(QString firstName, QString lastName);
+//    void addItem(QString nameFull);
+
+//    void removeItem(QString nameFull);
 
 protected:
     QHash<int, QByteArray> roleNames() const;
 
 private:
 
-    AllroundMenData* GetItem(QString& firstName, QString& lastName);
+    AllroundMenData* GetItem(QString& nameFull);
 
     QModelIndex indexFromItem( const AllroundMenData* item) const;
 
