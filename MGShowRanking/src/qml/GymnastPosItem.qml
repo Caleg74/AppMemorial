@@ -10,12 +10,11 @@ Item {
     width: parent.width
     height: parent.height
 
-    Row {
-
-        width: parent.width
-        height: parent.height
-        anchors.verticalCenter: parent.verticalCenter
-
+    Item {  // some sort of a Row
+//        width: parent.width
+//        height: parent.height
+        anchors.fill: parent
+        anchors.margins: 10
 
         Text {
             id: rankId
@@ -25,8 +24,9 @@ Item {
             color: "#0a3f60"
             horizontalAlignment: Text.AlignLeft
             verticalAlignment: Text.AlignVCenter
-            width: parent.width * 1 / 10
+            width: 30
             height: parent.height
+            anchors.left: parent.left
         }
 
         Text {
@@ -36,15 +36,17 @@ Item {
             color: "#0a3f60"
             horizontalAlignment: Text.AlignLeft
             verticalAlignment: Text.AlignVCenter
-            width: parent.width * 2 / 10
             height: parent.height
+            anchors.left: rankId.right
+            anchors.right: separator.left
         }
 
         Rectangle {
             id: separator
             width: 2    // just a line
-            height: parent.height - 5
+            height: parent.height
             color: "#d0d0d0"
+            anchors.right: parent.right
         }
     }
 }

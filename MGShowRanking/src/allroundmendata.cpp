@@ -73,7 +73,7 @@ void AllroundMenData::setTotalScore(float p_fTotScore)
 
 QString AllroundMenData::getTotalScore() const
 {
-    return QString::number(m_fTotalScore, 'g', 6);
+    return QString::number(m_fTotalScore, 'f', 3);
 }
 
 void AllroundMenData::setStartScore(EApparatus p_eApparatus, float p_fScore)
@@ -83,7 +83,7 @@ void AllroundMenData::setStartScore(EApparatus p_eApparatus, float p_fScore)
 
 QString AllroundMenData::getStartScore(EApparatus p_eApparatus) const
 {
-    return QString::number(m_aiScore[p_eApparatus].StartScore, 'g', 6);
+    return QString::number(m_aiScore[p_eApparatus].StartScore, 'f', 3);
 }
 
 void AllroundMenData::setFinalScore(EApparatus p_eApparatus, float p_fScore)
@@ -93,7 +93,7 @@ void AllroundMenData::setFinalScore(EApparatus p_eApparatus, float p_fScore)
 
 QString AllroundMenData::getFinalScore(EApparatus p_eApparatus) const
 {
-    return QString::number(m_aiScore[p_eApparatus].FinalScore, 'g', 6);
+    return QString::number(m_aiScore[p_eApparatus].FinalScore, 'f', 3);
 }
 
 void AllroundMenData::CalculateTotalScore()

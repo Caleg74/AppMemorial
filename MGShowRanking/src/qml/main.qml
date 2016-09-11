@@ -82,9 +82,7 @@ Window {
                 color: "#d0d0d0"
 
                 MenRanking {
-                    width: parent.width
-                    height: parent.height
-                    anchors.centerIn: parent
+                    anchors.fill: parent
                 }
             }
         }
