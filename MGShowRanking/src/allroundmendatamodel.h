@@ -12,6 +12,7 @@ public:
     enum AllroundMRoles {
         RankRole = Qt::UserRole + 1,
         NameFullRole,
+        FlagImageRole,
         FinalScoreTotalRole,
         StartScoreFloorRole,
         FinalScoreFloorRole,

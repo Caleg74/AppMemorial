@@ -132,7 +132,8 @@ QString dbInterface::getNationName(int p_iNationId, enum NationInfo infoType)
         QSqlDatabase db = QSqlDatabase::database("ConnMG");
         QSqlQuery query(db);
 
-        query.exec("SELECT id,nicename,iso3 FROM nations WHERE id = '" + QString::number(p_iNationId, 10) + "'");
+        // iso used for getting the filename {iso}.svg
+        query.exec("SELECT id,nicename,iso FROM nations WHERE id = '" + QString::number(p_iNationId, 10) + "'");
 
         if (query.first())
         {
@@ -234,7 +235,7 @@ void dbInterface::retrieveRegisteredGymnastList(QList<QStringList>& p_strGymnLis
         while(query.next())
         {
             // Convert NationId to nicename
-            QString strNationName = getNationName(query.value(3).toInt(), NI_Nicename);
+            QString strNationName = getNationName(query.value(3).toInt(), NI_ShortName);
 
             QStringList strData;
             strData << query.value(0).toString().trimmed()

@@ -39,10 +39,13 @@
 ****************************************************************************/
 #include "allroundmendata.h"
 
-AllroundMenData::AllroundMenData(const int p_iAthleteId, const QString &fullName)
+AllroundMenData::AllroundMenData(const int p_iAthleteId,
+                                 const QString& fullName,
+                                 const QString& imagePath)
     : m_iAthleteId(p_iAthleteId)
     , m_iRank(0)
     , m_nameFull(fullName)
+    , m_imagePath(imagePath)
     , m_fTotalScore(0)
 {
     for (int i=0; i<ApparatusList::AMApparatusMax; i++)
@@ -70,6 +73,11 @@ QString AllroundMenData::getRank() const
 QString AllroundMenData::getNameFull() const
 {
     return m_nameFull;
+}
+
+QString AllroundMenData::getImagePath() const
+{
+    return m_imagePath;
 }
 
 void AllroundMenData::setTotalScore(float p_fTotScore)

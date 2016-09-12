@@ -15,12 +15,15 @@ public:
         float FinalScore;
     } SScore;
 
-    AllroundMenData(const int p_iAthleteId, const QString &fullName);
+    AllroundMenData(const int p_iAthleteId,
+                    const QString& fullName,
+                    const QString& imagePath);
 
     int getAthleteId();
     void setRank(int p_iRank);
     QString getRank() const;
     QString getNameFull() const;
+    QString getImagePath() const;
     void setTotalScore(float p_fTotScore);
     QString getTotalScore() const;
     void setStartScore(ApparatusList::EApparatusMen p_eApparatus, float p_fScore);
@@ -42,6 +45,7 @@ private:
     int m_iAthleteId;
     int m_iRank;
     QString m_nameFull;
+    QString m_imagePath;
     float m_fTotalScore;
     SScore m_aiScore[ApparatusList::AMApparatusMax];
 };

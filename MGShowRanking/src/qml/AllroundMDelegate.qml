@@ -27,8 +27,9 @@ Item {
 
             GymnastPosItem {
                 id: rankId
-                rank: Rank          // roleName
-                nameFull: NameFull  // roleName
+                rank: Rank           // roleName
+                nameFull: NameFull   // roleName
+                flagImage: FlagImage // roleName
                 fontSize: parent.fontSize
                 anchors.left: parent.left
                 anchors.right: totId.left

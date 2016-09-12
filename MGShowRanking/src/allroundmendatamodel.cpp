@@ -32,7 +32,7 @@ void AllroundMenDataModel::RetrieveGymnastList()
 {
     QString firstName;
     QString lastName;
-    QString country;
+    QString countryFile;
     int athleteId;
 
     QList<QStringList> p_strGymnList;
@@ -44,12 +44,11 @@ void AllroundMenDataModel::RetrieveGymnastList()
         {
             firstName = p_strGymnList.at(i)[0];
             lastName = p_strGymnList.at(i)[1];
-            country = p_strGymnList.at(i)[2];
+            countryFile = "qrc:/flags/" + (p_strGymnList.at(i)[2]).toLower() + ".svg";
             athleteId = dbInterface::Instance()->getGymnastId(firstName, lastName);
 
             AllroundMenData cAllroundMen(athleteId, firstName
-                    + ", " + lastName
-                    + ", (" + country + ")");
+                    + " " + lastName + "  ", countryFile);
 
             beginInsertRows(QModelIndex(), rowCount(), rowCount());
             m_rankingList << cAllroundMen;
@@ -138,6 +137,8 @@ QVariant AllroundMenDataModel::data(const QModelIndex & index, int role) const {
         return gymnast.getRank();
     else if (role == NameFullRole)
         return gymnast.getNameFull();
+    else if (role == FlagImageRole)
+        return gymnast.getImagePath();
     else if (role == FinalScoreTotalRole)
         return gymnast.getTotalScore();
     else if (role == StartScoreFloorRole)
@@ -172,6 +173,7 @@ QHash<int, QByteArray> AllroundMenDataModel::roleNames() const {
     QHash<int, QByteArray> roles;
     roles[RankRole            ] = "Rank";
     roles[NameFullRole        ] = "NameFull";
+    roles[FlagImageRole       ] = "FlagImage";
     roles[FinalScoreTotalRole ] = "FinalScore_Total";
     roles[StartScoreFloorRole ] = "StartScore_Floor";
     roles[FinalScoreFloorRole ] = "FinalScore_Floor";

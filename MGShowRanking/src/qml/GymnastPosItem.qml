@@ -5,6 +5,7 @@ import QtQuick.Controls 2.0
 Item {
     property string rank;
     property string nameFull;
+    property string flagImage;
     property int fontSize: 15;
 
     width: parent.width
@@ -38,7 +39,17 @@ Item {
             verticalAlignment: Text.AlignVCenter
             height: parent.height
             anchors.left: rankId.right
-            anchors.right: separator.left
+        }
+
+        Image {
+            id: countryFlag
+//            source: "qrc:/flags/ch.svg"
+            source: parent.parent.flagImage
+            width: parent.parent.height / 2
+            sourceSize.width: width
+            sourceSize.height: width
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.left: fullnameId.right
         }
 
         Rectangle {
