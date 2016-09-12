@@ -5,6 +5,8 @@ QT += sql qml quick widgets
 CONFIG += c++11
 
 SOURCES += \
+    ../MGCommon/src/cbbItems/apparatusdata.cpp \
+    ../MGCommon/src/cbbItems/apparatuslist.cpp \
     ../MGCommon/src/db/dbconnection.cpp \
     ../MGCommon/src/cbbItems/comboboxmodel.cpp \
     ../MGCommon/src/cbbItems/countrylist.cpp \
@@ -17,6 +19,8 @@ SOURCES += \
     src/main.cpp
 
 HEADERS += \
+    ../MGCommon/src/cbbItems/apparatusdata.h \
+    ../MGCommon/src/cbbItems/apparatuslist.h \
     ../MGCommon/src/db/dbconnection.h \
     ../MGCommon/src/cbbItems/comboboxmodel.h \
     ../MGCommon/src/cbbItems/countrylist.h \

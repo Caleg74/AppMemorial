@@ -39,16 +39,22 @@
 ****************************************************************************/
 #include "allroundmendata.h"
 
-AllroundMenData::AllroundMenData(const QString &fullName)
-    : m_iRank(0)
+AllroundMenData::AllroundMenData(const int p_iAthleteId, const QString &fullName)
+    : m_iAthleteId(p_iAthleteId)
+    , m_iRank(0)
     , m_nameFull(fullName)
     , m_fTotalScore(0)
 {
-    for (int i=0; i<AApparatusMax; i++)
+    for (int i=0; i<ApparatusList::AMApparatusMax; i++)
     {
         m_aiScore[i].StartScore = 0;
         m_aiScore[i].FinalScore = 0;
     }
+}
+
+int AllroundMenData::getAthleteId()
+{
+    return m_iAthleteId;
 }
 
 void AllroundMenData::setRank(int p_iRank)
@@ -76,22 +82,22 @@ QString AllroundMenData::getTotalScore() const
     return QString::number(m_fTotalScore, 'f', 3);
 }
 
-void AllroundMenData::setStartScore(EApparatus p_eApparatus, float p_fScore)
+void AllroundMenData::setStartScore(ApparatusList::EApparatusMen p_eApparatus, float p_fScore)
 {
     m_aiScore[p_eApparatus].StartScore = p_fScore;
 }
 
-QString AllroundMenData::getStartScore(EApparatus p_eApparatus) const
+QString AllroundMenData::getStartScore(ApparatusList::EApparatusMen p_eApparatus) const
 {
     return QString::number(m_aiScore[p_eApparatus].StartScore, 'f', 3);
 }
 
-void AllroundMenData::setFinalScore(EApparatus p_eApparatus, float p_fScore)
+void AllroundMenData::setFinalScore(ApparatusList::EApparatusMen p_eApparatus, float p_fScore)
 {
     m_aiScore[p_eApparatus].FinalScore = p_fScore;
 }
 
-QString AllroundMenData::getFinalScore(EApparatus p_eApparatus) const
+QString AllroundMenData::getFinalScore(ApparatusList::EApparatusMen p_eApparatus) const
 {
     return QString::number(m_aiScore[p_eApparatus].FinalScore, 'f', 3);
 }
@@ -99,7 +105,7 @@ QString AllroundMenData::getFinalScore(EApparatus p_eApparatus) const
 void AllroundMenData::CalculateTotalScore()
 {
     float fTot = 0;
-    for (int i=0; i<AApparatusMax; i++)
+    for (int i=0; i<ApparatusList::AMApparatusMax; i++)
     {
         fTot += m_aiScore[i].FinalScore;
     }
@@ -124,7 +130,7 @@ bool AllroundMenData::operator<(const AllroundMenData other) const
         QList<int> scoresThis;
         QList<int> scoresOther;
 
-        for (int i=0; i<AApparatusMax; i++)
+        for (int i=0; i<ApparatusList::AMApparatusMax; i++)
         {
             scoresThis << m_aiScore[i].FinalScore;
             scoresOther << other.m_aiScore[i].FinalScore;
@@ -133,7 +139,7 @@ bool AllroundMenData::operator<(const AllroundMenData other) const
         qSort(scoresThis);
         qSort(scoresOther);
 
-        for (int i=AApparatusMax-1; i!= 0; i--)
+        for (int i=ApparatusList::AMApparatusMax-1; i!= 0; i--)
         {
             if (scoresThis.at(i) > scoresOther.at(i))
                 return !false;

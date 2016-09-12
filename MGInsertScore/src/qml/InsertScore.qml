@@ -93,6 +93,10 @@ Item {
                                   txtStartScore.text,
                                   txtFinalScore.text)
 
+                        txtStartScore.text = ""
+                        txtFinalScore.text = ""
+                        cbbAppartus.currentIndex = 0
+
 
                     }
                 }

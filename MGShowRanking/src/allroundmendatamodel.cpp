@@ -33,7 +33,7 @@ void AllroundMenDataModel::RetrieveGymnastList()
     QString firstName;
     QString lastName;
     QString country;
-    QString sex;
+    int athleteId;
 
     QList<QStringList> p_strGymnList;
     dbInterface::Instance()->retrieveRegisteredGymnastList(p_strGymnList);
@@ -42,9 +42,14 @@ void AllroundMenDataModel::RetrieveGymnastList()
     {
         if (p_strGymnList.at(i)[3] == "M")  // only Men ranking here
         {
-            AllroundMenData cAllroundMen(p_strGymnList.at(i)[0]
-                    + ", " + p_strGymnList.at(i)[1]
-                    + ", (" + p_strGymnList.at(i)[2] + ")");
+            firstName = p_strGymnList.at(i)[0];
+            lastName = p_strGymnList.at(i)[1];
+            country = p_strGymnList.at(i)[2];
+            athleteId = dbInterface::Instance()->getGymnastId(firstName, lastName);
+
+            AllroundMenData cAllroundMen(athleteId, firstName
+                    + ", " + lastName
+                    + ", (" + country + ")");
 
             beginInsertRows(QModelIndex(), rowCount(), rowCount());
             m_rankingList << cAllroundMen;
@@ -59,12 +64,17 @@ void AllroundMenDataModel::updateScores()
 
     for (iter = m_rankingList.begin(); iter != m_rankingList.end(); ++iter)
     {
-        for (int apparatus = 0; apparatus < AllroundMenData::AApparatusMax; apparatus++)
+        for (int apparatus = 0; apparatus < ApparatusList::AMApparatusMax; apparatus++)
         {
-            float fFinalRandom = (float)(qrand() % ((15000 + 1) - 10000) + 10000) / 1000;
-            float fStartRandom = fFinalRandom - 10;
-            iter->setFinalScore((AllroundMenData::EApparatus)apparatus, fFinalRandom);
-            iter->setStartScore((AllroundMenData::EApparatus)apparatus, fStartRandom);
+            int iAthleteId = iter->getAthleteId();
+            int iAppId = ApparatusList::Instance()->getApparatusId((ApparatusList::EApparatusMen)apparatus);
+            float fStartScore = dbInterface::Instance()->getStartScore(iAthleteId, iAppId);
+            float fFinalScore = dbInterface::Instance()->getFinalScore(iAthleteId, iAppId);
+
+//            float fFinalRandom = (float)(qrand() % ((15000 + 1) - 10000) + 10000) / 1000;
+//            float fStartRandom = fFinalRandom - 10;
+            iter->setFinalScore((ApparatusList::EApparatusMen)apparatus, fFinalScore);
+            iter->setStartScore((ApparatusList::EApparatusMen)apparatus, fStartScore);
         }
         iter->CalculateTotalScore();
     }
@@ -131,29 +141,29 @@ QVariant AllroundMenDataModel::data(const QModelIndex & index, int role) const {
     else if (role == FinalScoreTotalRole)
         return gymnast.getTotalScore();
     else if (role == StartScoreFloorRole)
-        return gymnast.getStartScore(AllroundMenData::AFloor);
+        return gymnast.getStartScore(ApparatusList::AMFloor);
     else if (role == FinalScoreFloorRole)
-        return gymnast.getFinalScore(AllroundMenData::AFloor);
+        return gymnast.getFinalScore(ApparatusList::AMFloor);
     else if (role == StartScorePHorseRole)
-        return gymnast.getStartScore(AllroundMenData::APommelHores);
+        return gymnast.getStartScore(ApparatusList::AMPommelHores);
     else if (role == FinalScorePHorseRole)
-        return gymnast.getFinalScore(AllroundMenData::APommelHores);
+        return gymnast.getFinalScore(ApparatusList::AMPommelHores);
     else if (role == StartScoreRingsRole)
-        return gymnast.getStartScore(AllroundMenData::ARings);
+        return gymnast.getStartScore(ApparatusList::AMRings);
     else if (role == FinalScoreRingsRole)
-        return gymnast.getFinalScore(AllroundMenData::ARings);
+        return gymnast.getFinalScore(ApparatusList::AMRings);
     else if (role == StartScoreVaultRole)
-        return gymnast.getStartScore(AllroundMenData::AVault);
+        return gymnast.getStartScore(ApparatusList::AMVault);
     else if (role == FinalScoreVaultRole)
-        return gymnast.getFinalScore(AllroundMenData::AVault);
+        return gymnast.getFinalScore(ApparatusList::AMVault);
     else if (role == StartScorePBarsRole)
-        return gymnast.getStartScore(AllroundMenData::AParallelBars);
+        return gymnast.getStartScore(ApparatusList::AMParallelBars);
     else if (role == FinalScorePBarsRole)
-        return gymnast.getFinalScore(AllroundMenData::AParallelBars);
+        return gymnast.getFinalScore(ApparatusList::AMParallelBars);
     else if (role == StartScoreHbarRole)
-        return gymnast.getStartScore(AllroundMenData::AHorizontalBar);
+        return gymnast.getStartScore(ApparatusList::AMHorizontalBar);
     else if (role == FinalScoreHbarRole)
-        return gymnast.getFinalScore(AllroundMenData::AHorizontalBar);
+        return gymnast.getFinalScore(ApparatusList::AMHorizontalBar);
 
     return QVariant();
 }

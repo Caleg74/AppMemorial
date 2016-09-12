@@ -1,22 +1,13 @@
 #ifndef ALLROUNMENDATA_H
 #define ALLROUNMENDATA_H
 
-#include <QString>
 #include <QtCore>
+#include "apparatuslist.h"
 
 class AllroundMenData
 {
 public:
-    enum EApparatus
-    {
-        AFloor,
-        APommelHores,
-        ARings,
-        AVault,
-        AParallelBars,
-        AHorizontalBar,
-        AApparatusMax
-    };
+
 
     typedef struct
     {
@@ -24,17 +15,18 @@ public:
         float FinalScore;
     } SScore;
 
-    AllroundMenData(const QString &fullName);
+    AllroundMenData(const int p_iAthleteId, const QString &fullName);
 
+    int getAthleteId();
     void setRank(int p_iRank);
     QString getRank() const;
     QString getNameFull() const;
     void setTotalScore(float p_fTotScore);
     QString getTotalScore() const;
-    void setStartScore(EApparatus p_eApparatus, float p_fScore);
-    QString getStartScore(EApparatus p_eApparatus) const;
-    void setFinalScore(EApparatus p_eApparatus, float p_fScore);
-    QString getFinalScore(EApparatus p_eApparatus) const;
+    void setStartScore(ApparatusList::EApparatusMen p_eApparatus, float p_fScore);
+    QString getStartScore(ApparatusList::EApparatusMen p_eApparatus) const;
+    void setFinalScore(ApparatusList::EApparatusMen p_eApparatus, float p_fScore);
+    QString getFinalScore(ApparatusList::EApparatusMen p_eApparatus) const;
 
     void CalculateTotalScore();
 
@@ -47,10 +39,11 @@ public:
 
 
 private:
+    int m_iAthleteId;
     int m_iRank;
     QString m_nameFull;
     float m_fTotalScore;
-    SScore m_aiScore[AApparatusMax];
+    SScore m_aiScore[ApparatusList::AMApparatusMax];
 };
 
 

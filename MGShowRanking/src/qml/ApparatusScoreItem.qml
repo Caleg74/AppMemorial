@@ -16,13 +16,13 @@ Item {
 //        width: parent.width
 //        height: parent.height
         anchors.fill: parent
-        anchors.margins: 10
+        anchors.margins: 5
 
         Item {  // some sort of a Row
             width: parent.width
             height: parent.height
             anchors.verticalCenter: parent.verticalCenter
-            anchors.margins: 10
+//            anchors.margins: 10
             anchors.left: parent.left
             anchors.right: separator.right
 

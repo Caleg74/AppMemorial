@@ -69,23 +69,26 @@ void CoreApplication::Connect()
 
 void CoreApplication::onGymnastChanged(QString p_currentTxt)
 {
-    QStringList strSplit = p_currentTxt.split(',');
-    if (strSplit.count() < 2)
+    if (p_currentTxt != "Seleziona ginnasti..")
     {
-        qDebug() << "onGymnastChanged(): first/last name formatting error";
-    }
-    QString firstName = strSplit.at(0).trimmed();
-    QString lastName =  strSplit.at(1).trimmed();
+        QStringList strSplit = p_currentTxt.split(',');
+        if (strSplit.count() < 2)
+        {
+            qDebug() << "onGymnastChanged(): first/last name formatting error";
+        }
+        QString firstName = strSplit.at(0).trimmed();
+        QString lastName =  strSplit.at(1).trimmed();
 
-    if (!firstName.isEmpty() && !lastName.isEmpty())
-    {
-        int iAthleteId = dbInterface::Instance()->getGymnastId(firstName, lastName);
-        QString strGender = dbInterface::Instance()->getGender(iAthleteId);
+        if (!firstName.isEmpty() && !lastName.isEmpty())
+        {
+            int iAthleteId = dbInterface::Instance()->getGymnastId(firstName, lastName);
+            QString strGender = dbInterface::Instance()->getGender(iAthleteId);
 
-        ApparatusList::Instance()->FillList(strGender);
-    }
-    else
-    {
-        qDebug() << "onGymnastChanged(): first/last name is empty";
+            ApparatusList::Instance()->FillComboList(strGender);
+        }
+        else
+        {
+            qDebug() << "onGymnastChanged(): first/last name is empty";
+        }
     }
 }

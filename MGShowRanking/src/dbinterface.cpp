@@ -21,6 +21,29 @@ dbInterface* dbInterface::Instance()
     return sm_pInstance;
 }
 
+void dbInterface::getApparatusList(QStringList* p_pList)
+{
+    if (m_bInitialized)
+    {
+        QSqlDatabase db = QSqlDatabase::database("ConnMG");
+        QSqlQuery query(db);
+        query.exec("SELECT id, name_it, name_en, gender FROM apparatus");
+
+        while (query.next())
+        {
+            QString name = query.value(0).toString() + ","  // id
+                         + query.value(1).toString() + ","  // name_it
+                         + query.value(2).toString() + ","  // name_en
+                         + query.value(3).toString();       // gender
+            *p_pList << name;
+        }
+    }
+    else
+    {
+        qInfo() << "dbInterface::getApparatusList(): Db not initialized";
+    }
+}
+
 void dbInterface::getCountriesList(QStringList* p_pList)
 {
 
@@ -171,33 +194,6 @@ void dbInterface::insertGymnast(QString& p_strFirstName,
     }
 }
 
-void dbInterface::deleteGymnast(QString& p_strFirstName, QString& p_strLastName)
-{
-
-    if (m_bInitialized)
-    {
-        QSqlDatabase db = QSqlDatabase::database("ConnMG");
-        QSqlQuery query(db);
-        QString strQuery = "DELETE FROM athlete WHERE first_name='" + p_strFirstName
-                + "' AND last_name='" + p_strLastName.trimmed() + "'";
-        bool bRet = query.exec(strQuery);
-
-        if (bRet)
-        {
-            qInfo() << "Athlete removed: " << p_strFirstName << " " << p_strLastName;
-        }
-        else
-        {
-            qCritical() << "Athlete NOT removed: " << p_strFirstName << " " << p_strLastName;
-            qCritical() << query.lastError();
-        }
-    }
-    else
-    {
-        qInfo() << "dbInterface::deleteGymnast(): Db not initialized";
-    }
-}
-
 int dbInterface::getGymnastId(QString& p_firstName, QString& p_lastName)
 {
     int athleteId = 0;
@@ -328,34 +324,6 @@ void dbInterface::subscribeGymnasttoEvent(int athleteId, int eventId)
     }
 }
 
-void dbInterface::deleteGymnastSubsscription(int athleteId, int eventId)
-{
-    if (m_bInitialized)
-    {
-        QSqlDatabase db = QSqlDatabase::database("ConnMG");
-        QSqlQuery query(db);
-        QString strQuery = "DELETE FROM sport_event_subscriptions WHERE "
-                           "athlete_id ='" + QString::number(athleteId, 10) + "' AND "
-                           "sport_event_id='" + QString::number(eventId, 10) + "'";
-
-        bool bRet = query.exec(strQuery);
-
-        if (bRet)
-        {
-            qInfo() << "Athlete unsubribed: " << athleteId << " to event: " << eventId;
-        }
-        else
-        {
-            qCritical() << "Athlete NOT unsubscribed: " << athleteId << " to event: " << eventId;
-            qCritical() << query.lastError();
-        }
-    }
-    else
-    {
-        qInfo() << "dbInterface::deleteGymnastSubsscription(): Db not initialized";
-    }
-}
-
 bool dbInterface::isGymnastAlreadyRegistered(int p_iAthleteId, int p_iEventId)
 {
     bool bAthleteFound = false;
@@ -409,4 +377,76 @@ int dbInterface::getCurrentEventId()
     }
 
     return eventId;
+}
+
+float dbInterface::getStartScore(const int p_iAthleteId, const int p_iApparatusId)
+{
+    float fScore = 0.0;
+
+    if (m_bInitialized)
+    {
+        QSqlDatabase db = QSqlDatabase::database("ConnMG");
+        QSqlQuery query(db);
+
+        int iEventId = dbInterface::Instance()->getCurrentEventId();
+
+         QString strQuery = "SELECT start_score FROM scores WHERE "
+                   " sport_event_id = "   + QString::number(iEventId, 10) +
+                   " AND athlete_id = "   + QString::number(p_iAthleteId, 10)+
+                   " AND apparatus_id = " + QString::number(p_iApparatusId, 10);
+
+         query.exec(strQuery);
+
+        while (query.next())
+        {
+            fScore = query.value(0).toFloat();
+        }
+
+        if (iEventId == 0)
+        {
+            qCritical() << "No Id found for event year: " << m_iCurrentYear;
+        }
+    }
+    else
+    {
+        qInfo() << "dbInterface::getStartScore(): Db not initialized";
+    }
+
+    return fScore;
+}
+
+float dbInterface::getFinalScore(const int p_iAthleteId, const int p_iApparatusId)
+{
+    float fScore = 0.0;
+
+    if (m_bInitialized)
+    {
+        QSqlDatabase db = QSqlDatabase::database("ConnMG");
+        QSqlQuery query(db);
+
+        int iEventId = dbInterface::Instance()->getCurrentEventId();
+
+        QString strQuery = "SELECT final_score FROM scores WHERE "
+                  " sport_event_id = "   + QString::number(iEventId, 10) +
+                  " AND athlete_id = "   + QString::number(p_iAthleteId, 10)+
+                  " AND apparatus_id = " + QString::number(p_iApparatusId, 10);
+
+        query.exec(strQuery);
+
+        while (query.next())
+        {
+            fScore = query.value(0).toFloat();
+        }
+
+        if (iEventId == 0)
+        {
+            qCritical() << "No Id found for event year: " << m_iCurrentYear;
+        }
+    }
+    else
+    {
+        qInfo() << "dbInterface::getFinalScore(): Db not initialized";
+    }
+
+    return fScore;
 }

@@ -16,7 +16,7 @@ public:
     static dbInterface* Instance();
 
     // for cbb
-    void getApparatusList(QStringList *p_pList, QString p_strGender);
+    void getApparatusList(QStringList *p_pList);
 
     // for cbb
     void getRegisterdGymnastList(QStringList* p_pList);

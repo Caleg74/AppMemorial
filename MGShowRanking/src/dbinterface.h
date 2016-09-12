@@ -16,6 +16,8 @@ public:
 
     static dbInterface* Instance();
 
+    void getApparatusList(QStringList* p_pList);
+
     // for cbb
     void getCountriesList(QStringList *p_pList);
 
@@ -27,8 +29,6 @@ public:
                        QString& p_strGender,
                        int p_iNationId);
 
-    void deleteGymnast(QString& p_strFirstName, QString& p_strLastName);
-
     int getGymnastId(QString& p_firstName, QString& p_lastName);
 
     void retrieveRegisteredGymnastList(QList<QStringList> &p_strGymnList);
@@ -36,8 +36,6 @@ public:
     void retrieveGymnastSubscriptionList(QList<QStringList> &p_strGymnList);
 
     void subscribeGymnasttoEvent(int athleteId, int eventId);
-
-    void deleteGymnastSubsscription(int athleteId, int eventId);
 
     bool isGymnastAlreadyRegistered(int p_iAthleteId, int p_iEventId);
 
@@ -47,6 +45,10 @@ public:
 
     /** returns the eventId for the current event (based on year) */
     int getCurrentEventId();
+
+    float getStartScore(const int p_iAthleteId, const int p_iApparatusId);
+
+    float getFinalScore(const int p_iAthleteId, const int p_iApparatusId);
 
 private:
 

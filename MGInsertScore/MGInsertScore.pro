@@ -6,18 +6,20 @@ CONFIG += c++11
 
 
 HEADERS += \
-    ../MGCommon/src/db/dbconnection.h \
+    ../MGCommon/src/cbbItems/apparatusdata.h \
     ../MGCommon/src/cbbItems/apparatuslist.h \
     ../MGCommon/src/cbbItems/comboboxmodel.h \
     ../MGCommon/src/cbbItems/gymnastselectionlist.h \
+    ../MGCommon/src/db/dbconnection.h \
     ../MGCommon/src/msgBox/messagebox.h \
     src/coreapplication.h \
     src/dbinterface.h \
     src/savescore.h
 
 SOURCES += \
-    ../MGCommon/src/db/dbconnection.cpp \
+    ../MGCommon/src/cbbItems/apparatusdata.cpp \
     ../MGCommon/src/cbbItems/apparatuslist.cpp \
+    ../MGCommon/src/db/dbconnection.cpp \
     ../MGCommon/src/cbbItems/comboboxmodel.cpp \
     ../MGCommon/src/cbbItems/gymnastselectionlist.cpp \
     ../MGCommon/src/msgBox/messagebox.cpp \
