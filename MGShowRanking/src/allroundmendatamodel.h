@@ -1,19 +1,15 @@
 #ifndef ALLROUNDMENDATAMODEL_H
 #define ALLROUNDMENDATAMODEL_H
 
-#include <QAbstractListModel>
-#include <QList>
+#include "allroundgymnastdatamodel.h"
 #include "allroundmendata.h"
 
-class AllroundMenDataModel : public QAbstractListModel
+class AllroundMenDataModel : public AllroundGymnastDataModel
 {
     Q_OBJECT
 public:
     enum AllroundMRoles {
-        RankRole = Qt::UserRole + 1,
-        NameFullRole,
-        FlagImageRole,
-        FinalScoreTotalRole,
+        FinalScoreTotalRole = LastGeneralRole,
         StartScoreFloorRole,
         FinalScoreFloorRole,
         StartScorePHorseRole,

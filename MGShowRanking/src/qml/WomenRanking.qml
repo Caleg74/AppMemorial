@@ -29,7 +29,7 @@ Item {
 
             Item // some sort of a Row
             {
-                property int apparatusWidth: parent.width / 10
+                property int apparatusWidth: parent.width / 7
                 anchors.margins: 5
                 anchors.fill: parent
 //                height: parent.height
@@ -54,33 +54,6 @@ Item {
                     height: parent.height
                     width: parent.apparatusWidth
                     imageSource: "/images/Sum.svg"
-                    anchors.right: floorId.left
-                }
-                TableTitleItem {
-                    id: floorId
-                    text: "Suolo"
-                    fontSize: parent.fontSize
-                    height: parent.height
-                    width: parent.apparatusWidth
-                    imageSource: "/images/Floor.svg"
-                    anchors.right: phorseId.left
-                }
-                TableTitleItem {
-                    id: phorseId
-                    text: "Cavallo a\nmaniglie"
-                    fontSize: parent.fontSize
-                    height: parent.height
-                    width: parent.apparatusWidth
-                    imageSource: "/images/PommelHorse.svg"
-                    anchors.right: ringsId.left
-                }
-                TableTitleItem {
-                    id: ringsId
-                    text: "Anelli"
-                    fontSize: parent.fontSize
-                    height: parent.height
-                    width: parent.apparatusWidth
-                    imageSource: "/images/Rings.svg"
                     anchors.right: vaultId.left
                 }
                 TableTitleItem {
@@ -90,26 +63,35 @@ Item {
                     height: parent.height
                     width: parent.apparatusWidth
                     imageSource: "/images/Vault.svg"
-                    anchors.right: pbarsId.left
+                    anchors.right: unBarsId.left
                 }
                 TableTitleItem {
-                    id: pbarsId
-                    text: "Parallela"
+                    id: unBarsId
+                    text: "Parallele\nasimmetriche"
                     fontSize: parent.fontSize
                     height: parent.height
                     width: parent.apparatusWidth
-                    imageSource: "/images/ParallelBars.svg"
-                    anchors.right: hbarId.left
+                    imageSource: "/images/UnevenBars.svg"
+                    anchors.right: balBeamId.left
                 }
                 TableTitleItem {
-                    id: hbarId
-                    text: "Sbarra"
+                    id: balBeamId
+                    text: "Trave"
                     fontSize: parent.fontSize
                     height: parent.height
                     width: parent.apparatusWidth
-                    separatorVisible: false
-                    imageSource: "/images/HorizontalBar.svg"
+                    imageSource: "/images/BalanceBeam.svg"
+                    anchors.right: floorId.left
+                }
+                TableTitleItem {
+                    id: floorId
+                    text: "Suolo"
+                    fontSize: parent.fontSize
+                    height: parent.height
+                    width: parent.apparatusWidth
+                    imageSource: "/images/Floor.svg"
                     anchors.right: parent.right
+                    separatorVisible: false
                 }
             }
         }
@@ -125,8 +107,8 @@ Item {
             ListView {
     //            width: 200; height: 250
                 id: rankingview
-                model: AllroundMenDataModel
-                delegate: AllroundMDelegate { }
+                model: AllroundWomenDataModel
+                delegate: AllroundWDelegate { }
 //                anchors.fill: parent
                 width: parent.width
                 spacing: 2

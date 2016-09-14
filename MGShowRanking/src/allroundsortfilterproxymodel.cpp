@@ -1,18 +1,18 @@
-#include "allroundmensortfilterproxymodel.h"
+#include "allroundsortfilterproxymodel.h"
 #include "allroundmendatamodel.h"
 #include <QtCore>
 
-AllroundMenSortFilterProxyModel::AllroundMenSortFilterProxyModel(QObject *parent)
+AllroundSortFilterProxyModel::AllroundSortFilterProxyModel(QObject *parent)
  : QSortFilterProxyModel(parent)
 {
 
 }
 
-bool AllroundMenSortFilterProxyModel::lessThan(const QModelIndex &left,
+bool AllroundSortFilterProxyModel::lessThan(const QModelIndex &left,
                                            const QModelIndex &right) const
 {
-    QVariant leftData = sourceModel()->data(left, AllroundMenDataModel::RankRole);
-    QVariant rightData = sourceModel()->data(right, AllroundMenDataModel::RankRole);
+    QVariant leftData = sourceModel()->data(left, AllroundGymnastDataModel::RankRole);
+    QVariant rightData = sourceModel()->data(right, AllroundGymnastDataModel::RankRole);
 
 //    qDebug() << "leftData: "  << leftData.toString();
 //    qDebug() << "rightData: " << rightData.toString();

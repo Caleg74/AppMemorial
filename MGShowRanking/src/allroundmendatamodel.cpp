@@ -1,8 +1,6 @@
 #include "allroundmendatamodel.h"
 #include "dbinterface.h"
-#include <QAbstractItemModel>
-#include <QTimer>
-#include "allroundmensortfilterproxymodel.h"
+#include "allroundsortfilterproxymodel.h"
 
 //**** STATIC MEMBER INITIALIZATION *********************
 AllroundMenDataModel* AllroundMenDataModel::sm_pInstance = NULL;
@@ -15,17 +13,15 @@ AllroundMenDataModel* AllroundMenDataModel::Instance()
     if (sm_pInstance == NULL)
     {
         sm_pInstance = new AllroundMenDataModel();
-
     }
 
     return sm_pInstance;
 }
 
 AllroundMenDataModel::AllroundMenDataModel(QObject *parent)
-    : QAbstractListModel(parent)
+    : AllroundGymnastDataModel(parent)
 {
     RetrieveGymnastList();
-
 }
 
 void AllroundMenDataModel::RetrieveGymnastList()

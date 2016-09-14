@@ -3,7 +3,7 @@
 
 #include <QObject>
 #include <QQmlApplicationEngine>
-#include "allroundmensortfilterproxymodel.h"
+#include "allroundsortfilterproxymodel.h"
 
 class CoreApplication : public QObject
 {
@@ -27,7 +27,9 @@ public slots:
 private:
     QQmlApplicationEngine* m_pAppEngine;
 
-    AllroundMenSortFilterProxyModel* m_qSortProxy;
+    AllroundSortFilterProxyModel* m_qSortMProxy;
+    AllroundSortFilterProxyModel* m_qSortWProxy;
+
 };
 
 #endif // COREAPPLICATION_H

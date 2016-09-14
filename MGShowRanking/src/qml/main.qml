@@ -96,6 +96,9 @@ Window {
                 anchors.fill: parent; anchors.margins: 20
                 color: "#d0d0d0"
 
+                WomenRanking {
+                    anchors.fill: parent
+                }
             }
         }
 

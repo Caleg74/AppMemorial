@@ -3,10 +3,10 @@
 
 #include <QSortFilterProxyModel>
 
-class AllroundMenSortFilterProxyModel : public QSortFilterProxyModel
+class AllroundSortFilterProxyModel : public QSortFilterProxyModel
 {
 public:
-    AllroundMenSortFilterProxyModel(QObject *parent = NULL);
+    AllroundSortFilterProxyModel(QObject *parent = NULL);
 
     bool lessThan(const QModelIndex &left,
                   const QModelIndex &right) const;

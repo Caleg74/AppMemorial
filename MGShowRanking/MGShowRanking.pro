@@ -12,8 +12,11 @@ SOURCES += \
     ../MGCommon/src/cbbItems/countrylist.cpp \
     ../MGCommon/src/cbbItems/gymnastselectionlist.cpp \
     src/allroundmendata.cpp \
+    src/allroundgymnastdatamodel.cpp \
     src/allroundmendatamodel.cpp \
-    src/allroundmensortfilterproxymodel.cpp \
+    src/allroundsortfilterproxymodel.cpp \
+    src/allroundwomendata.cpp \
+    src/allroundwomendatamodel.cpp \
     src/coreapplication.cpp \
     src/dbinterface.cpp \
     src/main.cpp
@@ -26,8 +29,11 @@ HEADERS += \
     ../MGCommon/src/cbbItems/countrylist.h \
     ../MGCommon/src/cbbItems/gymnastselectionlist.h \
     src/allroundmendata.h \
+    src/allroundgymnastdatamodel.h \
     src/allroundmendatamodel.h \
-    src/allroundmensortfilterproxymodel.h \
+    src/allroundsortfilterproxymodel.h \
+    src/allroundwomendata.h \
+    src/allroundwomendatamodel.h \
     src/coreapplication.h \
     src/dbinterface.h
 
@@ -52,7 +58,9 @@ OTHER_FILES += \
     ../MGCommon/qml-styles/StyleMGTextInput.qml \
     ../MGCommon/qml-styles/StyleMGPushButton.qml \
     src/qml/AllroundMDelegate.qml \
+    src/qml/AllroundWDelegate.qml \
     src/qml/MenRanking.qml \
+    src/qml/WomenRanking.qml \
     src/qml/TableTitleItem.qml \
     src/qml/ApparatusScoreItem.qml \
     src/qml/TotalScoreItem.qml \
