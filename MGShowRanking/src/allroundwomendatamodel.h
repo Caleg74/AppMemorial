@@ -1,10 +1,10 @@
 #ifndef ALLROUNDWOMENDATAMODEL_H
 #define ALLROUNDWOMENDATAMODEL_H
 
-#include "allroundgymnastdatamodel.h"
+#include "gymnastdatamodel.h"
 #include "allroundwomendata.h"
 
-class AllroundWomenDataModel : public AllroundGymnastDataModel
+class AllroundWomenDataModel : public GymnastDataModel
 {
     Q_OBJECT
 public:
@@ -20,8 +20,9 @@ public:
         FinalScoreFloorRole,
      };
 
-    /** Singleton */
-    static AllroundWomenDataModel* Instance();
+    AllroundWomenDataModel(QObject *parent = 0);
+
+    ~AllroundWomenDataModel();
 
     int rowCount(const QModelIndex & parent = QModelIndex()) const;
 
@@ -47,11 +48,7 @@ private:
 
     QModelIndex indexFromItem( const AllroundWomenData* item) const;
 
-    AllroundWomenDataModel(QObject *parent = 0);
-
     void RetrieveGymnastList();
-
-    static AllroundWomenDataModel* sm_pInstance;   ///< Singleton
 
     QList<AllroundWomenData> m_rankingList;
 };

@@ -1,8 +1,8 @@
 #include "dbconnection.h"
+#include <QtSql>
 
 dBConnection::dBConnection()
- : m_qDB()
- , m_bInitialized(false)
+ : m_bInitialized(false)
 {
 }
 

@@ -1,11 +1,11 @@
-#ifndef ALLROUNDGYMNASTDATAMODEL_H
-#define ALLROUNDGYMNASTDATAMODEL_H
+#ifndef GYMNASTDATAMODEL_H
+#define GYMNASTDATAMODEL_H
 
 #include <QAbstractListModel>
 #include <QList>
 #include "allroundmendata.h"
 
-class AllroundGymnastDataModel : public QAbstractListModel
+class GymnastDataModel : public QAbstractListModel
 {
     Q_OBJECT
 public:
@@ -16,7 +16,7 @@ public:
         LastGeneralRole
     };
 
-    AllroundGymnastDataModel(QObject *parent = 0);
+    GymnastDataModel(QObject *parent = 0);
 
     int rowCount(const QModelIndex & parent = QModelIndex()) const = 0 ;
 
@@ -27,4 +27,4 @@ protected:
 
 };
 
-#endif // ALLROUNDGYMNASTDATAMODEL_H
+#endif // GYMNASTDATAMODEL_H

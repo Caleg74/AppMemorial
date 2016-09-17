@@ -1,5 +1,9 @@
 #include "dbinterface.h"
 #include <QDate>
+#include <QSqlDatabase>
+#include <QSqlQuery>
+#include <QSqlError>
+#include <QDebug>
 
 dbInterface* dbInterface::sm_pInstance = NULL;
 

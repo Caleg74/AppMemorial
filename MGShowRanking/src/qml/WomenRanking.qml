@@ -17,7 +17,7 @@ Item {
 
 
         Rectangle {
-            id: menTitleSpace
+            id: womenTitleSpace
             y: 50
             height:  parent.height / 12
             width: parent.width
@@ -99,7 +99,7 @@ Item {
         ScrollView {
             width: parent.width
             height: parent.height
-            anchors.top: menTitleSpace.bottom
+            anchors.top: womenTitleSpace.bottom
             anchors.bottom: root.bottom
 
             flickableItem.interactive: true

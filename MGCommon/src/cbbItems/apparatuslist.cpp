@@ -1,12 +1,12 @@
 #include "apparatuslist.h"
 #include <QQmlContext>
 #include "dbinterface.h"
+#include <QDebug>
 
 // Static membe rinitialization
 ApparatusList* ApparatusList::sm_pInstance = NULL;
 
 ApparatusList::ApparatusList()
-    : m_cCbbModel()
 {
 }
 
@@ -20,13 +20,26 @@ ApparatusList* ApparatusList::Instance()
     return sm_pInstance;
 }
 
-void ApparatusList::Init(QQmlApplicationEngine &p_qEngine)
+ApparatusList::~ApparatusList()
+{
+    // remove all items
+    for (int i=0; i<m_ApparatusList.count(); ++i)
+    {
+        delete m_ApparatusList.at(i);
+    }
+    m_ApparatusList.clear();
+}
+
+void ApparatusList::Init(QQmlApplicationEngine &p_qEngine, const QString& p_strPropertyName, ComboBoxModel* const p_pCbbModel)
 {
     QQmlContext* pComboContext = p_qEngine.rootContext();
-    pComboContext->setContextProperty("apparatusModel", &m_cCbbModel);
+    pComboContext->setContextProperty(p_strPropertyName, p_pCbbModel);
 
     // move after mySQL read-out
-    RetrieveFromDb();
+    if (m_ApparatusList.isEmpty())
+    {
+        RetrieveFromDb();
+    }
 }
 
 void ApparatusList::RetrieveFromDb()
@@ -64,12 +77,15 @@ void ApparatusList::RetrieveFromDb()
     }
 }
 
-void ApparatusList::FillComboList(QString p_strGender)
+void ApparatusList::FillComboList(ComboBoxModel* const p_pCbbModel, QString p_strGender, bool p_bNoSelectionPresent)
 {
     QStringList tmp;
 
     // which content is
-    tmp << "Attrezzo..";
+    if (p_bNoSelectionPresent)
+    {
+        tmp << "Attrezzo..";
+    }
 
     for (int i=0; i<m_ApparatusList.count(); i++)
     {
@@ -79,7 +95,7 @@ void ApparatusList::FillComboList(QString p_strGender)
         }
     }
 
-    m_cCbbModel.setComboList(tmp);
+    p_pCbbModel->setComboList(tmp);
 }
 
 int ApparatusList::getApparatusId(EApparatusMen p_eApparatusMen)
@@ -90,4 +106,28 @@ int ApparatusList::getApparatusId(EApparatusMen p_eApparatusMen)
 int ApparatusList::getApparatusId(EApparatusWomen p_eApparatusWomen)
 {
     return m_aiEnumToIdWomen[p_eApparatusWomen];
+}
+
+int ApparatusList::getApparatusId(const QString& p_strApparatusName)
+{
+    int iApparatusId = 0;
+    bool bFound= false;
+
+    for (int i=0; i<m_ApparatusList.count(); i++)
+    {
+        if ( (m_ApparatusList.at(i)->getName(ApparatusData::ALangIt) == p_strApparatusName)
+          && (m_ApparatusList.at(i)->getName(ApparatusData::ALangEn) == p_strApparatusName))
+        {
+            iApparatusId = m_ApparatusList.at(i)->getId();
+            bFound = true;
+            break;
+        }
+    }
+
+    if (!bFound)
+    {
+        qCritical() << "No ApparatusId found for "  << p_strApparatusName;
+    }
+
+    return iApparatusId;
 }

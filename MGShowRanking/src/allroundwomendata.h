@@ -1,7 +1,7 @@
-#ifndef ALLROUNMENDATA_H
-#define ALLROUNMENDATA_H
+#ifndef ALLROUNDWOMENDATA_H
+#define ALLROUNDWOMENDATA_H
 
-#include <QtCore>
+#include <QString>
 #include "apparatuslist.h"
 
 class AllroundWomenData
@@ -52,4 +52,4 @@ private:
 
 
 
-#endif // ALLROUNMENDATA_H
+#endif // ALLROUNDWOMENDATA_H

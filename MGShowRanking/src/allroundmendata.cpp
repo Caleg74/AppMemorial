@@ -38,6 +38,7 @@
 **
 ****************************************************************************/
 #include "allroundmendata.h"
+#include <QDebug>
 
 AllroundMenData::AllroundMenData(const int p_iAthleteId,
                                  const QString& fullName,
@@ -127,7 +128,6 @@ bool AllroundMenData::operator<(const AllroundMenData other) const
     // the list must besorted out of the total score.
     // For this reason the total score must be calculated prior to this point
 
-    // each return value is ! (inverted), since the sorting is not ascending but descending
     if (m_fTotalScore < other.m_fTotalScore)
     {
         return !true;
@@ -153,6 +153,7 @@ bool AllroundMenData::operator<(const AllroundMenData other) const
                 return !false;
             else if (scoresThis.at(i) < scoresOther.at(i))
                 return !true;
+
             // else continue and compare the next score
         }
 

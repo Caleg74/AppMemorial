@@ -1,7 +1,7 @@
 #ifndef ALLROUNWOMENDATA_H
 #define ALLROUNWOMENDATA_H
 
-#include <QtCore>
+#include <QString>
 #include "apparatuslist.h"
 
 class AllroundMenData

@@ -1,29 +1,19 @@
 #include "allroundwomendatamodel.h"
 #include "dbinterface.h"
-#include "allroundsortfilterproxymodel.h"
+#include "sortfilterproxymodel.h"
 
 //**** STATIC MEMBER INITIALIZATION *********************
-AllroundWomenDataModel* AllroundWomenDataModel::sm_pInstance = NULL;
-
-
-//*******************************************************
-
-AllroundWomenDataModel* AllroundWomenDataModel::Instance()
-{
-    if (sm_pInstance == NULL)
-    {
-        sm_pInstance = new AllroundWomenDataModel();
-
-    }
-
-    return sm_pInstance;
-}
 
 AllroundWomenDataModel::AllroundWomenDataModel(QObject *parent)
-    : AllroundGymnastDataModel(parent)
+    : GymnastDataModel(parent)
 {
     RetrieveGymnastList();
 
+}
+
+AllroundWomenDataModel::~AllroundWomenDataModel()
+{
+    m_rankingList.clear();
 }
 
 void AllroundWomenDataModel::RetrieveGymnastList()

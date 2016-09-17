@@ -1,4 +1,5 @@
 #include "GymnastSelectModel.h"
+#include <QDebug>
 #include "dbinterface.h"
 
 //**** STATIC MEMBER INITIALIZATION *********************

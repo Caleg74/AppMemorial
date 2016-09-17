@@ -39,6 +39,7 @@ void CoreApplication::Init(QQmlApplicationEngine& p_qEngine)
     // save it as a class member
     m_pAppEngine = &p_qEngine;
 
+    ApparatusList::Instance()->Init(p_qEngine, "apparatusModel", &m_pApparatusCbbModel);
     MessageBox::SetEngine(m_pAppEngine);
 
 //    QQmlContext *ctxt = p_qEngine.rootContext();
@@ -84,7 +85,7 @@ void CoreApplication::onGymnastChanged(QString p_currentTxt)
             int iAthleteId = dbInterface::Instance()->getGymnastId(firstName, lastName);
             QString strGender = dbInterface::Instance()->getGender(iAthleteId);
 
-            ApparatusList::Instance()->FillComboList(strGender);
+            ApparatusList::Instance()->FillComboList(&m_pApparatusCbbModel, strGender);
         }
         else
         {

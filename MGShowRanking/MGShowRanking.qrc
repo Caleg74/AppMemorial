@@ -6,8 +6,10 @@
         <file alias="StyleMGPushButton.qml">../MGCommon/qml-styles/StyleMGPushButton.qml</file>
         <file alias="AllroundMDelegate.qml">src/qml/AllroundMDelegate.qml</file>
         <file alias="AllroundWDelegate.qml">src/qml/AllroundWDelegate.qml</file>
+        <file alias="SingleMWDelegate.qml">src/qml/SingleMWDelegate.qml</file>
         <file alias="MenRanking.qml">src/qml/MenRanking.qml</file>
         <file alias="WomenRanking.qml">src/qml/WomenRanking.qml</file>
+        <file alias="ApparatusRanking.qml">src/qml/ApparatusRanking.qml</file>
         <file alias="TableTitleItem.qml">src/qml/TableTitleItem.qml</file>
         <file alias="ApparatusScoreItem.qml">src/qml/ApparatusScoreItem.qml</file>
         <file alias="TotalScoreItem.qml">src/qml/TotalScoreItem.qml</file>

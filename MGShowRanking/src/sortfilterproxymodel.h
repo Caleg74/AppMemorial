@@ -3,16 +3,17 @@
 
 #include <QSortFilterProxyModel>
 
-class AllroundSortFilterProxyModel : public QSortFilterProxyModel
+class SortFilterProxyModel : public QSortFilterProxyModel
 {
 public:
-    AllroundSortFilterProxyModel(QObject *parent = NULL);
+    SortFilterProxyModel(QObject *parent = NULL);
 
     bool lessThan(const QModelIndex &left,
                   const QModelIndex &right) const;
 
-//    bool filterAcceptsRow(int sourceRow,
-//              const QModelIndex &sourceParent) const;
+protected:
+    virtual bool filterAcceptsRow(int sourceRow,
+              const QModelIndex &sourceParent) const Q_DECL_OVERRIDE;
 };
 
 #endif // GYMNASTSORTFILTERPROXYMODEL_H

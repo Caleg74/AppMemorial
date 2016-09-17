@@ -1,9 +1,14 @@
 #ifndef COREAPPLICATION_H
 #define COREAPPLICATION_H
 
-#include <QObject>
+#include <QTimer>
 #include <QQmlApplicationEngine>
-#include "allroundsortfilterproxymodel.h"
+#include <QQuickWindow>
+#include "sortfilterproxymodel.h"
+#include "comboboxmodel.h"
+#include "allroundmendatamodel.h"
+#include "allroundwomendatamodel.h"
+#include "singlemwdatamodel.h"
 
 class CoreApplication : public QObject
 {
@@ -22,14 +27,32 @@ public:
 signals:
 
 public slots:
+    void onWindowLoaded();
 
-        void updateScores();
+    void onWindowClosing(QQuickCloseEvent *p_event);
+
+    void updateScores();
+
+    void onApparatusMChanged(QString p_currentTxt);
+
 private:
+
+    AllroundWomenDataModel* m_pGymWomenModel;
+    AllroundMenDataModel*   m_pGymMenModel;
+    SingleMWDataModel*      m_pSingleMModel;
+    SingleMWDataModel*      m_pSingleWModel;
+
     QQmlApplicationEngine* m_pAppEngine;
 
-    AllroundSortFilterProxyModel* m_qSortMProxy;
-    AllroundSortFilterProxyModel* m_qSortWProxy;
+    SortFilterProxyModel* m_qSortMProxy;
+    SortFilterProxyModel* m_qSortWProxy;
+    SortFilterProxyModel* m_qSortSingleMProxy;
+    SortFilterProxyModel* m_qSortSingleWProxy;
 
+    ComboBoxModel m_cbbApparatusMen;
+    ComboBoxModel m_cbbApparatusWomen;
+
+    QTimer* m_updateTimer;
 };
 
 #endif // COREAPPLICATION_H

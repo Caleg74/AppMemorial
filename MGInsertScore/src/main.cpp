@@ -15,7 +15,6 @@ int main(int argc, char *argv[])
     cCoreApp.Init(engine);
 
     GymnastSelectionList::Instance()->Init(engine);
-    ApparatusList::Instance()->Init(engine);
 
     engine.load(QUrl(QStringLiteral("qrc:qml/main.qml")));
 

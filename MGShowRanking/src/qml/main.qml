@@ -39,7 +39,7 @@
 ****************************************************************************/
 
 import QtQuick 2.0
-import QtQuick.Window 2.2
+import QtQuick.Window 2.0
 import "qrc:/qml"
 
 Window {
@@ -117,12 +117,9 @@ Window {
                     wrapMode: Text.WordWrap
                 }
 
-//                Ranking {
-
-//                    width: parent.width
-//                    height: parent.height
-//                    anchors.centerIn: parent
-//                }
+                ApparatusRanking {
+                    anchors.fill: parent
+                }
             }
         }
     }

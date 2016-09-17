@@ -1,27 +1,18 @@
 #include "allroundmendatamodel.h"
 #include "dbinterface.h"
-#include "allroundsortfilterproxymodel.h"
+#include "sortfilterproxymodel.h"
 
 //**** STATIC MEMBER INITIALIZATION *********************
-AllroundMenDataModel* AllroundMenDataModel::sm_pInstance = NULL;
-
-
-//*******************************************************
-
-AllroundMenDataModel* AllroundMenDataModel::Instance()
-{
-    if (sm_pInstance == NULL)
-    {
-        sm_pInstance = new AllroundMenDataModel();
-    }
-
-    return sm_pInstance;
-}
 
 AllroundMenDataModel::AllroundMenDataModel(QObject *parent)
-    : AllroundGymnastDataModel(parent)
+    : GymnastDataModel(parent)
 {
     RetrieveGymnastList();
+}
+
+AllroundMenDataModel::~AllroundMenDataModel()
+{
+    m_rankingList.clear();
 }
 
 void AllroundMenDataModel::RetrieveGymnastList()
@@ -87,7 +78,6 @@ void AllroundMenDataModel::updateScores()
 
     // update all model
     emit dataChanged(index(0, 0), index(rowCount() - 1, 0));
-
 }
 
 
@@ -207,4 +197,9 @@ AllroundMenData* AllroundMenDataModel::GetItem(QString& nameFull)
     }
 
     return NULL;
+}
+
+bool AllroundMenDataModel::filterAcceptsRow( int source_row, const QModelIndex& source_parent ) const
+{
+    return true;
 }

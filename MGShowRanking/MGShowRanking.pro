@@ -12,11 +12,13 @@ SOURCES += \
     ../MGCommon/src/cbbItems/countrylist.cpp \
     ../MGCommon/src/cbbItems/gymnastselectionlist.cpp \
     src/allroundmendata.cpp \
-    src/allroundgymnastdatamodel.cpp \
+    src/gymnastdatamodel.cpp \
     src/allroundmendatamodel.cpp \
-    src/allroundsortfilterproxymodel.cpp \
+    src/sortfilterproxymodel.cpp \
     src/allroundwomendata.cpp \
     src/allroundwomendatamodel.cpp \
+    src/singlemwdata.cpp \
+    src/singlemwdatamodel.cpp \
     src/coreapplication.cpp \
     src/dbinterface.cpp \
     src/main.cpp
@@ -29,11 +31,13 @@ HEADERS += \
     ../MGCommon/src/cbbItems/countrylist.h \
     ../MGCommon/src/cbbItems/gymnastselectionlist.h \
     src/allroundmendata.h \
-    src/allroundgymnastdatamodel.h \
+    src/gymnastdatamodel.h \
     src/allroundmendatamodel.h \
-    src/allroundsortfilterproxymodel.h \
+    src/sortfilterproxymodel.h \
     src/allroundwomendata.h \
     src/allroundwomendatamodel.h \
+    src/singlemwdata.h \
+    src/singlemwdatamodel.h \
     src/coreapplication.h \
     src/dbinterface.h
 
@@ -59,8 +63,10 @@ OTHER_FILES += \
     ../MGCommon/qml-styles/StyleMGPushButton.qml \
     src/qml/AllroundMDelegate.qml \
     src/qml/AllroundWDelegate.qml \
+    src/qml/SingleMWDelegate.qml \
     src/qml/MenRanking.qml \
     src/qml/WomenRanking.qml \
+    src/qml/ApparatusRanking.qml \
     src/qml/TableTitleItem.qml \
     src/qml/ApparatusScoreItem.qml \
     src/qml/TotalScoreItem.qml \

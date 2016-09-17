@@ -1,10 +1,24 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include <QQuickWindow>
+#include <QDebug>
 #include "coreapplication.h"
 #include "apparatuslist.h"
+#include <signal.h>
+#include <cstdlib>
 
-int main(int argc, char *argv[])
+void signalHandler(int signal);
+
+int main(int argc, char ** argv)
 {
+
+    // Handling OS signals
+#ifdef _WIN32
+    signal(SIGINT, signalHandler);
+    signal(SIGTERM, signalHandler);
+    signal(SIGABRT, signalHandler);
+#endif
+
     QGuiApplication app(argc, argv);
 
     QQmlApplicationEngine engine;
@@ -12,16 +26,31 @@ int main(int argc, char *argv[])
     CoreApplication cCoreApp;
     cCoreApp.Init(engine);
 
-    ApparatusList::Instance()->Init(engine);
-//    GymnastSelectionList::Instance()->Init(engine);
-
     engine.load(QUrl(QStringLiteral("qrc:qml/main.qml")));
 
     cCoreApp.Connect();   // connect all signals from the UI
 
-//    QObject *topLevel = engine.rootObjects().value(0);
-//    QQuickWindow *window = qobject_cast<QQuickWindow *>(topLevel);
-//    window->show();
 
     return app.exec();
+
+}
+
+void signalHandler(int signal)
+{
+
+  switch(signal) {
+
+  case SIGINT:    qDebug() << "Application: interrupted"; break;
+//  case SIGKILL:   qDebug() << "Application: killed\n"; break;
+//  case SIGQUIT:   qDebug() << "Application: quit\n"; break;
+//  case SIGSTOP:   qDebug() << "Application: stopped\n"; break;
+  case SIGTERM:   qDebug() << "Application: terminated\n"; break;
+  case SIGABRT:   qDebug() << "Application aborted\n"; break;
+
+  //case SIGSEGV:   qDebug() << "Application: segmentation fault\n"; break;
+  default:        qDebug() << "Application: application exiting\n"; break;
+
+  }
+
+  QCoreApplication::quit();
 }

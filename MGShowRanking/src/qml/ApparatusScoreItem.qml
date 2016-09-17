@@ -9,7 +9,7 @@ Item {
     property bool separatorVisible: true;
     property int fontSize: 15;
 
-    width: parent.width
+    width: parent.widthh
     height: parent.height
 
     Item {  // some sort of a Row

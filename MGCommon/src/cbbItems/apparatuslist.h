@@ -32,13 +32,16 @@ public:
 
     static ApparatusList* Instance();
 
-    /** Initializes the core application components */
-    void Init(QQmlApplicationEngine &p_qEngine);
+    ~ApparatusList();
 
-    void FillComboList(QString p_strGender);
+    /** Initializes the core application components */
+    void Init(QQmlApplicationEngine &p_qEngine, const QString& p_strPropertyName, ComboBoxModel * const p_pCbbModel);
+
+    void FillComboList(ComboBoxModel * const p_pCbbModel, QString p_strGender, bool p_bNoSelectionPresent = true);
 
     int getApparatusId(EApparatusMen p_eApparatusMen);
     int getApparatusId(EApparatusWomen p_eApparatusWomen);
+    int getApparatusId(const QString& p_strApparatusName);
 
 
 private:
@@ -48,8 +51,6 @@ private:
     void RetrieveFromDb();
 
     static ApparatusList* sm_pInstance;
-
-    ComboBoxModel m_cCbbModel;
 
     QList<ApparatusData*> m_ApparatusList;
 

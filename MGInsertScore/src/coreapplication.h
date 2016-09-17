@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QQmlApplicationEngine>
+#include <comboboxmodel.h>
 
 class CoreApplication : public QObject
 {
@@ -25,6 +26,7 @@ public slots:
 private:
     QQmlApplicationEngine* m_pAppEngine;
 
+    ComboBoxModel m_pApparatusCbbModel;
 };
 
 #endif // COREAPPLICATION_H

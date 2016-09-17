@@ -1,10 +1,10 @@
 #ifndef ALLROUNDMENDATAMODEL_H
 #define ALLROUNDMENDATAMODEL_H
 
-#include "allroundgymnastdatamodel.h"
+#include "gymnastdatamodel.h"
 #include "allroundmendata.h"
 
-class AllroundMenDataModel : public AllroundGymnastDataModel
+class AllroundMenDataModel : public GymnastDataModel
 {
     Q_OBJECT
 public:
@@ -24,8 +24,9 @@ public:
         FinalScoreHbarRole
     };
 
-    /** Singleton */
-    static AllroundMenDataModel* Instance();
+    AllroundMenDataModel(QObject *parent = 0);
+
+    ~AllroundMenDataModel();
 
     int rowCount(const QModelIndex & parent = QModelIndex()) const;
 
@@ -45,17 +46,14 @@ public slots:
 protected:
     QHash<int, QByteArray> roleNames() const;
 
+    virtual bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const;
 private:
 
     AllroundMenData* GetItem(QString& nameFull);
 
     QModelIndex indexFromItem( const AllroundMenData* item) const;
 
-    AllroundMenDataModel(QObject *parent = 0);
-
     void RetrieveGymnastList();
-
-    static AllroundMenDataModel* sm_pInstance;   ///< Singleton
 
     QList<AllroundMenData> m_rankingList;
 };

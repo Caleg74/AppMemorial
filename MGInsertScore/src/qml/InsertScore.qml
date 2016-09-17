@@ -49,7 +49,6 @@ Item {
                     visible: cbbGymnastSelection.currentIndex > 0
                     currentIndex: 0
                 }
-
             }
 
             Row
