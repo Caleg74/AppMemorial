@@ -35,6 +35,8 @@ public slots:
 
     void onApparatusMChanged(QString p_currentTxt);
 
+    void onApparatusWChanged(QString p_currentTxt);
+
 private:
 
     AllroundWomenDataModel* m_pGymWomenModel;

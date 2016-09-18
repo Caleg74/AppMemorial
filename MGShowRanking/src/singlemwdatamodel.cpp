@@ -33,7 +33,12 @@ SingleMWDataModel::~SingleMWDataModel()
 
 void SingleMWDataModel::setApparatus(ApparatusList::EApparatusMen p_eAppMen)
 {
-    m_eApparatus = p_eAppMen;
+    m_iApparatus = (int)p_eAppMen;
+}
+
+void SingleMWDataModel::setApparatus(ApparatusList::EApparatusWomen p_eAppWomen)
+{
+    m_iApparatus = (int)p_eAppWomen;
 }
 
 void SingleMWDataModel::RetrieveGymnastList()
@@ -70,7 +75,12 @@ void SingleMWDataModel::updateScores()
 {
     QList<SingleMWData>::iterator iter;
 
-    int iAppId = ApparatusList::Instance()->getApparatusId(m_eApparatus);
+
+    int iAppId;
+    if (m_eGender == SG_Men)
+        iAppId= ApparatusList::Instance()->getApparatusId((ApparatusList::EApparatusMen)m_iApparatus);
+    else
+        iAppId= ApparatusList::Instance()->getApparatusId((ApparatusList::EApparatusWomen)m_iApparatus);
 
     for (iter = m_rankingList.begin(); iter != m_rankingList.end(); ++iter)
     {

@@ -107,6 +107,19 @@ void CoreApplication::Init(QQmlApplicationEngine& p_qEngine)
 
     ctxt->setContextProperty("SingleMDataModel", m_qSortSingleMProxy); // Contains the filter, not the model
     m_qSortSingleMProxy->sort(0);
+
+    // Single Women model
+    m_pSingleWModel = new SingleMWDataModel("F");
+
+    // Set filter
+    m_qSortSingleWProxy = new SortFilterProxyModel(this);
+    m_qSortSingleWProxy->setSortRole(SingleMWDataModel::RankRole);
+    m_qSortSingleWProxy->setFilterRole(SingleMWDataModel::FinalScoreSingleMW);
+    m_qSortSingleWProxy->setSourceModel(m_pSingleWModel);
+    m_qSortSingleWProxy->setDynamicSortFilter(true);
+
+    ctxt->setContextProperty("SingleWDataModel", m_qSortSingleWProxy); // Contains the filter, not the model
+    m_qSortSingleWProxy->sort(0);
 //    // Timer for refreshing the scores automatically
 
 
@@ -130,6 +143,14 @@ void CoreApplication::Connect()
     {
         connect(cbbApparatusMen, SIGNAL(selectedTextChanged(QString)),
                 this, SLOT(onApparatusMChanged(QString)));
+
+    }
+
+    QQuickItem* cbbApparatusWomen = m_pAppEngine->rootObjects().first()->findChild<QQuickItem*>("cbbAppartusW");
+    if (cbbApparatusMen)
+    {
+        connect(cbbApparatusWomen, SIGNAL(selectedTextChanged(QString)),
+                this, SLOT(onApparatusWChanged(QString)));
 
     }
 }
@@ -184,7 +205,7 @@ void CoreApplication::onApparatusMChanged(QString p_currentTxt)
             ApparatusList::EApparatusMen eApparatusM;
 
             if      (p_currentTxt.compare("Suolo") ==  0) { strImageFile += "Floor.svg"; eApparatusM = ApparatusList::AMFloor; }
-            else if (p_currentTxt.compare("Cavallo a maniglie") == 0) { strImageFile += "PommelHorse.svg"; eApparatusM = ApparatusList::AMPommelHores; }
+            else if (p_currentTxt.compare("Cavallo a\nmaniglie") == 0) { strImageFile += "PommelHorse.svg"; eApparatusM = ApparatusList::AMPommelHores; }
             else if (p_currentTxt.compare("Anelli") ==  0) { strImageFile += "Rings.svg"; eApparatusM = ApparatusList::AMRings; }
             else if (p_currentTxt.compare("Volteggio") ==  0) { strImageFile += "Vault.svg"; eApparatusM = ApparatusList::AMVault; }
             else if (p_currentTxt.compare("Parallele") ==  0) { strImageFile += "ParallelBars.svg"; eApparatusM = ApparatusList::AMParallelBars; }
@@ -203,10 +224,45 @@ void CoreApplication::onApparatusMChanged(QString p_currentTxt)
             m_pSingleMModel->setApparatus(eApparatusM);
             m_pSingleMModel->updateScores();
         }
+    }
+ }
 
-//        int iAthleteId = dbInterface::Instance()->getGymnastId(firstName, lastName);
-//        QString strGender = dbInterface::Instance()->getGender(iAthleteId);
 
-//        ApparatusList::Instance()->FillComboList(&m_pApparatusCbbModel, strGender);
+void CoreApplication::onApparatusWChanged(QString p_currentTxt)
+{
+    if (p_currentTxt != "Attrezzo..")
+    {
+        // set Title
+        QObject* ttiApparatusWomen = m_pAppEngine->rootObjects().first()->findChild<QObject*>("singleApparatusWId");
+        if (ttiApparatusWomen)
+        {
+
+            // only exception
+            if (p_currentTxt == "Parallele asimmetriche")
+                p_currentTxt = "Parallele \nasimmetriche"; // split into 2 lines
+
+            ttiApparatusWomen->setProperty("text", p_currentTxt);
+
+            QString strImageFile = "/images/";
+            ApparatusList::EApparatusWomen eApparatusW;
+
+            if      (p_currentTxt.compare("Suolo") ==  0) { strImageFile += "Floor.svg"; eApparatusW = ApparatusList::AWFloor; }
+            else if (p_currentTxt.compare("Volteggio") ==  0) { strImageFile += "Vault.svg"; eApparatusW = ApparatusList::AWVault; }
+            else if (p_currentTxt.compare("Parallele \nasimmetriche") ==  0) { strImageFile += "UnevenBars.svg"; eApparatusW = ApparatusList::AWUnevenBars; }
+            else if (p_currentTxt.compare("Trave") ==  0) { strImageFile += "BalanceBeam.svg"; eApparatusW = ApparatusList::AWBalanceBeam; }
+            else
+            {
+                strImageFile += "Empty.svg";
+                qCritical() << "Wrong apparatus selected";
+                return; // ?
+            }
+
+            // set image
+            ttiApparatusWomen->setProperty("imageSource", strImageFile);
+
+            // Retrieve scores for the selected floor
+            m_pSingleWModel->setApparatus(eApparatusW);
+            m_pSingleWModel->updateScores();
+        }
     }
  }

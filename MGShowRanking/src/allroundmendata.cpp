@@ -157,7 +157,12 @@ bool AllroundMenData::operator<(const AllroundMenData other) const
             // else continue and compare the next score
         }
 
-        return !true;
+        // at this pointit's probably everything = 0s...
+        // sort alphabetically
+        if (QString::compare(m_nameFull, other.m_nameFull) < 0)
+            return true;
+        else
+            return false;
     }
     else
     {

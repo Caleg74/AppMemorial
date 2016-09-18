@@ -27,6 +27,7 @@ Component {
             __maxPopupHeight: 600
             __menuItemType: "comboboxitem"
 
+
             frame: Rectangle {              // background
                 color: "#fff"
                 border.width: 2

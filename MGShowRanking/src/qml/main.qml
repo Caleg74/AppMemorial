@@ -38,7 +38,7 @@
 **
 ****************************************************************************/
 
-import QtQuick 2.0
+import QtQuick 2.5
 import QtQuick.Window 2.0
 import "qrc:/qml"
 
@@ -50,20 +50,25 @@ Window {
     title: qsTr("Memorial Gander")
     flags: Qt.Window
 
-        MouseArea {
-            anchors.fill: parent
-            onDoubleClicked: {
-                if (mainWindow.visibility === Window.FullScreen) {
-                    mainWindow.visibility = Window.AutomaticVisibility;
-                    flags: Qt.Window
-                } else {
-                    mainWindow.visibility = Window.FullScreen
-                    flags: Qt.FramelessWindowHint
-                }
+    MouseArea {
+        anchors.fill: parent
+        onDoubleClicked: {
+            if (mainWindow.visibility === Window.FullScreen) {
+                mainWindow.visibility = Window.AutomaticVisibility
+                flags: Qt.Window
+            } else {
+                mainWindow.visibility = Window.FullScreen
+                flags: Qt.FramelessWindowHint
             }
         }
+    }
 
-    StyleMGComboBox{ id: comboBoxMGStyle}
+    Shortcut {
+            sequence: "Ctrl+Q"
+            onActivated: Qt.quit()
+        }
+
+    StyleMGComboBox { id: comboBoxMGStyle}
     StyleMGTextInput { id: textEditMGStyle}
     StyleMGPushButton { id: buttonMGStyle}
 

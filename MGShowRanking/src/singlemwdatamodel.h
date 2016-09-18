@@ -34,6 +34,8 @@ public:
 
     void setApparatus(ApparatusList::EApparatusMen p_eAppMen);
 
+    void setApparatus(ApparatusList::EApparatusWomen p_eAppWomen);
+
 public slots:
 
     void updateScores();
@@ -55,7 +57,7 @@ private:
 
     SingleGender m_eGender;
 
-    ApparatusList::EApparatusMen m_eApparatus;
+    int m_iApparatus;   ///< used a more general int instead of ApparatusList::EApparatusMen/Women
 
     QList<SingleMWData> m_rankingList;
 };

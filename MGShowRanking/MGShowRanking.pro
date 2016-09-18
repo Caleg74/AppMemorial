@@ -67,6 +67,8 @@ OTHER_FILES += \
     src/qml/MenRanking.qml \
     src/qml/WomenRanking.qml \
     src/qml/ApparatusRanking.qml \
+    src/qml/ApparatusRankingM.qml \
+    src/qml/ApparatusRankingW.qml \
     src/qml/TableTitleItem.qml \
     src/qml/ApparatusScoreItem.qml \
     src/qml/TotalScoreItem.qml \

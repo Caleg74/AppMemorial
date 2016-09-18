@@ -17,12 +17,12 @@ Item {
 
         Item // some sort of a Row
         {
-            property int apparatusWidth: parent.width / 3
+            property int apparatusWidth: parent.width / 2.5
             anchors.margins: 5
             anchors.fill: parent
 //            height: parent.height
 //            width: parent.width
-            property int fontSize:  Math.max(parent.width / 30, 6)
+            property int fontSize:  Math.max(parent.width / 33, 6)
 
 
             GymnastPosItem {

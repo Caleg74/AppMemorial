@@ -51,7 +51,7 @@ void AllroundWomenDataModel::updateScores()
 
     for (iter = m_rankingList.begin(); iter != m_rankingList.end(); ++iter)
     {
-        for (int apparatus = 0; apparatus < ApparatusList::AMApparatusMax; apparatus++)
+        for (int apparatus = 0; apparatus < ApparatusList::AWApparatusMax; apparatus++)
         {
             int iAthleteId = iter->getAthleteId();
             int iAppId = ApparatusList::Instance()->getApparatusId((ApparatusList::EApparatusWomen)apparatus);
