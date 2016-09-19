@@ -9,10 +9,8 @@ dbInterface* dbInterface::sm_pInstance = NULL;
 
 
 dbInterface::dbInterface()
-: dBConnection()
+: dbIfaceBase()
 {
-    QDate qDate = QDate::currentDate();
-    m_iCurrentYear = qDate.year();
 }
 
 dbInterface* dbInterface::Instance()
@@ -25,56 +23,6 @@ dbInterface* dbInterface::Instance()
     return sm_pInstance;
 }
 
-void dbInterface::getCountriesList(QStringList* p_pList)
-{
-
-    if (m_bInitialized)
-    {
-        QSqlDatabase db = QSqlDatabase::database("ConnMG");
-        QSqlQuery query(db);
-        query.exec("SELECT nicename FROM nations");
-
-        *p_pList << "Nazione..";
-        while (query.next())
-        {
-            QString name = query.value(0).toString();
-            *p_pList << name;
-        }
-    }
-    else
-    {
-        qInfo() << "dbInterface::getCountriesList(): Db not initialized";
-    }
-}
-
-void dbInterface::getRegisterdGymnastList(QStringList* p_pList)
-{
-    if (m_bInitialized)
-    {
-        QSqlDatabase db = QSqlDatabase::database("ConnMG");
-        QSqlQuery query(db);
-        query.exec("SELECT first_name, last_name, gender, nation_id FROM athlete");
-
-        while(query.next())
-        {
-            // Convert NationId to nicename
-            QString strNationName = getNationName(query.value(3).toInt(), NI_ShortName);
-
-            *p_pList << query.value(0).toString().trimmed() + ", "
-                    + query.value(1).toString().trimmed() + ", ("
-                    + strNationName.trimmed() + ")";
-        }
-
-        qSort(*p_pList);
-
-        // put it at the beginning
-        p_pList->insert(p_pList->begin(), "Seleziona ginnasti..");
-    }
-    else
-    {
-        qInfo() << "dbInterface::getRegisterdGymnastList(): Db not initialized";
-    }
-}
 
 int dbInterface::getNationId(QString& p_strNiceName)
 {
@@ -103,43 +51,6 @@ int dbInterface::getNationId(QString& p_strNiceName)
 
     return iId;
 }
-
-QString dbInterface::getNationName(int p_iNationId, enum NationInfo infoType)
-{
-    QString strName;
-
-    if (m_bInitialized)
-    {
-        QSqlDatabase db = QSqlDatabase::database("ConnMG");
-        QSqlQuery query(db);
-
-        query.exec("SELECT id,nicename,iso3 FROM nations WHERE id = '" + QString::number(p_iNationId, 10) + "'");
-
-        if (query.first())
-        {
-            int iValNbr = 1;
-            switch(infoType)
-            {
-            case NI_Nicename:   iValNbr = 1; break;
-            case NI_ShortName:  iValNbr = 2; break;
-            default: qWarning() << "Invalid nation info " << infoType;
-            }
-
-            strName = query.value(iValNbr).toString();
-        }
-        else
-        {
-            qCritical() << "No name found for Id: " << p_iNationId;
-        }
-    }
-    else
-    {
-        qInfo() << "dbInterface::getNationName(): Db not initialized";
-    }
-
-    return strName;
-}
-
 
 void dbInterface::insertGymnast(QString& p_strFirstName,
                    QString& p_strLastName,
@@ -202,64 +113,6 @@ void dbInterface::deleteGymnast(QString& p_strFirstName, QString& p_strLastName)
     }
 }
 
-int dbInterface::getGymnastId(QString& p_firstName, QString& p_lastName)
-{
-    int athleteId = 0;
-
-    if (m_bInitialized)
-    {
-        QSqlDatabase db = QSqlDatabase::database("ConnMG");
-        QSqlQuery query(db);
-
-        query.exec("SELECT id, first_name, last_name FROM athlete WHERE first_name = '" + p_firstName + "'"
-                   " AND last_name = '" + p_lastName + "'");
-
-        if (query.first())
-        {
-            athleteId = query.value(0).toInt();
-        }
-        else
-        {
-            qCritical() << "No Id found for : " << p_firstName << " "  << p_lastName;
-        }
-    }
-    else
-    {
-        qInfo() << "dbInterface::getGymnastId(): Db not initialized";
-    }
-
-    return athleteId;
-}
-
-void dbInterface::retrieveRegisteredGymnastList(QList<QStringList>& p_strGymnList)
-{
-    if (m_bInitialized)
-    {
-        QSqlDatabase db = QSqlDatabase::database("ConnMG");
-        QSqlQuery query(db);
-        query.exec("SELECT first_name, last_name, gender, nation_id FROM athlete");
-
-        while(query.next())
-        {
-            // Convert NationId to nicename
-            QString strNationName = getNationName(query.value(3).toInt(), NI_Nicename);
-
-            QStringList strData;
-            strData << query.value(0).toString().trimmed()
-                    << query.value(1).toString().trimmed()
-                    << strNationName.trimmed()
-                    << query.value(2).toString().trimmed();
-
-            p_strGymnList << strData;
-            qInfo() << "Athlete retrieved: " << strData;
-        }
-    }
-    else
-    {
-        qInfo() << "dbInterface::insertGymnast(): Db not initialized";
-    }
-}
-
 void dbInterface::retrieveGymnastSubscriptionList(QList<QStringList>& p_strGymnList)
 {
     if (m_bInitialized)
@@ -287,7 +140,7 @@ void dbInterface::retrieveGymnastSubscriptionList(QList<QStringList>& p_strGymnL
                                  << eventId
                                  << queryAthlete.value(1).toString().trimmed()
                                  << queryAthlete.value(2).toString().trimmed()
-                                 << getNationName(queryAthlete.value(3).toInt(), NI_ShortName);
+                                 << getNationName(queryAthlete.value(3).toInt(), NI_Iso3Name);
             }
             else
             {
@@ -383,34 +236,46 @@ bool dbInterface::isGymnastAlreadyRegistered(int p_iAthleteId, int p_iEventId)
     return bAthleteFound;
 }
 
-int dbInterface::getCurrentEventId()
+void dbInterface::updateScore(const int p_iEventId,
+                           const int p_iAthleteId,
+                           const int p_iApparatusId,
+                           const int p_iForceScore)
 {
-    int eventId = 0;
-
     if (m_bInitialized)
     {
         QSqlDatabase db = QSqlDatabase::database("ConnMG");
         QSqlQuery query(db);
+        // UPDATE table_name
+        //SET column1=value1,column2=value2,...
+        //WHERE some_column=some_value;
+        query.prepare("UPDATE scores SET force_score = :force_score "
+                      "WHERE sport_event_id=:sport_event_id AND athlete_id=:athlete_id AND apparatus_id=:apparatus_id");
+        query.bindValue(":force_score", QString::number(p_iForceScore, 'g', 6));
+        query.bindValue(":sport_event_id", p_iEventId);
+        query.bindValue(":athlete_id", p_iAthleteId);
+        query.bindValue(":apparatus_id", p_iApparatusId);
 
-        query.exec("SELECT id, year FROM sport_event");
+        bool bRet = query.exec();
 
-        while (query.next())
+        if (bRet)
         {
-            if (query.value(1).toString().startsWith(QString::number(m_iCurrentYear, 10)))
-            {
-                eventId = query.value(0).toInt();
-            }
+            qInfo() << "Score updated: " << p_iEventId << ", "
+                                         << p_iAthleteId << ", "
+                                         << p_iApparatusId << ", "
+                                         << p_iForceScore;
         }
-
-        if (eventId == 0)
+        else
         {
-            qCritical() << "No Id found for event year: " << m_iCurrentYear;
+            qCritical() << "Score NOT updated: " << p_iEventId << ", "
+                                                 << p_iAthleteId << ", "
+                                                 << p_iApparatusId << ", "
+                                                 << p_iForceScore;
+            qCritical() << query.lastError();
         }
     }
     else
     {
-        qInfo() << "dbInterface::getCurrentEventId(): Db not initialized";
+        qInfo() << "dbInterface::updateScore(): Db not initialized";
     }
-
-    return eventId;
 }
+

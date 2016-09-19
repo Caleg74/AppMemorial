@@ -49,7 +49,7 @@ void SingleMWDataModel::RetrieveGymnastList()
     int athleteId;
 
     QList<QStringList> p_strGymnList;
-    dbInterface::Instance()->retrieveRegisteredGymnastList(p_strGymnList);
+    dbInterface::Instance()->retrieveRegisteredGymnastList(p_strGymnList, dbIfaceBase::NI_IsoName);
 
     QString strGender = m_eGender == SG_Men ? "M" : "F";
     for (int i = 0; i < p_strGymnList.size();i++)

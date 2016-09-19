@@ -37,7 +37,6 @@
 ** $QT_END_LICENSE$
 **
 ****************************************************************************/
-
 import QtQuick 2.0
 import QtQuick.Window 2.2
 import "qrc:/qml"
@@ -49,9 +48,11 @@ Window {
     visible: true
     title: qsTr("Memorial Gander")
 
+
     StyleMGComboBox{ id: comboBoxMGStyle}
     StyleMGTextInput { id: textEditMGStyle}
     StyleMGPushButton { id: buttonMGStyle}
+
     StyleMGTabWidget {
         id: tabs
         width: parent.width
@@ -94,7 +95,7 @@ Window {
         }
 
         Rectangle {
-            property string title: "Dati\n Evento"
+            property string title: "Dati \nEvento"
             anchors.fill: parent
             color: "#d0d0d0"
 
@@ -112,21 +113,14 @@ Window {
         }
 
         Rectangle {
-            property string title: "Stampa"
+            property string title: "Punteggi \nSpeciali"
             anchors.fill: parent; color: "#d0d0d0"
 
             Rectangle {
                 anchors.fill: parent; anchors.margins: 20
                 color: "#d0d0d0"
-                Text {
-                    width: parent.width - 20
-                    anchors.centerIn: parent; horizontalAlignment: Qt.AlignHCenter
-                    text: "Stampa"
-                    font.pixelSize: 20
-                    wrapMode: Text.WordWrap
-                }
 
-                Ranking {
+                ForceScore {
 
                     width: parent.width
                     height: parent.height

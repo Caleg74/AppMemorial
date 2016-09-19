@@ -1,26 +1,14 @@
 #ifndef DBINTERFACE_H
 #define DBINTERFACE_H
 
-#include "dbconnection.h"
+#include "dbifacebase.h"
 #include <QStringList>
 
-class dbInterface : public dBConnection
+class dbInterface : public dbIfaceBase
 {
 public:
 
-    enum NationInfo
-    {
-        NI_Nicename,
-        NI_ShortName
-    };
-
     static dbInterface* Instance();
-
-    // for cbb
-    void getCountriesList(QStringList *p_pList);
-
-    // for cbb
-    void getRegisterdGymnastList(QStringList* p_pList);
 
     void insertGymnast(QString& p_strFirstName,
                        QString& p_strLastName,
@@ -28,10 +16,6 @@ public:
                        int p_iNationId);
 
     void deleteGymnast(QString& p_strFirstName, QString& p_strLastName);
-
-    int getGymnastId(QString& p_firstName, QString& p_lastName);
-
-    void retrieveRegisteredGymnastList(QList<QStringList> &p_strGymnList);
 
     void retrieveGymnastSubscriptionList(QList<QStringList> &p_strGymnList);
 
@@ -43,17 +27,15 @@ public:
 
     int getNationId(QString& p_strNiceName);
 
-    QString getNationName(int p_iNationId, enum NationInfo infoType);
-
-    /** returns the eventId for the current event (based on year) */
-    int getCurrentEventId();
+    void updateScore(const int p_iEventId,
+                     const int p_iAthleteId,
+                     const int p_iApparatusId,
+                     const int p_iForceScore);
 
 private:
 
     /** Private constructor */
     dbInterface();
-
-    int m_iCurrentYear;
 
     static dbInterface* sm_pInstance;
 };

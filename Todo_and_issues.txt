@@ -4,7 +4,7 @@ TODO
 Date		App				Prio	Description
 ----		---				----	-----------
 2016-09-03	MGServer		Med		Insert gymnast - erasing works only if the table that uses the gymnast ID are empty
-									Add a pop-up for era confirmation (ex. Attention: erase will remove all data over the previous editions)
+									Add a pop-up for erase confirmation (ex. Attention: erase will remove all data over the previous editions)
 						
 2016-09-03	MGServer		Low		Add citycup information
 									At the moment could be done in the DB directly
@@ -17,6 +17,7 @@ Date		App				Prio	Description
 
 2016-09-10  MGShowRanking	Med		Create Postgres Read-only user ->Ivan
 
+2016-09-19  MGServer		Hi		Add button "reset all forced scores"
 
 -------------------------------------------
 

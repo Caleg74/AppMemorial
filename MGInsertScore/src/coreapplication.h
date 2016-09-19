@@ -23,6 +23,7 @@ signals:
 
 public slots:
     void onGymnastChanged(QString p_currentTxt);
+
 private:
     QQmlApplicationEngine* m_pAppEngine;
 

@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QQmlApplicationEngine>
 #include "gymnastsortfilterproxymodel.h"
+#include "comboboxmodel.h"
 
 class CoreApplication : public QObject
 {
@@ -19,11 +20,16 @@ public:
     /** Connectes all UI signals */
     void Connect();
 
+public slots:
+    void onGymnastChanged(QString p_currentTxt);
+
 private:
     QQmlApplicationEngine* m_pAppEngine;
 
     GymnastSortFilterProxyModel* m_qSortProxyGymnast;
     GymnastSortFilterProxyModel* m_qSortProxySelectedGymnast;
+
+    ComboBoxModel m_pApparatusCbbModel;
 };
 
 #endif // COREAPPLICATION_H

@@ -24,7 +24,7 @@ void AllroundWomenDataModel::RetrieveGymnastList()
     int athleteId;
 
     QList<QStringList> p_strGymnList;
-    dbInterface::Instance()->retrieveRegisteredGymnastList(p_strGymnList);
+    dbInterface::Instance()->retrieveRegisteredGymnastList(p_strGymnList, dbIfaceBase::NI_IsoName);
 
     for (int i = 0; i < p_strGymnList.size();i++)
     {

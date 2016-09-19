@@ -10,7 +10,7 @@
         <file alias="GymnastSelectionDelegate.qml">src/qml/GymnastSelectionDelegate.qml</file>
         <file alias="GymnastSelection.qml">src/qml/GymnastSelection.qml</file>
         <file alias="main.qml">src/qml/main.qml</file>
-        <file alias="Ranking.qml">src/qml/Ranking.qml</file>
+        <file alias="ForceScore.qml">src/qml/ForceScore.qml</file>
         <file alias="EventData.qml">src/qml/EventData.qml</file>
     </qresource>
     <qresource prefix="/images">

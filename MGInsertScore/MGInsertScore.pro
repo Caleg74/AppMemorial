@@ -11,6 +11,7 @@ HEADERS += \
     ../MGCommon/src/cbbItems/comboboxmodel.h \
     ../MGCommon/src/cbbItems/gymnastselectionlist.h \
     ../MGCommon/src/db/dbconnection.h \
+    ../MGCommon/src/db/dbifacebase.h \
     ../MGCommon/src/msgBox/messagebox.h \
     src/coreapplication.h \
     src/dbinterface.h \
@@ -20,6 +21,7 @@ SOURCES += \
     ../MGCommon/src/cbbItems/apparatusdata.cpp \
     ../MGCommon/src/cbbItems/apparatuslist.cpp \
     ../MGCommon/src/db/dbconnection.cpp \
+    ../MGCommon/src/db/dbifacebase.cpp \
     ../MGCommon/src/cbbItems/comboboxmodel.cpp \
     ../MGCommon/src/cbbItems/gymnastselectionlist.cpp \
     ../MGCommon/src/msgBox/messagebox.cpp \
