@@ -28,11 +28,6 @@ GymnastDataModel::GymnastDataModel(QObject *parent)
 
 void GymnastDataModel::RetrieveGymnastList()
 {
-    QString firstName;
-    QString lastName;
-    QString country;
-    QString sex;
-
     QList<QStringList> p_strGymnList;
     dbInterface::Instance()->retrieveRegisteredGymnastList(p_strGymnList, dbIfaceBase::NI_Nicename);
 

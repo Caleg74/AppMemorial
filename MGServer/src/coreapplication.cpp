@@ -74,8 +74,8 @@ void CoreApplication::Connect()
     QObject* saveScoreBtn = m_pAppEngine->rootObjects().first()->findChild<QObject*>("btnSaveScore");
     if (saveScoreBtn)
     {
-        connect(saveScoreBtn, SIGNAL(saveScore(QString, QString, QString, QString)),
-                SaveForceScore::Instance(), SLOT(onSaveScore(QString, QString, QString, QString)));
+        connect(saveScoreBtn, SIGNAL(saveScore(QString, QString, QString)),
+                SaveForceScore::Instance(), SLOT(onSaveForceScore(QString, QString, QString)));
     }
 
     QQuickItem* cbbGymnast = m_pAppEngine->rootObjects().first()->findChild<QQuickItem*>("cbbGymnastSelection");
