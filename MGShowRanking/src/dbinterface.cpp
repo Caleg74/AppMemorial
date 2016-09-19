@@ -455,3 +455,39 @@ float dbInterface::getFinalScore(const int p_iAthleteId, const int p_iApparatusI
 
     return fScore;
 }
+
+int dbInterface::getForceScore(const int p_iAthleteId, const int p_iApparatusId)
+{
+    int iForceScore = 0;
+
+    if (m_bInitialized)
+    {
+        QSqlDatabase db = QSqlDatabase::database("ConnMG");
+        QSqlQuery query(db);
+
+        int iEventId = dbInterface::Instance()->getCurrentEventId();
+
+        QString strQuery = "SELECT force_score FROM scores WHERE "
+                  " sport_event_id = "   + QString::number(iEventId, 10) +
+                  " AND athlete_id = "   + QString::number(p_iAthleteId, 10)+
+                  " AND apparatus_id = " + QString::number(p_iApparatusId, 10);
+
+        query.exec(strQuery);
+
+        while (query.next())
+        {
+            iForceScore = query.value(0).toInt();
+        }
+
+        if (iEventId == 0)
+        {
+            qCritical() << "No Id found for event year: " << m_iCurrentYear;
+        }
+    }
+    else
+    {
+        qInfo() << "dbInterface::getForceScore(): Db not initialized";
+    }
+
+    return iForceScore;
+}

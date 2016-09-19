@@ -87,9 +87,11 @@ void SingleMWDataModel::updateScores()
         int iAthleteId = iter->getAthleteId();
         float fStartScore = dbInterface::Instance()->getStartScore(iAthleteId, iAppId);
         float fFinalScore = dbInterface::Instance()->getFinalScore(iAthleteId, iAppId);
+        int iForceScore   = dbInterface::Instance()->getForceScore(iAthleteId, iAppId);
 
         iter->setFinalScore(fFinalScore);
         iter->setStartScore(fStartScore);
+        iter->setForceScore(iForceScore);
     }
 
     // sort the list

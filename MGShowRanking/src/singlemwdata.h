@@ -13,6 +13,7 @@ public:
     {
         float StartScore;
         float FinalScore;
+        int   ForceScore;   // to be used only in case of equal score
     } SScore;
 
     SingleMWData(const int p_iAthleteId,
@@ -27,8 +28,12 @@ public:
 
     void setStartScore(float p_fScore);
     QString getStartScore() const;
+
     void setFinalScore(float p_fScore);
     QString getFinalScore() const;
+
+    void setForceScore(int p_iForceScore);
+//    QString getForceScore() const;
 
     friend bool operator== (const SingleMWData& lhs, const SingleMWData& rhs);
 

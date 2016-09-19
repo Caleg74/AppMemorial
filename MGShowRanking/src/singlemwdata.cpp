@@ -98,6 +98,11 @@ QString SingleMWData::getFinalScore() const
     return QString::number(m_sScore.FinalScore, 'f', 3);
 }
 
+void SingleMWData::setForceScore(int p_iForceScore)
+{
+    m_sScore.ForceScore = p_iForceScore;
+}
+
 bool SingleMWData::operator<(const SingleMWData other) const
 {
     // each return value is ! (inverted), since the sorting is not ascending but descending
@@ -114,7 +119,14 @@ bool SingleMWData::operator<(const SingleMWData other) const
         else if (m_sScore.StartScore == other.m_sScore.StartScore)
         {
             // TODO lok for a "manual flagW that makes the difference
-            return !true;
+            if (m_sScore.ForceScore < other.m_sScore.ForceScore)
+            {
+                return !true;
+            }
+            else
+            {
+                return !false;
+            }
         }
         else
         {
