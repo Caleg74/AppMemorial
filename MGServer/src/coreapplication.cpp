@@ -32,7 +32,7 @@ void CoreApplication::Init(QQmlApplicationEngine& p_qEngine)
     }
 
     // initialize the database
-    if (!dbInterface::Instance()->initDb())
+    if (!dbInterface::Instance()->initDb(false))
     {
         return;
     }

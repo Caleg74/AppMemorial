@@ -201,5 +201,8 @@ AllroundMenData* AllroundMenDataModel::GetItem(QString& nameFull)
 
 bool AllroundMenDataModel::filterAcceptsRow( int source_row, const QModelIndex& source_parent ) const
 {
+    Q_UNUSED(source_row);
+    Q_UNUSED(source_parent);
+
     return true;
 }

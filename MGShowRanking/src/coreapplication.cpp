@@ -55,7 +55,7 @@ void CoreApplication::Init(QQmlApplicationEngine& p_qEngine)
     }
 
     // initialize the database
-    if (!dbInterface::Instance()->initDb())
+    if (!dbInterface::Instance()->initDb(true))
     {
         return;
     }
@@ -166,6 +166,8 @@ void CoreApplication::onWindowLoaded()
 
 void CoreApplication::onWindowClosing(QQuickCloseEvent* p_event)
 {
+    Q_UNUSED(p_event);
+
     qDebug() << "onWindowClosing()";
     if (m_updateTimer != NULL)
     {

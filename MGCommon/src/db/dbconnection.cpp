@@ -28,10 +28,14 @@ bool dBConnection::loadDriver()
     return bRet;
 }
 
-bool dBConnection::initDb()
+bool dBConnection::initDb(bool p_bReadOnly)
 {
     QSqlDatabase db = QSqlDatabase::addDatabase("QODBC", "ConnMG");
-    db.setDatabaseName("PostgreSQL35W");
+    if (p_bReadOnly)
+        db.setDatabaseName("PostgreSQL35R");    // Readonly access user!
+    else
+        db.setDatabaseName("PostgreSQL35W");    // R/W access user!
+
     db.setHostName("localhost");
     db.setPort(5432);
 

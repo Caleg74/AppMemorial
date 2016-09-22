@@ -9,7 +9,7 @@ public:
 
     ~dBConnection();
 
-    bool initDb();
+    bool initDb(bool p_bReadOnly);
 
     bool loadDriver();
 
