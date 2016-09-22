@@ -4,6 +4,7 @@
 #include <QSqlQuery>
 #include <QSqlError>
 #include <QDebug>
+#include "messagebox.h"
 
 dbInterface* dbInterface::sm_pInstance = NULL;
 
@@ -103,8 +104,14 @@ void dbInterface::deleteGymnast(QString& p_strFirstName, QString& p_strLastName)
         }
         else
         {
-            qCritical() << "Athlete NOT removed: " << p_strFirstName << " " << p_strLastName;
-            qCritical() << query.lastError();
+            QString strErr = "Athlete NOT removed: " + p_strFirstName + " " + p_strLastName
+                    +  "\n" + query.lastError().text();
+            qCritical() << strErr;
+
+            MessageBox cMsgBox;
+            cMsgBox.SetTitle("Warning");
+            cMsgBox.SetText(strErr);
+            cMsgBox.Show();
         }
     }
     else
