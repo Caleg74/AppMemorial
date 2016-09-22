@@ -41,8 +41,8 @@ void SaveForceScore::onSaveForceScore(QString p_strGymnastFullTxt,
         strErr = "Valore non é tra 0 e 99";
     }
 
-        // save it to DB
-    SendToDb(p_strGymnastFullTxt, p_strApparatus, iForceScore);
+    // save it to DB
+    StoreForceScore(p_strGymnastFullTxt, p_strApparatus, iForceScore);
 
     // Show it to the user
     if (!bConvForceScoreOk)
@@ -52,6 +52,11 @@ void SaveForceScore::onSaveForceScore(QString p_strGymnastFullTxt,
         cMsgBox.SetText(strErr);
         cMsgBox.Show();
     }
+}
+
+void SaveForceScore::eraseForcedScores()
+{
+    ResetAllForceScore();
 }
 
 int SaveForceScore::CheckForceScore(QString p_strInputVal, bool* bOk)
@@ -69,7 +74,7 @@ int SaveForceScore::CheckForceScore(QString p_strInputVal, bool* bOk)
 }
 
 
-void SaveForceScore::SendToDb(QString& p_strGymnastFullTxt,
+void SaveForceScore::StoreForceScore(QString& p_strGymnastFullTxt,
                          QString& p_strApparatus,
                          int p_iForceScore)
 {
@@ -93,7 +98,7 @@ void SaveForceScore::SendToDb(QString& p_strGymnastFullTxt,
     if (bScorePresent)
     {
         // update existing score
-        dbInterface::Instance()->updateScore(iEventId, iAthleteId,
+        dbInterface::Instance()->updateForceScore(iEventId, iAthleteId,
                                          iApparatusId, p_iForceScore);
     }
     else
@@ -105,4 +110,16 @@ void SaveForceScore::SendToDb(QString& p_strGymnastFullTxt,
         cMsgBox.SetText(strErr);
         cMsgBox.Show();
     }
+}
+
+void SaveForceScore::ResetAllForceScore()
+{
+    int iEventId = dbInterface::Instance()->getCurrentEventId();
+    dbInterface::Instance()->eraseAllForcedScore(iEventId);
+
+    MessageBox cMsgBox;
+    cMsgBox.SetTitle("Warning");
+    QString strErr = "Punteggi speciali azzerati";
+    cMsgBox.SetText(strErr);
+    cMsgBox.Show();
 }

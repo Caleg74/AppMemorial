@@ -2,7 +2,7 @@ import QtQuick 2.0
 
 Item {
     id: listItemDelegate
-    width: parent.width - 50
+    width: (parent.width * 2/3) - 50
     height: 50
 
     BorderImage {
@@ -37,7 +37,7 @@ Item {
                 text: FullName // role name
                 font.pointSize: 15
                 color: "#333"
-                width: ((parent.width)/ 2) - 50
+                width: (parent.width) - 150
                 anchors.verticalCenter: parent.verticalCenter
 
             }

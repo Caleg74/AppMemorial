@@ -10,17 +10,23 @@ public:
     static SaveForceScore* Instance();
 
 public slots:
+
     void onSaveForceScore(QString p_strGymnastFullTxt,
                           QString p_strApparatus,
                           QString p_strForceScore);
+
+    void eraseForcedScores();
+
 private:
     SaveForceScore(QObject* parent = NULL);
 
     int CheckForceScore(QString p_strInputVal, bool* bOk);
 
-    void SendToDb(QString& p_strGymnastFullTxt,
+    void StoreForceScore(QString& p_strGymnastFullTxt,
                   QString& p_strApparatus,
                   int p_iForceScore);
+
+    void ResetAllForceScore();
 
     static SaveForceScore* sm_instance;
 

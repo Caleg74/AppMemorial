@@ -236,7 +236,7 @@ bool dbInterface::isGymnastAlreadyRegistered(int p_iAthleteId, int p_iEventId)
     return bAthleteFound;
 }
 
-void dbInterface::updateScore(const int p_iEventId,
+void dbInterface::updateForceScore(const int p_iEventId,
                            const int p_iAthleteId,
                            const int p_iApparatusId,
                            const int p_iForceScore)
@@ -279,3 +279,31 @@ void dbInterface::updateScore(const int p_iEventId,
     }
 }
 
+void dbInterface::eraseAllForcedScore(const int p_iEventId)
+{
+    if (m_bInitialized)
+    {
+        QSqlDatabase db = QSqlDatabase::database("ConnMG");
+        QSqlQuery query(db);
+
+        query.prepare("UPDATE scores SET force_score = 0 "
+                      "WHERE sport_event_id=:sport_event_id");
+        query.bindValue(":sport_event_id", p_iEventId);
+
+        bool bRet = query.exec();
+
+        if (bRet)
+        {
+            qInfo() << "All Forced Score reset for Event: " << p_iEventId;
+        }
+        else
+        {
+            qCritical() << "Score Forced Score reset FAILED";
+            qCritical() << query.lastError();
+        }
+    }
+    else
+    {
+        qInfo() << "dbInterface::updateScore(): Db not initialized";
+    }
+}

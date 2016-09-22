@@ -27,10 +27,12 @@ public:
 
     int getNationId(QString& p_strNiceName);
 
-    void updateScore(const int p_iEventId,
+    void updateForceScore(const int p_iEventId,
                      const int p_iAthleteId,
                      const int p_iApparatusId,
                      const int p_iForceScore);
+
+    void eraseAllForcedScore(const int p_iEventId);
 
 private:
 

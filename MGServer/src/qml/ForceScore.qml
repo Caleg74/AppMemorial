@@ -53,7 +53,7 @@ Item {
 
             RowLayout
             {
-                spacing: 20
+                spacing: 40
                 Layout.alignment: Qt.AlignBottom
 
                 Text {
@@ -97,10 +97,34 @@ Item {
                     }
                 }
             }
-        }
 
-        StyleMGMsgBox {
-            visible: false
+            Rectangle
+            {
+                width: parent.width
+                height: 2 // just a line
+                color: "#aaaaaa"
+            }
+
+            Row
+            {
+                Text {
+                    id: lblEraseForceScore
+//                    width: parent.parent.width/3
+                    text: "Azzera tutti punteggi speciali:  "
+                    font.pointSize: 15
+//                    anchors.left: parent.left
+                }
+
+                StyleMGPushButton {
+                    id:btnEraseForceScore
+                    objectName: "btnEraseForceScore"
+                    width: 100
+                    buttonText: "Azzera"
+
+//                    anchors.right: parent.right
+
+                }
+            }
         }
     }
 }

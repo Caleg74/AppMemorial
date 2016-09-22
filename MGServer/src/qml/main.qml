@@ -129,4 +129,8 @@ Window {
             }
         }
     }
+
+    StyleMGMsgBox {
+        visible: false
+    }
 }

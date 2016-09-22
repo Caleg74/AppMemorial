@@ -22,51 +22,54 @@ CoreApplication::~CoreApplication()
 
 void CoreApplication::Init(QQmlApplicationEngine& p_qEngine)
 {
+    bool bDBOk = true;
+    // Init the DB connection
     if (dbInterface::Instance()->loadDriver())
     {
         qInfo() << "QOBCD driver loaded successfully";
     }
     else
     {
-        return;
+        bDBOk = false;
     }
 
     // initialize the database
     if (!dbInterface::Instance()->initDb(false))
     {
-        return;
+        bDBOk = false;
     }
 
     // save it as a class member
     m_pAppEngine = &p_qEngine;
+    MessageBox::SetEngine(m_pAppEngine);
 
     QQmlContext *ctxt = p_qEngine.rootContext();
 
-    // Create the the model for the gymnasts of every event
-    GymnastDataModel* pGymModel = GymnastDataModel::Instance();
-    // Set filter
-    m_qSortProxyGymnast = new GymnastSortFilterProxyModel(this);
-    m_qSortProxyGymnast->setSortRole(GymnastDataModel::FirstNameRole);
-    m_qSortProxyGymnast->setSourceModel(pGymModel);
-    m_qSortProxyGymnast->setDynamicSortFilter(true);
-    ctxt->setContextProperty("GymnastDataModel", m_qSortProxyGymnast); // Contains the filter, not the model
-    m_qSortProxyGymnast->sort(0);
+    if (bDBOk)
+    {
+        // Create the the model for the gymnasts of every event
+        GymnastDataModel* pGymModel = GymnastDataModel::Instance();
+        // Set filter
+        m_qSortProxyGymnast = new GymnastSortFilterProxyModel(this);
+        m_qSortProxyGymnast->setSortRole(GymnastDataModel::FirstNameRole);
+        m_qSortProxyGymnast->setSourceModel(pGymModel);
+        m_qSortProxyGymnast->setDynamicSortFilter(true);
+        ctxt->setContextProperty("GymnastDataModel", m_qSortProxyGymnast); // Contains the filter, not the model
+        m_qSortProxyGymnast->sort(0);
 
-    // Create the "registers to this event gymnasts" model
-    GymnastSelectModel* pGymSelModel = GymnastSelectModel::Instance();
-    // Set filter
-    m_qSortProxySelectedGymnast = new GymnastSortFilterProxyModel(this);
-    m_qSortProxySelectedGymnast->setSortRole(GymnastDataModel::FirstNameRole);
-    m_qSortProxySelectedGymnast->setSourceModel(pGymSelModel);
-    m_qSortProxySelectedGymnast->setDynamicSortFilter(true);
-    ctxt->setContextProperty("GymnastSelectModel", m_qSortProxySelectedGymnast);
-    m_qSortProxySelectedGymnast->sort(0);
+        // Create the "registers to this event gymnasts" model
+        GymnastSelectModel* pGymSelModel = GymnastSelectModel::Instance();
+        // Set filter
+        m_qSortProxySelectedGymnast = new GymnastSortFilterProxyModel(this);
+        m_qSortProxySelectedGymnast->setSortRole(GymnastDataModel::FirstNameRole);
+        m_qSortProxySelectedGymnast->setSourceModel(pGymSelModel);
+        m_qSortProxySelectedGymnast->setDynamicSortFilter(true);
+        ctxt->setContextProperty("GymnastSelectModel", m_qSortProxySelectedGymnast);
+        m_qSortProxySelectedGymnast->sort(0);
 
-    ApparatusList::Instance()->Init(p_qEngine, "apparatusModel", &m_pApparatusCbbModel);
-    MessageBox::SetEngine(m_pAppEngine);
+        ApparatusList::Instance()->Init(p_qEngine, "apparatusModel", &m_pApparatusCbbModel);
 
-//    connect(pGymModel, SIGNAL(OutputChanged(unsigned int)),
-//            &m_cIoWrap, SLOT(SetOutput(unsigned int)));
+    }
 }
 
 void CoreApplication::Connect()
@@ -76,6 +79,13 @@ void CoreApplication::Connect()
     {
         connect(saveScoreBtn, SIGNAL(saveScore(QString, QString, QString)),
                 SaveForceScore::Instance(), SLOT(onSaveForceScore(QString, QString, QString)));
+    }
+
+    QObject* eraseForcedScoreBtn = m_pAppEngine->rootObjects().first()->findChild<QObject*>("btnEraseForceScore");
+    if (eraseForcedScoreBtn)
+    {
+        connect(eraseForcedScoreBtn, SIGNAL(clicked()),
+                SaveForceScore::Instance(), SLOT(eraseForcedScores()));
     }
 
     QQuickItem* cbbGymnast = m_pAppEngine->rootObjects().first()->findChild<QQuickItem*>("cbbGymnastSelection");

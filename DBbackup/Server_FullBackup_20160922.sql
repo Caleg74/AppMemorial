@@ -2,7 +2,7 @@
 -- PostgreSQL database cluster dump
 --
 
--- Started on 2016-09-22 17:34:26
+-- Started on 2016-09-22 17:38:37
 
 SET default_transaction_read_only = off;
 
@@ -52,7 +52,7 @@ SET default_transaction_read_only = off;
 -- Dumped from database version 9.5.3
 -- Dumped by pg_dump version 9.5.3
 
--- Started on 2016-09-22 17:34:26
+-- Started on 2016-09-22 17:38:37
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -1185,7 +1185,7 @@ ALTER DEFAULT PRIVILEGES FOR ROLE postgres IN SCHEMA public REVOKE ALL ON TABLES
 ALTER DEFAULT PRIVILEGES FOR ROLE postgres IN SCHEMA public GRANT SELECT ON TABLES  TO ginnastica_readonly;
 
 
--- Completed on 2016-09-22 17:34:26
+-- Completed on 2016-09-22 17:38:37
 
 --
 -- PostgreSQL database dump complete
@@ -1202,7 +1202,7 @@ SET default_transaction_read_only = off;
 -- Dumped from database version 9.5.3
 -- Dumped by pg_dump version 9.5.3
 
--- Started on 2016-09-22 17:34:26
+-- Started on 2016-09-22 17:38:37
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -1267,7 +1267,7 @@ GRANT ALL ON SCHEMA public TO postgres;
 GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
--- Completed on 2016-09-22 17:34:28
+-- Completed on 2016-09-22 17:38:37
 
 --
 -- PostgreSQL database dump complete
@@ -1284,7 +1284,7 @@ SET default_transaction_read_only = off;
 -- Dumped from database version 9.5.3
 -- Dumped by pg_dump version 9.5.3
 
--- Started on 2016-09-22 17:34:28
+-- Started on 2016-09-22 17:38:37
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -1332,13 +1332,13 @@ GRANT ALL ON SCHEMA public TO postgres;
 GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
--- Completed on 2016-09-22 17:34:29
+-- Completed on 2016-09-22 17:38:37
 
 --
 -- PostgreSQL database dump complete
 --
 
--- Completed on 2016-09-22 17:34:29
+-- Completed on 2016-09-22 17:38:37
 
 --
 -- PostgreSQL database cluster dump complete

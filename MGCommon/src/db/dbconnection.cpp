@@ -18,10 +18,12 @@ bool dBConnection::loadDriver()
     // OCDB with conection name
     if (QSqlDatabase::drivers().contains("QODBC"))
     {
+        m_strlastError = "No error";
         bRet = true;
     }
     else
     {
+        m_strlastError = "Database driver QODBC not loaded";
         qCritical() << "Database driver QODBC not loaded";
     }
 
@@ -41,17 +43,23 @@ bool dBConnection::initDb(bool p_bReadOnly)
 
     if (db.open())
     {
+        m_strlastError = "No error";
         m_bInitialized = true;
     }
     else
     {
         m_bInitialized = false;
+        m_strlastError = db.lastError().text();
         qCritical() << "DbError: " << db.lastError();
-        db = QSqlDatabase();
         QSqlDatabase::removeDatabase(QString("ConnMG"));
     }
 
     //    connectionWidget->refresh();
 
     return m_bInitialized;
+}
+
+QString& dBConnection::getLastError()
+{
+    return m_strlastError;
 }
