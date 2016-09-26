@@ -15,47 +15,60 @@ Item {
         anchors.fill: parent
 //        opacity: 1 - backendHelper.opacity
 
-        Column
+        Grid
         {
+            columns: 2
             anchors.verticalCenter: parent.verticalCenter
+            spacing: 20
 
-            Row
-            {
-                spacing: 30
-                Text {
-                    id: eventYear
-                    width: 100
-                    text: qsTr("Anno")
-                    font.pointSize: 15
-                }
-
-                TextField {
-                    id: txtYear
-                    width: 200
-                    activeFocusOnPress: true
-                    style:textEditMGStyle
-                    placeholderText: "YYYY"
-                    font.pointSize: 15
-                }
+            // Row 1
+            Text {
+                id: eventYear
+                width: 100
+                text: qsTr("Anno")
+                font.pointSize: 15
             }
 
-            Row
-            {
-                Text {
-                    id: eventName
-                    width: 100
-                    text: qsTr("Nome")
-                    font.pointSize: 15
-                }
+            TextField {
+                id: txtYear
+                width: 200
+                activeFocusOnPress: true
+                style:textEditMGStyle
+                placeholderText: "YYYY"
+                font.pointSize: 15
+            }
 
-                TextField {
-                    id: txtName
-                    width: 400
-                    activeFocusOnPress: true
-                    style:textEditMGStyle
-                    placeholderText: "Memorial.."
-                    font.pointSize: 15
-                }
+
+            // Row 2
+            Text {
+                id: eventName
+                width: 100
+                text: qsTr("Nome")
+                font.pointSize: 15
+            }
+
+            TextField {
+                id: txtName
+                width: 400
+                activeFocusOnPress: true
+                style:textEditMGStyle
+                placeholderText: "Memorial.."
+                font.pointSize: 15
+            }
+
+            // Row 3
+            Text {
+                id: idCreatePdf
+                width: 100
+                text: qsTr("Classifiche")
+                font.pointSize: 15
+            }
+
+            StyleMGPushButton {
+                id:btnCreatePdf
+                objectName: "btnCreatePdf"
+                width: 100
+                buttonText: "Crea PDF"
             }
         }
     }

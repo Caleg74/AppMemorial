@@ -5,6 +5,7 @@
 #include <QQmlApplicationEngine>
 #include "gymnastsortfilterproxymodel.h"
 #include "comboboxmodel.h"
+#include "createpdf.h"
 
 class CoreApplication : public QObject
 {
@@ -30,6 +31,8 @@ private:
     GymnastSortFilterProxyModel* m_qSortProxySelectedGymnast;
 
     ComboBoxModel m_pApparatusCbbModel;
+
+    CreatePdf m_cPdf;
 };
 
 #endif // COREAPPLICATION_H

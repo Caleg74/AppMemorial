@@ -1,6 +1,6 @@
 TEMPLATE = app
 
-QT += sql qml quick widgets
+QT += sql qml quick widgets printsupport
 CONFIG += c++11
 
 SOURCES += \
@@ -20,7 +20,8 @@ SOURCES += \
     src/coreapplication.cpp \
     src/dbinterface.cpp \
     src/gymnastsortfilterproxymodel.cpp \
-    src/saveforcescore.cpp
+    src/saveforcescore.cpp \
+    src/createpdf.cpp
 
 HEADERS += \
     ../MGCommon/src/db/dbconnection.h \
@@ -38,7 +39,8 @@ HEADERS += \
     src/coreapplication.h \
     src/dbinterface.h \
     src/gymnastsortfilterproxymodel.h \
-    src/saveforcescore.h
+    src/saveforcescore.h \
+    src/createpdf.h
 
 
 INCLUDEPATH += \

@@ -11,6 +11,7 @@
 CoreApplication::CoreApplication(QObject *parent)
     : QObject(parent)
     , m_pAppEngine(NULL)
+    , m_cPdf()
 {
 
 }
@@ -93,6 +94,13 @@ void CoreApplication::Connect()
     {
         connect(cbbGymnast, SIGNAL(selectedTextChanged(QString)),
                 this, SLOT(onGymnastChanged(QString)));
+    }
+
+    QObject* createPdfBtn = m_pAppEngine->rootObjects().first()->findChild<QObject*>("btnCreatePdf");
+    if (createPdfBtn)
+    {
+        connect(createPdfBtn, SIGNAL(clicked()),
+                &m_cPdf, SLOT(Print()));
     }
 }
 
