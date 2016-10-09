@@ -67,12 +67,16 @@ void CreatePdf::Print()
 void CreatePdf::PrintMenAllround(bool p_bHFImages)
 {
     QTextDocument doc;
-
     QFile file("../MGServer/pdf/TestHtmlMen.html");
     if(!file.open(QIODevice::ReadOnly)) {
         qDebug() << "Unable to open file " << file.errorString();
     }
     QTextStream strLocalText(&file);
+
+//    QWebView web;
+//    web.setHtml(strLocalText);
+//    web.print(&printer);
+
     QTextCursor cur(&doc);
 //    cur.movePosition(QTextCursor::Start);
 //    cur.insertText("Ciao!");

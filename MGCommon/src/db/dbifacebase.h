@@ -11,7 +11,7 @@ public:
     enum NationInfo
     {
         NI_Nicename,
-        NI_Iso3Name,
+        NI_IocName,
         NI_IsoName
     };
 

@@ -35,15 +35,16 @@ Item {
                 anchors.right: totId.left
             }
 
-            TotalScoreItem {
+            ScoreItem {
                 id: totId
+                startScore: StartScore_Total  // roleName
                 finalScore: FinalScore_Total  // roleName
                 fontSize: parent.fontSize
                 width: parent.apparatusWidth
                 anchors.right: vaultId.left
             }
 
-            ApparatusScoreItem {
+            ScoreItem {
                 id: vaultId
                 startScore: StartScore_Vault  // roleName
                 finalScore: FinalScore_Vault  // roleName
@@ -52,7 +53,7 @@ Item {
                 anchors.right: unevBarsId.left
             }
 
-            ApparatusScoreItem {
+            ScoreItem {
                 id: unevBarsId
                 startScore: StartScore_UnBars  // roleName
                 finalScore: FinalScore_UnBars  // roleName
@@ -61,7 +62,7 @@ Item {
                 anchors.right: balanceBId.left
             }
 
-            ApparatusScoreItem {
+            ScoreItem {
                 id: balanceBId
                 startScore: StartScore_BalBeam  // roleName
                 finalScore: FinalScore_BalBeam  // roleName
@@ -70,7 +71,7 @@ Item {
                 anchors.right: floorId.left
             }
 
-            ApparatusScoreItem {
+            ScoreItem {
                 id: floorId
                 startScore: StartScore_Floor  // roleName
                 finalScore: FinalScore_Floor  // roleName

@@ -12,7 +12,9 @@ class ApparatusList : public QObject
 public:
     enum EApparatusMen
     {
-        AMFloor,
+        AMTotalScore,
+        AMFirstApparatus,
+        AMFloor = AMFirstApparatus,
         AMPommelHores,
         AMRings,
         AMVault,
@@ -23,7 +25,9 @@ public:
 
     enum EApparatusWomen
     {
-        AWVault,
+        AWTotalScore,
+        AWFirstApparatus,
+        AWVault = AWFirstApparatus,
         AWUnevenBars,
         AWBalanceBeam,
         AWFloor,

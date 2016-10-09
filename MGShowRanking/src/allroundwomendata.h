@@ -24,10 +24,10 @@ public:
     QString getRank() const;
     QString getNameFull() const;
     QString getImagePath() const;
-    void setTotalScore(float p_fTotScore);
-    QString getTotalScore() const;
+
     void setStartScore(ApparatusList::EApparatusWomen p_eApparatus, float p_fScore);
     QString getStartScore(ApparatusList::EApparatusWomen p_eApparatus) const;
+
     void setFinalScore(ApparatusList::EApparatusWomen p_eApparatus, float p_fScore);
     QString getFinalScore(ApparatusList::EApparatusWomen p_eApparatus) const;
 
@@ -46,7 +46,6 @@ private:
     int m_iRank;
     QString m_nameFull;
     QString m_imagePath;
-    float m_fTotalScore;
     SScore m_aiScore[ApparatusList::AWApparatusMax];
 };
 

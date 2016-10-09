@@ -71,6 +71,8 @@ float dbInterface::getStartScore(const int p_iAthleteId, const int p_iApparatusI
 
         while (query.next())
         {
+//            qDebug() << query.value(0).typeName()
+//                    << ", " << query.value(0).toString();
             fScore = query.value(0).toFloat();
         }
 

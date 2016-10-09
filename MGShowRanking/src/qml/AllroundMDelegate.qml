@@ -35,15 +35,17 @@ Item {
                 anchors.right: totId.left
             }
 
-            TotalScoreItem {
+            ScoreItem {
                 id: totId
                 finalScore: FinalScore_Total  // roleName
+                startScore: StartScore_Total  // roleName
                 fontSize: parent.fontSize
+                fontBold: true
                 width: parent.apparatusWidth
                 anchors.right: floorId.left
             }
 
-            ApparatusScoreItem {
+            ScoreItem {
                 id: floorId
                 startScore: StartScore_Floor  // roleName
                 finalScore: FinalScore_Floor  // roleName
@@ -52,7 +54,7 @@ Item {
                 anchors.right: phorseId.left
             }
 
-            ApparatusScoreItem {
+            ScoreItem {
                 id: phorseId
                 startScore: StartScore_PHorse  // roleName
                 finalScore: FinalScore_PHorse  // roleName
@@ -61,7 +63,7 @@ Item {
                 anchors.right: ringsId.left
             }
 
-            ApparatusScoreItem {
+            ScoreItem {
                 id: ringsId
                 startScore: StartScore_Rings  // roleName
                 finalScore: FinalScore_Rings  // roleName
@@ -70,7 +72,7 @@ Item {
                 anchors.right: vaultId.left
             }
 
-            ApparatusScoreItem {
+            ScoreItem {
                 id: vaultId
                 startScore: StartScore_Vault  // roleName
                 finalScore: FinalScore_Vault  // roleName
@@ -79,7 +81,7 @@ Item {
                 anchors.right: pbarsId.left
             }
 
-            ApparatusScoreItem {
+            ScoreItem {
                 id: pbarsId
                 startScore: StartScore_ParallelBars  // roleName
                 finalScore: FinalScore_ParallelBars  // roleName
@@ -88,7 +90,7 @@ Item {
                 anchors.right: hbarId.left
             }
 
-            ApparatusScoreItem {
+            ScoreItem {
                 id: hbarId
                 startScore: StartScore_HBar  // roleName
                 finalScore: FinalScore_HBar  // roleName

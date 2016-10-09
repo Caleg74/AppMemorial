@@ -47,7 +47,6 @@ AllroundWomenData::AllroundWomenData(const int p_iAthleteId,
     , m_iRank(0)
     , m_nameFull(fullName)
     , m_imagePath(imagePath)
-    , m_fTotalScore(0)
 {
     for (int i=0; i<ApparatusList::AWApparatusMax; i++)
     {
@@ -81,16 +80,6 @@ QString AllroundWomenData::getImagePath() const
     return m_imagePath;
 }
 
-void AllroundWomenData::setTotalScore(float p_fTotScore)
-{
-    m_fTotalScore = p_fTotScore;
-}
-
-QString AllroundWomenData::getTotalScore() const
-{
-    return QString::number(m_fTotalScore, 'f', 3);
-}
-
 void AllroundWomenData::setStartScore(ApparatusList::EApparatusWomen p_eApparatus, float p_fScore)
 {
     m_aiScore[p_eApparatus].StartScore = p_fScore;
@@ -113,13 +102,16 @@ QString AllroundWomenData::getFinalScore(ApparatusList::EApparatusWomen p_eAppar
 
 void AllroundWomenData::CalculateTotalScore()
 {
+    float fStartTot = 0;
     float fTot = 0;
-    for (int i=0; i<ApparatusList::AWApparatusMax; i++)
+    for (int i=ApparatusList::AWFirstApparatus; i<ApparatusList::AWApparatusMax; i++)
     {
+        fStartTot += m_aiScore[i].StartScore;
         fTot += m_aiScore[i].FinalScore;
     }
 
-    m_fTotalScore = fTot;
+    m_aiScore[ApparatusList::AWTotalScore].StartScore = fStartTot;
+    m_aiScore[ApparatusList::AWTotalScore].FinalScore = fTot;
 }
 
 bool AllroundWomenData::operator<(const AllroundWomenData other) const
@@ -129,17 +121,17 @@ bool AllroundWomenData::operator<(const AllroundWomenData other) const
     // For this reason the total score must be calculated prior to this point
 
     // each return value is ! (inverted), since the sorting is not ascending but descending
-    if (m_fTotalScore < other.m_fTotalScore)
+    if (m_aiScore[ApparatusList::AWTotalScore].FinalScore < other.m_aiScore[ApparatusList::AWTotalScore].FinalScore)
     {
         return !true;
     }
-    else if (m_fTotalScore == other.m_fTotalScore)
+    else if (m_aiScore[ApparatusList::AWTotalScore].FinalScore == other.m_aiScore[ApparatusList::AWTotalScore].FinalScore)
     {
-        // look for the highest note between the 2
+        // 2nd criteria: look for the highest note between the 2
         QList<int> scoresThis;
         QList<int> scoresOther;
 
-        for (int i=0; i<ApparatusList::AWApparatusMax; i++)
+        for (int i=ApparatusList::AWFirstApparatus; i<ApparatusList::AWApparatusMax; i++)
         {
             scoresThis << m_aiScore[i].FinalScore;
             scoresOther << other.m_aiScore[i].FinalScore;
@@ -148,14 +140,20 @@ bool AllroundWomenData::operator<(const AllroundWomenData other) const
         qSort(scoresThis);
         qSort(scoresOther);
 
-        for (int i=ApparatusList::AWApparatusMax-1; i!= 0; i--)
+        for (int i=ApparatusList::AWApparatusMax-1; i!=ApparatusList::AWFirstApparatus; i--)
         {
-            if (scoresThis.at(i) > scoresOther.at(i))
+            if (scoresThis.at(i-ApparatusList::AWFirstApparatus) > scoresOther.at(i-ApparatusList::AWFirstApparatus))
                 return !false;
-            else if (scoresThis.at(i) < scoresOther.at(i))
+            else if (scoresThis.at(i-ApparatusList::AWFirstApparatus) < scoresOther.at(i-ApparatusList::AWFirstApparatus))
                 return !true;
             // else continue and compare the next score
         }
+
+        // 3rd criteria: the smallest start score had less "penalties"; therefore, it will have a higher ranking
+        if (m_aiScore[ApparatusList::AWTotalScore].StartScore > other.m_aiScore[ApparatusList::AWTotalScore].StartScore)
+            return !true;
+        else
+            return !false;
 
         // at this pointit's probably everything = 0s...
         // sort alphabetically
@@ -186,7 +184,7 @@ QDebug &operator<<(QDebug &stream, const AllroundWomenData &obj)
 {
     stream << "{" << obj.m_nameFull << ", ";
     stream << obj.m_iRank << ", ";
-    stream << obj.m_fTotalScore << "}\n";
+    stream << obj.m_aiScore[ApparatusList::AWTotalScore].FinalScore << "}\n";
 
     return stream;
 }

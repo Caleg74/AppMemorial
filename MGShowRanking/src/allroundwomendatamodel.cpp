@@ -51,7 +51,7 @@ void AllroundWomenDataModel::updateScores()
 
     for (iter = m_rankingList.begin(); iter != m_rankingList.end(); ++iter)
     {
-        for (int apparatus = 0; apparatus < ApparatusList::AWApparatusMax; apparatus++)
+        for (int apparatus = ApparatusList::AWFirstApparatus; apparatus < ApparatusList::AWApparatusMax; apparatus++)
         {
             int iAthleteId = iter->getAthleteId();
             int iAppId = ApparatusList::Instance()->getApparatusId((ApparatusList::EApparatusWomen)apparatus);
@@ -127,8 +127,10 @@ QVariant AllroundWomenDataModel::data(const QModelIndex & index, int role) const
         return gymnast.getNameFull();
     else if (role == FlagImageRole)
         return gymnast.getImagePath();
+    else if (role == StartScoreTotalRole)
+        return gymnast.getStartScore(ApparatusList::AWTotalScore);
     else if (role == FinalScoreTotalRole)
-        return gymnast.getTotalScore();
+        return gymnast.getFinalScore(ApparatusList::AWTotalScore);
     else if (role == StartScoreVaultRole)
         return gymnast.getStartScore(ApparatusList::AWVault);
     else if (role == FinalScoreVaultRole)
@@ -154,6 +156,7 @@ QHash<int, QByteArray> AllroundWomenDataModel::roleNames() const {
     roles[RankRole             ] = "Rank";
     roles[NameFullRole         ] = "NameFull";
     roles[FlagImageRole        ] = "FlagImage";
+    roles[StartScoreTotalRole  ] = "StartScore_Total";
     roles[FinalScoreTotalRole  ] = "FinalScore_Total";
     roles[StartScoreFloorRole  ] = "StartScore_Floor";
     roles[FinalScoreFloorRole  ] = "FinalScore_Floor";

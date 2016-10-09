@@ -13,8 +13,7 @@
         <file alias="ApparatusRankingM.qml">src/qml/ApparatusRankingM.qml</file>
         <file alias="ApparatusRankingW.qml">src/qml/ApparatusRankingW.qml</file>
         <file alias="TableTitleItem.qml">src/qml/TableTitleItem.qml</file>
-        <file alias="ApparatusScoreItem.qml">src/qml/ApparatusScoreItem.qml</file>
-        <file alias="TotalScoreItem.qml">src/qml/TotalScoreItem.qml</file>
+        <file alias="ScoreItem.qml">src/qml/ScoreItem.qml</file>
         <file alias="GymnastPosItem.qml">src/qml/GymnastPosItem.qml</file>
         <file alias="main.qml">src/qml/main.qml</file>
     </qresource>

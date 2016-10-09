@@ -36,7 +36,7 @@ Item {
             }
 
 
-            ApparatusScoreItem {
+            ScoreItem {
                 id: singleScoreMId
                 startScore: StartScore_SingleMW  // roleName
                 finalScore: FinalScore_SingleMW  // roleName

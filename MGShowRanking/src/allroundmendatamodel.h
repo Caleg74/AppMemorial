@@ -9,7 +9,8 @@ class AllroundMenDataModel : public GymnastDataModel
     Q_OBJECT
 public:
     enum AllroundMRoles {
-        FinalScoreTotalRole = LastGeneralRole,
+        StartScoreTotalRole = LastGeneralRole,
+        FinalScoreTotalRole,
         StartScoreFloorRole,
         FinalScoreFloorRole,
         StartScorePHorseRole,

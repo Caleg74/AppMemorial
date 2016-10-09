@@ -112,7 +112,7 @@ bool SingleMWData::operator<(const SingleMWData other) const
     }
     else if (m_sScore.FinalScore == other.m_sScore.FinalScore)
     {
-        if (m_sScore.StartScore < other.m_sScore.StartScore)
+        if (m_sScore.StartScore > other.m_sScore.StartScore)
         {
             return !true;
         }

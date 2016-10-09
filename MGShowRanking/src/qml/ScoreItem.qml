@@ -8,6 +8,7 @@ Item {
     property string startScore;
     property bool separatorVisible: true;
     property int fontSize: 15;
+    property bool fontBold: false;
 
     width: parent.widthh
     height: parent.height
@@ -30,6 +31,7 @@ Item {
                 id: finalScore
                 text: root.finalScore
                 font.pointSize: fontSize
+                font.bold: fontBold
                 color: "#0a3f60"
                 horizontalAlignment: Text.AlignLeft
                 verticalAlignment: Text.AlignVCenter
@@ -43,13 +45,13 @@ Item {
                 id: startScore
                 text: root.startScore // root.startScore !== "0" ? "("+ root.startScore +")" : ""
                 font.pointSize: fontSize * 2 / 3
+                font.bold: false
                 color: "#0a3f60"
                 horizontalAlignment: Text.AlignLeft
                 verticalAlignment: Text.AlignVCenter
-                width: parent.width * 1 /3
+                width: parent.width * 2 /5
                 height: parent.height
                 anchors.right: parent.right
-
             }
         }
         Rectangle {

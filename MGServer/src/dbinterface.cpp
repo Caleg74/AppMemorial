@@ -147,7 +147,7 @@ void dbInterface::retrieveGymnastSubscriptionList(QList<QStringList>& p_strGymnL
                                  << eventId
                                  << queryAthlete.value(1).toString().trimmed()
                                  << queryAthlete.value(2).toString().trimmed()
-                                 << getNationName(queryAthlete.value(3).toInt(), NI_Iso3Name);
+                                 << getNationName(queryAthlete.value(3).toInt(), NI_IocName);
             }
             else
             {

@@ -14,7 +14,6 @@ dbIfaceBase::dbIfaceBase()
 
 void dbIfaceBase::getCountriesList(QStringList* p_pList)
 {
-
     if (m_bInitialized)
     {
         QSqlDatabase db = QSqlDatabase::database("ConnMG");
@@ -27,6 +26,8 @@ void dbIfaceBase::getCountriesList(QStringList* p_pList)
             QString name = query.value(0).toString();
             *p_pList << name;
         }
+
+        qSort(*p_pList);
     }
     else
     {
@@ -45,7 +46,7 @@ void dbIfaceBase::getRegisterdGymnastList(QStringList* p_pList)
         while(query.next())
         {
             // Convert NationId to nicename
-            QString strNationName = getNationName(query.value(3).toInt(), NI_Iso3Name);
+            QString strNationName = getNationName(query.value(3).toInt(), NI_IocName);
 
             *p_pList << query.value(0).toString().trimmed() + ", "
                     + query.value(1).toString().trimmed() + ", ("
@@ -100,7 +101,7 @@ QString dbIfaceBase::getNationName(int p_iNationId, enum NationInfo infoType)
         QSqlDatabase db = QSqlDatabase::database("ConnMG");
         QSqlQuery query(db);
 
-        query.exec("SELECT id,nicename,iso3,iso FROM nations WHERE id = '" + QString::number(p_iNationId, 10) + "'");
+        query.exec("SELECT id,nicename,ioc,iso FROM nations WHERE id = '" + QString::number(p_iNationId, 10) + "'");
 
         if (query.first())
         {
@@ -108,7 +109,7 @@ QString dbIfaceBase::getNationName(int p_iNationId, enum NationInfo infoType)
             switch(infoType)
             {
             case NI_Nicename:  iValNbr = 1; break;
-            case NI_Iso3Name:  iValNbr = 2; break;
+            case NI_IocName:   iValNbr = 2; break;
             case NI_IsoName:   iValNbr = 3; break;
 
             default: qWarning() << "Invalid nation info " << infoType;

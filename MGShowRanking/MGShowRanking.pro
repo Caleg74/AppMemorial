@@ -72,7 +72,6 @@ OTHER_FILES += \
     src/qml/ApparatusRankingM.qml \
     src/qml/ApparatusRankingW.qml \
     src/qml/TableTitleItem.qml \
-    src/qml/ApparatusScoreItem.qml \
-    src/qml/TotalScoreItem.qml \
+    src/qml/ScoreItem.qml \
     src/qml/GymnastPosItem.qml \
     src/qml/main.qml
