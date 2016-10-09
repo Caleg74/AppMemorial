@@ -35,7 +35,7 @@ void AllroundWomenDataModel::RetrieveGymnastList()
             countryFile = "qrc:/flags/" + (p_strGymnList.at(i)[2]).toLower() + ".svg";
             athleteId = dbInterface::Instance()->getGymnastId(firstName, lastName);
 
-            AllroundWomenData cAllroundWomen(athleteId, firstName
+            AthleteData cAllroundWomen(AthleteData::Female, athleteId, firstName
                     + " " + lastName + "  ", countryFile);
 
             beginInsertRows(QModelIndex(), rowCount(), rowCount());
@@ -47,11 +47,11 @@ void AllroundWomenDataModel::RetrieveGymnastList()
 
 void AllroundWomenDataModel::updateScores()
 {
-    QList<AllroundWomenData>::iterator iter;
+    QList<AthleteData>::iterator iter;
 
     for (iter = m_rankingList.begin(); iter != m_rankingList.end(); ++iter)
     {
-        for (int apparatus = ApparatusList::AWFirstApparatus; apparatus < ApparatusList::AWApparatusMax; apparatus++)
+        for (int apparatus = ApparatusList::AGFirstApparatus; apparatus < ApparatusList::AWApparatusMax; apparatus++)
         {
             int iAthleteId = iter->getAthleteId();
             int iAppId = ApparatusList::Instance()->getApparatusId((ApparatusList::EApparatusWomen)apparatus);
@@ -120,7 +120,7 @@ QVariant AllroundWomenDataModel::data(const QModelIndex & index, int role) const
     if (index.row() < 0 || index.row() >= m_rankingList.count())
         return QVariant();
 
-    const AllroundWomenData &gymnast = m_rankingList[index.row()];
+    const AthleteData &gymnast = m_rankingList[index.row()];
     if (role == RankRole)
         return gymnast.getRank();
     else if (role == NameFullRole)
@@ -128,9 +128,9 @@ QVariant AllroundWomenDataModel::data(const QModelIndex & index, int role) const
     else if (role == FlagImageRole)
         return gymnast.getImagePath();
     else if (role == StartScoreTotalRole)
-        return gymnast.getStartScore(ApparatusList::AWTotalScore);
+        return gymnast.getStartScore(ApparatusList::AGTotalScore);
     else if (role == FinalScoreTotalRole)
-        return gymnast.getFinalScore(ApparatusList::AWTotalScore);
+        return gymnast.getFinalScore(ApparatusList::AGTotalScore);
     else if (role == StartScoreVaultRole)
         return gymnast.getStartScore(ApparatusList::AWVault);
     else if (role == FinalScoreVaultRole)
@@ -171,7 +171,7 @@ QHash<int, QByteArray> AllroundWomenDataModel::roleNames() const {
     return roles;
 }
 
-QModelIndex AllroundWomenDataModel::indexFromItem(const AllroundWomenData* item) const
+QModelIndex AllroundWomenDataModel::indexFromItem(const AthleteData* item) const
 {
     Q_ASSERT(item);
     for(int row=0; row<m_rankingList.size(); ++row)
@@ -181,13 +181,13 @@ QModelIndex AllroundWomenDataModel::indexFromItem(const AllroundWomenData* item)
     return QModelIndex();
 }
 
-AllroundWomenData* AllroundWomenDataModel::GetItem(QString& nameFull)
+AthleteData *AllroundWomenDataModel::GetItem(QString& nameFull)
 {
-    QList<AllroundWomenData>::const_iterator iter;
+    QList<AthleteData>::const_iterator iter;
     for (iter = m_rankingList.constBegin(); iter != m_rankingList.constEnd(); ++iter)
     {
         if ((iter)->getNameFull() == nameFull)
-            return (AllroundWomenData*)iter.i->v;
+            return (AthleteData*)iter.i->v;
     }
 
     return NULL;

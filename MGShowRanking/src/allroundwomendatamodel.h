@@ -2,7 +2,7 @@
 #define ALLROUNDWOMENDATAMODEL_H
 
 #include "gymnastdatamodel.h"
-#include "allroundwomendata.h"
+#include "athletedata.h"
 
 class AllroundWomenDataModel : public GymnastDataModel
 {
@@ -45,13 +45,13 @@ protected:
 
 private:
 
-    AllroundWomenData *GetItem(QString& nameFull);
+    AthleteData *GetItem(QString& nameFull);
 
-    QModelIndex indexFromItem( const AllroundWomenData* item) const;
+    QModelIndex indexFromItem(const AthleteData *item) const;
 
     void RetrieveGymnastList();
 
-    QList<AllroundWomenData> m_rankingList;
+    QList<AthleteData> m_rankingList;
 };
 
 #endif // ALLROUNDWOMENDATAMODEL_H

@@ -3,7 +3,7 @@
 
 #include <QAbstractListModel>
 #include <QList>
-#include "allroundmendata.h"
+#include "athletedata.h"
 
 class GymnastDataModel : public QAbstractListModel
 {

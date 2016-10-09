@@ -10,11 +10,16 @@ class ApparatusList : public QObject
 {
     Q_OBJECT
 public:
+
+    enum EApparatusGeneral
+    {
+        AGTotalScore,
+        AGFirstApparatus
+    };
+
     enum EApparatusMen
     {
-        AMTotalScore,
-        AMFirstApparatus,
-        AMFloor = AMFirstApparatus,
+        AMFloor = AGFirstApparatus,
         AMPommelHores,
         AMRings,
         AMVault,
@@ -25,9 +30,7 @@ public:
 
     enum EApparatusWomen
     {
-        AWTotalScore,
-        AWFirstApparatus,
-        AWVault = AWFirstApparatus,
+        AWVault = AGFirstApparatus,
         AWUnevenBars,
         AWBalanceBeam,
         AWFloor,

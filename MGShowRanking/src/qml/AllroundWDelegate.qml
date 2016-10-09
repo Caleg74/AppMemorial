@@ -40,6 +40,7 @@ Item {
                 startScore: StartScore_Total  // roleName
                 finalScore: FinalScore_Total  // roleName
                 fontSize: parent.fontSize
+                fontBold: true
                 width: parent.apparatusWidth
                 anchors.right: vaultId.left
             }

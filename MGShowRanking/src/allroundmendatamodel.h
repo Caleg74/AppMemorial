@@ -2,7 +2,7 @@
 #define ALLROUNDMENDATAMODEL_H
 
 #include "gymnastdatamodel.h"
-#include "allroundmendata.h"
+#include "athletedata.h"
 
 class AllroundMenDataModel : public GymnastDataModel
 {
@@ -50,13 +50,13 @@ protected:
     virtual bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const;
 private:
 
-    AllroundMenData* GetItem(QString& nameFull);
+    AthleteData* GetItem(QString& nameFull);
 
-    QModelIndex indexFromItem( const AllroundMenData* item) const;
+    QModelIndex indexFromItem( const AthleteData* item) const;
 
     void RetrieveGymnastList();
 
-    QList<AllroundMenData> m_rankingList;
+    QList<AthleteData> m_rankingList;
 };
 
 #endif // ALLROUNDMENDATAMODEL_H
