@@ -46,7 +46,7 @@ GymnastData::GymnastData(const QString &firstName,
     : m_firstName(firstName)
     , m_lastName(lastName)
     , m_country(country)
-    , m_sex(sex)
+    , m_gender(sex)
 {
 }
 
@@ -65,9 +65,9 @@ QString GymnastData::Country() const
     return m_country;
 }
 
-QString GymnastData::Sex() const
+QString GymnastData::Gender() const
 {
-    return m_sex;
+    return m_gender;
 }
 
 bool GymnastData::operator<(const GymnastData other) const
@@ -100,7 +100,7 @@ bool operator== (const GymnastData& lhs, const GymnastData& rhs)
     if ( (lhs.FirstName() == rhs.FirstName())
       && (lhs.LastName() == rhs.LastName())
       && (lhs.Country() == rhs.Country())
-      && (lhs.Sex() == rhs.Sex()))
+      && (lhs.Gender() == rhs.Gender()))
     {
         return true;
     }
@@ -114,7 +114,7 @@ QDebug &operator<<(QDebug &stream, const GymnastData &obj)
 {
     stream << "{" << obj.m_firstName << ", ";
     stream << obj.m_lastName << ", ";
-    stream << obj.m_sex << ", ";
+    stream << obj.m_gender << ", ";
     stream << obj.m_country << "}\n";
 
     return stream;

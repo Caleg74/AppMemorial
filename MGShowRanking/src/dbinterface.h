@@ -10,14 +10,6 @@ public:
 
     static dbInterface* Instance();
 
-    int getNationId(QString& p_strNiceName);
-
-    float getStartScore(const int p_iAthleteId, const int p_iApparatusId);
-
-    float getFinalScore(const int p_iAthleteId, const int p_iApparatusId);
-
-    int getForceScore(const int p_iAthleteId, const int p_iApparatusId);
-
 private:
 
     /** Private constructor */

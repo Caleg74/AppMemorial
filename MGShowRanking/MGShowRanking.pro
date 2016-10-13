@@ -12,6 +12,7 @@ SOURCES += \
     ../MGCommon/src/cbbItems/comboboxmodel.cpp \
     ../MGCommon/src/cbbItems/countrylist.cpp \
     ../MGCommon/src/cbbItems/gymnastselectionlist.cpp \
+    ../MGCommon/src/gymnast/athletedata.cpp \
     src/gymnastdatamodel.cpp \
     src/allroundmendatamodel.cpp \
     src/sortfilterproxymodel.cpp \
@@ -20,8 +21,7 @@ SOURCES += \
     src/singlemwdatamodel.cpp \
     src/coreapplication.cpp \
     src/dbinterface.cpp \
-    src/main.cpp \
-    src/athletedata.cpp
+    src/main.cpp
 
 HEADERS += \
     ../MGCommon/src/cbbItems/apparatusdata.h \
@@ -31,6 +31,7 @@ HEADERS += \
     ../MGCommon/src/cbbItems/comboboxmodel.h \
     ../MGCommon/src/cbbItems/countrylist.h \
     ../MGCommon/src/cbbItems/gymnastselectionlist.h \
+    ../MGCommon/src/gymnast/athletedata.h \
     src/gymnastdatamodel.h \
     src/allroundmendatamodel.h \
     src/sortfilterproxymodel.h \
@@ -38,12 +39,12 @@ HEADERS += \
     src/singlemwdata.h \
     src/singlemwdatamodel.h \
     src/coreapplication.h \
-    src/dbinterface.h \
-    src/athletedata.h
+    src/dbinterface.h
 
 INCLUDEPATH += \
     ../MGCommon/src/db \
     ../MGCommon/src/cbbItems \
+    ../MGCommon/src/gymnast \
     src/
 
 RESOURCES += MGShowRanking.qrc

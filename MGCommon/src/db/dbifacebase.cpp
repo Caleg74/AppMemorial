@@ -340,3 +340,113 @@ void dbIfaceBase::getApparatusList(QStringList* p_pList)
         qInfo() << "dbInterface::getApparatusList(): Db not initialized";
     }
 }
+
+float dbIfaceBase::getStartScore(const int p_iAthleteId, const int p_iApparatusId)
+{
+    float fScore = 0.0;
+
+    if (m_bInitialized)
+    {
+        QSqlDatabase db = QSqlDatabase::database("ConnMG");
+        QSqlQuery query(db);
+
+        int iEventId = getCurrentEventId();
+
+         QString strQuery = "SELECT start_score FROM scores WHERE "
+                   " sport_event_id = "   + QString::number(iEventId, 10) +
+                   " AND athlete_id = "   + QString::number(p_iAthleteId, 10)+
+                   " AND apparatus_id = " + QString::number(p_iApparatusId, 10);
+
+         query.exec(strQuery);
+
+        while (query.next())
+        {
+//            qDebug() << query.value(0).typeName()
+//                    << ", " << query.value(0).toString();
+            fScore = query.value(0).toFloat();
+        }
+
+        if (iEventId == 0)
+        {
+            qCritical() << "No Id found for event year: " << m_iCurrentYear;
+        }
+    }
+    else
+    {
+        qInfo() << "dbInterface::getStartScore(): Db not initialized";
+    }
+
+    return fScore;
+}
+
+float dbIfaceBase::getFinalScore(const int p_iAthleteId, const int p_iApparatusId)
+{
+    float fScore = 0.0;
+
+    if (m_bInitialized)
+    {
+        QSqlDatabase db = QSqlDatabase::database("ConnMG");
+        QSqlQuery query(db);
+
+        int iEventId = getCurrentEventId();
+
+        QString strQuery = "SELECT final_score FROM scores WHERE "
+                  " sport_event_id = "   + QString::number(iEventId, 10) +
+                  " AND athlete_id = "   + QString::number(p_iAthleteId, 10)+
+                  " AND apparatus_id = " + QString::number(p_iApparatusId, 10);
+
+        query.exec(strQuery);
+
+        while (query.next())
+        {
+            fScore = query.value(0).toFloat();
+        }
+
+        if (iEventId == 0)
+        {
+            qCritical() << "No Id found for event year: " << m_iCurrentYear;
+        }
+    }
+    else
+    {
+        qInfo() << "dbInterface::getFinalScore(): Db not initialized";
+    }
+
+    return fScore;
+}
+
+int dbIfaceBase::getForceScore(const int p_iAthleteId, const int p_iApparatusId)
+{
+    int iForceScore = 0;
+
+    if (m_bInitialized)
+    {
+        QSqlDatabase db = QSqlDatabase::database("ConnMG");
+        QSqlQuery query(db);
+
+        int iEventId = getCurrentEventId();
+
+        QString strQuery = "SELECT force_score FROM scores WHERE "
+                  " sport_event_id = "   + QString::number(iEventId, 10) +
+                  " AND athlete_id = "   + QString::number(p_iAthleteId, 10)+
+                  " AND apparatus_id = " + QString::number(p_iApparatusId, 10);
+
+        query.exec(strQuery);
+
+        while (query.next())
+        {
+            iForceScore = query.value(0).toInt();
+        }
+
+        if (iEventId == 0)
+        {
+            qCritical() << "No Id found for event year: " << m_iCurrentYear;
+        }
+    }
+    else
+    {
+        qInfo() << "dbInterface::getForceScore(): Db not initialized";
+    }
+
+    return iForceScore;
+}

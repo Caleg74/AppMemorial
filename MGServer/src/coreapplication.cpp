@@ -70,6 +70,7 @@ void CoreApplication::Init(QQmlApplicationEngine& p_qEngine)
 
         ApparatusList::Instance()->Init(p_qEngine, "apparatusModel", &m_pApparatusCbbModel);
 
+        m_cPdf.retriveGymnastList();
     }
 }
 

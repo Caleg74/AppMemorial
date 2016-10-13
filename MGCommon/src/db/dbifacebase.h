@@ -44,6 +44,12 @@ public:
 
     void getApparatusList(QStringList* p_pList);
 
+    float getStartScore(const int p_iAthleteId, const int p_iApparatusId);
+
+    float getFinalScore(const int p_iAthleteId, const int p_iApparatusId);
+
+    int getForceScore(const int p_iAthleteId, const int p_iApparatusId);
+
 protected:
 
     int m_iCurrentYear;

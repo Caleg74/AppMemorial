@@ -21,7 +21,9 @@ SOURCES += \
     src/dbinterface.cpp \
     src/gymnastsortfilterproxymodel.cpp \
     src/saveforcescore.cpp \
-    src/createpdf.cpp
+    src/createpdf.cpp \
+    src/gymnastranking.cpp \
+    ../MGCommon/src/gymnast/athletedata.cpp
 
 HEADERS += \
     ../MGCommon/src/db/dbconnection.h \
@@ -40,13 +42,16 @@ HEADERS += \
     src/dbinterface.h \
     src/gymnastsortfilterproxymodel.h \
     src/saveforcescore.h \
-    src/createpdf.h
+    src/createpdf.h \
+    src/gymnastranking.h \
+    ../MGCommon/src/gymnast/athletedata.h
 
 
 INCLUDEPATH += \
     ../MGCommon/src/db \
     ../MGCommon/src/cbbItems \
     ../MGCommon/src/msgBox \
+    ../MGCommon/src/gymnast \
     src/
 
 OTHER_FILES += \

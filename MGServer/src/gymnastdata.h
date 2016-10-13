@@ -55,7 +55,7 @@ public:
     QString FirstName() const;
     QString LastName() const;
     QString Country() const;
-    QString Sex() const;
+    QString Gender() const;
 
     friend bool operator== (const GymnastData& lhs, const GymnastData& rhs);
 
@@ -69,7 +69,7 @@ private:
     QString m_firstName;
     QString m_lastName;
     QString m_country;
-    QString m_sex;
+    QString m_gender;
 };
 
 

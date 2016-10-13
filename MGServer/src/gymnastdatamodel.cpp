@@ -97,7 +97,7 @@ QVariant GymnastDataModel::data(const QModelIndex & index, int role) const {
     else if (role == CountryRole)
         return gymnast.Country();
     else if (role == SexRole)
-        return gymnast.Sex();
+        return gymnast.Gender();
     return QVariant();
 }
 

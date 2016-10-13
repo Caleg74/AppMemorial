@@ -5,12 +5,15 @@
 #include <QPrinter>
 #include <QTextStream>
 #include <QPainter>
+#include "gymnastranking.h"
 
 class CreatePdf : public QObject
 {
     Q_OBJECT
 public:
     CreatePdf();
+
+    void retriveGymnastList();
 
 public slots:
     void Print();
@@ -37,12 +40,20 @@ private:
      */
     void PrintWomenCitycup(bool p_bHFImages);
 
-//    QTextDocument m_doc;
+    void PrintHeader(bool p_bHFImages, QTextStream& out);
+    void PrintFooter(bool p_bHFImages, QTextStream& out);
+    void PrintMenTableTitle(QTextStream& out);
+    void PrintMenTableBody(QTextStream& out);
+    void PrintWomenTableTitle(QTextStream& out);
+    void PrintWomenTableBody(QTextStream& out);
+
     QTextStream m_textStream;
 
     QPainter m_painter;
 
     QPrinter m_printer;
+
+    GymnastRanking m_cRank;
 };
 
 #endif // CREATEPDF_H
