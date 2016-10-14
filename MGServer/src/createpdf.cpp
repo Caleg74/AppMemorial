@@ -22,60 +22,49 @@ void CreatePdf::Print()
     // 1st update the scores
     m_cRank.updateAllroundScores();
 
-    //-------
-//    QPrinter printer;
-//    printer.setOutputFormat(QPrinter::PdfFormat);
-//    printer.setOutputFileName("/foobar/nonwritable.pdf");
-//    QPainter painter;
-//    if (! painter.begin(&printer)) { // failed to open file
-//        qWarning("failed to open file, is it writable?");
-//        return 1;
-//    }
-//    painter.drawText(10, 10, "Test");
-//    if (! printer.newPage()) {
-//        qWarning("failed in flushing page to disk, disk full?");
-//        return 1;
-//    }
-//    painter.drawText(10, 10, "Test 2");
-//    painter.end();
-    //-----------
+    // print 2 files,with and without header/footer
+    for (int i=0; i<2; i++)
+    {
+        bool bWithLogo = (i==0); // 1st time wizh logo
 
-    QString strFileName = "../MGServer/pdf/MemorialGander2016.pdf";
-    m_printer.setOutputFormat(QPrinter::PdfFormat);
-    m_printer.setPaperSize(QPrinter::A4);
-    m_printer.setOutputFileName(strFileName);
+        QString strFileName;
+        if (bWithLogo)
+            strFileName= "../MGServer/pdf/MemorialGander2016.pdf";
+        else
+            strFileName= "../MGServer/pdf/MemorialGander2016_NoImage.pdf";
 
-    if (! m_painter.begin(&m_printer)) { // failed to open file
-        qWarning("failed to open file, is it writable?");
-        return;
+        m_printer.setOutputFormat(QPrinter::PdfFormat);
+        m_printer.setPaperSize(QPrinter::A4);
+        m_printer.setOutputFileName(strFileName);
+
+        if (! m_painter.begin(&m_printer)) { // failed to open file
+            qWarning("failed to open file, is it writable?");
+            return;
+        }
+
+       PrintMenAllround(bWithLogo);
+
+        if (! m_printer.newPage()) {
+            qWarning("failed in flushing page to disk, disk full?");
+        }
+
+        PrintWomenAllround(bWithLogo);
+
+        if (! m_printer.newPage()) {
+            qWarning("failed in flushing page to disk, disk full?");
+        }
+
+        m_cRank.updateSingleScores(ApparatusList::AMParallelBars);
+        PrintMenCityTrophy(bWithLogo);
+        if (! m_printer.newPage()) {
+            qWarning("failed in flushing page to disk, disk full?");
+        }
+
+        m_cRank.updateSingleScores(ApparatusList::AWFloor);
+        PrintWomenCityTrophy(bWithLogo);
+
+        m_painter.end();
     }
-
-   PrintMenAllround(false);
-
-    if (! m_printer.newPage()) {
-        qWarning("failed in flushing page to disk, disk full?");
-    }
-
-    PrintWomenAllround(false);
-
-    if (! m_printer.newPage()) {
-        qWarning("failed in flushing page to disk, disk full?");
-    }
-
-    m_cRank.updateSingleScores(ApparatusList::AMParallelBars);
-    PrintMenCityTrophy(false);
-    if (! m_printer.newPage()) {
-        qWarning("failed in flushing page to disk, disk full?");
-    }
-
-    m_cRank.updateSingleScores(ApparatusList::AWFloor);
-    PrintWomenCityTrophy(false);
-
-//    m_doc.setHtml(m_textStream.readAll());
-//    m_doc.setPageSize(m_printer.pageRect().size()); // This is necessary if you want to hide the page number
-
-    m_painter.end();
-//    m_doc.print(&m_printer);
 }
 
 void CreatePdf::PrintMenAllround(bool p_bHFImages)
@@ -94,12 +83,12 @@ void CreatePdf::PrintMenAllround(bool p_bHFImages)
     PrintHeader(p_bHFImages, out);
 
 
-    //    QWebView web;
-//    web.setHtml(strLocalText);
-//    web.print(&printer);
+//    //    QWebView web;
+////    web.setHtml(strLocalText);
+////    web.print(&printer);
 
-//    cur.movePosition(QTextCursor::Start);
-//    cur.insertText("Ciao!");
+////    cur.movePosition(QTextCursor::Start);
+////    cur.insertText("Ciao!");
 
     PrintMenTableTitle(out);
 
@@ -246,6 +235,8 @@ void CreatePdf::PrintHeader(bool p_bHFImages, QTextStream& out)
     QTextStream strHeader(&fileIn);
     out << strHeader.readAll(); // copy to output file
     fileIn.close();
+
+    AddHeader(p_bHFImages);
 }
 
 void CreatePdf::PrintFooter(bool p_bHFImages, QTextStream& out)
@@ -263,6 +254,8 @@ void CreatePdf::PrintFooter(bool p_bHFImages, QTextStream& out)
     QTextStream strFooter(&fileIn);
     out << strFooter.readAll();
     fileIn.close();
+
+    AddFooter(p_bHFImages);
 }
 
 void CreatePdf::PrintMenTableTitle(QTextStream& out)
@@ -483,5 +476,27 @@ void CreatePdf::PrintSingleWApparatusTableBody(QTextStream& out)
                 <<")</small></td> <!-- Single appparatus -->" << endl;
             out << "\t</tr>" << endl;
         }
+    }
+}
+
+void CreatePdf::AddHeader(bool p_bHFImages)
+{
+    if (p_bHFImages)
+    {
+        QRectF target(20.0, 0.0, 496.0/3, 223.0/3);
+        QRectF source(0.0, 0.0, 496.0, 223.0);
+        QImage image = QImage("../MGServer/pdf/IN_Header_LogoMG.png");
+        m_painter.drawImage(target, image, source);  // Paint the mask onto the image
+    }
+}
+
+void CreatePdf::AddFooter(bool p_bHFImages)
+{
+    if (p_bHFImages)
+    {
+        QRectF target(20.0, 750.0, 2560.0/5, 286.0/5);
+        QRectF source(0.0, 0.0, 2560.0, 286.0);
+        QImage image = QImage("../MGServer/pdf/IN_Footer_Sponsors.png");
+        m_painter.drawImage(target, image, source);  // Paint the mask onto the image
     }
 }

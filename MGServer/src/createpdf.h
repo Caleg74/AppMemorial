@@ -51,6 +51,9 @@ private:
     void PrintSingleWApparatusTableTitle(QTextStream& out);
     void PrintSingleWApparatusTableBody(QTextStream& out);
 
+    void AddHeader(bool p_bHFImages);
+    void AddFooter(bool p_bHFImages);
+
     QTextStream m_textStream;
 
     QPainter m_painter;
