@@ -198,8 +198,8 @@ bool AthleteData::operator<(const AthleteData other) const
     else if (m_vecScore[ApparatusList::AGTotalScore].FinalScore == other.m_vecScore[ApparatusList::AGTotalScore].FinalScore)
     {
         // 2nd criteria: look for the highest note between the 2
-        QList<int> scoresThis;
-        QList<int> scoresOther;
+        QList<float> scoresThis;
+        QList<float> scoresOther;
 
         for (int i=ApparatusList::AGFirstApparatus; i<iApparatusMax; i++)
         {
