@@ -27,7 +27,7 @@ public:
 
     QString getGender(int p_iAthleteId);
 
-    void retrieveRegisteredGymnastList(QList<QStringList> &p_strGymnList, NationInfo p_eNationType);
+    void retrieveRegisteredGymnastList(QList<QStringList> &p_strGymnList);
 
     int getNationId(QString& p_strNiceName);
 

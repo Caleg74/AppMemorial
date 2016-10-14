@@ -41,11 +41,13 @@
 #include <QDebug>
 
 SingleMWData::SingleMWData(const int p_iAthleteId,
-                                 const QString& fullName,
-                                 const QString& imagePath)
+                           const QString& fullName,
+                           const QString &nation,
+                           const QString& imagePath)
     : m_iAthleteId(p_iAthleteId)
     , m_iRank(0)
     , m_nameFull(fullName)
+    , m_nation(nation)
     , m_imagePath(imagePath)
 {
     m_sScore.StartScore = 0;
@@ -73,6 +75,10 @@ QString SingleMWData::getNameFull() const
     return m_nameFull;
 }
 
+QString SingleMWData::getNation() const
+{
+    return m_nation;
+}
 QString SingleMWData::getImagePath() const
 {
     return m_imagePath;

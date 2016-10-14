@@ -13,11 +13,11 @@ SOURCES += \
     ../MGCommon/src/cbbItems/countrylist.cpp \
     ../MGCommon/src/cbbItems/gymnastselectionlist.cpp \
     ../MGCommon/src/gymnast/athletedata.cpp \
+    ../MGCommon/src/gymnast/singlemwdata.cpp \
     src/gymnastdatamodel.cpp \
     src/allroundmendatamodel.cpp \
     src/sortfilterproxymodel.cpp \
     src/allroundwomendatamodel.cpp \
-    src/singlemwdata.cpp \
     src/singlemwdatamodel.cpp \
     src/coreapplication.cpp \
     src/dbinterface.cpp \
@@ -32,11 +32,11 @@ HEADERS += \
     ../MGCommon/src/cbbItems/countrylist.h \
     ../MGCommon/src/cbbItems/gymnastselectionlist.h \
     ../MGCommon/src/gymnast/athletedata.h \
+    ../MGCommon/src/gymnast/singlemwdata.h \
     src/gymnastdatamodel.h \
     src/allroundmendatamodel.h \
     src/sortfilterproxymodel.h \
     src/allroundwomendatamodel.h \
-    src/singlemwdata.h \
     src/singlemwdatamodel.h \
     src/coreapplication.h \
     src/dbinterface.h

@@ -20,7 +20,7 @@ void CreatePdf::Print()
 {
     retriveGymnastList();
     // 1st update the scores
-    m_cRank.updateScores();
+    m_cRank.updateAllroundScores();
 
     //-------
 //    QPrinter printer;
@@ -58,13 +58,18 @@ void CreatePdf::Print()
 
     PrintWomenAllround(false);
 
-//    PrintWomenAllround(false);
-//    m_printer.newPage();
+    if (! m_printer.newPage()) {
+        qWarning("failed in flushing page to disk, disk full?");
+    }
 
-//    PrintMenCitycup(false);
-//    m_printer.newPage();
+    m_cRank.updateSingleScores(ApparatusList::AMParallelBars);
+    PrintMenCityTrophy(false);
+    if (! m_printer.newPage()) {
+        qWarning("failed in flushing page to disk, disk full?");
+    }
 
-//    PrintWomenCitycup(false);
+    m_cRank.updateSingleScores(ApparatusList::AWFloor);
+    PrintWomenCityTrophy(false);
 
 //    m_doc.setHtml(m_textStream.readAll());
 //    m_doc.setPageSize(m_printer.pageRect().size()); // This is necessary if you want to hide the page number
@@ -156,15 +161,73 @@ void CreatePdf::PrintWomenAllround(bool p_bHFImages)
     doc.drawContents(&m_painter);
 }
 
-void CreatePdf::PrintMenCitycup(bool p_bHFImages)
+void CreatePdf::PrintMenCityTrophy(bool p_bHFImages)
 {
+    QTextDocument doc;
+    QTextCursor cur(&doc);
 
+    if (QFile::exists("../MGServer/pdf/OUT_MenCityTrophy.html"))
+        QFile::remove("../MGServer/pdf/OUT_MenCityTrophy.html");
+    QFile fileOut("../MGServer/pdf/OUT_MenCityTrophy.html");
+    if(!fileOut.open(QIODevice::ReadWrite)) {
+        qDebug() << "Unable to open file " << fileOut.errorString();
+    }
+    QTextStream out(&fileOut);
+
+    PrintHeader(p_bHFImages, out);
+
+    PrintSingleMApparatusTableTitle(out);
+
+    PrintSingleMApparatusTableBody(out);
+
+    PrintFooter(p_bHFImages, out);
+
+    // Read the output files and import it as html document
+    fileOut.close();
+    QFile fileIn("../MGServer/pdf/OUT_MenCityTrophy.html");
+    if(!fileIn.open(QIODevice::ReadOnly)) {
+        qDebug() << "Unable to open file " << fileIn.errorString();
+    }
+    QTextStream strReadOutCompleteFile(&fileIn);
+    cur.insertHtml(strReadOutCompleteFile.readAll());
+    fileIn.close();
+
+    doc.drawContents(&m_painter);
 }
 
 
-void CreatePdf::PrintWomenCitycup(bool p_bHFImages)
+void CreatePdf::PrintWomenCityTrophy(bool p_bHFImages)
 {
+    QTextDocument doc;
+    QTextCursor cur(&doc);
 
+    if (QFile::exists("../MGServer/pdf/OUT_WomenCityTrophy.html"))
+        QFile::remove("../MGServer/pdf/OUT_WomenCityTrophy.html");
+    QFile fileOut("../MGServer/pdf/OUT_WomenCityTrophy.html");
+    if(!fileOut.open(QIODevice::ReadWrite)) {
+        qDebug() << "Unable to open file " << fileOut.errorString();
+    }
+    QTextStream out(&fileOut);
+
+    PrintHeader(p_bHFImages, out);
+
+    PrintSingleWApparatusTableTitle(out);
+
+    PrintSingleWApparatusTableBody(out);
+
+    PrintFooter(p_bHFImages, out);
+
+    // Read the output files and import it as html document
+    fileOut.close();
+    QFile fileIn("../MGServer/pdf/OUT_WomenCityTrophy.html");
+    if(!fileIn.open(QIODevice::ReadOnly)) {
+        qDebug() << "Unable to open file " << fileIn.errorString();
+    }
+    QTextStream strReadOutCompleteFile(&fileIn);
+    cur.insertHtml(strReadOutCompleteFile.readAll());
+    fileIn.close();
+
+    doc.drawContents(&m_painter);
 }
 
 void CreatePdf::PrintHeader(bool p_bHFImages, QTextStream& out)
@@ -215,7 +278,7 @@ void CreatePdf::PrintMenTableTitle(QTextStream& out)
 
 void CreatePdf::PrintMenTableBody(QTextStream& out)
 {
-    QList<AthleteData>* pMenList = m_cRank.getMenList();
+    QList<AthleteData>* pMenList = m_cRank.getAllroundMenList();
 
     for (int i=0; i<pMenList->size(); i++)
     {
@@ -224,7 +287,9 @@ void CreatePdf::PrintMenTableBody(QTextStream& out)
             << pMenList->at(i).getRank()
             <<"</th> <!-- Rank -->" << endl;
         out << "\t  <th rowspan=\"2\" valign=\"middle\" align=\"left\" width=\"150\">"
-            << pMenList->at(i).getNameFull() << "</th>" << endl;
+            << pMenList->at(i).getNameFull()
+            << "(" << pMenList->at(i).getNationShort() << ")"
+            << "</th>" << endl;
         out << "\t  <th align=\"center\">"
             << pMenList->at(i).getFinalScore(ApparatusList::AGTotalScore)
             <<"</th> <!-- Total -->" << endl;
@@ -287,7 +352,7 @@ void CreatePdf::PrintWomenTableTitle(QTextStream& out)
 
 void CreatePdf::PrintWomenTableBody(QTextStream& out)
 {
-    QList<AthleteData>* pWomenList = m_cRank.getWomenList();
+    QList<AthleteData>* pWomenList = m_cRank.getAllroundWomenList();
 
     for (int i=0; i<pWomenList->size(); i++)
     {
@@ -296,7 +361,9 @@ void CreatePdf::PrintWomenTableBody(QTextStream& out)
             << pWomenList->at(i).getRank()
             <<"</th> <!-- Rank -->" << endl;
         out << "\t  <th rowspan=\"2\" valign=\"middle\" align=\"left\" width=\"150\">"
-            << pWomenList->at(i).getNameFull() << "</th>" << endl;
+            << pWomenList->at(i).getNameFull()
+            << "(" << pWomenList->at(i).getNationShort() << ")"
+            << "</th>" << endl;
         out << "\t  <th align=\"center\">"
             << pWomenList->at(i).getFinalScore(ApparatusList::AGTotalScore)
             <<"</th> <!-- Total -->" << endl;
@@ -332,5 +399,89 @@ void CreatePdf::PrintWomenTableBody(QTextStream& out)
             <<")</small></td>  <!-- Floor-->" << endl;
 
         out << "\t</tr>" << endl;
+    }
+}
+
+void CreatePdf::PrintSingleMApparatusTableTitle(QTextStream& out)
+{
+    QFile fileIn("../MGServer/pdf/IN_MenCityTrophyTableTitle.html");
+    if(!fileIn.open(QIODevice::ReadOnly)) {
+        qDebug() << "Unable to open file " << fileIn.errorString();
+    }
+    QTextStream strTableTitle(&fileIn);
+    out << strTableTitle.readAll(); // copy to output file
+    fileIn.close();
+}
+
+void CreatePdf::PrintSingleMApparatusTableBody(QTextStream& out)
+{
+    QList<SingleMWData>* pMenList = m_cRank.getSingleMenList();
+
+    for (int i=0; i<pMenList->size(); i++)
+    {
+        // Skip if final score is 0
+        if (pMenList->at(i).getFinalScore() != "0.000")
+        {
+            out << "\t<tr>" << endl;
+            out << "\t  <th rowspan=\"2\" valign=\"middle\">"
+                << pMenList->at(i).getRank()
+                <<"</th> <!-- Rank -->" << endl;
+            out << "\t  <th rowspan=\"2\" valign=\"middle\" align=\"left\" width=\"180\">"
+                << pMenList->at(i).getNameFull()
+                << "(" << pMenList->at(i).getNation() << ")"
+                << "</th>" << endl;
+            out << "\t  <th align=\"center\">"
+                << pMenList->at(i).getFinalScore()
+                <<"</th> <!-- Single appparatus -->" << endl;
+            out << "\t</tr>" << endl;
+
+            out << "\t<tr>" << endl;
+            out << "\t  <td align=\"center\"><small>("
+                << pMenList->at(i).getStartScore()
+                <<")</small></td> <!-- Single appparatus -->" << endl;
+            out << "\t</tr>" << endl;
+        }
+    }
+}
+
+void CreatePdf::PrintSingleWApparatusTableTitle(QTextStream& out)
+{
+    QFile fileIn("../MGServer/pdf/IN_WomenCityTrophyTableTitle.html");
+    if(!fileIn.open(QIODevice::ReadOnly)) {
+        qDebug() << "Unable to open file " << fileIn.errorString();
+    }
+    QTextStream strTableTitle(&fileIn);
+    out << strTableTitle.readAll(); // copy to output file
+    fileIn.close();
+}
+
+void CreatePdf::PrintSingleWApparatusTableBody(QTextStream& out)
+{
+    QList<SingleMWData>* pWomenList = m_cRank.getSingleWomenList();
+
+    for (int i=0; i<pWomenList->size(); i++)
+    {
+        // Skip if final score is 0
+        if (pWomenList->at(i).getFinalScore() != "0.000")
+        {
+            out << "\t<tr>" << endl;
+            out << "\t  <th rowspan=\"2\" valign=\"middle\">"
+                << pWomenList->at(i).getRank()
+                <<"</th> <!-- Rank -->" << endl;
+            out << "\t  <th rowspan=\"2\" valign=\"middle\" align=\"left\" width=\"180\">"
+                << pWomenList->at(i).getNameFull()
+                << "(" << pWomenList->at(i).getNation() << ")"
+                << "</th>" << endl;
+            out << "\t  <th align=\"center\">"
+                << pWomenList->at(i).getFinalScore()
+                <<"</th> <!-- Single appparatus -->" << endl;
+            out << "\t</tr>" << endl;
+
+            out << "\t<tr>" << endl;
+            out << "\t  <td align=\"center\" width=\"60\"><small>("
+                << pWomenList->at(i).getStartScore()
+                <<")</small></td> <!-- Single appparatus -->" << endl;
+            out << "\t</tr>" << endl;
+        }
     }
 }

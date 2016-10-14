@@ -17,13 +17,15 @@ public:
     } SScore;
 
     SingleMWData(const int p_iAthleteId,
-                    const QString& fullName,
-                    const QString& imagePath);
+                 const QString& fullName,
+                 const QString& nation,
+                 const QString& imagePath);
 
     int getAthleteId();
     void setRank(int p_iRank);
     QString getRank() const;
     QString getNameFull() const;
+    QString getNation() const;
     QString getImagePath() const;
 
     void setStartScore(float p_fScore);
@@ -47,8 +49,8 @@ private:
     int m_iAthleteId;
     int m_iRank;
     QString m_nameFull;
+    QString m_nation;
     QString m_imagePath;
-
     SScore m_sScore;
 };
 

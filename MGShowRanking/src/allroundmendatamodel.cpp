@@ -19,11 +19,13 @@ void AllroundMenDataModel::RetrieveGymnastList()
 {
     QString firstName;
     QString lastName;
+    QString countryIso;
+    QString countryIoc;
     QString countryFile;
     int athleteId;
 
     QList<QStringList> p_strGymnList;
-    dbInterface::Instance()->retrieveRegisteredGymnastList(p_strGymnList, dbIfaceBase::NI_IsoName);
+    dbInterface::Instance()->retrieveRegisteredGymnastList(p_strGymnList);
 
     for (int i = 0; i < p_strGymnList.size();i++)
     {
@@ -31,11 +33,13 @@ void AllroundMenDataModel::RetrieveGymnastList()
         {
             firstName = p_strGymnList.at(i)[0];
             lastName = p_strGymnList.at(i)[1];
-            countryFile = "qrc:/flags/" + (p_strGymnList.at(i)[2]).toLower() + ".svg";
+            countryIso = dbInterface::Instance()->getNationName(p_strGymnList.at(i)[2].toInt(), dbIfaceBase::NI_IsoName);
+            countryIoc = dbInterface::Instance()->getNationName(p_strGymnList.at(i)[2].toInt(), dbIfaceBase::NI_IocName);
+            countryFile = "qrc:/flags/" + countryIso.toLower() + ".svg";
             athleteId = dbInterface::Instance()->getGymnastId(firstName, lastName);
 
             AthleteData cAllroundMen(AthleteData::Male, athleteId, firstName
-                    + " " + lastName + "  ", countryFile);
+                    + " " + lastName + "  ", countryIoc, countryFile);
 
             beginInsertRows(QModelIndex(), rowCount(), rowCount());
             m_rankingList << cAllroundMen;

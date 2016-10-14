@@ -12,6 +12,8 @@ SOURCES += \
     ../MGCommon/src/cbbItems/apparatusdata.cpp \
     ../MGCommon/src/cbbItems/apparatuslist.cpp \
     ../MGCommon/src/msgBox/messagebox.cpp \
+    ../MGCommon/src/gymnast/athletedata.cpp \
+    ../MGCommon/src/gymnast/singlemwdata.cpp \
     src/main.cpp \
     src/gymnastdata.cpp \
     src/gymnastdatamodel.cpp \
@@ -22,8 +24,7 @@ SOURCES += \
     src/gymnastsortfilterproxymodel.cpp \
     src/saveforcescore.cpp \
     src/createpdf.cpp \
-    src/gymnastranking.cpp \
-    ../MGCommon/src/gymnast/athletedata.cpp
+    src/gymnastranking.cpp
 
 HEADERS += \
     ../MGCommon/src/db/dbconnection.h \
@@ -34,6 +35,8 @@ HEADERS += \
     ../MGCommon/src/cbbItems/apparatusdata.h \
     ../MGCommon/src/cbbItems/apparatuslist.h \
     ../MGCommon/src/msgBox/messagebox.h \
+    ../MGCommon/src/gymnast/athletedata.h \
+    ../MGCommon/src/gymnast/singlemwdata.h \
     src/gymnastdata.h \
     src/gymnastdatamodel.h \
     src/gymnastselectdata.h \
@@ -43,8 +46,7 @@ HEADERS += \
     src/gymnastsortfilterproxymodel.h \
     src/saveforcescore.h \
     src/createpdf.h \
-    src/gymnastranking.h \
-    ../MGCommon/src/gymnast/athletedata.h
+    src/gymnastranking.h
 
 
 INCLUDEPATH += \

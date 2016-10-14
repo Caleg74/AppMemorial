@@ -40,13 +40,16 @@
 #include "athletedata.h"
 #include <QDebug>
 
-AthleteData::AthleteData(const Gender_t p_eGender, const int p_iAthleteId,
-                                 const QString& fullName,
-                                 const QString& imagePath)
+AthleteData::AthleteData(const Gender_t p_eGender,
+                         const int p_iAthleteId,
+                         const QString& fullName,
+                         const QString& nation,
+                         const QString& imagePath)
     : m_eGender(p_eGender)
     , m_iAthleteId(p_iAthleteId)
     , m_iRank(0)
     , m_nameFull(fullName)
+    , m_nationShort(nation)
     , m_imagePath(imagePath)
 {
     int iApparatusMax;
@@ -82,6 +85,10 @@ QString AthleteData::getNameFull() const
     return m_nameFull;
 }
 
+QString AthleteData::getNationShort() const
+{
+    return m_nationShort;
+}
 QString AthleteData::getImagePath() const
 {
     return m_imagePath;

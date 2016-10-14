@@ -223,7 +223,7 @@ QString dbIfaceBase::getGender(int p_iAthleteId)
 }
 
 
-void dbIfaceBase::retrieveRegisteredGymnastList(QList<QStringList>& p_strGymnList, NationInfo p_eNationType)
+void dbIfaceBase::retrieveRegisteredGymnastList(QList<QStringList>& p_strGymnList)
 {
     if (m_bInitialized)
     {
@@ -233,13 +233,10 @@ void dbIfaceBase::retrieveRegisteredGymnastList(QList<QStringList>& p_strGymnLis
 
         while(query.next())
         {
-            // Convert NationId to nicename
-            QString strNationName = getNationName(query.value(3).toInt(), p_eNationType);
-
             QStringList strData;
             strData << query.value(0).toString().trimmed()
                     << query.value(1).toString().trimmed()
-                    << strNationName.trimmed()
+                    << query.value(3).toString().trimmed()
                     << query.value(2).toString().trimmed();
 
             p_strGymnList << strData;

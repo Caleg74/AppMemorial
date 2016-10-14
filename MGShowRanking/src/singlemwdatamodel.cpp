@@ -45,11 +45,13 @@ void SingleMWDataModel::RetrieveGymnastList()
 {
     QString firstName;
     QString lastName;
+    QString countryIso;
+    QString countryIoc;
     QString countryFile;
     int athleteId;
 
     QList<QStringList> p_strGymnList;
-    dbInterface::Instance()->retrieveRegisteredGymnastList(p_strGymnList, dbIfaceBase::NI_IsoName);
+    dbInterface::Instance()->retrieveRegisteredGymnastList(p_strGymnList);
 
     QString strGender = m_eGender == SG_Men ? "M" : "F";
     for (int i = 0; i < p_strGymnList.size();i++)
@@ -58,11 +60,13 @@ void SingleMWDataModel::RetrieveGymnastList()
         {
             firstName = p_strGymnList.at(i)[0];
             lastName = p_strGymnList.at(i)[1];
-            countryFile = "qrc:/flags/" + (p_strGymnList.at(i)[2]).toLower() + ".svg";
+            countryIso = dbInterface::Instance()->getNationName(p_strGymnList.at(i)[2].toInt(), dbIfaceBase::NI_IsoName);
+            countryIoc = dbInterface::Instance()->getNationName(p_strGymnList.at(i)[2].toInt(), dbIfaceBase::NI_IocName);
+            countryFile = "qrc:/flags/" + countryIso.toLower() + ".svg";
             athleteId = dbInterface::Instance()->getGymnastId(firstName, lastName);
 
             SingleMWData cSingleMW(athleteId, firstName
-                    + " " + lastName + "  ", countryFile);
+                    + " " + lastName + "  ", countryIoc, countryFile);
 
             beginInsertRows(QModelIndex(), rowCount(), rowCount());
             m_rankingList << cSingleMW;

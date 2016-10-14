@@ -30,15 +30,15 @@ private:
      */
     void PrintWomenAllround(bool p_bHFImages);
 
-    /** Creates a pdf for the Men's citycup ranking.
+    /** Creates a pdf for the Men's CityTrophy ranking.
      * @param p_bHFImages true=with Header/Footer sponsor images
      */
-    void PrintMenCitycup(bool p_bHFImages);
+    void PrintMenCityTrophy(bool p_bHFImages);
 
-    /** Creates a pdf for the Women's citycup ranking.
+    /** Creates a pdf for the Women's CityTrophy ranking.
      * @param p_bHFImages true=with Header/Footer sponsor images
      */
-    void PrintWomenCitycup(bool p_bHFImages);
+    void PrintWomenCityTrophy(bool p_bHFImages);
 
     void PrintHeader(bool p_bHFImages, QTextStream& out);
     void PrintFooter(bool p_bHFImages, QTextStream& out);
@@ -46,6 +46,10 @@ private:
     void PrintMenTableBody(QTextStream& out);
     void PrintWomenTableTitle(QTextStream& out);
     void PrintWomenTableBody(QTextStream& out);
+    void PrintSingleMApparatusTableTitle(QTextStream& out);
+    void PrintSingleMApparatusTableBody(QTextStream& out);
+    void PrintSingleWApparatusTableTitle(QTextStream& out);
+    void PrintSingleWApparatusTableBody(QTextStream& out);
 
     QTextStream m_textStream;
 

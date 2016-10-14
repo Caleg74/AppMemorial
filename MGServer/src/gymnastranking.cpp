@@ -5,20 +5,32 @@ GymnastRanking::GymnastRanking()
 {
 }
 
-QList<AthleteData>* GymnastRanking::getMenList()
+QList<AthleteData>* GymnastRanking::getAllroundMenList()
 {
     return &m_MenList;
 }
 
-QList<AthleteData>* GymnastRanking::getWomenList()
+QList<AthleteData>* GymnastRanking::getAllroundWomenList()
 {
     return &m_WomenList;
+}
+
+QList<SingleMWData>* GymnastRanking::getSingleMenList()
+{
+    return &m_singleMApparatusList;
+}
+
+QList<SingleMWData>* GymnastRanking::getSingleWomenList()
+{
+    return &m_singleWApparatusList;
 }
 
 void GymnastRanking::createLists()
 {
     m_MenList.clear();
     m_WomenList.clear();
+    m_singleMApparatusList.clear();
+    m_singleWApparatusList.clear();
 
     retrieveGymnastList("M");
     retrieveGymnastList("F");
@@ -29,13 +41,15 @@ void GymnastRanking::retrieveGymnastList(const QString &p_strGender)
     QString firstName;
     QString lastName;
     QString countryFile;
+    QString countryIso;
+    QString countryIoc;
     int athleteId;
 
     Q_ASSERT((p_strGender == "F") || (p_strGender == "M"));
 
     AthleteData::Gender_t eGender = p_strGender == "F" ? AthleteData::Female : AthleteData::Male;
     QList<QStringList> p_strGymnList;
-    dbInterface::Instance()->retrieveRegisteredGymnastList(p_strGymnList, dbIfaceBase::NI_IsoName);
+    dbInterface::Instance()->retrieveRegisteredGymnastList(p_strGymnList);
 
     for (int i = 0; i < p_strGymnList.size();i++)
     {
@@ -43,27 +57,82 @@ void GymnastRanking::retrieveGymnastList(const QString &p_strGender)
         {
             firstName = p_strGymnList.at(i)[0];
             lastName = p_strGymnList.at(i)[1];
-            countryFile = "qrc:/flags/" + (p_strGymnList.at(i)[2]).toLower() + ".svg";
+            countryIso = dbInterface::Instance()->getNationName(p_strGymnList.at(i)[2].toInt(), dbIfaceBase::NI_IsoName);
+            countryFile = "qrc:/flags/" + countryIso.toLower() + ".svg";
             athleteId = dbInterface::Instance()->getGymnastId(firstName, lastName);
+            countryIoc = dbInterface::Instance()->getNationName(p_strGymnList.at(i)[2].toInt(), dbIfaceBase::NI_IocName);
 
             AthleteData cAthlete(eGender, athleteId, firstName
-                    + " " + lastName + "  ", countryFile);
+                    + " " + lastName + "  ", countryIoc, countryFile);
+
+            SingleMWData cSingleMW(athleteId, firstName
+                    + " " + lastName + "  ", countryIoc, countryFile);
 
             if (p_strGender == "F")
+            {
                 m_WomenList << cAthlete;
+                m_singleWApparatusList << cSingleMW;
+            }
             else
+            {
                 m_MenList << cAthlete;
+                m_singleMApparatusList << cSingleMW;
+            }
         }
     }
 }
 
-void GymnastRanking::updateScores()
+void GymnastRanking::updateAllroundScores()
 {
-    updateMenScores();
-    updateWomenScores();
+    updateAllroundMenScores();
+    updateAllroundWomenScores();
 }
 
-void GymnastRanking::updateMenScores()
+void GymnastRanking::updateSingleScores(ApparatusList::EApparatusMen p_eAppMen)
+{
+    int iAppId;
+    iAppId= ApparatusList::Instance()->getApparatusId((ApparatusList::EApparatusMen)p_eAppMen);
+
+    updateSingleScores(iAppId, &m_singleMApparatusList);
+}
+
+void GymnastRanking::updateSingleScores(ApparatusList::EApparatusWomen p_eAppWomen)
+{
+    int iAppId;
+    iAppId= ApparatusList::Instance()->getApparatusId((ApparatusList::EApparatusWomen)p_eAppWomen);
+
+    updateSingleScores(iAppId, &m_singleWApparatusList);
+}
+
+void GymnastRanking::updateSingleScores(int p_iApparatusId, QList<SingleMWData>* p_pList)
+{
+    QList<SingleMWData>::iterator iter;
+
+    for (iter = p_pList->begin(); iter != p_pList->end(); ++iter)
+    {
+        int iAthleteId = iter->getAthleteId();
+        float fStartScore = dbInterface::Instance()->getStartScore(iAthleteId, p_iApparatusId);
+        float fFinalScore = dbInterface::Instance()->getFinalScore(iAthleteId, p_iApparatusId);
+        int iForceScore   = dbInterface::Instance()->getForceScore(iAthleteId, p_iApparatusId);
+
+        iter->setFinalScore(fFinalScore);
+        iter->setStartScore(fStartScore);
+        iter->setForceScore(iForceScore);
+    }
+
+    // sort the list
+    qSort(*p_pList);
+
+    // the order defines the ranking as well
+    int iRank = 1;
+    for (iter = p_pList->begin(); iter != p_pList->end(); ++iter)
+    {
+        iter->setRank(iRank);
+        iRank++;
+    }
+}
+
+void GymnastRanking::updateAllroundMenScores()
 {
     QList<AthleteData>::iterator iter;
 
@@ -94,7 +163,7 @@ void GymnastRanking::updateMenScores()
     }
 }
 
-void GymnastRanking::updateWomenScores()
+void GymnastRanking::updateAllroundWomenScores()
 {
     QList<AthleteData>::iterator iter;
 

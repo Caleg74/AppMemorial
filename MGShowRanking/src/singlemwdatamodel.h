@@ -9,7 +9,8 @@ class SingleMWDataModel : public GymnastDataModel
 {
     Q_OBJECT
 public:
-    enum AllroundWRoles {
+    enum SingleMWRoles
+    {
         FinalScoreTotalRole = LastGeneralRole,
         StartScoreSingleMW,
         FinalScoreSingleMW

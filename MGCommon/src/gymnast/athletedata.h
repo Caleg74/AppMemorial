@@ -25,12 +25,14 @@ public:
     AthleteData(const Gender_t p_eGender,
                 const int p_iAthleteId,
                 const QString& fullName,
+                const QString& nation,
                 const QString& imagePath);
 
     int getAthleteId();
     void setRank(int p_iRank);
     QString getRank() const;
     QString getNameFull() const;
+    QString getNationShort() const;
     QString getImagePath() const;
 
     void setStartScore(int p_iApparatus, float p_fScore);
@@ -54,6 +56,7 @@ private:
     int m_iAthleteId;
     int m_iRank;
     QString m_nameFull;
+    QString m_nationShort;
     QString m_imagePath;
     QVector<SScore> m_vecScore;
 };

@@ -29,12 +29,16 @@ GymnastDataModel::GymnastDataModel(QObject *parent)
 void GymnastDataModel::RetrieveGymnastList()
 {
     QList<QStringList> p_strGymnList;
-    dbInterface::Instance()->retrieveRegisteredGymnastList(p_strGymnList, dbIfaceBase::NI_Nicename);
+    dbInterface::Instance()->retrieveRegisteredGymnastList(p_strGymnList);
 
     for (int i = 0; i < p_strGymnList.size();i++)
     {
+        // Convert NationId to nicename
+        QString strNationName = dbInterface::Instance()->getNationName(p_strGymnList.at(i)[2].toInt(), dbIfaceBase::NI_Nicename);
+
         GymnastData cNewGymnast(p_strGymnList.at(i)[0], p_strGymnList.at(i)[1],
-                p_strGymnList.at(i)[2], p_strGymnList.at(i)[3]);
+                strNationName, p_strGymnList.at(i)[3]);
+
 
         beginInsertRows(QModelIndex(), rowCount(), rowCount());
         m_gymnastList << cNewGymnast;
