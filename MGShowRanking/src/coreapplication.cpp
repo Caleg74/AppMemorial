@@ -186,6 +186,9 @@ void CoreApplication::updateScores()
 
         m_pSingleMModel->updateScores();
         m_qSortSingleMProxy->sort(0, Qt::AscendingOrder);
+
+        m_pSingleWModel->updateScores();
+        m_qSortSingleWProxy->sort(0, Qt::AscendingOrder);
 }
 
 void CoreApplication::onApparatusMChanged(QString p_currentTxt)
