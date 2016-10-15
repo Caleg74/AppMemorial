@@ -4,6 +4,7 @@ QT += sql qml quick widgets
 
 CONFIG += c++11
 
+RC_ICONS = ../MGCommon/image/ApplicationGreen.ico
 
 HEADERS += \
     ../MGCommon/src/cbbItems/apparatusdata.h \

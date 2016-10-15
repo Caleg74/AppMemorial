@@ -3,6 +3,8 @@ TEMPLATE = app
 QT += sql qml quick widgets printsupport
 CONFIG += c++11
 
+RC_ICONS = ../MGCommon/image/ApplicationRed.ico
+
 SOURCES += \
     ../MGCommon/src/db/dbconnection.cpp \
     ../MGCommon/src/db/dbifacebase.cpp \

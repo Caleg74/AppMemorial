@@ -4,6 +4,8 @@ QT += sql qml quick widgets
 
 CONFIG += c++11
 
+RC_ICONS = ../MGCommon/image/Application.ico
+
 SOURCES += \
     ../MGCommon/src/cbbItems/apparatusdata.cpp \
     ../MGCommon/src/cbbItems/apparatuslist.cpp \
