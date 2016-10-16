@@ -2,6 +2,8 @@
 #include <QFile>
 #include <QDebug>
 #include <QTextCursor>
+#include <QStandardPaths>
+
 
 CreatePdf::CreatePdf()
  : QObject()
@@ -27,11 +29,12 @@ void CreatePdf::Print()
     {
         bool bWithLogo = (i==0); // 1st time wizh logo
 
-        QString strFileName;
+        QString strFileName = QStandardPaths::writableLocation(QStandardPaths::DesktopLocation);
+
         if (bWithLogo)
-            strFileName= "../MGServer/pdf/MemorialGander2016.pdf";
+            strFileName += "/MemorialGander2016.pdf";
         else
-            strFileName= "../MGServer/pdf/MemorialGander2016_NoImage.pdf";
+            strFileName += "/MemorialGander2016_NoImage.pdf";
 
         m_printer.setOutputFormat(QPrinter::PdfFormat);
         m_printer.setPaperSize(QPrinter::A4);
@@ -64,6 +67,8 @@ void CreatePdf::Print()
         PrintWomenCityTrophy(bWithLogo);
 
         m_painter.end();
+
+        qDebug() << "File created in " << strFileName;
     }
 }
 
