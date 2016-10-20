@@ -123,7 +123,10 @@ QString AthleteData::getStartScore(int p_iApparatus) const
             qCritical() << "getStartScore(): p_iApparatus(W) " << p_iApparatus << " is out-of-range";
     }
 
-    return QString::number(m_vecScore[p_iApparatus].StartScore, 'f', 3);
+    if (m_vecScore[p_iApparatus].StartScore == 0.0)
+        return " - ";
+    else
+        return QString::number(m_vecScore[p_iApparatus].StartScore, 'f', 3);
 }
 
 void AthleteData::setFinalScore(int p_iApparatus, float p_fScore)
@@ -155,7 +158,10 @@ QString AthleteData::getFinalScore(int p_iApparatus) const
             qCritical() << "getFinalScore(): p_iApparatus(W) " << p_iApparatus << " is out-of-range";
     }
 
-    return QString::number(m_vecScore[p_iApparatus].FinalScore, 'f', 3);
+    if (m_vecScore[p_iApparatus].FinalScore == 0.0)
+        return " - ";
+    else
+        return QString::number(m_vecScore[p_iApparatus].FinalScore, 'f', 3);
 }
 
 void AthleteData::CalculateTotalScore()
