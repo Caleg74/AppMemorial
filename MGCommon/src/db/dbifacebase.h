@@ -4,6 +4,14 @@
 #include "dbconnection.h"
 #include <QStringList>
 
+struct AllScores
+{
+    float StartScore;
+    float FinalScore;
+    int   ForceScore;   // to be used only in case of equal score
+    bool  IsFinalApparatus;
+};
+
 class dbIfaceBase : public dBConnection
 {
 public:
@@ -14,6 +22,7 @@ public:
         NI_IocName,
         NI_IsoName
     };
+
 
     dbIfaceBase();
 
@@ -54,6 +63,8 @@ public:
     float getStartScore(const int p_iAthleteId, const int p_iApparatusId);
 
     float getFinalScore(const int p_iAthleteId, const int p_iApparatusId);
+
+    AllScores getAllScores(const int p_iAthleteId, const int p_iApparatusId);
 
     int getForceScore(const int p_iAthleteId, const int p_iApparatusId);
 

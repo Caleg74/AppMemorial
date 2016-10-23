@@ -58,13 +58,13 @@ void AllroundMenDataModel::updateScores()
         {
             int iAthleteId = iter->getAthleteId();
             int iAppId = ApparatusList::Instance()->getApparatusId((ApparatusList::EApparatusMen)apparatus);
-            float fStartScore = dbInterface::Instance()->getStartScore(iAthleteId, iAppId);
-            float fFinalScore = dbInterface::Instance()->getFinalScore(iAthleteId, iAppId);
+            AllScores sAllScore = dbInterface::Instance()->getAllScores(iAthleteId, iAppId);
 
 //            float fFinalRandom = (float)(qrand() % ((15000 + 1) - 10000) + 10000) / 1000;
 //            float fStartRandom = fFinalRandom - 10;
-            iter->setFinalScore((ApparatusList::EApparatusMen)apparatus, fFinalScore);
-            iter->setStartScore((ApparatusList::EApparatusMen)apparatus, fStartScore);
+            iter->setFinalScore((ApparatusList::EApparatusMen)apparatus, sAllScore.FinalScore);
+            iter->setStartScore((ApparatusList::EApparatusMen)apparatus, sAllScore.StartScore);
+            iter->setIsFinalApparatusScore((ApparatusList::EApparatusMen)apparatus, sAllScore.IsFinalApparatus);
         }
         iter->CalculateTotalScore();
     }

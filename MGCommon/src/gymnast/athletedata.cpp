@@ -60,7 +60,7 @@ AthleteData::AthleteData(const Gender_t p_eGender,
 
     for (int i=0; i<iApparatusMax; i++)
     {
-        SScore score = {0.0, 0.0};
+        SScore score = {0.0, 0.0, false};
         m_vecScore.push_back(score);
     }
 }
@@ -92,6 +92,22 @@ QString AthleteData::getNationShort() const
 QString AthleteData::getImagePath() const
 {
     return m_imagePath;
+}
+
+void AthleteData::setIsFinalApparatusScore(int p_iApparatus, bool p_bIsFinalApparatus)
+{
+    if (m_eGender == Male)
+    {
+        if (p_iApparatus >= (ApparatusList::AMApparatusMax))
+            qCritical() << "setStartScore(): p_iApparatus(M) " << p_iApparatus << " is out-of-range";
+    }
+    else
+    {
+        if (p_iApparatus >= (ApparatusList::AWApparatusMax))
+            qCritical() << "setStartScore(): p_iApparatus(W) " << p_iApparatus << " is out-of-range";
+    }
+
+    m_vecScore[p_iApparatus].IsFinalApparatus = p_bIsFinalApparatus;
 }
 
 void AthleteData::setStartScore(int p_iApparatus, float p_fScore)
@@ -203,16 +219,50 @@ bool AthleteData::operator<(const AthleteData other) const
     }
     else if (m_vecScore[ApparatusList::AGTotalScore].FinalScore == other.m_vecScore[ApparatusList::AGTotalScore].FinalScore)
     {
-        // 2nd criteria: look for the highest note between the 2
+        // 2nd criteria: look for the highest final_score of THE FINAL APPARATUS
         QList<float> scoresThis;
         QList<float> scoresOther;
+        int iFinalApparatusIndexThis = -1;// -1 = NOT_FOUND
+        int iFinalApparatusIndexOther = -1;// -1 = NOT_FOUND
 
         for (int i=ApparatusList::AGFirstApparatus; i<iApparatusMax; i++)
         {
             scoresThis << m_vecScore[i].FinalScore;
             scoresOther << other.m_vecScore[i].FinalScore;
+
+            if (m_vecScore[i].IsFinalApparatus)
+            {
+                iFinalApparatusIndexThis = i;
+            }
+            if (other.m_vecScore[i].IsFinalApparatus)
+            {
+                iFinalApparatusIndexOther = i;
+            }
         }
 
+        if ((iFinalApparatusIndexThis >= 0) && (iFinalApparatusIndexOther >= 0))
+        {
+            if (m_vecScore[iFinalApparatusIndexThis].FinalScore < other.m_vecScore[iFinalApparatusIndexOther].FinalScore)
+            {
+                return !true;
+            }
+            else if (m_vecScore[iFinalApparatusIndexThis].FinalScore > other.m_vecScore[iFinalApparatusIndexOther].FinalScore)
+            {
+                return !false;
+            }
+
+            // 3rd criteria: look for the lowest start_score of THE FINAL APPARATUS
+            if (m_vecScore[iFinalApparatusIndexThis].StartScore > other.m_vecScore[iFinalApparatusIndexOther].StartScore)
+            {
+                return !true;
+            }
+            else if (m_vecScore[iFinalApparatusIndexThis].StartScore < other.m_vecScore[iFinalApparatusIndexOther].StartScore)
+            {
+                return !false;
+            }
+        }
+
+        // 4th criteria: look for the highest note between the 2
         qSort(scoresThis);
         qSort(scoresOther);
 
@@ -226,10 +276,10 @@ bool AthleteData::operator<(const AthleteData other) const
             // else continue and compare the next score
         }
 
-        // 3rd criteria: the smallest start score had less "penalties"; therefore, it will have a higher ranking
+        // 5th criteria: the smallest start score had less "penalties"; therefore, it will have a higher ranking
         if (m_vecScore[ApparatusList::AGTotalScore].StartScore > other.m_vecScore[ApparatusList::AGTotalScore].StartScore)
             return !true;
-        else
+        else if (m_vecScore[ApparatusList::AGTotalScore].StartScore < other.m_vecScore[ApparatusList::AGTotalScore].StartScore)
             return !false;
 
         // at this pointit's probably everything = 0s...

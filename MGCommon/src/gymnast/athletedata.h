@@ -20,6 +20,7 @@ public:
     {
         float StartScore;
         float FinalScore;
+        bool  IsFinalApparatus; // mark if score id fromthe final apparatus
     } SScore;
 
     AthleteData(const Gender_t p_eGender,
@@ -35,6 +36,7 @@ public:
     QString getNationShort() const;
     QString getImagePath() const;
 
+    void setIsFinalApparatusScore(int p_iApparatus, bool p_bIsFinalApparatus);
     void setStartScore(int p_iApparatus, float p_fScore);
     QString getStartScore(int p_iApparatus) const;
 

@@ -465,6 +465,45 @@ float dbIfaceBase::getFinalScore(const int p_iAthleteId, const int p_iApparatusI
     return fScore;
 }
 
+AllScores dbIfaceBase::getAllScores(const int p_iAthleteId, const int p_iApparatusId)
+{
+    AllScores allScores = {0.0, 0.0, 0, false};
+
+    if (m_bInitialized)
+    {
+        QSqlDatabase db = QSqlDatabase::database("ConnMG");
+        QSqlQuery query(db);
+
+        int iEventId = getCurrentEventId();
+
+        QString strQuery = "SELECT start_score, final_score, force_score, final_apparatus FROM scores WHERE "
+                  " sport_event_id = "   + QString::number(iEventId, 10) +
+                  " AND athlete_id = "   + QString::number(p_iAthleteId, 10)+
+                  " AND apparatus_id = " + QString::number(p_iApparatusId, 10);
+
+        query.exec(strQuery);
+
+        while (query.next())
+        {
+            allScores.StartScore = query.value(0).toFloat();
+            allScores.FinalScore = query.value(1).toFloat();
+            allScores.ForceScore = query.value(2).toInt();
+            allScores.IsFinalApparatus = query.value(3).toBool();
+        }
+
+        if (iEventId == 0)
+        {
+            qCritical() << "No Id found for event year: " << m_iCurrentYear;
+        }
+    }
+    else
+    {
+        qInfo() << "dbInterface::getAllScores(): Db not initialized";
+    }
+
+    return allScores;
+}
+
 int dbIfaceBase::getForceScore(const int p_iAthleteId, const int p_iApparatusId)
 {
     int iForceScore = 0;
