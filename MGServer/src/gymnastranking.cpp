@@ -49,7 +49,7 @@ void GymnastRanking::retrieveGymnastList(const QString &p_strGender)
 
     AthleteData::Gender_t eGender = p_strGender == "F" ? AthleteData::Female : AthleteData::Male;
     QList<QStringList> p_strGymnList;
-    dbInterface::Instance()->retrieveRegisteredGymnastList(p_strGymnList);
+    dbInterface::Instance()->retrieveGymnastEventList(p_strGymnList);
 
     for (int i = 0; i < p_strGymnList.size();i++)
     {
