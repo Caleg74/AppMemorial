@@ -13,7 +13,7 @@ SOURCES += \
     ../MGCommon/src/db/dbifacebase.cpp \
     ../MGCommon/src/cbbItems/comboboxmodel.cpp \
     ../MGCommon/src/cbbItems/countrylist.cpp \
-    ../MGCommon/src/cbbItems/gymnastselectionlist.cpp \
+    ../MGCommon/src/cbbItems/gymnasteventlist.cpp \
     ../MGCommon/src/gymnast/athletedata.cpp \
     ../MGCommon/src/gymnast/singlemwdata.cpp \
     src/gymnastdatamodel.cpp \
@@ -32,7 +32,7 @@ HEADERS += \
     ../MGCommon/src/db/dbifacebase.h \
     ../MGCommon/src/cbbItems/comboboxmodel.h \
     ../MGCommon/src/cbbItems/countrylist.h \
-    ../MGCommon/src/cbbItems/gymnastselectionlist.h \
+    ../MGCommon/src/cbbItems/gymnasteventlist.h \
     ../MGCommon/src/gymnast/athletedata.h \
     ../MGCommon/src/gymnast/singlemwdata.h \
     src/gymnastdatamodel.h \

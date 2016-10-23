@@ -10,7 +10,7 @@ HEADERS += \
     ../MGCommon/src/cbbItems/apparatusdata.h \
     ../MGCommon/src/cbbItems/apparatuslist.h \
     ../MGCommon/src/cbbItems/comboboxmodel.h \
-    ../MGCommon/src/cbbItems/gymnastselectionlist.h \
+    ../MGCommon/src/cbbItems/gymnasteventlist.h \
     ../MGCommon/src/db/dbconnection.h \
     ../MGCommon/src/db/dbifacebase.h \
     ../MGCommon/src/msgBox/messagebox.h \
@@ -24,7 +24,7 @@ SOURCES += \
     ../MGCommon/src/db/dbconnection.cpp \
     ../MGCommon/src/db/dbifacebase.cpp \
     ../MGCommon/src/cbbItems/comboboxmodel.cpp \
-    ../MGCommon/src/cbbItems/gymnastselectionlist.cpp \
+    ../MGCommon/src/cbbItems/gymnasteventlist.cpp \
     ../MGCommon/src/msgBox/messagebox.cpp \
     src/coreapplication.cpp \
     src/dbinterface.cpp \
@@ -50,6 +50,7 @@ include(deployment.pri)
 
 OTHER_FILES += \
     ../MGCommon/qml-styles/StyleMGTabWidget.qml \
+    ../MGCommon/qml-styles/StyleMGCheckbox.qml \
     ../MGCommon/qml-styles/StyleMGComboBox.qml \
     ../MGCommon/qml-styles/StyleMGTextInput.qml \
     ../MGCommon/qml-styles/StyleMGPushButton.qml \

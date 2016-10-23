@@ -29,7 +29,7 @@ Item {
                 ComboBox {
                     id: cbbGymnastSelection
                     objectName: "cbbGymnastSelection"
-                    model: gymnastRegisteredModel.comboList
+                    model: gymnastEventModel.comboList
                     width: parent.parent.width/2
 //                    activeFocusOnPress: true
                     style:comboBoxMGStyle
@@ -43,21 +43,54 @@ Item {
                 ComboBox {
                     id: cbbAppartus
                     model: apparatusModel.comboList
-                    width: parent.parent.width/3
+                    width: parent.parent.width/10*4
                     activeFocusOnPress: true
                     style:comboBoxMGStyle
                     visible: cbbGymnastSelection.currentIndex > 0
                     currentIndex: 0
                 }
+
             }
 
             Row
             {
+
+                CheckBox {
+                    id: chkFinalApparatus
+                    text: "Attrezzo Finale"
+                    style: CheckBoxStyle {
+
+                    indicator: Rectangle {
+                           implicitWidth: 24
+                           implicitHeight: 24
+                           radius: 3
+                           border.color: control.activeFocus ? "grey" : "#0a3f60"
+                           border.width: 2
+                           Rectangle {
+                               visible: control.checked
+                               color: "#83d1f5"
+                               border.color: "#0a3f60"
+                               radius: 2
+                               anchors.margins: 4
+                               anchors.fill: parent
+                           }
+                   }
+
+                   spacing: 10
+
+                   label: Text {
+                           font.pointSize: 15
+                           color: "#0a3f60"
+                           text: control.text
+                         }
+                    }
+                }
+
                 spacing: 20
 
                 TextField {
                     id: txtStartScore
-                    width: parent.parent.width/3
+                    width: parent.parent.width/5
                     activeFocusOnPress: true
                     style:textEditMGStyle
                     placeholderText: "Start Score.."
@@ -66,7 +99,7 @@ Item {
 
                 TextField {
                     id: txtFinalScore
-                    width: parent.parent.width/3
+                    width: parent.parent.width/5
                     activeFocusOnPress: true
                     style:textEditMGStyle
                     placeholderText: "Final Score.."
@@ -81,7 +114,8 @@ Item {
                     signal saveScore(string gymnastName,
                                      string apparatus,
                                      string startScore,
-                                     string finalScore)
+                                     string finalScore,
+                                     bool finalApparatus)
 
                     enabled: (txtStartScore.text.length) && (txtFinalScore.text.length)
                              && (cbbGymnastSelection.currentIndex >= 0)
@@ -90,7 +124,8 @@ Item {
                         saveScore(cbbGymnastSelection.currentText,
                                   cbbAppartus.currentText,
                                   txtStartScore.text,
-                                  txtFinalScore.text)
+                                  txtFinalScore.text,
+                                  chkFinalApparatus.checked)
 
                         txtStartScore.text = ""
                         txtFinalScore.text = ""

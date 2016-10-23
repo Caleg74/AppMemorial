@@ -13,7 +13,8 @@ public slots:
     void onSaveScore(QString p_strGymnastFullTxt,
                      QString p_strApparatus,
                      QString p_strStartScore,
-                     QString p_strFinalScore);
+                     QString p_strFinalScore,
+                     bool p_bFinalApparatus);
 
 private:
     SaveScore(QObject* parent = NULL);
@@ -25,7 +26,8 @@ private:
     void SendToDb(QString& p_strGymnastFullTxt,
                   QString& p_strApparatus,
                   float p_fStartScore,
-                  float p_fFinalScore);
+                  float p_fFinalScore,
+                  bool p_bFinalApparatus);
 
     static SaveScore* sm_instance;
 

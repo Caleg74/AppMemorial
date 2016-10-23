@@ -12,16 +12,18 @@ public:
     int getNationId(QString& p_strNiceName);
 
     void setNewScore(const int p_iEventId,
-                  const int p_iAthleteId,
-                  const int p_iApparatusId,
-                  const float p_fStartScore,
-                  const float p_fFinalScore);
+                     const int p_iAthleteId,
+                     const int p_iApparatusId,
+                     const float p_fStartScore,
+                     const float p_fFinalScore,
+                     const bool p_bFinalApparatus);
 
     void updateScore(const int p_iEventId,
                      const int p_iAthleteId,
                      const int p_iApparatusId,
                      const float p_fStartScore,
-                     const float p_fFinalScore);
+                     const float p_fFinalScore,
+                     const bool p_bFinalApparatus);
 
 private:
 

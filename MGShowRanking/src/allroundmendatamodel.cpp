@@ -25,7 +25,7 @@ void AllroundMenDataModel::RetrieveGymnastList()
     int athleteId;
 
     QList<QStringList> p_strGymnList;
-    dbInterface::Instance()->retrieveRegisteredGymnastList(p_strGymnList);
+    dbInterface::Instance()->retrieveGymnastEventList(p_strGymnList);
 
     for (int i = 0; i < p_strGymnList.size();i++)
     {

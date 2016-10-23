@@ -4,12 +4,13 @@ import "qrc:/qml"
 
 Window {
     id: window
-    width: 640
+    width: 800
     height: 320
     visible: true
     title: qsTr("Memorial Gander - Insert Score")
 
-    StyleMGComboBox{ id: comboBoxMGStyle}
+    StyleMGCheckbox { id: checkboxMGStyle }
+    StyleMGComboBox { id: comboBoxMGStyle}
     StyleMGTextInput { id: textEditMGStyle}
     StyleMGPushButton { id: buttonMGStyle}
 

@@ -20,14 +20,21 @@ public:
     // for cbb
     void getCountriesList(QStringList *p_pList);
 
-    // for cbb
+    // for cbb (complete gymnast list, not only for this event)
     void getRegisterdGymnastList(QStringList* p_pList);
+
+    // for cbb (gymnast list for this event only)
+    void getEventSelectedGymnastList(QStringList* p_pList);
 
     int getGymnastId(QString& p_firstName, QString& p_lastName);
 
     QString getGender(int p_iAthleteId);
 
+    /** Retrieve global gymnast list, not only the ones registered to this event */
     void retrieveRegisteredGymnastList(QList<QStringList> &p_strGymnList);
+
+    /** Retrieve gymnast list registered to the current event */
+    void retrieveGymnastEventList(QList<QStringList>& p_strGymnList);
 
     int getNationId(QString& p_strNiceName);
 

@@ -25,14 +25,17 @@ SaveScore* SaveScore::Instance()
 }
 
 void SaveScore::onSaveScore(QString p_strGymnastFullTxt,
-                         QString p_strApparatus,
-                         QString p_strStartScore,
-                         QString p_strFinalScore)
+                            QString p_strApparatus,
+                            QString p_strStartScore,
+                            QString p_strFinalScore,
+                            bool p_bFinalApparatus)
 {
+    QString strFinalApparatus = p_bFinalApparatus ? "FinalApparatus" : "";
     qDebug() << "onSaveScore(): " << p_strGymnastFullTxt <<  ", "
                 << p_strApparatus <<  ", "
                 << p_strStartScore <<  ", "
-                << p_strFinalScore;
+                << p_strFinalScore <<   ", "
+                << strFinalApparatus;
 
     QString strErr = "";
     bool bConvStartScoreOk = false;
@@ -55,7 +58,7 @@ void SaveScore::onSaveScore(QString p_strGymnastFullTxt,
     }
 
     // save it to DB
-    SendToDb(p_strGymnastFullTxt, p_strApparatus, fStartScore, fFinalScore);
+    SendToDb(p_strGymnastFullTxt, p_strApparatus, fStartScore, fFinalScore, p_bFinalApparatus);
 
     // Show it to the user
     if ((!bConvStartScoreOk) || (!bConvFinalScoreOk))
@@ -98,7 +101,8 @@ float SaveScore::CheckFinalScore(QString p_strInputVal, bool* bOk)
 void SaveScore::SendToDb(QString& p_strGymnastFullTxt,
                          QString& p_strApparatus,
                          float p_fStartScore,
-                         float p_fFinalScore)
+                         float p_fFinalScore,
+                         bool p_bFinalApparatus)
 {
     QStringList strSplit = p_strGymnastFullTxt.split(',');
     if (strSplit.count() < 2)
@@ -121,12 +125,12 @@ void SaveScore::SendToDb(QString& p_strGymnastFullTxt,
     {
         // update existing score
         dbInterface::Instance()->updateScore(iEventId, iAthleteId,
-                                         iApparatusId, p_fStartScore, p_fFinalScore);
+                                         iApparatusId, p_fStartScore, p_fFinalScore, p_bFinalApparatus);
     }
     else
     {
         // insert a new one
         dbInterface::Instance()->setNewScore(iEventId, iAthleteId,
-                                         iApparatusId, p_fStartScore, p_fFinalScore);
+                                         iApparatusId, p_fStartScore, p_fFinalScore, p_bFinalApparatus);
     }
 }

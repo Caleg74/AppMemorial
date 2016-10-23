@@ -64,6 +64,33 @@ void dbIfaceBase::getRegisterdGymnastList(QStringList* p_pList)
     }
 }
 
+void dbIfaceBase::getEventSelectedGymnastList(QStringList* p_pList)
+{
+    if (m_bInitialized)
+    {
+        QSqlDatabase db = QSqlDatabase::database("ConnMG");
+        QSqlQuery query(db);
+        query.exec("SELECT first_name, last_name, gender, nation_id FROM event_athlete_vw");
+
+        while(query.next())
+        {
+            QString countryIoc = getNationName(query.value(3).toString().trimmed().toInt(), dbIfaceBase::NI_IocName);
+            *p_pList << query.value(0).toString().trimmed() + ", "
+                    + query.value(1).toString().trimmed() + ", ("
+                    + countryIoc + ")";
+        }
+
+//        qSort(*p_pList);
+
+        // put it at the beginning
+        p_pList->insert(p_pList->begin(), "Seleziona ginnasti..");
+    }
+    else
+    {
+        qInfo() << "dbInterface::getEventSelectedGymnastList(): Db not initialized";
+    }
+}
+
 int dbIfaceBase::getNationId(QString& p_strNiceName)
 {
     int iId = 0;
@@ -234,10 +261,10 @@ void dbIfaceBase::retrieveRegisteredGymnastList(QList<QStringList>& p_strGymnLis
         while(query.next())
         {
             QStringList strData;
-            strData << query.value(0).toString().trimmed()
-                    << query.value(1).toString().trimmed()
-                    << query.value(3).toString().trimmed()
-                    << query.value(2).toString().trimmed();
+            strData << query.value(0).toString().trimmed()  // first name
+                    << query.value(1).toString().trimmed()  // last name
+                    << query.value(3).toString().trimmed()  // nation_id
+                    << query.value(2).toString().trimmed(); // gender
 
             p_strGymnList << strData;
             qInfo() << "Athlete retrieved: " << strData;
@@ -245,7 +272,33 @@ void dbIfaceBase::retrieveRegisteredGymnastList(QList<QStringList>& p_strGymnLis
     }
     else
     {
-        qInfo() << "dbInterface::insertGymnast(): Db not initialized";
+        qInfo() << "dbInterface::retrieveRegisteredGymnastList(): Db not initialized";
+    }
+}
+
+void dbIfaceBase::retrieveGymnastEventList(QList<QStringList>& p_strGymnList)
+{
+    if (m_bInitialized)
+    {
+        QSqlDatabase db = QSqlDatabase::database("ConnMG");
+        QSqlQuery query(db);
+        query.exec("SELECT first_name, last_name, gender, nation_id FROM event_athlete_vw");
+
+        while(query.next())
+        {
+            QStringList strData;
+            strData << query.value(0).toString().trimmed()  // first name
+                    << query.value(1).toString().trimmed()  // last name
+                    << query.value(3).toString().trimmed()  // nation_id
+                    << query.value(2).toString().trimmed(); // gender
+
+            p_strGymnList << strData;
+            qInfo() << "Athlete retrieved: " << strData;
+        }
+    }
+    else
+    {
+        qInfo() << "dbInterface::retrieveGymnastEventList(): Db not initialized";
     }
 }
 

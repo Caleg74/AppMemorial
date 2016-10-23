@@ -52,32 +52,36 @@ int dbInterface::getNationId(QString& p_strNiceName)
 }
 
 void dbInterface::setNewScore(const int p_iEventId,
-                           const int p_iAthleteId,
-                           const int p_iApparatusId,
-                           const float p_fStartScore,
-                           const float p_fFinalScore)
+                              const int p_iAthleteId,
+                              const int p_iApparatusId,
+                              const float p_fStartScore,
+                              const float p_fFinalScore,
+                              const bool p_bFinalApparatus)
 {
     if (m_bInitialized)
     {
         QSqlDatabase db = QSqlDatabase::database("ConnMG");
         QSqlQuery query(db);
-        query.prepare("INSERT INTO scores (sport_event_id, athlete_id, apparatus_id, start_score, final_score) "
-                           "VALUES (:sport_event_id, :athlete_id, :apparatus_id, :start_score, :final_score)");
+        query.prepare("INSERT INTO scores (sport_event_id, athlete_id, apparatus_id, start_score, final_score, final_apparatus) "
+                           "VALUES (:sport_event_id, :athlete_id, :apparatus_id, :start_score, :final_score, :final_apparatus)");
         query.bindValue(":sport_event_id", p_iEventId);
         query.bindValue(":athlete_id", p_iAthleteId);
         query.bindValue(":apparatus_id", p_iApparatusId);
         query.bindValue(":start_score", QString::number(p_fStartScore, 'g', 6));
         query.bindValue(":final_score", QString::number(p_fFinalScore, 'g', 6));
+        query.bindValue(":final_apparatus", QString::number((int)p_bFinalApparatus));
 
         bool bRet = query.exec();
 
+        QString strFinalApparatus = p_bFinalApparatus ? "FinalApparatus" : "";
         if (bRet)
         {
             qInfo() << "Score added: " << p_iEventId << ", "
                                        << p_iAthleteId << ", "
                                        << p_iApparatusId << ", "
                                        << p_fStartScore << ", "
-                                       << p_fFinalScore;
+                                       << p_fFinalScore << ", "
+                                       << strFinalApparatus;
         }
         else
         {
@@ -85,7 +89,8 @@ void dbInterface::setNewScore(const int p_iEventId,
                                                 << p_iAthleteId << ", "
                                                 << p_iApparatusId << ", "
                                                 << p_fStartScore << ", "
-                                                << p_fFinalScore;
+                                                << p_fFinalScore << ", "
+                                                << strFinalApparatus;
             qCritical() << query.lastError();
         }
     }
@@ -96,10 +101,11 @@ void dbInterface::setNewScore(const int p_iEventId,
 }
 
 void dbInterface::updateScore(const int p_iEventId,
-                           const int p_iAthleteId,
-                           const int p_iApparatusId,
-                           const float p_fStartScore,
-                           const float p_fFinalScore)
+                              const int p_iAthleteId,
+                              const int p_iApparatusId,
+                              const float p_fStartScore,
+                              const float p_fFinalScore,
+                              const bool p_bFinalApparatus)
 {
     if (m_bInitialized)
     {
@@ -108,15 +114,18 @@ void dbInterface::updateScore(const int p_iEventId,
         // UPDATE table_name
         //SET column1=value1,column2=value2,...
         //WHERE some_column=some_value;
-        query.prepare("UPDATE scores SET start_score = :start_score, final_score = :final_score "
+        query.prepare("UPDATE scores SET start_score = :start_score, final_score = :final_score, final_apparatus = :final_apparatus "
                       "WHERE sport_event_id=:sport_event_id AND athlete_id=:athlete_id AND apparatus_id=:apparatus_id");
         query.bindValue(":start_score", QString::number(p_fStartScore, 'g', 6));
         query.bindValue(":final_score", QString::number(p_fFinalScore, 'g', 6));
         query.bindValue(":sport_event_id", p_iEventId);
         query.bindValue(":athlete_id", p_iAthleteId);
         query.bindValue(":apparatus_id", p_iApparatusId);
+        query.bindValue(":final_apparatus", QString::number((int)p_bFinalApparatus));
 
         bool bRet = query.exec();
+
+        QString strFinalApparatus = p_bFinalApparatus ? "FinalApparatus" : "";
 
         if (bRet)
         {
@@ -124,7 +133,8 @@ void dbInterface::updateScore(const int p_iEventId,
                                          << p_iAthleteId << ", "
                                          << p_iApparatusId << ", "
                                          << p_fStartScore << ", "
-                                         << p_fFinalScore;
+                                         << p_fFinalScore << ", "
+                                         << strFinalApparatus;
         }
         else
         {
@@ -132,7 +142,8 @@ void dbInterface::updateScore(const int p_iEventId,
                                                  << p_iAthleteId << ", "
                                                  << p_iApparatusId << ", "
                                                  << p_fStartScore << ", "
-                                                 << p_fFinalScore;
+                                                 << p_fFinalScore << ", "
+                                                 << strFinalApparatus;
             qCritical() << query.lastError();
         }
     }

@@ -11,6 +11,7 @@ SOURCES += \
     ../MGCommon/src/cbbItems/comboboxmodel.cpp \
     ../MGCommon/src/cbbItems/countrylist.cpp \
     ../MGCommon/src/cbbItems/gymnastselectionlist.cpp \
+    ../MGCommon/src/cbbItems/gymnasteventlist.cpp \
     ../MGCommon/src/cbbItems/apparatusdata.cpp \
     ../MGCommon/src/cbbItems/apparatuslist.cpp \
     ../MGCommon/src/msgBox/messagebox.cpp \
@@ -34,6 +35,7 @@ HEADERS += \
     ../MGCommon/src/cbbItems/comboboxmodel.h \
     ../MGCommon/src/cbbItems/countrylist.h \
     ../MGCommon/src/cbbItems/gymnastselectionlist.h \
+    ../MGCommon/src/cbbItems/gymnasteventlist.h \
     ../MGCommon/src/cbbItems/apparatusdata.h \
     ../MGCommon/src/cbbItems/apparatuslist.h \
     ../MGCommon/src/msgBox/messagebox.h \
