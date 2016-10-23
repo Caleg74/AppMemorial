@@ -25,7 +25,7 @@ Item {
             color: "#0a3f60"
             horizontalAlignment: Text.AlignLeft
             verticalAlignment: Text.AlignVCenter
-            width: 30
+            width: 40
             height: parent.height
             anchors.left: parent.left
         }
