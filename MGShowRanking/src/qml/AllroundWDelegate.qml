@@ -39,6 +39,7 @@ Item {
                 id: totId
                 startScore: StartScore_Total  // roleName
                 finalScore: FinalScore_Total  // roleName
+                isFinalApparatus: false
                 fontSize: parent.fontSize
                 fontBold: true
                 width: parent.apparatusWidth
@@ -49,6 +50,7 @@ Item {
                 id: vaultId
                 startScore: StartScore_Vault  // roleName
                 finalScore: FinalScore_Vault  // roleName
+                isFinalApparatus: FinalApparatus_Vault // roleName
                 fontSize: parent.fontSize
                 width: parent.apparatusWidth
                 anchors.right: unevBarsId.left
@@ -58,6 +60,7 @@ Item {
                 id: unevBarsId
                 startScore: StartScore_UnBars  // roleName
                 finalScore: FinalScore_UnBars  // roleName
+                isFinalApparatus: FinalApparatus_UnBars // roleName
                 fontSize: parent.fontSize
                 width: parent.apparatusWidth
                 anchors.right: balanceBId.left
@@ -67,6 +70,7 @@ Item {
                 id: balanceBId
                 startScore: StartScore_BalBeam  // roleName
                 finalScore: FinalScore_BalBeam  // roleName
+                isFinalApparatus: FinalApparatus_BalBeam // roleName
                 fontSize: parent.fontSize
                 width: parent.apparatusWidth
                 anchors.right: floorId.left
@@ -76,6 +80,7 @@ Item {
                 id: floorId
                 startScore: StartScore_Floor  // roleName
                 finalScore: FinalScore_Floor  // roleName
+                isFinalApparatus: FinalApparatus_Floor // roleName
                 fontSize: parent.fontSize
                 width: parent.apparatusWidth
                 anchors.right: parent.right

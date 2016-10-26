@@ -9,6 +9,7 @@ Item {
     property bool separatorVisible: true;
     property int fontSize: 15;
     property bool fontBold: false;
+    property bool isFinalApparatus: false;
 
     width: parent.widthh
     height: parent.height
@@ -32,6 +33,7 @@ Item {
                 text: root.finalScore
                 font.pointSize: fontSize
                 font.bold: fontBold
+                font.italic: isFinalApparatus
                 color: "#0a3f60"
                 horizontalAlignment: Text.AlignLeft
                 verticalAlignment: Text.AlignVCenter
@@ -46,6 +48,7 @@ Item {
                 text: root.startScore // root.startScore !== "0" ? "("+ root.startScore +")" : ""
                 font.pointSize: fontSize * 2 / 3
                 font.bold: false
+                font.italic: isFinalApparatus
                 color: "#0a3f60"
                 horizontalAlignment: Text.AlignLeft
                 verticalAlignment: Text.AlignVCenter

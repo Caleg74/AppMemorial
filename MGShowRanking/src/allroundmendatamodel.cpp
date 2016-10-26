@@ -137,49 +137,67 @@ QVariant AllroundMenDataModel::data(const QModelIndex & index, int role) const {
         return gymnast.getStartScore(ApparatusList::AMFloor);
     else if (role == FinalScoreFloorRole)
         return gymnast.getFinalScore(ApparatusList::AMFloor);
+    else if (role == FinalApparatusFloorRole)
+        return gymnast.isFinalApparatusScore(ApparatusList::AMFloor);
     else if (role == StartScorePHorseRole)
         return gymnast.getStartScore(ApparatusList::AMPommelHores);
     else if (role == FinalScorePHorseRole)
         return gymnast.getFinalScore(ApparatusList::AMPommelHores);
+    else if (role == FinalApparatusPHorseRole)
+        return gymnast.isFinalApparatusScore(ApparatusList::AMPommelHores);
     else if (role == StartScoreRingsRole)
         return gymnast.getStartScore(ApparatusList::AMRings);
     else if (role == FinalScoreRingsRole)
         return gymnast.getFinalScore(ApparatusList::AMRings);
+    else if (role == FinalApparatusRingsRole)
+        return gymnast.isFinalApparatusScore(ApparatusList::AMRings);
     else if (role == StartScoreVaultRole)
         return gymnast.getStartScore(ApparatusList::AMVault);
     else if (role == FinalScoreVaultRole)
         return gymnast.getFinalScore(ApparatusList::AMVault);
+    else if (role == FinalApparatusVaultRole)
+        return gymnast.isFinalApparatusScore(ApparatusList::AMVault);
     else if (role == StartScorePBarsRole)
         return gymnast.getStartScore(ApparatusList::AMParallelBars);
     else if (role == FinalScorePBarsRole)
         return gymnast.getFinalScore(ApparatusList::AMParallelBars);
-    else if (role == StartScoreHbarRole)
+    else if (role == FinalApparatusPBarsRole)
+        return gymnast.isFinalApparatusScore(ApparatusList::AMParallelBars);
+    else if (role == StartScoreHBarRole)
         return gymnast.getStartScore(ApparatusList::AMHorizontalBar);
-    else if (role == FinalScoreHbarRole)
+    else if (role == FinalScoreHBarRole)
         return gymnast.getFinalScore(ApparatusList::AMHorizontalBar);
+    else if (role == FinalApparatusHBarRole)
+        return gymnast.isFinalApparatusScore(ApparatusList::AMHorizontalBar);
 
     return QVariant();
 }
 
 QHash<int, QByteArray> AllroundMenDataModel::roleNames() const {
     QHash<int, QByteArray> roles;
-    roles[RankRole            ] = "Rank";
-    roles[NameFullRole        ] = "NameFull";
-    roles[FlagImageRole       ] = "FlagImage";
-    roles[StartScoreTotalRole ] = "StartScore_Total";
-    roles[FinalScoreTotalRole ] = "FinalScore_Total";
-    roles[StartScoreFloorRole ] = "StartScore_Floor";
-    roles[FinalScoreFloorRole ] = "FinalScore_Floor";
-    roles[StartScorePHorseRole] = "StartScore_PHorse";
-    roles[FinalScorePHorseRole] = "FinalScore_PHorse";
-    roles[StartScoreRingsRole ] = "StartScore_Rings";
-    roles[FinalScoreRingsRole ] = "FinalScore_Rings";
-    roles[StartScoreVaultRole ] = "StartScore_Vault";
-    roles[FinalScoreVaultRole ] = "FinalScore_Vault";
-    roles[StartScorePBarsRole ] = "StartScore_ParallelBars";
-    roles[FinalScorePBarsRole ] = "FinalScore_ParallelBars";
-    roles[StartScoreHbarRole  ] = "StartScore_HBar";
-    roles[FinalScoreHbarRole  ] = "FinalScore_HBar";
+    roles[RankRole            ]      = "Rank";
+    roles[NameFullRole        ]      = "NameFull";
+    roles[FlagImageRole       ]      = "FlagImage";
+    roles[StartScoreTotalRole ]      = "StartScore_Total";
+    roles[FinalScoreTotalRole ]      = "FinalScore_Total";
+    roles[StartScoreFloorRole ]      = "StartScore_Floor";
+    roles[FinalScoreFloorRole ]      = "FinalScore_Floor";
+    roles[FinalApparatusFloorRole ]  = "FinalApparatus_Floor";
+    roles[StartScorePHorseRole]      = "StartScore_PHorse";
+    roles[FinalScorePHorseRole]      = "FinalScore_PHorse";
+    roles[FinalApparatusPHorseRole ] = "FinalApparatus_PHorse";
+    roles[StartScoreRingsRole ]      = "StartScore_Rings";
+    roles[FinalScoreRingsRole ]      = "FinalScore_Rings";
+    roles[FinalApparatusRingsRole ]  = "FinalApparatus_Rings";
+    roles[StartScoreVaultRole ]      = "StartScore_Vault";
+    roles[FinalScoreVaultRole ]      = "FinalScore_Vault";
+    roles[FinalApparatusVaultRole ]  = "FinalApparatus_Vault";
+    roles[StartScorePBarsRole ]      = "StartScore_ParallelBars";
+    roles[FinalScorePBarsRole ]      = "FinalScore_ParallelBars";
+    roles[FinalApparatusPBarsRole ]  = "FinalApparatus_ParallelBars";
+    roles[StartScoreHBarRole  ]      = "StartScore_HBar";
+    roles[FinalScoreHBarRole  ]      = "FinalScore_HBar";
+    roles[FinalApparatusHBarRole ]   = "FinalApparatus_HBar";
 
     return roles;
 }

@@ -13,12 +13,16 @@ public:
         FinalScoreTotalRole,
         StartScoreVaultRole,
         FinalScoreVaultRole,
+        FinalApparatusVaultRole,
         StartScoreUnBarsRole,
         FinalScoreUnBarsRole,
+        FinalApparatusUnBarsRole,
         StartScoreBalBeamRole,
         FinalScoreBalBeamRole,
+        FinalApparatusBalBeamRole,
         StartScoreFloorRole,
         FinalScoreFloorRole,
+        FinalApparatusFloorRole
      };
 
     AllroundWomenDataModel(QObject *parent = 0);

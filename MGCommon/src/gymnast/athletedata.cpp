@@ -110,6 +110,22 @@ void AthleteData::setIsFinalApparatusScore(int p_iApparatus, bool p_bIsFinalAppa
     m_vecScore[p_iApparatus].IsFinalApparatus = p_bIsFinalApparatus;
 }
 
+bool AthleteData::isFinalApparatusScore(int p_iApparatus) const
+{
+    if (m_eGender == Male)
+    {
+        if (p_iApparatus >= (ApparatusList::AMApparatusMax))
+            qCritical() << "getFinalScore(): p_iApparatus(M) " << p_iApparatus << " is out-of-range";
+    }
+    else
+    {
+        if (p_iApparatus >= (ApparatusList::AWApparatusMax))
+            qCritical() << "getFinalScore(): p_iApparatus(W) " << p_iApparatus << " is out-of-range";
+    }
+
+    return m_vecScore[p_iApparatus].IsFinalApparatus;
+}
+
 void AthleteData::setStartScore(int p_iApparatus, float p_fScore)
 {
     if (m_eGender == Male)

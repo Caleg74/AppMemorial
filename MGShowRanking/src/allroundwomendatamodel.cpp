@@ -138,37 +138,49 @@ QVariant AllroundWomenDataModel::data(const QModelIndex & index, int role) const
         return gymnast.getStartScore(ApparatusList::AWVault);
     else if (role == FinalScoreVaultRole)
         return gymnast.getFinalScore(ApparatusList::AWVault);
+    else if (role == FinalApparatusVaultRole)
+        return gymnast.isFinalApparatusScore(ApparatusList::AWVault);
     else if (role == StartScoreUnBarsRole)
         return gymnast.getStartScore(ApparatusList::AWUnevenBars);
     else if (role == FinalScoreUnBarsRole)
         return gymnast.getFinalScore(ApparatusList::AWUnevenBars);
+    else if (role == FinalApparatusUnBarsRole)
+        return gymnast.isFinalApparatusScore(ApparatusList::AWUnevenBars);
     else if (role == StartScoreBalBeamRole)
         return gymnast.getStartScore(ApparatusList::AWBalanceBeam);
     else if (role == FinalScoreBalBeamRole)
         return gymnast.getFinalScore(ApparatusList::AWBalanceBeam);
+    else if (role == FinalApparatusBalBeamRole)
+        return gymnast.isFinalApparatusScore(ApparatusList::AWBalanceBeam);
     else if (role == StartScoreFloorRole)
         return gymnast.getStartScore(ApparatusList::AWFloor);
     else if (role == FinalScoreFloorRole)
         return gymnast.getFinalScore(ApparatusList::AWFloor);
+    else if (role == FinalApparatusFloorRole)
+        return gymnast.isFinalApparatusScore(ApparatusList::AWFloor);
 
     return QVariant();
 }
 
 QHash<int, QByteArray> AllroundWomenDataModel::roleNames() const {
     QHash<int, QByteArray> roles;
-    roles[RankRole             ] = "Rank";
-    roles[NameFullRole         ] = "NameFull";
-    roles[FlagImageRole        ] = "FlagImage";
-    roles[StartScoreTotalRole  ] = "StartScore_Total";
-    roles[FinalScoreTotalRole  ] = "FinalScore_Total";
-    roles[StartScoreFloorRole  ] = "StartScore_Floor";
-    roles[FinalScoreFloorRole  ] = "FinalScore_Floor";
-    roles[StartScoreUnBarsRole ] = "StartScore_UnBars";
-    roles[FinalScoreUnBarsRole ] = "FinalScore_UnBars";
-    roles[StartScoreBalBeamRole] = "StartScore_BalBeam";
-    roles[FinalScoreBalBeamRole] = "FinalScore_BalBeam";
-    roles[StartScoreVaultRole  ] = "StartScore_Vault";
-    roles[FinalScoreVaultRole  ] = "FinalScore_Vault";
+    roles[RankRole             ]     = "Rank";
+    roles[NameFullRole         ]     = "NameFull";
+    roles[FlagImageRole        ]     = "FlagImage";
+    roles[StartScoreTotalRole  ]     = "StartScore_Total";
+    roles[FinalScoreTotalRole  ]     = "FinalScore_Total";
+    roles[StartScoreFloorRole  ]     = "StartScore_Floor";
+    roles[FinalScoreFloorRole  ]     = "FinalScore_Floor";
+    roles[FinalApparatusFloorRole]   = "FinalApparatus_Floor";
+    roles[StartScoreUnBarsRole ]     = "StartScore_UnBars";
+    roles[FinalScoreUnBarsRole ]     = "FinalScore_UnBars";
+    roles[FinalApparatusUnBarsRole]  = "FinalApparatus_UnBars";
+    roles[StartScoreBalBeamRole]     = "StartScore_BalBeam";
+    roles[FinalScoreBalBeamRole]     = "FinalScore_BalBeam";
+    roles[FinalApparatusBalBeamRole] = "FinalApparatus_BalBeam";
+    roles[StartScoreVaultRole  ]     = "StartScore_Vault";
+    roles[FinalScoreVaultRole  ]     = "FinalScore_Vault";
+    roles[FinalApparatusVaultRole]   = "FinalApparatus_Vault";
 
 
     return roles;

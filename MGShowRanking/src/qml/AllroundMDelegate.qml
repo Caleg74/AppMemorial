@@ -39,6 +39,7 @@ Item {
                 id: totId
                 finalScore: FinalScore_Total  // roleName
                 startScore: StartScore_Total  // roleName
+                isFinalApparatus: false
                 fontSize: parent.fontSize
                 fontBold: true
                 width: parent.apparatusWidth
@@ -49,6 +50,7 @@ Item {
                 id: floorId
                 startScore: StartScore_Floor  // roleName
                 finalScore: FinalScore_Floor  // roleName
+                isFinalApparatus: FinalApparatus_Floor // roleName
                 fontSize: parent.fontSize
                 width: parent.apparatusWidth
                 anchors.right: phorseId.left
@@ -58,6 +60,7 @@ Item {
                 id: phorseId
                 startScore: StartScore_PHorse  // roleName
                 finalScore: FinalScore_PHorse  // roleName
+                isFinalApparatus: FinalApparatus_PHorse // roleName
                 fontSize: parent.fontSize
                 width: parent.apparatusWidth
                 anchors.right: ringsId.left
@@ -67,6 +70,7 @@ Item {
                 id: ringsId
                 startScore: StartScore_Rings  // roleName
                 finalScore: FinalScore_Rings  // roleName
+                isFinalApparatus: FinalApparatus_Rings // roleName
                 fontSize: parent.fontSize
                 width: parent.apparatusWidth
                 anchors.right: vaultId.left
@@ -76,6 +80,7 @@ Item {
                 id: vaultId
                 startScore: StartScore_Vault  // roleName
                 finalScore: FinalScore_Vault  // roleName
+                isFinalApparatus: FinalApparatus_Vault // roleName
                 fontSize: parent.fontSize
                 width: parent.apparatusWidth
                 anchors.right: pbarsId.left
@@ -85,6 +90,7 @@ Item {
                 id: pbarsId
                 startScore: StartScore_ParallelBars  // roleName
                 finalScore: FinalScore_ParallelBars  // roleName
+                isFinalApparatus: FinalApparatus_ParallelBars // roleName
                 fontSize: parent.fontSize
                 width: parent.apparatusWidth
                 anchors.right: hbarId.left
@@ -94,6 +100,7 @@ Item {
                 id: hbarId
                 startScore: StartScore_HBar  // roleName
                 finalScore: FinalScore_HBar  // roleName
+                isFinalApparatus: FinalApparatus_HBar // roleName
                 fontSize: parent.fontSize
                 width: parent.apparatusWidth
                 separatorVisible: false

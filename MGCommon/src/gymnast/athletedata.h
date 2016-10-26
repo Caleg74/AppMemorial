@@ -37,6 +37,8 @@ public:
     QString getImagePath() const;
 
     void setIsFinalApparatusScore(int p_iApparatus, bool p_bIsFinalApparatus);
+    bool isFinalApparatusScore(int p_iApparatus) const;
+
     void setStartScore(int p_iApparatus, float p_fScore);
     QString getStartScore(int p_iApparatus) const;
 
