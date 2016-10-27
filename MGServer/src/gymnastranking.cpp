@@ -114,10 +114,12 @@ void GymnastRanking::updateSingleScores(int p_iApparatusId, QList<SingleMWData>*
         float fStartScore = dbInterface::Instance()->getStartScore(iAthleteId, p_iApparatusId);
         float fFinalScore = dbInterface::Instance()->getFinalScore(iAthleteId, p_iApparatusId);
         int iForceScore   = dbInterface::Instance()->getForceScore(iAthleteId, p_iApparatusId);
+        float fTotalAllroundScore = dbInterface::Instance()->getAllroundTotalScore(iAthleteId);
 
         iter->setFinalScore(fFinalScore);
         iter->setStartScore(fStartScore);
         iter->setForceScore(iForceScore);
+        iter->setAllroundTotalScore(fTotalAllroundScore);
     }
 
     // sort the list

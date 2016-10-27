@@ -46,6 +46,7 @@ SingleMWData::SingleMWData(const int p_iAthleteId,
                            const QString& imagePath)
     : m_iAthleteId(p_iAthleteId)
     , m_iRank(0)
+    , m_fAllroundScore(0.0)
     , m_nameFull(fullName)
     , m_nation(nation)
     , m_imagePath(imagePath)
@@ -109,6 +110,11 @@ void SingleMWData::setForceScore(int p_iForceScore)
     m_sScore.ForceScore = p_iForceScore;
 }
 
+void SingleMWData::setAllroundTotalScore(float p_fAllroundTotScore)
+{
+    m_fAllroundScore = p_fAllroundTotScore;
+}
+
 bool SingleMWData::operator<(const SingleMWData other) const
 {
     // each return value is ! (inverted), since the sorting is not ascending but descending
@@ -116,32 +122,44 @@ bool SingleMWData::operator<(const SingleMWData other) const
     {
         return !true;
     }
-    else if (m_sScore.FinalScore == other.m_sScore.FinalScore)
+    else if (m_sScore.FinalScore > other.m_sScore.FinalScore)
     {
-        if (m_sScore.StartScore > other.m_sScore.StartScore)
+        return !false;
+    }
+    else //(m_sScore.FinalScore == other.m_sScore.FinalScore)
+    {
+        // 2nd criteria is the final Allround ranking
+        if (m_fAllroundScore < other.m_fAllroundScore)
         {
             return !true;
         }
-        else if (m_sScore.StartScore == other.m_sScore.StartScore)
+        else if (m_fAllroundScore > other.m_fAllroundScore)
         {
-            // TODO lok for a "manual flagW that makes the difference
-            if (m_sScore.ForceScore < other.m_sScore.ForceScore)
+            return !false;
+        }
+        else    // (m_iAllroundRank == other.m_iAllroundRank)
+        {
+            // 3rd criteria is  "manual flag" a force_score that makes the difference
+            if (m_sScore.StartScore > other.m_sScore.StartScore)
             {
                 return !true;
+            }
+            else if (m_sScore.StartScore == other.m_sScore.StartScore)
+            {
+                 if (m_sScore.ForceScore < other.m_sScore.ForceScore)
+                {
+                    return !true;
+                }
+                else
+                {
+                    return !false;
+                }
             }
             else
             {
                 return !false;
             }
         }
-        else
-        {
-            return !false;
-        }
-    }
-    else
-    {
-        return !false;
     }
 }
 

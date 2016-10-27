@@ -35,6 +35,11 @@ public:
     QString getFinalScore() const;
 
     void setForceScore(int p_iForceScore);
+
+    /** Sets the allround total score.
+     *  It shall be used only in case of equal score */
+    void setAllroundTotalScore(float p_fAllroundTotScore);
+
 //    QString getForceScore() const;
 
     friend bool operator== (const SingleMWData& lhs, const SingleMWData& rhs);
@@ -44,10 +49,10 @@ public:
     bool operator<(const SingleMWData other) const;
 
 
-
 private:
     int m_iAthleteId;
     int m_iRank;
+    float m_fAllroundScore;    // just in case of equalscore
     QString m_nameFull;
     QString m_nation;
     QString m_imagePath;

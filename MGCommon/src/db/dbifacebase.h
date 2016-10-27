@@ -68,6 +68,8 @@ public:
 
     int getForceScore(const int p_iAthleteId, const int p_iApparatusId);
 
+    float getAllroundTotalScore(const int p_iAthleteId);
+
 protected:
 
     int m_iCurrentYear;

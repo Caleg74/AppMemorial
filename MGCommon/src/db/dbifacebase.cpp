@@ -539,3 +539,38 @@ int dbIfaceBase::getForceScore(const int p_iAthleteId, const int p_iApparatusId)
 
     return iForceScore;
 }
+
+float dbIfaceBase::getAllroundTotalScore(const int p_iAthleteId)
+{
+    float fTotalScore = 0.0;
+
+    if (m_bInitialized)
+    {
+        QSqlDatabase db = QSqlDatabase::database("ConnMG");
+        QSqlQuery query(db);
+
+        int iEventId = getCurrentEventId();
+
+        QString strQuery = "SELECT total_final_score FROM total_scores_vw WHERE "
+                  " sport_event_id = "   + QString::number(iEventId, 10) +
+                  " AND athlete_id = "   + QString::number(p_iAthleteId, 10);
+
+        query.exec(strQuery);
+
+        while (query.next())
+        {
+            fTotalScore = query.value(0).toFloat();
+        }
+
+        if (iEventId == 0)
+        {
+            qCritical() << "No Id found for event year: " << m_iCurrentYear;
+        }
+    }
+    else
+    {
+        qInfo() << "dbInterface::getAllroundTotalScore(): Db not initialized";
+    }
+
+    return fTotalScore;
+}
