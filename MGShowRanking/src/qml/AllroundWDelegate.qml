@@ -3,7 +3,7 @@ import QtQuick 2.0
 Item {
     id: allroundMDelegate
     width: parent.width
-    height: 50
+    height: 45
 
     Rectangle {
         y: 20

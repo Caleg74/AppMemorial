@@ -1,9 +1,9 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include <QDebug>
 #include "coreapplication.h"
 #include "apparatuslist.h"
 #include "gymnasteventlist.h"
-
 
 int main(int argc, char *argv[])
 {
@@ -12,17 +12,25 @@ int main(int argc, char *argv[])
     QQmlApplicationEngine engine;
 
     CoreApplication cCoreApp;
-    cCoreApp.Init(engine);
 
-    GymnastEventList::Instance()->Init(engine);
+    if (cCoreApp.Init(engine))
+    {
+        GymnastEventList::Instance()->Init(engine);
 
-    engine.load(QUrl(QStringLiteral("qrc:qml/main.qml")));
 
-    cCoreApp.Connect();   // connect all signals from the UI
+        engine.load(QUrl(QStringLiteral("qrc:qml/main.qml")));
 
-//    QObject *topLevel = engine.rootObjects().value(0);
-//    QQuickWindow *window = qobject_cast<QQuickWindow *>(topLevel);
-//    window->show();
+        cCoreApp.Connect();   // connect all signals from the UI
 
-    return app.exec();
-}
+    //    QObject *topLevel = engine.rootObjects().value(0);
+    //    QQuickWindow *window = qobject_cast<QQuickWindow *>(topLevel);
+    //    window->show();
+
+        return app.exec();
+    }
+    else
+    {
+        qCritical() << "Initalization failed, application closed";
+    }
+    return 0;
+} 

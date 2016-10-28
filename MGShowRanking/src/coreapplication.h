@@ -19,7 +19,7 @@ public:
     virtual ~CoreApplication();
 
     /** Initializes the core application components */
-    void Init(QQmlApplicationEngine &p_qEngine);
+    bool Init(QQmlApplicationEngine &p_qEngine);
 
     /** Connectes all UI signals */
     void Connect();

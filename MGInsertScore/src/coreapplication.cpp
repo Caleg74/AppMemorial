@@ -19,7 +19,7 @@ CoreApplication::~CoreApplication()
 
 }
 
-void CoreApplication::Init(QQmlApplicationEngine& p_qEngine)
+bool CoreApplication::Init(QQmlApplicationEngine& p_qEngine)
 {
     if (dbInterface::Instance()->loadDriver())
     {
@@ -27,13 +27,13 @@ void CoreApplication::Init(QQmlApplicationEngine& p_qEngine)
     }
     else
     {
-        return;
+        return false;
     }
 
     // initialize the database
     if (!dbInterface::Instance()->initDb(false))
     {
-        return;
+        return false;
     }
 
     // save it as a class member
@@ -49,6 +49,8 @@ void CoreApplication::Init(QQmlApplicationEngine& p_qEngine)
 //    m_qProxyModel->setFilterRegExp("0");    // enum value of "SignalDoor"
 //    connect(pGymModel, SIGNAL(OutputChanged(unsigned int)),
 //            &m_cIoWrap, SLOT(SetOutput(unsigned int)));
+
+    return true;
 }
 
 void CoreApplication::Connect()

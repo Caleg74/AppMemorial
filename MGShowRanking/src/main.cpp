@@ -24,15 +24,19 @@ int main(int argc, char ** argv)
     QQmlApplicationEngine engine;
 
     CoreApplication cCoreApp;
-    cCoreApp.Init(engine);
+    if (cCoreApp.Init(engine))
+    {
+        engine.load(QUrl(QStringLiteral("qrc:qml/main.qml")));
 
-    engine.load(QUrl(QStringLiteral("qrc:qml/main.qml")));
+        cCoreApp.Connect();   // connect all signals from the UI
 
-    cCoreApp.Connect();   // connect all signals from the UI
-
-
-    return app.exec();
-
+        return app.exec();
+    }
+    else
+    {
+        qCritical() << "Initalization failed, application closed";
+    }
+    return 0;
 }
 
 void signalHandler(int signal)

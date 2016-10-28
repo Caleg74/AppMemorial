@@ -18,9 +18,9 @@ Item {
 
         Rectangle {
             id: menTitleSpace
-            y: 50
+            y: 20
             height:  parent.height / 12
-            width: parent.width
+            width: parent.width - 14 // scroll bar size
             radius: 5
             border.width: 2
             border.color: "#0a3f60"
@@ -115,7 +115,7 @@ Item {
         }
 
         ScrollView {
-            width: parent.width
+            width: parent.width - 14 // scroll bar size
             height: parent.height
             anchors.top: menTitleSpace.bottom
             anchors.bottom: root.bottom
@@ -147,7 +147,7 @@ Item {
                         anchors.fill: parent
                         anchors.topMargin: 6
                         anchors.leftMargin: 4
-                        anchors.rightMargin: 4
+                        anchors.rightMargin: -4
                         anchors.bottomMargin: 6
                     }
                 }
