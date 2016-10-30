@@ -19,6 +19,7 @@ Item {
 
         Text{
             id: lblTitleWomen
+            renderType: Text.NativeRendering
             text: "Attrezzo Femminile: "
             font.pixelSize: Math.max(parent.width / 20, 6)
             anchors.verticalCenter: parent.verticalCenter

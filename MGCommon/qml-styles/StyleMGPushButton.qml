@@ -36,6 +36,7 @@
 
           Text {
               id: innerText
+              renderType: Text.NativeRendering
               font.pointSize: fontSize
               anchors.centerIn: parent
           }

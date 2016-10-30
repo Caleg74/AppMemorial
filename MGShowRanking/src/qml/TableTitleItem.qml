@@ -19,8 +19,8 @@ Item {
         anchors.margins: 10
 
         Text {
-
             id: titleItemName
+            renderType: Text.NativeRendering
             text: parent.parent.text
             font.pointSize: fontSize
             color: "#0a3f60"

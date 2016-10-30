@@ -87,6 +87,7 @@ Item {
                 }
 
                 Text {
+                    renderType: Text.NativeRendering
                     horizontalAlignment: Qt.AlignHCenter; verticalAlignment: Qt.AlignVCenter
                     anchors.fill: parent
                     text: stack.children[index].title

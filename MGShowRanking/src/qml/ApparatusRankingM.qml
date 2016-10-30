@@ -19,6 +19,7 @@ Item {
 
         Text{
             id: lblTitleMen
+            renderType: Text.NativeRendering
             text: "Attrezzo Maschile: "
             font.pixelSize: Math.max(parent.width / 20, 6)
             anchors.verticalCenter: parent.verticalCenter

@@ -79,6 +79,7 @@ Item {
                    spacing: 10
 
                    label: Text {
+                           renderType: Text.NativeRendering
                            font.pointSize: 15
                            color: "#0a3f60"
                            text: control.text

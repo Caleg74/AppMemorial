@@ -19,6 +19,7 @@ Item {
 
         Text {
             id: rankId
+            renderType: Text.NativeRendering
             text: parent.parent.rank
             font.bold: true
             font.pointSize: fontSize
@@ -32,6 +33,7 @@ Item {
 
         Text {
             id: fullnameId
+            renderType: Text.NativeRendering
             text: parent.parent.nameFull
             font.pointSize: fontSize
             color: "#0a3f60"

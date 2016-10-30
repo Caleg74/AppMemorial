@@ -15,6 +15,7 @@ Component {
         }
 
         label: Text {
+            renderType: Text.NativeRendering
             verticalAlignment: Text.AlignVCenter
             horizontalAlignment: Text.AlignHCenter
             font.pointSize: 15
@@ -37,6 +38,7 @@ Component {
 
             itemDelegate.label:             // an item text
                 Text {
+                renderType: Text.NativeRendering
                 verticalAlignment: Text.AlignVCenter
                 horizontalAlignment: Text.AlignHCenter
                 font.pointSize: 15
@@ -65,6 +67,7 @@ Component {
             }
 
             property Component menuItemPanel: Text {
+                renderType: Text.NativeRendering
                 text: "NOT IMPLEMENTED"
                 color: "red"
                 font {

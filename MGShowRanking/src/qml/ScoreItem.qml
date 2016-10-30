@@ -30,6 +30,7 @@ Item {
 
             Text {
                 id: finalScore
+                renderType: Text.NativeRendering
                 text: root.finalScore
                 font.pointSize: fontSize
                 font.bold: fontBold
@@ -45,6 +46,7 @@ Item {
 
             Text {
                 id: startScore
+                renderType: Text.NativeRendering
                 text: root.startScore // root.startScore !== "0" ? "("+ root.startScore +")" : ""
                 font.pointSize: fontSize * 2 / 3
                 font.bold: false

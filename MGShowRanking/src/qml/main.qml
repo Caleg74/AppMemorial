@@ -115,6 +115,7 @@ Window {
                 anchors.fill: parent; anchors.margins: 20
                 color: "#d0d0d0"
                 Text {
+                    renderType: Text.NativeRendering
                     width: parent.width - 20
                     anchors.centerIn: parent; horizontalAlignment: Qt.AlignHCenter
                     text: "Classifica Generale"
