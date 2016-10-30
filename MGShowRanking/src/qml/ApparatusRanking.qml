@@ -5,7 +5,8 @@ import QtQuick.Controls.Styles 1.1
 Item {
 //    width: parent.width
 //    height: parent.height
-
+    id: idSingleRanking
+    objectName: "idSingleRanking"
 
     Rectangle {
 

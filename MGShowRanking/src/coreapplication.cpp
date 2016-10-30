@@ -180,17 +180,48 @@ void CoreApplication::onWindowClosing(QQuickCloseEvent* p_event)
 
 void CoreApplication::updateScores()
 {
-        m_pGymMenModel->updateScores();
-        m_qSortMProxy->sort(0, Qt::AscendingOrder);
+        QQuickItem* qMenRankingTab = m_pAppEngine->rootObjects().first()->findChild<QQuickItem*>("idMenRanking");
+        if (qMenRankingTab == nullptr)
+        {
+            qCritical() << "Item idMenRanking not found";
+            return;
+        }
 
-        m_pGymWomenModel->updateScores();
-        m_qSortWProxy->sort(0, Qt::AscendingOrder);
+        QQuickItem* qWomenRankingTab = m_pAppEngine->rootObjects().first()->findChild<QQuickItem*>("idWomenRanking");
+        if (qMenRankingTab == nullptr)
+        {
+            qCritical() << "Item idWomenRanking not found";
+            return;
+        }
 
-        m_pSingleMModel->updateScores();
-        m_qSortSingleMProxy->sort(0, Qt::AscendingOrder);
+        QQuickItem* qSingleRankingTab = m_pAppEngine->rootObjects().first()->findChild<QQuickItem*>("idSingleRanking");
+        if (qMenRankingTab == nullptr)
+        {
+            qCritical() << "Item idSingleRanking not found";
+            return;
+        }
 
-        m_pSingleWModel->updateScores();
-        m_qSortSingleWProxy->sort(0, Qt::AscendingOrder);
+        // update only the current selected tab
+        if (qMenRankingTab->isEnabled())
+        {
+            m_pGymMenModel->updateScores();
+            m_qSortMProxy->sort(0, Qt::AscendingOrder);
+        }
+
+        if (qWomenRankingTab->isEnabled())
+        {
+            m_pGymWomenModel->updateScores();
+            m_qSortWProxy->sort(0, Qt::AscendingOrder);
+        }
+
+        if (qSingleRankingTab->isEnabled())
+        {
+            m_pSingleMModel->updateScores();
+            m_qSortSingleMProxy->sort(0, Qt::AscendingOrder);
+
+            m_pSingleWModel->updateScores();
+            m_qSortSingleWProxy->sort(0, Qt::AscendingOrder);
+        }
 }
 
 void CoreApplication::onApparatusMChanged(QString p_currentTxt)
