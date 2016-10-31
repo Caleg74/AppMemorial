@@ -48,7 +48,7 @@ Item {
                 id: startScore
                 renderType: Text.NativeRendering
                 text: root.startScore // root.startScore !== "0" ? "("+ root.startScore +")" : ""
-                font.pointSize: fontSize * 2 / 3
+                font.pointSize: fontSize * 3/4
                 font.bold: false
                 font.italic: isFinalApparatus
                 color: "#0a3f60"

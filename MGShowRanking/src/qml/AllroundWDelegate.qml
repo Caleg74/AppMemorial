@@ -22,7 +22,7 @@ Item {
             anchors.fill: parent
 //            height: parent.height
 //            width: parent.width
-            property int fontSize:  Math.max(parent.width / 100, 6)
+            property int fontSize:  Math.max(parent.width / 90, 6)
 
 
             GymnastPosItem {
