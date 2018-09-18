@@ -9,7 +9,8 @@ dbIfaceBase::dbIfaceBase()
 : dBConnection()
 {
     QDate qDate = QDate::currentDate();
-    m_iCurrentYear = qDate.year();
+    m_iCurrentYear = qDate.year();  // GCADBG ori
+    m_iCurrentYear = 2016;          // Just for test on old DB
 }
 
 void dbIfaceBase::getCountriesList(QStringList* p_pList)

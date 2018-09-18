@@ -57,14 +57,9 @@ void CreatePdf::Print()
             qWarning("failed in flushing page to disk, disk full?");
         }
 
-        m_cRank.updateSingleScores(ApparatusList::AMParallelBars);
-        PrintMenCityTrophy(bWithLogo);
-        if (! m_printer.newPage()) {
-            qWarning("failed in flushing page to disk, disk full?");
-        }
+        PrintAllSingleApparatusMen(bWithLogo);
 
-        m_cRank.updateSingleScores(ApparatusList::AWFloor);
-        PrintWomenCityTrophy(bWithLogo);
+        PrintAllSingleApparatusWomen(bWithLogo);
 
         m_painter.end();
 
@@ -155,73 +150,95 @@ void CreatePdf::PrintWomenAllround(bool p_bHFImages)
     doc.drawContents(&m_painter);
 }
 
-void CreatePdf::PrintMenCityTrophy(bool p_bHFImages)
+void CreatePdf::PrintAllSingleApparatusMen(bool p_bHFImages)
 {
     QTextDocument doc;
     QTextCursor cur(&doc);
 
-    if (QFile::exists("../MGServer/pdf/OUT_MenCityTrophy.html"))
-        QFile::remove("../MGServer/pdf/OUT_MenCityTrophy.html");
-    QFile fileOut("../MGServer/pdf/OUT_MenCityTrophy.html");
-    if(!fileOut.open(QIODevice::ReadWrite)) {
-        qDebug() << "Unable to open file " << fileOut.errorString();
+    for (int apparatus = ApparatusList::AGFirstApparatus; apparatus < ApparatusList::AMApparatusMax; apparatus++)
+    {
+        if (QFile::exists("../MGServer/pdf/OUT_SingleApparatusMen.html"))
+            QFile::remove("../MGServer/pdf/OUT_SingleApparatusMen.html");
+        QFile fileOut("../MGServer/pdf/OUT_SingleApparatusMen.html");
+        if(!fileOut.open(QIODevice::ReadWrite)) {
+            qDebug() << "Unable to open file " << fileOut.errorString();
+        }
+        QTextStream out(&fileOut);
+
+        PrintHeader(p_bHFImages, out);
+
+        m_cRank.updateSingleScores(static_cast<ApparatusList::EApparatusMen>(apparatus));
+
+        PrintSingleMApparatusTableTitle(out, static_cast<ApparatusList::EApparatusMen>(apparatus));
+
+        PrintSingleMApparatusTableBody(out);
+
+        PrintFooter(p_bHFImages, out);
+
+        // Read the output files and import it as html document
+        fileOut.close();
+        QFile fileIn("../MGServer/pdf/OUT_SingleApparatusMen.html");
+        if(!fileIn.open(QIODevice::ReadOnly)) {
+            qDebug() << "Unable to open file " << fileIn.errorString();
+        }
+        QTextStream strReadOutCompleteFile(&fileIn);
+        cur.insertHtml(strReadOutCompleteFile.readAll());
+        fileIn.close();
+
+        doc.drawContents(&m_painter);
+
+        if (! m_printer.newPage()) {
+            qWarning("failed in flushing page to disk, disk full?");
+        }
+        doc.clear();
     }
-    QTextStream out(&fileOut);
-
-    PrintHeader(p_bHFImages, out);
-
-    PrintSingleMApparatusTableTitle(out);
-
-    PrintSingleMApparatusTableBody(out);
-
-    PrintFooter(p_bHFImages, out);
-
-    // Read the output files and import it as html document
-    fileOut.close();
-    QFile fileIn("../MGServer/pdf/OUT_MenCityTrophy.html");
-    if(!fileIn.open(QIODevice::ReadOnly)) {
-        qDebug() << "Unable to open file " << fileIn.errorString();
-    }
-    QTextStream strReadOutCompleteFile(&fileIn);
-    cur.insertHtml(strReadOutCompleteFile.readAll());
-    fileIn.close();
-
-    doc.drawContents(&m_painter);
 }
 
-
-void CreatePdf::PrintWomenCityTrophy(bool p_bHFImages)
+void CreatePdf::PrintAllSingleApparatusWomen(bool p_bHFImages)
 {
     QTextDocument doc;
     QTextCursor cur(&doc);
 
-    if (QFile::exists("../MGServer/pdf/OUT_WomenCityTrophy.html"))
-        QFile::remove("../MGServer/pdf/OUT_WomenCityTrophy.html");
-    QFile fileOut("../MGServer/pdf/OUT_WomenCityTrophy.html");
-    if(!fileOut.open(QIODevice::ReadWrite)) {
-        qDebug() << "Unable to open file " << fileOut.errorString();
+    for (int apparatus = ApparatusList::AGFirstApparatus; apparatus < ApparatusList::AWApparatusMax; apparatus++)
+    {
+        if (QFile::exists("../MGServer/pdf/OUT_SingleApparatusWomen.html"))
+            QFile::remove("../MGServer/pdf/OUT_SingleApparatusWomen.html");
+        QFile fileOut("../MGServer/pdf/OUT_SingleApparatusWomen.html");
+        if(!fileOut.open(QIODevice::ReadWrite)) {
+            qDebug() << "Unable to open file " << fileOut.errorString();
+        }
+        QTextStream out(&fileOut);
+
+        PrintHeader(p_bHFImages, out);
+
+        m_cRank.updateSingleScores(static_cast<ApparatusList::EApparatusWomen>(apparatus));
+
+        PrintSingleWApparatusTableTitle(out, static_cast<ApparatusList::EApparatusWomen>(apparatus));
+
+        PrintSingleWApparatusTableBody(out);
+
+        PrintFooter(p_bHFImages, out);
+
+        // Read the output files and import it as html document
+        fileOut.close();
+        QFile fileIn("../MGServer/pdf/OUT_SingleApparatusWomen.html");
+        if(!fileIn.open(QIODevice::ReadOnly)) {
+            qDebug() << "Unable to open file " << fileIn.errorString();
+        }
+        QTextStream strReadOutCompleteFile(&fileIn);
+        cur.insertHtml(strReadOutCompleteFile.readAll());
+        fileIn.close();
+
+        doc.drawContents(&m_painter);
+
+        if (apparatus != (ApparatusList::AWApparatusMax-1))
+        {
+            if (! m_printer.newPage()) {
+                qWarning("failed in flushing page to disk, disk full?");
+            }
+        }
+        doc.clear();
     }
-    QTextStream out(&fileOut);
-
-    PrintHeader(p_bHFImages, out);
-
-    PrintSingleWApparatusTableTitle(out);
-
-    PrintSingleWApparatusTableBody(out);
-
-    PrintFooter(p_bHFImages, out);
-
-    // Read the output files and import it as html document
-    fileOut.close();
-    QFile fileIn("../MGServer/pdf/OUT_WomenCityTrophy.html");
-    if(!fileIn.open(QIODevice::ReadOnly)) {
-        qDebug() << "Unable to open file " << fileIn.errorString();
-    }
-    QTextStream strReadOutCompleteFile(&fileIn);
-    cur.insertHtml(strReadOutCompleteFile.readAll());
-    fileIn.close();
-
-    doc.drawContents(&m_painter);
 }
 
 void CreatePdf::PrintHeader(bool p_bHFImages, QTextStream& out)
@@ -400,9 +417,41 @@ void CreatePdf::PrintWomenTableBody(QTextStream& out)
     }
 }
 
-void CreatePdf::PrintSingleMApparatusTableTitle(QTextStream& out)
+void CreatePdf::PrintSingleMApparatusTableTitle(QTextStream& out, ApparatusList::EApparatusMen p_eApparatus)
 {
-    QFile fileIn("../MGServer/pdf/IN_MenCityTrophyTableTitle.html");
+    QFile fileIn;
+
+    switch (p_eApparatus)
+    {
+    case ApparatusList::EApparatusMen::AMFloor:
+        fileIn.setFileName("../MGServer/pdf/IN_Men_Floor.html");
+        break;
+
+    case ApparatusList::EApparatusMen::AMHorizontalBar:
+        fileIn.setFileName("../MGServer/pdf/IN_Men_HorizontalBar.html");
+        break;
+
+    case ApparatusList::EApparatusMen::AMParallelBars:
+        fileIn.setFileName("../MGServer/pdf/IN_Men_ParallelBars.html");
+        break;
+
+    case ApparatusList::EApparatusMen::AMPommelHores:
+        fileIn.setFileName("../MGServer/pdf/IN_Men_PommelHorse.html");
+        break;
+
+    case ApparatusList::EApparatusMen::AMRings:
+        fileIn.setFileName("../MGServer/pdf/IN_Men_Rings.html");
+        break;
+
+    case ApparatusList::EApparatusMen::AMVault:
+        fileIn.setFileName("../MGServer/pdf/IN_Men_Vault.html");
+        break;
+
+    default:
+        qDebug() << "Unable to find table title for this apparatus " << p_eApparatus;
+
+    }
+
     if(!fileIn.open(QIODevice::ReadOnly)) {
         qDebug() << "Unable to open file " << fileIn.errorString();
     }
@@ -442,12 +491,37 @@ void CreatePdf::PrintSingleMApparatusTableBody(QTextStream& out)
     }
 }
 
-void CreatePdf::PrintSingleWApparatusTableTitle(QTextStream& out)
+void CreatePdf::PrintSingleWApparatusTableTitle(QTextStream& out, ApparatusList::EApparatusWomen p_eApparatus)
 {
-    QFile fileIn("../MGServer/pdf/IN_WomenCityTrophyTableTitle.html");
+    QFile fileIn;
+
+    switch (p_eApparatus)
+    {
+    case ApparatusList::EApparatusWomen::AWFloor:
+        fileIn.setFileName("../MGServer/pdf/IN_Women_Floor.html");
+        break;
+
+    case ApparatusList::EApparatusWomen::AWBalanceBeam:
+        fileIn.setFileName("../MGServer/pdf/IN_Women_BalanceBeam.html");
+        break;
+
+    case ApparatusList::EApparatusWomen::AWUnevenBars:
+        fileIn.setFileName("../MGServer/pdf/IN_Women_UnevenBars.html");
+        break;
+
+    case ApparatusList::EApparatusWomen::AWVault:
+        fileIn.setFileName("../MGServer/pdf/IN_Women_Vault.html");
+        break;
+
+    default:
+        qDebug() << "Unable to find table title for this apparatus " << p_eApparatus;
+
+    }
+
     if(!fileIn.open(QIODevice::ReadOnly)) {
         qDebug() << "Unable to open file " << fileIn.errorString();
     }
+
     QTextStream strTableTitle(&fileIn);
     out << strTableTitle.readAll(); // copy to output file
     fileIn.close();
