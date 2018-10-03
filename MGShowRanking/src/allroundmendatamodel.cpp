@@ -64,6 +64,7 @@ void AllroundMenDataModel::updateScores()
 //            float fStartRandom = fFinalRandom - 10;
             iter->setFinalScore((ApparatusList::EApparatusMen)apparatus, sAllScore.FinalScore);
             iter->setStartScore((ApparatusList::EApparatusMen)apparatus, sAllScore.StartScore);
+            iter->setExecutionScore((ApparatusList::EApparatusMen)apparatus);
             iter->setIsFinalApparatusScore((ApparatusList::EApparatusMen)apparatus, sAllScore.IsFinalApparatus);
         }
         iter->CalculateTotalScore();

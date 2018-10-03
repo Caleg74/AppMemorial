@@ -32,9 +32,9 @@ void CreatePdf::Print()
         QString strFileName = QStandardPaths::writableLocation(QStandardPaths::DesktopLocation);
 
         if (bWithLogo)
-            strFileName += "/MemorialGander2016.pdf";
+            strFileName += "/MemorialGander2018.pdf";
         else
-            strFileName += "/MemorialGander2016_NoImage.pdf";
+            strFileName += "/MemorialGander2018_NoImage.pdf";
 
         m_printer.setOutputFormat(QPrinter::PdfFormat);
         m_printer.setPaperSize(QPrinter::A4);

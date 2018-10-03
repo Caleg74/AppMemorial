@@ -109,7 +109,8 @@ Window {
 
         Rectangle {
             property string title: "Classifica \nSingoli \nAttrezzi"
-            anchors.fill: parent; color: "#d0d0d0"
+            anchors.fill: parent;
+            color: "#d0d0d0"
 
             Rectangle {
                 anchors.fill: parent; anchors.margins: 20
@@ -118,12 +119,27 @@ Window {
                     renderType: Text.NativeRendering
                     width: parent.width - 20
                     anchors.centerIn: parent; horizontalAlignment: Qt.AlignHCenter
-                    text: "Classifica Generale"
+                    text: "Classifica Singoli Attrezzi"
                     font.pixelSize: 20
                     wrapMode: Text.WordWrap
                 }
 
                 ApparatusRanking {
+                    anchors.fill: parent
+                }
+            }
+        }
+
+        Rectangle {
+            property string title: "Cronologia \nNote"
+            anchors.fill: parent;
+            color: "#d0d0d0"
+
+            Rectangle {
+                anchors.fill: parent; anchors.margins: 20
+                color: "#d0d0d0"
+
+                ChronologicalScores {
                     anchors.fill: parent
                 }
             }

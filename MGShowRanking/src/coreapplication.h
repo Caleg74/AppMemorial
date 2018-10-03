@@ -9,6 +9,7 @@
 #include "allroundmendatamodel.h"
 #include "allroundwomendatamodel.h"
 #include "singlemwdatamodel.h"
+#include "chronolistdatamodel.h"
 
 class CoreApplication : public QObject
 {
@@ -43,6 +44,7 @@ private:
     AllroundMenDataModel*   m_pGymMenModel;
     SingleMWDataModel*      m_pSingleMModel;
     SingleMWDataModel*      m_pSingleWModel;
+    ChronoListDataModel*    m_pChronoListModel;
 
     QQmlApplicationEngine* m_pAppEngine;
 
@@ -50,6 +52,7 @@ private:
     SortFilterProxyModel* m_qSortWProxy;
     SortFilterProxyModel* m_qSortSingleMProxy;
     SortFilterProxyModel* m_qSortSingleWProxy;
+    SortFilterProxyModel* m_qSortChronoProxy;
 
     ComboBoxModel m_cbbApparatusMen;
     ComboBoxModel m_cbbApparatusWomen;

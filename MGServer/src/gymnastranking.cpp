@@ -149,6 +149,7 @@ void GymnastRanking::updateAllroundMenScores()
 
             iter->setFinalScore((ApparatusList::EApparatusMen)apparatus, fFinalScore);
             iter->setStartScore((ApparatusList::EApparatusMen)apparatus, fStartScore);
+            iter->setExecutionScore((ApparatusList::EApparatusMen)apparatus);
         }
         iter->CalculateTotalScore();
     }
@@ -180,6 +181,7 @@ void GymnastRanking::updateAllroundWomenScores()
 
             iter->setFinalScore((ApparatusList::EApparatusWomen)apparatus, fFinalScore);
             iter->setStartScore((ApparatusList::EApparatusWomen)apparatus, fStartScore);
+            iter->setExecutionScore((ApparatusList::EApparatusWomen)apparatus);
         }
         iter->CalculateTotalScore();
     }

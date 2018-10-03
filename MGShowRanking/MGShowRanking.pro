@@ -23,7 +23,9 @@ SOURCES += \
     src/singlemwdatamodel.cpp \
     src/coreapplication.cpp \
     src/dbinterface.cpp \
-    src/main.cpp
+    src/chronolistdatamodel.cpp \
+    src/main.cpp \
+    ../MGCommon/src/gymnast/chronolistdata.cpp
 
 HEADERS += \
     ../MGCommon/src/cbbItems/apparatusdata.h \
@@ -41,7 +43,9 @@ HEADERS += \
     src/allroundwomendatamodel.h \
     src/singlemwdatamodel.h \
     src/coreapplication.h \
-    src/dbinterface.h
+    src/dbinterface.h \
+    src/chronolistdatamodel.h \
+    ../MGCommon/src/gymnast/chronolistdata.h
 
 INCLUDEPATH += \
     ../MGCommon/src/db \
@@ -66,13 +70,16 @@ OTHER_FILES += \
     ../MGCommon/qml-styles/StyleMGPushButton.qml \
     src/qml/AllroundMDelegate.qml \
     src/qml/AllroundWDelegate.qml \
+    src/qml/ChronoListDelegate.qml \
     src/qml/SingleMWDelegate.qml \
     src/qml/MenRanking.qml \
     src/qml/WomenRanking.qml \
     src/qml/ApparatusRanking.qml \
     src/qml/ApparatusRankingM.qml \
     src/qml/ApparatusRankingW.qml \
+    src/qml/ChronologicalScores.qml \
     src/qml/TableTitleItem.qml \
     src/qml/ScoreItem.qml \
     src/qml/GymnastPosItem.qml \
+    src/qml/GeneralTxtItem.qml \
     src/qml/main.qml

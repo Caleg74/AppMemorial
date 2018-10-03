@@ -7,16 +7,18 @@
 
 CoreApplication::CoreApplication(QObject *parent)
     : QObject(parent)
-    , m_pGymWomenModel(NULL)
-    , m_pGymMenModel(NULL)
-    , m_pSingleMModel(NULL)
-    , m_pSingleWModel(NULL)
-    , m_pAppEngine(NULL)
-    , m_qSortMProxy(NULL)
-    , m_qSortWProxy(NULL)
-    , m_qSortSingleMProxy(NULL)
-    , m_qSortSingleWProxy(NULL)
-    , m_updateTimer(NULL)
+    , m_pGymWomenModel(nullptr)
+    , m_pGymMenModel(nullptr)
+    , m_pSingleMModel(nullptr)
+    , m_pSingleWModel(nullptr)
+    , m_pChronoListModel(nullptr)
+    , m_pAppEngine(nullptr)
+    , m_qSortMProxy(nullptr)
+    , m_qSortWProxy(nullptr)
+    , m_qSortSingleMProxy(nullptr)
+    , m_qSortSingleWProxy(nullptr)
+    , m_qSortChronoProxy(nullptr)
+    , m_updateTimer(nullptr)
 {
 
 }
@@ -27,20 +29,24 @@ CoreApplication::~CoreApplication()
     delete m_pGymMenModel;
     delete m_pSingleMModel;
     delete m_pSingleWModel;
+    delete m_pChronoListModel;
     delete m_qSortMProxy;
     delete m_qSortWProxy;
     delete m_updateTimer;
     delete m_qSortSingleMProxy;
     delete m_qSortSingleWProxy;
-    m_pGymWomenModel = 0;
-    m_pGymMenModel = 0;
-    m_pSingleMModel = 0;
-    m_pSingleWModel = 0;
-    m_qSortMProxy = 0;
-    m_qSortWProxy = 0;
-    m_updateTimer = 0;
-    m_qSortSingleMProxy = 0;
-    m_qSortSingleWProxy = 0;
+    delete m_qSortChronoProxy;
+    m_pGymWomenModel = nullptr;
+    m_pGymMenModel = nullptr;
+    m_pSingleMModel = nullptr;
+    m_pSingleWModel = nullptr;
+    m_pChronoListModel = nullptr;
+    m_qSortMProxy = nullptr;
+    m_qSortWProxy = nullptr;
+    m_updateTimer = nullptr;
+    m_qSortSingleMProxy = nullptr;
+    m_qSortSingleWProxy = nullptr;
+    m_qSortChronoProxy = nullptr;
 }
 
 bool CoreApplication::Init(QQmlApplicationEngine& p_qEngine)
@@ -126,6 +132,13 @@ bool CoreApplication::Init(QQmlApplicationEngine& p_qEngine)
 //    connect(pGymModel, SIGNAL(OutputChanged(unsigned int)),
 //            &m_cIoWrap, SLOT(SetOutput(unsigned int)));
 
+    // Chronological list, sorted already within the DB view
+    m_pChronoListModel = new ChronoListDataModel();
+    m_qSortChronoProxy = new SortFilterProxyModel(this);
+    m_qSortChronoProxy->setSourceModel(m_pChronoListModel);
+    m_qSortChronoProxy->setDynamicSortFilter(true);
+    ctxt->setContextProperty("ChronoListModel", m_pChronoListModel); // Contains the filter, not the model
+
     return true;
 }
 
@@ -158,7 +171,7 @@ void CoreApplication::Connect()
 }
 void CoreApplication::onWindowLoaded()
 {
-    if (m_updateTimer == NULL)
+    if (m_updateTimer == nullptr)
     {
         m_updateTimer = new QTimer();
         connect(m_updateTimer, SIGNAL(timeout()), this, SLOT(updateScores()));
@@ -171,7 +184,7 @@ void CoreApplication::onWindowClosing(QQuickCloseEvent* p_event)
     Q_UNUSED(p_event);
 
     qDebug() << "onWindowClosing()";
-    if (m_updateTimer != NULL)
+    if (m_updateTimer != nullptr)
     {
         m_updateTimer->stop();
         m_updateTimer->disconnect();    // disconnect all signals
@@ -201,6 +214,13 @@ void CoreApplication::updateScores()
             return;
         }
 
+        QQuickItem* qChronoListTab = m_pAppEngine->rootObjects().first()->findChild<QQuickItem*>("idChronoScores");
+        if (qChronoListTab == nullptr)
+        {
+            qCritical() << "Item idChronoScores not found";
+            return;
+        }
+
         // update only the current selected tab
         if (qMenRankingTab->isEnabled())
         {
@@ -221,6 +241,12 @@ void CoreApplication::updateScores()
 
             m_pSingleWModel->updateScores();
             m_qSortSingleWProxy->sort(0, Qt::AscendingOrder);
+        }
+
+        if (qChronoListTab->isEnabled())
+        {
+            m_pChronoListModel->updateScores();
+            // sort not necessary, already sorted in DB view
         }
 }
 

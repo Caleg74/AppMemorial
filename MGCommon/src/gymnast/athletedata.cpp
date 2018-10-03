@@ -60,7 +60,7 @@ AthleteData::AthleteData(const Gender_t p_eGender,
 
     for (int i=0; i<iApparatusMax; i++)
     {
-        SScore score = {0.0, 0.0, false};
+        SScore score = {0.0, 0.0, 0.0, false};
         m_vecScore.push_back(score);
     }
 }
@@ -155,10 +155,45 @@ QString AthleteData::getStartScore(int p_iApparatus) const
             qCritical() << "getStartScore(): p_iApparatus(W) " << p_iApparatus << " is out-of-range";
     }
 
-    if (m_vecScore[p_iApparatus].StartScore == 0.0)
+    if (m_vecScore[p_iApparatus].StartScore == 0.0f)
         return " - ";
     else
         return QString::number(m_vecScore[p_iApparatus].StartScore, 'f', 3);
+}
+
+void AthleteData::setExecutionScore(int p_iApparatus)
+{
+    if (m_eGender == Male)
+    {
+        if (p_iApparatus >= (ApparatusList::AMApparatusMax))
+            qCritical() << "setFinalScore(): p_iApparatus(M) " << p_iApparatus << " is out-of-range";
+    }
+    else
+    {
+        if (p_iApparatus >= (ApparatusList::AWApparatusMax))
+            qCritical() << "setFinalScore(): p_iApparatus(W) " << p_iApparatus << " is out-of-range";
+    }
+
+    m_vecScore[p_iApparatus].ExecutionScore = m_vecScore[p_iApparatus].FinalScore - m_vecScore[p_iApparatus].StartScore;
+}
+
+QString AthleteData::getExecutionScore(int p_iApparatus) const
+{
+    if (m_eGender == Male)
+    {
+        if (p_iApparatus >= (ApparatusList::AMApparatusMax))
+            qCritical() << "getStartScore(): p_iApparatus(M) " << p_iApparatus << " is out-of-range";
+    }
+    else
+    {
+        if (p_iApparatus >= (ApparatusList::AWApparatusMax))
+            qCritical() << "getStartScore(): p_iApparatus(W) " << p_iApparatus << " is out-of-range";
+    }
+
+    if (m_vecScore[p_iApparatus].ExecutionScore == 0.0f)
+        return " - ";
+    else
+        return QString::number(m_vecScore[p_iApparatus].ExecutionScore, 'f', 3);
 }
 
 void AthleteData::setFinalScore(int p_iApparatus, float p_fScore)
@@ -190,7 +225,7 @@ QString AthleteData::getFinalScore(int p_iApparatus) const
             qCritical() << "getFinalScore(): p_iApparatus(W) " << p_iApparatus << " is out-of-range";
     }
 
-    if (m_vecScore[p_iApparatus].FinalScore == 0.0)
+    if (m_vecScore[p_iApparatus].FinalScore == 0.0f)
         return " - ";
     else
         return QString::number(m_vecScore[p_iApparatus].FinalScore, 'f', 3);

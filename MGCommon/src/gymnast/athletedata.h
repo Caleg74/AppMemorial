@@ -19,6 +19,7 @@ public:
     typedef struct
     {
         float StartScore;
+        float ExecutionScore;
         float FinalScore;
         bool  IsFinalApparatus; // mark if score id fromthe final apparatus
     } SScore;
@@ -41,6 +42,9 @@ public:
 
     void setStartScore(int p_iApparatus, float p_fScore);
     QString getStartScore(int p_iApparatus) const;
+
+    void setExecutionScore(int p_iApparatus);
+    QString getExecutionScore(int p_iApparatus) const;
 
     void setFinalScore(int p_iApparatus, float p_fScore);
     QString getFinalScore(int p_iApparatus) const;

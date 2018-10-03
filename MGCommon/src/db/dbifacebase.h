@@ -70,6 +70,7 @@ public:
 
     float getAllroundTotalScore(const int p_iAthleteId);
 
+    void retrieveChronologicalList(QList<QStringList>& p_strChronoList);
 protected:
 
     int m_iCurrentYear;

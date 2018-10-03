@@ -9,8 +9,7 @@ dbIfaceBase::dbIfaceBase()
 : dBConnection()
 {
     QDate qDate = QDate::currentDate();
-    m_iCurrentYear = qDate.year();  // GCADBG ori
-    m_iCurrentYear = 2016;          // Just for test on old DB
+    m_iCurrentYear = qDate.year();
 }
 
 void dbIfaceBase::getCountriesList(QStringList* p_pList)
@@ -140,7 +139,7 @@ QString dbIfaceBase::getNationName(int p_iNationId, enum NationInfo infoType)
             case NI_IocName:   iValNbr = 2; break;
             case NI_IsoName:   iValNbr = 3; break;
 
-            default: qWarning() << "Invalid nation info " << infoType;
+//            default: qWarning() << "Invalid nation info " << infoType;  // already covered all of them
             }
 
             strName = query.value(iValNbr).toString();
@@ -574,4 +573,38 @@ float dbIfaceBase::getAllroundTotalScore(const int p_iAthleteId)
     }
 
     return fTotalScore;
+}
+
+void dbIfaceBase::retrieveChronologicalList(QList<QStringList>& p_strChronoList)
+{
+    if (m_bInitialized)
+    {
+        QSqlDatabase db = QSqlDatabase::database("ConnMG");
+        QSqlQuery query(db);
+        int iEventId = getCurrentEventId();
+
+        QString strQuery = "SELECT gender, fullname, nation, apparatus, start_score, execution_score, final_score, total_score FROM chrono_list_vw WHERE "
+                   "event_id = "   + QString::number(iEventId, 10);
+        query.exec(strQuery);
+
+        while (query.next())
+        {
+            QStringList strData;
+            strData << query.value(0).toString().trimmed()  // gender
+                    << query.value(1).toString().trimmed()  // fullname
+                    << query.value(2).toString().trimmed()  // nation
+                    << query.value(3).toString().trimmed()  // apparatus
+                    << query.value(4).toString().trimmed()  // start_score
+                    << query.value(5).toString().trimmed()  // execution_score
+                    << query.value(6).toString().trimmed()  // final_score
+                    << query.value(7).toString().trimmed();  // total_score
+
+            p_strChronoList << strData;
+//            qInfo() << "Athlete retrieved: " << strData;
+        }
+    }
+    else
+    {
+        qInfo() << "dbInterface::retrieveChronologicalList(): Db not initialized";
+    }
 }

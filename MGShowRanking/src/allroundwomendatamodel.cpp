@@ -64,6 +64,7 @@ void AllroundWomenDataModel::updateScores()
 //            float fStartRandom = fFinalRandom - 10;
             iter->setFinalScore((ApparatusList::EApparatusWomen)apparatus, sAllScore.FinalScore);
             iter->setStartScore((ApparatusList::EApparatusWomen)apparatus, sAllScore.StartScore);
+            iter->setExecutionScore((ApparatusList::EApparatusWomen)apparatus);
             iter->setIsFinalApparatusScore((ApparatusList::EApparatusWomen)apparatus, sAllScore.IsFinalApparatus);
         }
         iter->CalculateTotalScore();

@@ -16,6 +16,9 @@
         <file alias="ScoreItem.qml">src/qml/ScoreItem.qml</file>
         <file alias="GymnastPosItem.qml">src/qml/GymnastPosItem.qml</file>
         <file alias="main.qml">src/qml/main.qml</file>
+        <file alias="ChronologicalScores.qml">src/qml/ChronologicalScores.qml</file>
+        <file alias="ChronoListDelegate.qml">src/qml/ChronoListDelegate.qml</file>
+        <file alias="GeneralTxtItem.qml">src/qml/GeneralTxtItem.qml</file>
     </qresource>
     <qresource prefix="/images">
         <file alias="add_icon.png">../MGCommon/image/add_icon.png</file>
