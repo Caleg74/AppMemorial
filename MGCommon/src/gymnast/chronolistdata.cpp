@@ -61,7 +61,7 @@ void ChronoListData::setNationShort(const QString& p_strNationShort)
     m_strNationShort = p_strNationShort;
 }
 
-QString ChronoListData::getNaionShort() const
+QString ChronoListData::getNationShort() const
 {
     return m_strNationShort;
 }

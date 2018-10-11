@@ -25,7 +25,7 @@ public:
     QString getImagePath() const;
 
     void setNationShort(const QString& p_strNationShort);
-    QString getNaionShort() const;
+    QString getNationShort() const;
 
     void setStartScore(const float p_fStartScore);
     QString getStartScore() const;

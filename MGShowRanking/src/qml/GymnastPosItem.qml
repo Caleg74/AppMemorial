@@ -52,6 +52,7 @@ Item {
             sourceSize.height: width
             anchors.verticalCenter: parent.verticalCenter
             anchors.left: fullnameId.right
+            anchors.leftMargin: 10
         }
 
         Rectangle {

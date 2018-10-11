@@ -43,6 +43,9 @@ void ChronoListDataModel::updateScores()
 {
     QList<ChronoListData>::iterator iter;
     QList<QStringList> dbRawList;
+    QString countryIoc;
+    QString countryIso;
+    QString countryFile;
 
     dbInterface::Instance()->retrieveChronologicalList(dbRawList);
 
@@ -53,7 +56,16 @@ void ChronoListDataModel::updateScores()
         {
             iter->setGender(dbRawList.at(iObjIndex).at(0));
             iter->setNameFull(dbRawList.at(iObjIndex).at(1));
-            iter->setNationShort(dbRawList.at(iObjIndex).at(2));
+
+            // Set the flag
+            countryIso = dbInterface::Instance()->getNationName(dbRawList.at(iObjIndex).at(2).toInt(), dbIfaceBase::NI_IsoName);
+            countryFile = "qrc:/flags/" + countryIso.toLower() + ".svg";
+            iter->setImagePath(countryFile);
+
+            // set the Nation Short name
+            countryIoc = dbInterface::Instance()->getNationName(dbRawList.at(iObjIndex).at(2).toInt(), dbIfaceBase::NI_IocName);
+            iter->setNationShort(countryIoc);
+
             iter->setApparatusName(dbRawList.at(iObjIndex).at(3));
             iter->setStartScore(dbRawList.at(iObjIndex).at(4).toFloat());
             iter->setExecutionScore(dbRawList.at(iObjIndex).at(5).toFloat());
@@ -115,7 +127,7 @@ QVariant ChronoListDataModel::data(const QModelIndex & index, int role) const {
     else if (role == FlagImageRole)
         return chronoItem.getImagePath();
     else if (role == CountryRole)
-        return chronoItem.getNaionShort();
+        return chronoItem.getNationShort();
     else if (role == ApparatusRole)
         return chronoItem.getApparatusName();
     else if (role == StartScoreRole)
