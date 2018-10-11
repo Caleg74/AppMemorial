@@ -1,82 +1,84 @@
-import QtQuick 2.0
-import QtQuick.Controls 1.4
-import QtQuick.Controls.Styles 1.4
-import QtQuick.Controls.Private 1.0
+import QtQuick 2.6
+import QtQuick.Controls 2.1
 
-Component {
-    ComboBoxStyle {
-        id: comboBox
-        background: Rectangle {
-            id: rectCategory
-            radius: 5
-            border.width: 2
-            border.color: "#0a3f60"
-            color: "#fff"
-        }
+ComboBox {
+    id: control
+    font.pointSize: 15
 
-        label: Text {
-            renderType: Text.NativeRendering
-            verticalAlignment: Text.AlignVCenter
-            horizontalAlignment: Text.AlignHCenter
-            font.pointSize: 15
+    delegate: ItemDelegate {
+        width: control.width
+        contentItem: Text {
+            text: modelData
             color: "#0a3f60"
-            text: control.currentText
+            font: control.font
+            elide: Text.ElideRight
+            verticalAlignment: Text.AlignVCenter
+        }
+        highlighted: control.highlightedIndex === index
+    }
+
+    indicator: Canvas {
+        id: canvas
+        x: control.width - width - control.rightPadding
+        y: control.topPadding + (control.availableHeight - height) / 2
+        width: 12
+        height: 8
+        contextType: "2d"
+
+        Connections {
+            target: control
+            onPressedChanged: canvas.requestPaint()
         }
 
-        // drop-down customization here
-        property Component __dropDownStyle: MenuStyle {
-            __maxPopupHeight: 600
-            __menuItemType: "comboboxitem"
+        onPaint: {
+            context.reset();
+            context.moveTo(0, 0);
+            context.lineTo(width, 0);
+            context.lineTo(width / 2, height);
+            context.closePath();
+            context.fillStyle = control.pressed ? "white" : "#0a3f60"
+            context.fill();
+        }
+    }
 
+    contentItem: Text {
+        leftPadding: 4
+        rightPadding: control.indicator.width + control.spacing
 
-            frame: Rectangle {              // background
-                color: "#fff"
-                border.width: 2
-                border.color: "#83d1f5"
-                radius: 5
-            }
+        text: control.displayText
+        font: control.font
+        color: control.pressed ? "white" : "#0a3f60"
+        verticalAlignment: Text.AlignVCenter
+        elide: Text.ElideRight
+    }
 
-            itemDelegate.label:             // an item text
-                Text {
-                renderType: Text.NativeRendering
-                verticalAlignment: Text.AlignVCenter
-                horizontalAlignment: Text.AlignHCenter
-                font.pointSize: 15
-                color: styleData.selected ? "white" : "#0a3f60"
-                text: styleData.text
-            }
+    background: Rectangle {
+        implicitWidth: 120
+        implicitHeight: 40
+        border.color: control.pressed ? "#83d1f5" : "#0a3f60"
+        border.width: control.visualFocus ? 4 : 2
+        radius: 5
+    }
 
-            itemDelegate.background: Rectangle {  // selection of an item
-                radius: 2
-                color: styleData.selected ? "#83d1f5" : "transparent"
-            }
+    popup: Popup {
+        y: control.height - 1
+        width: control.width
+        implicitHeight: contentItem.implicitHeight
+        padding: 1
 
-            __scrollerStyle: ScrollViewStyle { }
+        contentItem: ListView {
+            clip: true
+            implicitHeight: contentHeight
+            model: control.popup.visible ? control.delegateModel : null
+            currentIndex: control.highlightedIndex
+
+            ScrollIndicator.vertical: ScrollIndicator { }
         }
 
-        property Component __popupStyle: Style {
-            property int __maxPopupHeight: 400
-            property int submenuOverlap: 0
-
-            property Component frame: Rectangle {
-                width: (parent ? parent.contentWidth : 0)
-                height: (parent ? parent.contentHeight : 0) + 2
-                border.color: "#0a3f60"
-                property real maxHeight: 500
-                property int margin: 1
-            }
-
-            property Component menuItemPanel: Text {
-                renderType: Text.NativeRendering
-                text: "NOT IMPLEMENTED"
-                color: "red"
-                font {
-                    pixelSize: 14
-                    bold: true
-                }
-            }
-
-            property Component __scrollerStyle: null
+        background: Rectangle {
+            border.color: "#0a3f60"
+            radius: 5
         }
     }
 }
+

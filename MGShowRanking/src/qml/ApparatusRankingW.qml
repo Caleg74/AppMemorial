@@ -26,13 +26,11 @@ Item {
             anchors.left: parent.left
         }
 
-        ComboBox {
+        StyleMGComboBox {
             id: cbbAppartusW
             objectName: "cbbAppartusW"
             model: apparatusModelW.comboList
             width: parent.parent.width /2
-            activeFocusOnPress: true
-            style:comboBoxMGStyle
             currentIndex: 0
             anchors.verticalCenter: parent.verticalCenter
             anchors.left: lblTitleWomen.right
