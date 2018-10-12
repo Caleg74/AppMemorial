@@ -282,7 +282,11 @@ void dbIfaceBase::retrieveGymnastEventList(QList<QStringList>& p_strGymnList)
     {
         QSqlDatabase db = QSqlDatabase::database("ConnMG");
         QSqlQuery query(db);
-        query.exec("SELECT first_name, last_name, gender, nation_id FROM event_athlete_vw");
+
+        int iEventId = getCurrentEventId();
+
+        query.exec("SELECT first_name, last_name, gender, nation_id FROM event_athlete_vw WHERE "
+                   " sport_event_id = " + QString::number(iEventId, 10));
 
         while(query.next())
         {

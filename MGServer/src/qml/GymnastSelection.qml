@@ -32,12 +32,10 @@ Item {
                 anchors.left: parent.left
                 anchors.verticalCenter: parent.verticalCenter
 
-                ComboBox {
+                StyleMGComboBox {
                     id: cbbGymnastSelection
                     model: gymnastRegisteredModel.comboList
                     width: parent.parent.width/2 - 50
-                    activeFocusOnPress: true
-                    style:comboBoxMGStyle
                     currentIndex: 0
                 }
 

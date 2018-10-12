@@ -51,12 +51,10 @@ Item {
                     font.pointSize: 15
                 }
 
-                ComboBox {
+                StyleMGComboBox {
                     id: cbbCountry
                     model: countryListModel.comboList
                     width: parent.parent.width/4 - 50
-                    activeFocusOnPress: true
-                    style:comboBoxMGStyle
                     currentIndex: 0
 
 //                    model: ListModel {
@@ -68,11 +66,9 @@ Item {
 //                    }
                 }
 
-                ComboBox {
+                StyleMGComboBox {
                     id: cbbSex
                     width: parent.parent.width/4 - 50
-                    activeFocusOnPress: true
-                    style:comboBoxMGStyle
                     currentIndex: 0
 
                     model: ListModel {

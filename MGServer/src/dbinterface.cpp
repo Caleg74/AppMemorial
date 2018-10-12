@@ -128,8 +128,9 @@ void dbInterface::retrieveGymnastSubscriptionList(QList<QStringList>& p_strGymnL
         QSqlQuery queryAthlete(db);
         QSqlQuery querySportEventSub(db);
 
-
-        querySportEventSub.exec("SELECT athlete_id, sport_event_id FROM sport_event_subscriptions");
+        int iEventId = getCurrentEventId();
+        querySportEventSub.exec("SELECT athlete_id, sport_event_id FROM sport_event_subscriptions WHERE "
+                  " sport_event_id = "   + QString::number(iEventId, 10));
 
         while (querySportEventSub.next())
         {
