@@ -51,6 +51,10 @@ void AllroundMenDataModel::RetrieveGymnastList()
 void AllroundMenDataModel::updateScores()
 {
     QList<AthleteData>::iterator iter;
+    int iLatestScoreAthletedId = 0;
+    int iLatestScoreApparatusId = 0;
+
+    bool bLatestScoreIsValid = dbInterface::Instance()->getLatestScore("M", &iLatestScoreAthletedId, &iLatestScoreApparatusId);
 
     for (iter = m_rankingList.begin(); iter != m_rankingList.end(); ++iter)
     {
@@ -59,13 +63,15 @@ void AllroundMenDataModel::updateScores()
             int iAthleteId = iter->getAthleteId();
             int iAppId = ApparatusList::Instance()->getApparatusId((ApparatusList::EApparatusMen)apparatus);
             AllScores sAllScore = dbInterface::Instance()->getAllScores(iAthleteId, iAppId);
-
 //            float fFinalRandom = (float)(qrand() % ((15000 + 1) - 10000) + 10000) / 1000;
 //            float fStartRandom = fFinalRandom - 10;
             iter->setFinalScore((ApparatusList::EApparatusMen)apparatus, sAllScore.FinalScore);
             iter->setStartScore((ApparatusList::EApparatusMen)apparatus, sAllScore.StartScore);
             iter->setExecutionScore((ApparatusList::EApparatusMen)apparatus);
             iter->setIsFinalApparatusScore((ApparatusList::EApparatusMen)apparatus, sAllScore.IsFinalApparatus);
+
+            bool bLatestScore = (bLatestScoreIsValid && (iLatestScoreAthletedId == iAthleteId) && (iLatestScoreApparatusId == iAppId));
+            iter->setIsLatestScore((ApparatusList::EApparatusMen)apparatus, bLatestScore);
         }
         iter->CalculateTotalScore();
     }
@@ -140,36 +146,48 @@ QVariant AllroundMenDataModel::data(const QModelIndex & index, int role) const {
         return gymnast.getFinalScore(ApparatusList::AMFloor);
     else if (role == FinalApparatusFloorRole)
         return gymnast.isFinalApparatusScore(ApparatusList::AMFloor);
+    else if (role == LatestScoreFloorRole)
+        return gymnast.isLatestScore(ApparatusList::AMFloor);
     else if (role == StartScorePHorseRole)
-        return gymnast.getStartScore(ApparatusList::AMPommelHores);
+        return gymnast.getStartScore(ApparatusList::AMPommelHorse);
     else if (role == FinalScorePHorseRole)
-        return gymnast.getFinalScore(ApparatusList::AMPommelHores);
+        return gymnast.getFinalScore(ApparatusList::AMPommelHorse);
     else if (role == FinalApparatusPHorseRole)
-        return gymnast.isFinalApparatusScore(ApparatusList::AMPommelHores);
+        return gymnast.isFinalApparatusScore(ApparatusList::AMPommelHorse);
+    else if (role == LatestScorePHorseRole)
+        return gymnast.isLatestScore(ApparatusList::AMPommelHorse);
     else if (role == StartScoreRingsRole)
         return gymnast.getStartScore(ApparatusList::AMRings);
     else if (role == FinalScoreRingsRole)
         return gymnast.getFinalScore(ApparatusList::AMRings);
     else if (role == FinalApparatusRingsRole)
         return gymnast.isFinalApparatusScore(ApparatusList::AMRings);
+    else if (role == LatestScoreRingsRole)
+        return gymnast.isLatestScore(ApparatusList::AMRings);
     else if (role == StartScoreVaultRole)
         return gymnast.getStartScore(ApparatusList::AMVault);
     else if (role == FinalScoreVaultRole)
         return gymnast.getFinalScore(ApparatusList::AMVault);
     else if (role == FinalApparatusVaultRole)
         return gymnast.isFinalApparatusScore(ApparatusList::AMVault);
+    else if (role == LatestScoreVaultRole)
+        return gymnast.isLatestScore(ApparatusList::AMVault);
     else if (role == StartScorePBarsRole)
         return gymnast.getStartScore(ApparatusList::AMParallelBars);
     else if (role == FinalScorePBarsRole)
         return gymnast.getFinalScore(ApparatusList::AMParallelBars);
     else if (role == FinalApparatusPBarsRole)
         return gymnast.isFinalApparatusScore(ApparatusList::AMParallelBars);
+    else if (role == LatestScorePBarsRole)
+        return gymnast.isLatestScore(ApparatusList::AMParallelBars);
     else if (role == StartScoreHBarRole)
         return gymnast.getStartScore(ApparatusList::AMHorizontalBar);
     else if (role == FinalScoreHBarRole)
         return gymnast.getFinalScore(ApparatusList::AMHorizontalBar);
     else if (role == FinalApparatusHBarRole)
         return gymnast.isFinalApparatusScore(ApparatusList::AMHorizontalBar);
+    else if (role == LatestScoreHBarRole)
+        return gymnast.isLatestScore(ApparatusList::AMHorizontalBar);
 
     return QVariant();
 }
@@ -184,21 +202,27 @@ QHash<int, QByteArray> AllroundMenDataModel::roleNames() const {
     roles[StartScoreFloorRole ]      = "StartScore_Floor";
     roles[FinalScoreFloorRole ]      = "FinalScore_Floor";
     roles[FinalApparatusFloorRole ]  = "FinalApparatus_Floor";
+    roles[LatestScoreFloorRole ]     = "LatestScore_Floor";
     roles[StartScorePHorseRole]      = "StartScore_PHorse";
     roles[FinalScorePHorseRole]      = "FinalScore_PHorse";
     roles[FinalApparatusPHorseRole ] = "FinalApparatus_PHorse";
+    roles[LatestScorePHorseRole ]    = "LatestScore_PHorse";
     roles[StartScoreRingsRole ]      = "StartScore_Rings";
     roles[FinalScoreRingsRole ]      = "FinalScore_Rings";
     roles[FinalApparatusRingsRole ]  = "FinalApparatus_Rings";
+    roles[LatestScoreRingsRole ]     = "LatestScore_Rings";
     roles[StartScoreVaultRole ]      = "StartScore_Vault";
     roles[FinalScoreVaultRole ]      = "FinalScore_Vault";
     roles[FinalApparatusVaultRole ]  = "FinalApparatus_Vault";
+    roles[LatestScoreVaultRole ]     = "LatestScore_Vault";
     roles[StartScorePBarsRole ]      = "StartScore_ParallelBars";
     roles[FinalScorePBarsRole ]      = "FinalScore_ParallelBars";
     roles[FinalApparatusPBarsRole ]  = "FinalApparatus_ParallelBars";
+    roles[LatestScorePBarsRole ]     = "LatestScore_ParallelBars";
     roles[StartScoreHBarRole  ]      = "StartScore_HBar";
     roles[FinalScoreHBarRole  ]      = "FinalScore_HBar";
     roles[FinalApparatusHBarRole ]   = "FinalApparatus_HBar";
+    roles[LatestScoreHBarRole ]      = "LatestScore_HBar";
 
     return roles;
 }
@@ -222,7 +246,7 @@ AthleteData* AllroundMenDataModel::GetItem(QString& nameFull)
             return (AthleteData*)iter.i->v;
     }
 
-    return NULL;
+    return nullptr;
 }
 
 bool AllroundMenDataModel::filterAcceptsRow( int source_row, const QModelIndex& source_parent ) const

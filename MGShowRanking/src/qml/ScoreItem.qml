@@ -10,6 +10,7 @@ Item {
     property int fontSize: 15;
     property bool fontBold: false;
     property bool isFinalApparatus: false;
+    property bool latestScore: true
 
     width: parent.widthh
     height: parent.height
@@ -20,13 +21,14 @@ Item {
         anchors.fill: parent
         anchors.margins: 5
 
-        Item {  // some sort of a Row
+        Rectangle {  // some sort of a Row
             width: parent.width
             height: parent.height
             anchors.verticalCenter: parent.verticalCenter
 //            anchors.margins: 10
             anchors.left: parent.left
             anchors.right: separator.right
+            color: latestScore ? "#8083d1f5" : "white"
 
             Text {
                 id: finalScore
@@ -35,7 +37,7 @@ Item {
                 font.pointSize: fontSize
                 font.bold: fontBold
                 font.italic: isFinalApparatus
-                color: "#0a3f60"
+                color:  "#0a3f60"
                 horizontalAlignment: Text.AlignLeft
                 verticalAlignment: Text.AlignVCenter
 //                width: parent.width - startScore.width - separator.width
@@ -51,7 +53,7 @@ Item {
                 font.pointSize: fontSize * 3/4
                 font.bold: false
                 font.italic: isFinalApparatus
-                color: "#0a3f60"
+                color:  "#0a3f60"
                 horizontalAlignment: Text.AlignLeft
                 verticalAlignment: Text.AlignVCenter
                 width: parent.width * 2 /5

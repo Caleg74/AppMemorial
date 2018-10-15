@@ -14,15 +14,19 @@ public:
         StartScoreVaultRole,
         FinalScoreVaultRole,
         FinalApparatusVaultRole,
+        LatestScoreVaultRole,
         StartScoreUnBarsRole,
         FinalScoreUnBarsRole,
         FinalApparatusUnBarsRole,
+        LatestScoreUnBarsRole,
         StartScoreBalBeamRole,
         FinalScoreBalBeamRole,
         FinalApparatusBalBeamRole,
+        LatestScoreBalBeamRole,
         StartScoreFloorRole,
         FinalScoreFloorRole,
-        FinalApparatusFloorRole
+        FinalApparatusFloorRole,
+        LatestScoreFloorRole
      };
 
     AllroundWomenDataModel(QObject *parent = 0);

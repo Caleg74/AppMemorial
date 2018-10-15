@@ -62,7 +62,7 @@ void ApparatusList::RetrieveFromDb()
                                                  items.at(3));           // gender
 
             if ((items.at(2) == "Floor") && (items.at(3) == "M")) m_aiEnumToIdMen[AMFloor] = items.at(0).toInt();
-            else if ((items.at(2) == "Pommel horse") && (items.at(3) == "M")) m_aiEnumToIdMen[AMPommelHores] = items.at(0).toInt();
+            else if ((items.at(2) == "Pommel horse") && (items.at(3) == "M")) m_aiEnumToIdMen[AMPommelHorse] = items.at(0).toInt();
             else if ((items.at(2) == "Rings") && (items.at(3) == "M")) m_aiEnumToIdMen[AMRings] = items.at(0).toInt();
             else if ((items.at(2) == "Vault") && (items.at(3) == "M")) m_aiEnumToIdMen[AMVault] = items.at(0).toInt();
             else if ((items.at(2) == "Parallel bars") && (items.at(3) == "M")) m_aiEnumToIdMen[AMParallelBars] = items.at(0).toInt();
@@ -111,19 +111,22 @@ int ApparatusList::getApparatusId(EApparatusWomen p_eApparatusWomen)
     return m_aiEnumToIdWomen[p_eApparatusWomen];
 }
 
-int ApparatusList::getApparatusId(const QString& p_strApparatusName)
+int ApparatusList::getApparatusId(const QString& p_strApparatusName, const QString& p_strGender)
 {
     int iApparatusId = 0;
     bool bFound= false;
 
     for (int i=0; i<m_ApparatusList.count(); i++)
     {
-        if ( (m_ApparatusList.at(i)->getName(ApparatusData::ALangIt) == p_strApparatusName)
-          && (m_ApparatusList.at(i)->getName(ApparatusData::ALangEn) == p_strApparatusName))
+        if (m_ApparatusList.at(i)->getGender() == p_strGender)
         {
-            iApparatusId = m_ApparatusList.at(i)->getId();
-            bFound = true;
-            break;
+            if ( (m_ApparatusList.at(i)->getName(ApparatusData::ALangIt) == p_strApparatusName)
+              || (m_ApparatusList.at(i)->getName(ApparatusData::ALangEn) == p_strApparatusName))
+            {
+                iApparatusId = m_ApparatusList.at(i)->getId();
+                bFound = true;
+                break;
+            }
         }
     }
 

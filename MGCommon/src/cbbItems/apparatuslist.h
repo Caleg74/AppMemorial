@@ -20,7 +20,7 @@ public:
     enum EApparatusMen
     {
         AMFloor = AGFirstApparatus,
-        AMPommelHores,
+        AMPommelHorse,
         AMRings,
         AMVault,
         AMParallelBars,
@@ -48,7 +48,7 @@ public:
 
     int getApparatusId(EApparatusMen p_eApparatusMen);
     int getApparatusId(EApparatusWomen p_eApparatusWomen);
-    int getApparatusId(const QString& p_strApparatusName);
+    int getApparatusId(const QString& p_strApparatusName, const QString &p_strGender);
 
 
 private:

@@ -269,7 +269,7 @@ void CoreApplication::onApparatusMChanged(QString p_currentTxt)
             ApparatusList::EApparatusMen eApparatusM;
 
             if      (p_currentTxt.compare("Suolo") ==  0) { strImageFile += "Floor.svg"; eApparatusM = ApparatusList::AMFloor; }
-            else if (p_currentTxt.compare("Cavallo a\nmaniglie") == 0) { strImageFile += "PommelHorse.svg"; eApparatusM = ApparatusList::AMPommelHores; }
+            else if (p_currentTxt.compare("Cavallo a\nmaniglie") == 0) { strImageFile += "PommelHorse.svg"; eApparatusM = ApparatusList::AMPommelHorse; }
             else if (p_currentTxt.compare("Anelli") ==  0) { strImageFile += "Rings.svg"; eApparatusM = ApparatusList::AMRings; }
             else if (p_currentTxt.compare("Volteggio") ==  0) { strImageFile += "Vault.svg"; eApparatusM = ApparatusList::AMVault; }
             else if (p_currentTxt.compare("Parallele") ==  0) { strImageFile += "ParallelBars.svg"; eApparatusM = ApparatusList::AMParallelBars; }

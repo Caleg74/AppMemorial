@@ -71,6 +71,14 @@ public:
     float getAllroundTotalScore(const int p_iAthleteId);
 
     void retrieveChronologicalList(QList<QStringList>& p_strChronoList);
+
+    /** Gets the latest inserted score.
+     * @param[in]  p_strGender String "M" or "F"
+     * @param[out] p_pAthleteId Athlete ID
+     * @param[out] p_pApparatusId Apparatus ID
+     * @return true if a valid entry has been found */
+    bool getLatestScore(const QString p_strGender, int* p_pAthleteId, int* p_pApparatusId);
+
 protected:
 
     int m_iCurrentYear;

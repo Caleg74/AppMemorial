@@ -22,6 +22,7 @@ public:
         float ExecutionScore;
         float FinalScore;
         bool  IsFinalApparatus; // mark if score id fromthe final apparatus
+        bool  IsLatestScore;    // true if last-inserted score
     } SScore;
 
     AthleteData(const Gender_t p_eGender,
@@ -39,6 +40,9 @@ public:
 
     void setIsFinalApparatusScore(int p_iApparatus, bool p_bIsFinalApparatus);
     bool isFinalApparatusScore(int p_iApparatus) const;
+
+    void setIsLatestScore(int p_iApparatus, bool p_bIsLatestScore);
+    bool isLatestScore(int p_iApparatus) const;
 
     void setStartScore(int p_iApparatus, float p_fScore);
     QString getStartScore(int p_iApparatus) const;

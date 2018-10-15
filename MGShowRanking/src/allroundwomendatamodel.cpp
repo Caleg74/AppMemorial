@@ -51,6 +51,10 @@ void AllroundWomenDataModel::RetrieveGymnastList()
 void AllroundWomenDataModel::updateScores()
 {
     QList<AthleteData>::iterator iter;
+    int iLatestScoreAthletedId = 0;
+    int iLatestScoreApparatusId = 0;
+
+    bool bLatestScoreIsValid = dbInterface::Instance()->getLatestScore("F", &iLatestScoreAthletedId, &iLatestScoreApparatusId);
 
     for (iter = m_rankingList.begin(); iter != m_rankingList.end(); ++iter)
     {
@@ -66,6 +70,9 @@ void AllroundWomenDataModel::updateScores()
             iter->setStartScore((ApparatusList::EApparatusWomen)apparatus, sAllScore.StartScore);
             iter->setExecutionScore((ApparatusList::EApparatusWomen)apparatus);
             iter->setIsFinalApparatusScore((ApparatusList::EApparatusWomen)apparatus, sAllScore.IsFinalApparatus);
+
+            bool bLatestScore = (bLatestScoreIsValid && (iLatestScoreAthletedId == iAthleteId) && (iLatestScoreApparatusId == iAppId));
+            iter->setIsLatestScore((ApparatusList::EApparatusWomen)apparatus, bLatestScore);
         }
         iter->CalculateTotalScore();
     }
@@ -141,24 +148,32 @@ QVariant AllroundWomenDataModel::data(const QModelIndex & index, int role) const
         return gymnast.getFinalScore(ApparatusList::AWVault);
     else if (role == FinalApparatusVaultRole)
         return gymnast.isFinalApparatusScore(ApparatusList::AWVault);
+    else if (role == LatestScoreVaultRole)
+        return gymnast.isLatestScore(ApparatusList::AWVault);
     else if (role == StartScoreUnBarsRole)
         return gymnast.getStartScore(ApparatusList::AWUnevenBars);
     else if (role == FinalScoreUnBarsRole)
         return gymnast.getFinalScore(ApparatusList::AWUnevenBars);
     else if (role == FinalApparatusUnBarsRole)
         return gymnast.isFinalApparatusScore(ApparatusList::AWUnevenBars);
+    else if (role == LatestScoreUnBarsRole)
+        return gymnast.isLatestScore(ApparatusList::AWUnevenBars);
     else if (role == StartScoreBalBeamRole)
         return gymnast.getStartScore(ApparatusList::AWBalanceBeam);
     else if (role == FinalScoreBalBeamRole)
         return gymnast.getFinalScore(ApparatusList::AWBalanceBeam);
     else if (role == FinalApparatusBalBeamRole)
         return gymnast.isFinalApparatusScore(ApparatusList::AWBalanceBeam);
+    else if (role == LatestScoreBalBeamRole)
+        return gymnast.isLatestScore(ApparatusList::AWBalanceBeam);
     else if (role == StartScoreFloorRole)
         return gymnast.getStartScore(ApparatusList::AWFloor);
     else if (role == FinalScoreFloorRole)
         return gymnast.getFinalScore(ApparatusList::AWFloor);
     else if (role == FinalApparatusFloorRole)
         return gymnast.isFinalApparatusScore(ApparatusList::AWFloor);
+    else if (role == LatestScoreFloorRole)
+        return gymnast.isLatestScore(ApparatusList::AWFloor);
 
     return QVariant();
 }
@@ -173,15 +188,19 @@ QHash<int, QByteArray> AllroundWomenDataModel::roleNames() const {
     roles[StartScoreFloorRole  ]     = "StartScore_Floor";
     roles[FinalScoreFloorRole  ]     = "FinalScore_Floor";
     roles[FinalApparatusFloorRole]   = "FinalApparatus_Floor";
+    roles[LatestScoreFloorRole ]     = "LatestScore_Floor";
     roles[StartScoreUnBarsRole ]     = "StartScore_UnBars";
     roles[FinalScoreUnBarsRole ]     = "FinalScore_UnBars";
     roles[FinalApparatusUnBarsRole]  = "FinalApparatus_UnBars";
+    roles[LatestScoreUnBarsRole ]    = "LatestScore_UnBars";
     roles[StartScoreBalBeamRole]     = "StartScore_BalBeam";
     roles[FinalScoreBalBeamRole]     = "FinalScore_BalBeam";
     roles[FinalApparatusBalBeamRole] = "FinalApparatus_BalBeam";
+    roles[LatestScoreBalBeamRole ]   = "LatestScore_BalBeam";
     roles[StartScoreVaultRole  ]     = "StartScore_Vault";
     roles[FinalScoreVaultRole  ]     = "FinalScore_Vault";
     roles[FinalApparatusVaultRole]   = "FinalApparatus_Vault";
+    roles[LatestScoreVaultRole ]     = "LatestScore_Vault";
 
 
     return roles;
@@ -206,5 +225,5 @@ AthleteData *AllroundWomenDataModel::GetItem(QString& nameFull)
             return (AthleteData*)iter.i->v;
     }
 
-    return NULL;
+    return nullptr;
 }

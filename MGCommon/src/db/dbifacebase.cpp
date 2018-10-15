@@ -4,6 +4,7 @@
 #include <QSqlQuery>
 #include <QSqlError>
 #include <QDebug>
+#include "apparatuslist.h"
 
 dbIfaceBase::dbIfaceBase()
 : dBConnection()
@@ -612,4 +613,39 @@ void dbIfaceBase::retrieveChronologicalList(QList<QStringList>& p_strChronoList)
     {
         qInfo() << "dbInterface::retrieveChronologicalList(): Db not initialized";
     }
+}
+
+
+bool dbIfaceBase::getLatestScore(const QString p_strGender, int* p_pAthleteId, int* p_pApparatusId)
+{
+    bool bRet = false;
+    if (m_bInitialized)
+    {
+        QSqlDatabase db = QSqlDatabase::database("ConnMG");
+        QSqlQuery query(db);
+        int iEventId = getCurrentEventId();
+
+        QString strQuery = "SELECT id, apparatus, final_score FROM chrono_list_vw WHERE"
+                   " event_id = "   + QString::number(iEventId, 10) +
+                   " AND gender = '" + p_strGender + "'"; // as CHAR
+
+        // 	SELECT id, apparatus, final_score FROM chrono_list_vw WHERE event_id = 2 AND gender = 'M'"	QString
+
+        query.exec(strQuery);
+
+        if (query.first())
+        {
+            *p_pAthleteId = query.value(0).toString().trimmed().toInt();
+            QString strApparatusName = query.value(1).toString().trimmed();
+            *p_pApparatusId = ApparatusList::Instance()->getApparatusId(strApparatusName, p_strGender);
+
+            // Check if score is >0 (to avoid non-init issues when list is empty)
+            if (query.value(2).toString().trimmed().toFloat() > 0.0f)
+            {
+                bRet = true;
+            }
+        }
+    }
+
+    return bRet;
 }

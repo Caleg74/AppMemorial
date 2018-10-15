@@ -14,21 +14,27 @@ public:
         StartScoreFloorRole,
         FinalScoreFloorRole,
         FinalApparatusFloorRole,
+        LatestScoreFloorRole,
         StartScorePHorseRole,
         FinalScorePHorseRole,
         FinalApparatusPHorseRole,
+        LatestScorePHorseRole,
         StartScoreRingsRole,
         FinalScoreRingsRole,
         FinalApparatusRingsRole,
+        LatestScoreRingsRole,
         StartScoreVaultRole,
         FinalScoreVaultRole,
         FinalApparatusVaultRole,
+        LatestScoreVaultRole,
         StartScorePBarsRole,
         FinalScorePBarsRole,
         FinalApparatusPBarsRole,
+        LatestScorePBarsRole,
         StartScoreHBarRole,
         FinalScoreHBarRole,
-        FinalApparatusHBarRole
+        FinalApparatusHBarRole,
+        LatestScoreHBarRole,
     };
 
     AllroundMenDataModel(QObject *parent = 0);

@@ -60,7 +60,7 @@ AthleteData::AthleteData(const Gender_t p_eGender,
 
     for (int i=0; i<iApparatusMax; i++)
     {
-        SScore score = {0.0, 0.0, 0.0, false};
+        SScore score = {0.0, 0.0, 0.0, false, false};
         m_vecScore.push_back(score);
     }
 }
@@ -124,6 +124,38 @@ bool AthleteData::isFinalApparatusScore(int p_iApparatus) const
     }
 
     return m_vecScore[p_iApparatus].IsFinalApparatus;
+}
+
+void AthleteData::setIsLatestScore(int p_iApparatus, bool p_bIsLatestScore)
+{
+    if (m_eGender == Male)
+    {
+        if (p_iApparatus >= (ApparatusList::AMApparatusMax))
+            qCritical() << "setStartScore(): p_iApparatus(M) " << p_iApparatus << " is out-of-range";
+    }
+    else
+    {
+        if (p_iApparatus >= (ApparatusList::AWApparatusMax))
+            qCritical() << "setStartScore(): p_iApparatus(W) " << p_iApparatus << " is out-of-range";
+    }
+
+    m_vecScore[p_iApparatus].IsLatestScore = p_bIsLatestScore;
+}
+
+bool AthleteData::isLatestScore(int p_iApparatus) const
+{
+    if (m_eGender == Male)
+    {
+        if (p_iApparatus >= (ApparatusList::AMApparatusMax))
+            qCritical() << "getFinalScore(): p_iApparatus(M) " << p_iApparatus << " is out-of-range";
+    }
+    else
+    {
+        if (p_iApparatus >= (ApparatusList::AWApparatusMax))
+            qCritical() << "getFinalScore(): p_iApparatus(W) " << p_iApparatus << " is out-of-range";
+    }
+
+    return m_vecScore[p_iApparatus].IsLatestScore;
 }
 
 void AthleteData::setStartScore(int p_iApparatus, float p_fScore)
