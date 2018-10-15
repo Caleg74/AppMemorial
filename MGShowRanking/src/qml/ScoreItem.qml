@@ -10,10 +10,18 @@ Item {
     property int fontSize: 15;
     property bool fontBold: false;
     property bool isFinalApparatus: false;
-    property bool latestScore: true
+    property bool latestScore
 
     width: parent.widthh
     height: parent.height
+
+    onLatestScoreChanged: {
+        if (latestScore) {
+            scoreBackground.gradient = grad
+        } else {
+            scoreBackground.gradient = null
+        }
+   }
 
     Item {  // some sort of a Row
 //        width: parent.width
@@ -21,14 +29,21 @@ Item {
         anchors.fill: parent
         anchors.margins: 5
 
-        Rectangle {  // some sort of a Row
+        Rectangle {
+            id: scoreBackground
             width: parent.width
             height: parent.height
             anchors.verticalCenter: parent.verticalCenter
 //            anchors.margins: 10
             anchors.left: parent.left
             anchors.right: separator.right
-            color: latestScore ? "#8083d1f5" : "white"
+//            color: latestScore ? "#8083d1f5" : "white"
+            radius: 5
+            Gradient { // enabled or disabled depending on "latestScore"Changed" value
+                  id: grad
+                  GradientStop { position: 0.0; color: "#4083d1f5" }
+                  GradientStop { position: 1.0; color: "#A083d1f5" }
+            }
 
             Text {
                 id: finalScore
