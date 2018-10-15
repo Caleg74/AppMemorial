@@ -71,7 +71,12 @@ void dbIfaceBase::getEventSelectedGymnastList(QStringList* p_pList)
     {
         QSqlDatabase db = QSqlDatabase::database("ConnMG");
         QSqlQuery query(db);
-        query.exec("SELECT first_name, last_name, gender, nation_id FROM event_athlete_vw");
+        int iEventId = getCurrentEventId();
+
+        QString strQuery = "SELECT first_name, last_name, gender, nation_id FROM event_athlete_vw WHERE"
+                           " sport_event_id = "   + QString::number(iEventId, 10);
+
+        query.exec(strQuery);
 
         while(query.next())
         {
