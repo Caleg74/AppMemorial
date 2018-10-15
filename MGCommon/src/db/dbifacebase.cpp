@@ -587,21 +587,22 @@ void dbIfaceBase::retrieveChronologicalList(QList<QStringList>& p_strChronoList)
         QSqlQuery query(db);
         int iEventId = getCurrentEventId();
 
-        QString strQuery = "SELECT gender, fullname, nation, apparatus, start_score, execution_score, final_score, total_score FROM chrono_list_vw WHERE "
+        QString strQuery = "SELECT id, gender, fullname, nation, apparatus, start_score, execution_score, final_score, total_score FROM chrono_list_vw WHERE "
                    "event_id = "   + QString::number(iEventId, 10);
         query.exec(strQuery);
 
         while (query.next())
         {
             QStringList strData;
-            strData << query.value(0).toString().trimmed()  // gender
-                    << query.value(1).toString().trimmed()  // fullname
-                    << query.value(2).toString().trimmed()  // nation
-                    << query.value(3).toString().trimmed()  // apparatus
-                    << query.value(4).toString().trimmed()  // start_score
-                    << query.value(5).toString().trimmed()  // execution_score
-                    << query.value(6).toString().trimmed()  // final_score
-                    << query.value(7).toString().trimmed();  // total_score
+            strData << query.value(0).toString().trimmed()  // athelete id
+                    << query.value(1).toString().trimmed()  // gender
+                    << query.value(2).toString().trimmed()  // fullname
+                    << query.value(3).toString().trimmed()  // nation
+                    << query.value(4).toString().trimmed()  // apparatus
+                    << query.value(5).toString().trimmed()  // start_score
+                    << query.value(6).toString().trimmed()  // execution_score
+                    << query.value(7).toString().trimmed()  // final_score
+                    << query.value(8).toString().trimmed();  // total_score
 
             p_strChronoList << strData;
 //            qInfo() << "Athlete retrieved: " << strData;

@@ -11,7 +11,7 @@ Item {
     Rectangle {
         id: chronoScoresTitleleSpace
         y: 50
-        height:  parent.height / 12
+        height:  parent.height / 10
         width: parent.width
         radius: 5
         border.width: 2
@@ -20,13 +20,13 @@ Item {
 
         Item // some sort of a Row
         {
-            property int colWidthUnit: parent.width / 14
+            property int colWidthUnit: parent.width / 12
             anchors.margins: 5
             anchors.fill: parent
             property int fontSize:  Math.max(parent.width / 120, 6)
 
 /*
-            Sesso | Nome Cognome | Nazione | Attrezzo | Coeff. difficoltà | Esecuzione | Nota finale | Totale | Rango
+            Sesso | Nome Cognome | Nazione | Attrezzo | Coeff. difficoltà | Esecuzione | Nota finale | Totale
  */
             TableTitleItem {
                 id: mwId
@@ -44,7 +44,7 @@ Item {
                 text: "Nome"
                 fontSize: parent.fontSize
                 height: parent.height
-                width: parent.colWidthUnit * 4
+                width: parent.colWidthUnit * 3
 //                imageSource: "/images/Empty.svg"
                 anchors.left: mwId.right
             }
@@ -113,20 +113,21 @@ Item {
                 width: parent.colWidthUnit
 //                imageSource: "/images/Empty.svg"
                 anchors.left: finalScoreId.right
-            }
-
-            TableTitleItem {
-                id: rankId
-                objectName: "rankId"
-                text: "Rango"
-                fontSize: parent.fontSize
-                height: parent.height
-                width: parent.colWidthUnit
-//                imageSource: "/images/Empty.svg"
-                anchors.left: totalGymnastId.right
                 anchors.right: parent.right
                 separatorVisible: false
             }
+
+//            TableTitleItem {
+//                id: rankId
+//                objectName: "rankId"
+//                text: "Rango"
+//                fontSize: parent.fontSize
+//                height: parent.height
+//                width: parent.colWidthUnit
+////                imageSource: "/images/Empty.svg"
+//                anchors.left: totalGymnastId.right
+//                separatorVisible: false
+//            }
         }
     }
 

@@ -17,7 +17,7 @@ Item {
 
         Item // some sort of a Row
         {
-            property int colWidthUnit: parent.width / 14
+            property int colWidthUnit: parent.width / 12
             anchors.margins: 5
             anchors.fill: parent
 //            height: parent.height
@@ -38,7 +38,7 @@ Item {
                 nameFull: NameFull   // roleName
                 flagImage: FlagImage // roleName
                 fontSize: parent.fontSize
-                width: parent.colWidthUnit * 4
+                width: parent.colWidthUnit * 3
                 anchors.left: mwId.right
             }
 
@@ -89,16 +89,18 @@ Item {
                 fontSize: parent.fontSize
                 width: parent.colWidthUnit
                 anchors.left: finalScoreId.right
+                anchors.right: parent.right
+                separatorVisible: false
             }
 
-            GeneralTxtItem {
-                id: rankId
-                generalText: Rank   // roleName
-                fontSize: parent.fontSize
-                width: parent.colWidthUnit
-                anchors.left: gymnastTotId.right
-                anchors.right: parent.right
-            }
+//            GeneralTxtItem {
+//                id: rankId
+//                generalText: Rank   // roleName
+//                fontSize: parent.fontSize
+//                width: parent.colWidthUnit
+//                anchors.left: gymnastTotId.right
+//                anchors.right: parent.right
+//            }
         }
     }
 }

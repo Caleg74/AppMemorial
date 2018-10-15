@@ -16,8 +16,8 @@ public:
         StartScoreRole,
         ExecutionScoreRole,
         FinalScoreRole,
-        GymnastTotalScoreRole,
-        RankRole
+        GymnastTotalScoreRole
+//        RankRole
     };
 
     ChronoListDataModel(QObject *parent = nullptr);

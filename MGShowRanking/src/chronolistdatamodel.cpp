@@ -31,7 +31,7 @@ void ChronoListDataModel::FillChronoList()
         cChronoItem.setStartScore(0.0f);
         cChronoItem.setExecutionScore(0.0f);
         cChronoItem.setFinalScore(0.0f);
-        cChronoItem.setRank(0);
+//        cChronoItem.setRank(0);
 
         beginInsertRows(QModelIndex(), rowCount(), rowCount());
         m_chronoList << cChronoItem;
@@ -54,23 +54,24 @@ void ChronoListDataModel::updateScores()
     {
         if (iObjIndex < dbRawList.length())
         {
-            iter->setGender(dbRawList.at(iObjIndex).at(0));
-            iter->setNameFull(dbRawList.at(iObjIndex).at(1));
+            iter->setGender(dbRawList.at(iObjIndex).at(1));
+            iter->setNameFull(dbRawList.at(iObjIndex).at(2));
 
             // Set the flag
-            countryIso = dbInterface::Instance()->getNationName(dbRawList.at(iObjIndex).at(2).toInt(), dbIfaceBase::NI_IsoName);
+            countryIso = dbInterface::Instance()->getNationName(dbRawList.at(iObjIndex).at(3).toInt(), dbIfaceBase::NI_IsoName);
             countryFile = "qrc:/flags/" + countryIso.toLower() + ".svg";
             iter->setImagePath(countryFile);
 
             // set the Nation Short name
-            countryIoc = dbInterface::Instance()->getNationName(dbRawList.at(iObjIndex).at(2).toInt(), dbIfaceBase::NI_IocName);
+            countryIoc = dbInterface::Instance()->getNationName(dbRawList.at(iObjIndex).at(3).toInt(), dbIfaceBase::NI_IocName);
             iter->setNationShort(countryIoc);
 
-            iter->setApparatusName(dbRawList.at(iObjIndex).at(3));
-            iter->setStartScore(dbRawList.at(iObjIndex).at(4).toFloat());
-            iter->setExecutionScore(dbRawList.at(iObjIndex).at(5).toFloat());
-            iter->setFinalScore(dbRawList.at(iObjIndex).at(6).toFloat());
-            iter->setTotScore(dbRawList.at(iObjIndex).at(7).toFloat());
+            iter->setApparatusName(dbRawList.at(iObjIndex).at(4));
+            iter->setStartScore(dbRawList.at(iObjIndex).at(5).toFloat());
+            iter->setExecutionScore(dbRawList.at(iObjIndex).at(6).toFloat());
+            iter->setFinalScore(dbRawList.at(iObjIndex).at(7).toFloat());
+            int iAthleteId = dbRawList.at(iObjIndex).at(0).toInt();
+            iter->setTotScore(dbInterface::Instance()->getAllroundTotalScore(iAthleteId));
         }
         // next object in the List
         iObjIndex++;
@@ -138,8 +139,8 @@ QVariant ChronoListDataModel::data(const QModelIndex & index, int role) const {
         return chronoItem.getFinalScore();
     else if (role == GymnastTotalScoreRole)
         return chronoItem.getTotScore();
-    else if (role == RankRole)
-        return chronoItem.getRank();
+//    else if (role == RankRole)
+//        return chronoItem.getRank();
     else
         qDebug() << "Role " << role << " not found";
 
@@ -157,7 +158,7 @@ QHash<int, QByteArray> ChronoListDataModel::roleNames() const {
     roles[ExecutionScoreRole   ]      = "ExecutionScore";
     roles[FinalScoreRole       ]      = "FinalScore";
     roles[GymnastTotalScoreRole]      = "GymnastTotalScore";
-    roles[RankRole             ]      = "Rank";
+//    roles[RankRole             ]      = "Rank";
 
     return roles;
 }
