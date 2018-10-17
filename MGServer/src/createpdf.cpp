@@ -312,7 +312,7 @@ void CreatePdf::PrintMenTableBody(QTextStream& out)
             << pMenList->at(i).getFinalScore(ApparatusList::AMFloor)
             <<"</td> <!-- Floor -->" << endl;
         out << "\t  <td align=\"center\">"
-            << pMenList->at(i).getFinalScore(ApparatusList::AMPommelHores)
+            << pMenList->at(i).getFinalScore(ApparatusList::AMPommelHorse)
             <<"</td> <!-- Pommel Horse-->" << endl;
         out << "\t  <td align=\"center\">"
             << pMenList->at(i).getFinalScore(ApparatusList::AMRings)
@@ -336,7 +336,7 @@ void CreatePdf::PrintMenTableBody(QTextStream& out)
             << pMenList->at(i).getStartScore(ApparatusList::AMFloor)
             <<")</small></td>  <!-- Floor -->" << endl;
         out << "\t  <td align=\"center\"><small>("
-            << pMenList->at(i).getStartScore(ApparatusList::AMPommelHores)
+            << pMenList->at(i).getStartScore(ApparatusList::AMPommelHorse)
             <<")</small></td>  <!-- Pommel Horse-->" << endl;
         out << "\t  <td align=\"center\"><small>("
             << pMenList->at(i).getStartScore(ApparatusList::AMRings)
@@ -435,7 +435,7 @@ void CreatePdf::PrintSingleMApparatusTableTitle(QTextStream& out, ApparatusList:
         fileIn.setFileName("../MGServer/pdf/IN_Men_ParallelBars.html");
         break;
 
-    case ApparatusList::EApparatusMen::AMPommelHores:
+    case ApparatusList::EApparatusMen::AMPommelHorse:
         fileIn.setFileName("../MGServer/pdf/IN_Men_PommelHorse.html");
         break;
 
