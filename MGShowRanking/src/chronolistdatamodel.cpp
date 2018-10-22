@@ -31,6 +31,7 @@ void ChronoListDataModel::FillChronoList()
         cChronoItem.setStartScore(0.0f);
         cChronoItem.setExecutionScore(0.0f);
         cChronoItem.setFinalScore(0.0f);
+        cChronoItem.setIsLatestScore(false);
 //        cChronoItem.setRank(0);
 
         beginInsertRows(QModelIndex(), rowCount(), rowCount());
@@ -72,6 +73,7 @@ void ChronoListDataModel::updateScores()
             iter->setFinalScore(dbRawList.at(iObjIndex).at(7).toFloat());
             int iAthleteId = dbRawList.at(iObjIndex).at(0).toInt();
             iter->setTotScore(dbInterface::Instance()->getAllroundTotalScore(iAthleteId));
+            iter->setIsLatestScore(iObjIndex == 0); // highlight only 1st row
         }
         // next object in the List
         iObjIndex++;
@@ -139,6 +141,8 @@ QVariant ChronoListDataModel::data(const QModelIndex & index, int role) const {
         return chronoItem.getFinalScore();
     else if (role == GymnastTotalScoreRole)
         return chronoItem.getTotScore();
+    else if (role == LatestScoreRole)
+        return chronoItem.isLatestScore();
 //    else if (role == RankRole)
 //        return chronoItem.getRank();
     else
@@ -158,6 +162,7 @@ QHash<int, QByteArray> ChronoListDataModel::roleNames() const {
     roles[ExecutionScoreRole   ]      = "ExecutionScore";
     roles[FinalScoreRole       ]      = "FinalScore";
     roles[GymnastTotalScoreRole]      = "GymnastTotalScore";
+    roles[LatestScoreRole      ]      = "LatestScore";
 //    roles[RankRole             ]      = "Rank";
 
     return roles;

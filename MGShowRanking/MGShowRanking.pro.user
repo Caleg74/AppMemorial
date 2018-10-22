@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
+<<<<<<< HEAD
 <!-- Written by QtCreator 4.6.1, 2018-10-18T23:08:05. -->
+=======
+<!-- Written by QtCreator 4.7.1, 2018-10-22T09:04:02. -->
+>>>>>>> 1d7f7b5d5977e9d8846ddde377a4307ca5d6bbca
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -292,7 +296,11 @@
     <value type="QString" key="Qt4ProjectManager.Qt4RunConfiguration.ProFile">MGShowRanking.pro</value>
     <value type="bool" key="Qt4ProjectManager.Qt4RunConfiguration.UseDyldImageSuffix">false</value>
     <value type="QString" key="Qt4ProjectManager.Qt4RunConfiguration.UserWorkingDirectory"></value>
+<<<<<<< HEAD
     <value type="QString" key="Qt4ProjectManager.Qt4RunConfiguration.UserWorkingDirectory.default">C:/Users/gabri/MemorialGander/build-MGShowRanking-Desktop_Qt_5_11_0_MinGW_32bit-Debug</value>
+=======
+    <value type="QString" key="Qt4ProjectManager.Qt4RunConfiguration.UserWorkingDirectory.default">C:/Private/MemorialGander/build-MGShowRanking-Desktop_Qt_5_11_0_MinGW_32bit-Debug</value>
+>>>>>>> 1d7f7b5d5977e9d8846ddde377a4307ca5d6bbca
     <value type="uint" key="RunConfiguration.QmlDebugServerPort">3768</value>
     <value type="bool" key="RunConfiguration.UseCppDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>
