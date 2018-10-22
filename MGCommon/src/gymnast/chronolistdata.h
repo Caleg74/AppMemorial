@@ -42,6 +42,9 @@ public:
     void setRank(const int p_iRank);
     float getRank() const;
 
+    void setIsLatestScore(bool p_bIsLatestScore);
+    bool isLatestScore() const;
+
 private:
     QString m_strGender;
     QString m_strApparatus;
@@ -51,6 +54,7 @@ private:
     AthleteData::SScore m_sScore;
     float m_fTotScore;
     int m_iRank;
+    bool m_bLatestScore;
 };
 
 #endif // CHRONOLISTDATA_H

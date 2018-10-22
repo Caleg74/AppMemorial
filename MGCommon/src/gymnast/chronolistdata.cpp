@@ -9,6 +9,7 @@ ChronoListData::ChronoListData()
     , m_sScore()
     , m_fTotScore(0.0f)
     , m_iRank(0)
+    , m_bLatestScore(false)
 {
     m_sScore.StartScore = 0.0f;
     m_sScore.ExecutionScore = 0.0f;
@@ -110,3 +111,14 @@ float ChronoListData::getRank() const
 {
     return m_iRank;
 }
+
+void ChronoListData::setIsLatestScore(bool p_bIsLatestScore)
+{
+    m_bLatestScore = p_bIsLatestScore;
+}
+
+bool ChronoListData::isLatestScore() const
+{
+    return m_bLatestScore;
+}
+

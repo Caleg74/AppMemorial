@@ -16,7 +16,8 @@ public:
         StartScoreRole,
         ExecutionScoreRole,
         FinalScoreRole,
-        GymnastTotalScoreRole
+        GymnastTotalScoreRole,
+        LatestScoreRole
 //        RankRole
     };
 

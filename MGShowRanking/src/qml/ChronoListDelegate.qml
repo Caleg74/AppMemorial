@@ -5,6 +5,7 @@ Item {
     width: parent.width
     height: 45
 
+
     Rectangle {
         y: 20
         height:  parent.height
@@ -14,16 +15,31 @@ Item {
         border.color: "#0a3f60"
         color: "#fff"
 
+        Gradient { // enabled or disabled depending on "latestScore"Changed" value
+              id: grad
+              GradientStop { position: 0.0; color: "#4083d1f5" }
+              GradientStop { position: 1.0; color: "#A083d1f5" }
+        }
 
-        Item // some sort of a Row
+        Rectangle // some sort of a Row
         {
+            property bool latestScore;
+
+            onLatestScoreChanged: {
+                if (latestScore) {
+                    gradient = grad
+                } else {
+                    gradient = null
+                }
+            }
+            id: chronoRow
             property int colWidthUnit: parent.width / 12
             anchors.margins: 5
             anchors.fill: parent
 //            height: parent.height
 //            width: parent.width
             property int fontSize:  Math.max(parent.width / 120, 6)
-
+            latestScore: LatestScore   // roleName
 
             GeneralTxtItem {
                 id: mwId
