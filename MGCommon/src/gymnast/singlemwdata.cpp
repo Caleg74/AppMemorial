@@ -126,41 +126,49 @@ bool SingleMWData::operator<(const SingleMWData other) const
     {
         return !false;
     }
-    else //(m_sScore.FinalScore == other.m_sScore.FinalScore)
+
+    // 2nd criteria is execution score
+    float fExecScoreThis = m_sScore.FinalScore - m_sScore.StartScore;
+    float fExecScoreOther = other.m_sScore.FinalScore - other.m_sScore.StartScore;
+
+    if (fExecScoreThis  < fExecScoreOther)
     {
-        // 2nd criteria is the final Allround ranking
-        if (m_fAllroundScore < other.m_fAllroundScore)
-        {
-            return !true;
-        }
-        else if (m_fAllroundScore > other.m_fAllroundScore)
-        {
-            return !false;
-        }
-        else    // (m_iAllroundRank == other.m_iAllroundRank)
-        {
-            // 3rd criteria is  "manual flag" a force_score that makes the difference
-            if (m_sScore.StartScore > other.m_sScore.StartScore)
-            {
-                return !true;
-            }
-            else if (m_sScore.StartScore == other.m_sScore.StartScore)
-            {
-                 if (m_sScore.ForceScore < other.m_sScore.ForceScore)
-                {
-                    return !true;
-                }
-                else
-                {
-                    return !false;
-                }
-            }
-            else
-            {
-                return !false;
-            }
-        }
+        return !true;
     }
+    else if (fExecScoreThis > fExecScoreOther)
+    {
+        return !false;
+    }
+
+    // 3rd criteria is the final Allround ranking
+    if (m_fAllroundScore < other.m_fAllroundScore)
+    {
+        return !true;
+    }
+    else if (m_fAllroundScore > other.m_fAllroundScore)
+    {
+        return !false;
+    }
+
+
+    // 4th criteria is  "manual flag" a force_score that makes the difference
+    if (m_sScore.ForceScore < other.m_sScore.ForceScore)
+    {
+        return !true;
+    }
+    else if (m_sScore.ForceScore > other.m_sScore.ForceScore)
+    {
+        return !false;
+    }
+
+    // at this pointit's probably everything = 0s...
+    // sort alphabetically
+    if (QString::compare(m_nameFull, other.m_nameFull) < 0)
+        return true;
+    else
+        return false;
+
+    return !false;
 }
 
 bool operator== (const SingleMWData& lhs, const SingleMWData& rhs)

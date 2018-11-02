@@ -302,68 +302,85 @@ bool AthleteData::operator<(const AthleteData other) const
     }
     else if (m_vecScore[ApparatusList::AGTotalScore].FinalScore == other.m_vecScore[ApparatusList::AGTotalScore].FinalScore)
     {
-        // 2nd criteria: look for the highest final_score of THE FINAL APPARATUS
+        // 2nd criteria: remove the lowest score and check the total again
         QList<float> scoresThis;
         QList<float> scoresOther;
-        int iFinalApparatusIndexThis = -1;// -1 = NOT_FOUND
-        int iFinalApparatusIndexOther = -1;// -1 = NOT_FOUND
 
+        // Fill the list with all final scores
         for (int i=ApparatusList::AGFirstApparatus; i<iApparatusMax; i++)
         {
             scoresThis << m_vecScore[i].FinalScore;
             scoresOther << other.m_vecScore[i].FinalScore;
-
-            if (m_vecScore[i].IsFinalApparatus)
-            {
-                iFinalApparatusIndexThis = i;
-            }
-            if (other.m_vecScore[i].IsFinalApparatus)
-            {
-                iFinalApparatusIndexOther = i;
-            }
         }
-
-        if ((iFinalApparatusIndexThis >= 0) && (iFinalApparatusIndexOther >= 0))
-        {
-            if (m_vecScore[iFinalApparatusIndexThis].FinalScore < other.m_vecScore[iFinalApparatusIndexOther].FinalScore)
-            {
-                return !true;
-            }
-            else if (m_vecScore[iFinalApparatusIndexThis].FinalScore > other.m_vecScore[iFinalApparatusIndexOther].FinalScore)
-            {
-                return !false;
-            }
-
-            // 3rd criteria: look for the lowest start_score of THE FINAL APPARATUS
-            if (m_vecScore[iFinalApparatusIndexThis].StartScore > other.m_vecScore[iFinalApparatusIndexOther].StartScore)
-            {
-                return !true;
-            }
-            else if (m_vecScore[iFinalApparatusIndexThis].StartScore < other.m_vecScore[iFinalApparatusIndexOther].StartScore)
-            {
-                return !false;
-            }
-        }
-
-        // 4th criteria: look for the highest note between the 2
+        // sort the list, then remove the lowest score
         qSort(scoresThis);
         qSort(scoresOther);
 
-        for (int i=iApparatusMax-1; i!=ApparatusList::AGFirstApparatus; i--)
+        while (scoresThis.size() > 1)
         {
-            if (scoresThis.at(i-ApparatusList::AGFirstApparatus) > scoresOther.at(i-ApparatusList::AGFirstApparatus))
-                return !false;
-            else if (scoresThis.at(i-ApparatusList::AGFirstApparatus) < scoresOther.at(i-ApparatusList::AGFirstApparatus))
-                return !true;
+            scoresThis.removeLast();
+            scoresOther.removeLast();
 
-            // else continue and compare the next score
+            float fSumThis = 0.0;
+            float fSumOther = 0.0;
+            // create the total with the remaining items
+            for (int j=0; j<scoresThis.size(); j++)
+            {
+                fSumThis += scoresThis.at(j);
+                fSumOther += scoresOther.at(j);
+            }
+
+            if (fSumThis < fSumOther)
+            {
+                return !true;
+            }
+            else if (fSumThis > fSumOther)
+            {
+                return !false;
+            }
+            // if equal remove the next "lowest" score and try again
         }
 
-        // 5th criteria: the smallest start score had less "penalties"; therefore, it will have a higher ranking
-        if (m_vecScore[ApparatusList::AGTotalScore].StartScore > other.m_vecScore[ApparatusList::AGTotalScore].StartScore)
+        // 3rd criteria: the highest sum of all execution (E) scores
+        // Fill the list with all execution scores
+        float fSumExecThis = 0.0;
+        float fSumExecOther = 0.0;
+
+        for (int i=ApparatusList::AGFirstApparatus; i<iApparatusMax; i++)
+        {
+            fSumExecThis += m_vecScore[i].ExecutionScore;
+            fSumExecOther += other.m_vecScore[i].ExecutionScore;
+        }
+
+        if (fSumExecThis < fSumExecOther)
+        {
             return !true;
-        else if (m_vecScore[ApparatusList::AGTotalScore].StartScore < other.m_vecScore[ApparatusList::AGTotalScore].StartScore)
+        }
+        else if (fSumExecThis > fSumExecOther)
+        {
             return !false;
+        }
+
+
+        // 4th criteria: the highest sum of all start (D) scores
+        // Fill the list with all execution scores
+        float fSumStartThis = 0.0;
+        float fSumStartOther = 0.0;
+
+        for (int i=ApparatusList::AGFirstApparatus; i<iApparatusMax; i++)
+        {
+            fSumStartThis += m_vecScore[i].StartScore;
+            fSumStartOther += other.m_vecScore[i].StartScore;
+        }
+
+        if (fSumStartThis < fSumStartOther)
+        {
+            return !true;
+        }
+        else if (fSumStartOther > fSumStartOther)
+        {
+            return !false;
+        }
 
         // at this pointit's probably everything = 0s...
         // sort alphabetically
