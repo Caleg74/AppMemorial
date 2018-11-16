@@ -1,0 +1,5 @@
+MGDeploy
+build-MGInsertScore-Desktop*
+build-MGServer-Desktop*
+build-MGShowRanking-Desktop*
+*.pro.user*
