@@ -39,6 +39,8 @@
 ****************************************************************************/
 #include "athletedata.h"
 #include <QDebug>
+#include <math.h>
+#include "arithmetictools.h"
 
 AthleteData::AthleteData(const Gender_t p_eGender,
                          const int p_iAthleteId,
@@ -187,7 +189,7 @@ QString AthleteData::getStartScore(int p_iApparatus) const
             qCritical() << "getStartScore(): p_iApparatus(W) " << p_iApparatus << " is out-of-range";
     }
 
-    if (m_vecScore[p_iApparatus].StartScore == 0.0f)
+    if (fAreSame(m_vecScore[p_iApparatus].StartScore, 0.0f))
         return " - ";
     else
         return QString::number(m_vecScore[p_iApparatus].StartScore, 'f', 3);
@@ -222,7 +224,7 @@ QString AthleteData::getExecutionScore(int p_iApparatus) const
             qCritical() << "getStartScore(): p_iApparatus(W) " << p_iApparatus << " is out-of-range";
     }
 
-    if (m_vecScore[p_iApparatus].ExecutionScore == 0.0f)
+    if (fAreSame(m_vecScore[p_iApparatus].ExecutionScore, 0.0f))
         return " - ";
     else
         return QString::number(m_vecScore[p_iApparatus].ExecutionScore, 'f', 3);
@@ -257,7 +259,7 @@ QString AthleteData::getFinalScore(int p_iApparatus) const
             qCritical() << "getFinalScore(): p_iApparatus(W) " << p_iApparatus << " is out-of-range";
     }
 
-    if (m_vecScore[p_iApparatus].FinalScore == 0.0f)
+    if (fAreSame(m_vecScore[p_iApparatus].FinalScore, 0.0f))
         return " - ";
     else
         return QString::number(m_vecScore[p_iApparatus].FinalScore, 'f', 3);
@@ -296,11 +298,8 @@ bool AthleteData::operator<(const AthleteData other) const
     // For this reason the total score must be calculated prior to this point
 
     // each return value is ! (inverted), since the sorting is not ascending but descending
-    if (m_vecScore[ApparatusList::AGTotalScore].FinalScore < other.m_vecScore[ApparatusList::AGTotalScore].FinalScore)
-    {
-        return !true;
-    }
-    else if (m_vecScore[ApparatusList::AGTotalScore].FinalScore == other.m_vecScore[ApparatusList::AGTotalScore].FinalScore)
+    if (fAreSame(m_vecScore[ApparatusList::AGTotalScore].FinalScore,
+                     other.m_vecScore[ApparatusList::AGTotalScore].FinalScore))
     {
         // 2nd criteria: remove the lowest score and check the total again
         QList<float> scoresThis;
@@ -312,14 +311,14 @@ bool AthleteData::operator<(const AthleteData other) const
             scoresThis << m_vecScore[i].FinalScore;
             scoresOther << other.m_vecScore[i].FinalScore;
         }
-        // sort the list, then remove the lowest score
+        // sort the list in ascending order, then remove the lowest score
         qSort(scoresThis);
         qSort(scoresOther);
 
         while (scoresThis.size() > 1)
         {
-            scoresThis.removeLast();
-            scoresOther.removeLast();
+            scoresThis.removeFirst();
+            scoresOther.removeFirst();
 
             float fSumThis = 0.0;
             float fSumOther = 0.0;
@@ -330,11 +329,11 @@ bool AthleteData::operator<(const AthleteData other) const
                 fSumOther += scoresOther.at(j);
             }
 
-            if (fSumThis < fSumOther)
+            if (fALessThanB(fSumThis, fSumOther))
             {
                 return !true;
             }
-            else if (fSumThis > fSumOther)
+            else if (fAGreaterThanB(fSumThis, fSumOther))
             {
                 return !false;
             }
@@ -352,11 +351,11 @@ bool AthleteData::operator<(const AthleteData other) const
             fSumExecOther += other.m_vecScore[i].ExecutionScore;
         }
 
-        if (fSumExecThis < fSumExecOther)
+        if (fALessThanB(fSumExecThis, fSumExecOther))
         {
             return !true;
         }
-        else if (fSumExecThis > fSumExecOther)
+        else if (fAGreaterThanB(fSumExecThis, fSumExecOther))
         {
             return !false;
         }
@@ -373,11 +372,11 @@ bool AthleteData::operator<(const AthleteData other) const
             fSumStartOther += other.m_vecScore[i].StartScore;
         }
 
-        if (fSumStartThis < fSumStartOther)
+        if (fALessThanB(fSumStartThis, fSumStartOther))
         {
             return !true;
         }
-        else if (fSumStartOther > fSumStartOther)
+        else if (fAGreaterThanB(fSumStartOther, fSumStartOther))
         {
             return !false;
         }
@@ -388,6 +387,11 @@ bool AthleteData::operator<(const AthleteData other) const
             return true;
         else
             return false;
+    }
+    else if (fALessThanB(m_vecScore[ApparatusList::AGTotalScore].FinalScore,
+                         other.m_vecScore[ApparatusList::AGTotalScore].FinalScore))
+    {
+     return !true;
     }
     else
     {

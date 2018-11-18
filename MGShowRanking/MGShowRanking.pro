@@ -25,7 +25,8 @@ SOURCES += \
     src/dbinterface.cpp \
     src/chronolistdatamodel.cpp \
     src/main.cpp \
-    ../MGCommon/src/gymnast/chronolistdata.cpp
+    ../MGCommon/src/gymnast/chronolistdata.cpp \
+    ../MGCommon/src/arithmetictools.cpp
 
 HEADERS += \
     ../MGCommon/src/cbbItems/apparatusdata.h \
@@ -45,9 +46,11 @@ HEADERS += \
     src/coreapplication.h \
     src/dbinterface.h \
     src/chronolistdatamodel.h \
-    ../MGCommon/src/gymnast/chronolistdata.h
+    ../MGCommon/src/gymnast/chronolistdata.h \
+    ../MGCommon/src/arithmetictools.h
 
 INCLUDEPATH += \
+    ../MGCommon/src \
     ../MGCommon/src/db \
     ../MGCommon/src/cbbItems \
     ../MGCommon/src/gymnast \

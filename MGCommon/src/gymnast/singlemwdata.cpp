@@ -39,6 +39,7 @@
 ****************************************************************************/
 #include "singlemwdata.h"
 #include <QDebug>
+#include "arithmetictools.h"
 
 SingleMWData::SingleMWData(const int p_iAthleteId,
                            const QString& fullName,
@@ -118,11 +119,11 @@ void SingleMWData::setAllroundTotalScore(float p_fAllroundTotScore)
 bool SingleMWData::operator<(const SingleMWData other) const
 {
     // each return value is ! (inverted), since the sorting is not ascending but descending
-    if (m_sScore.FinalScore < other.m_sScore.FinalScore)
+    if (fALessThanB(m_sScore.FinalScore, other.m_sScore.FinalScore))
     {
         return !true;
     }
-    else if (m_sScore.FinalScore > other.m_sScore.FinalScore)
+    else if (fAGreaterThanB(m_sScore.FinalScore, other.m_sScore.FinalScore))
     {
         return !false;
     }
@@ -131,32 +132,32 @@ bool SingleMWData::operator<(const SingleMWData other) const
     float fExecScoreThis = m_sScore.FinalScore - m_sScore.StartScore;
     float fExecScoreOther = other.m_sScore.FinalScore - other.m_sScore.StartScore;
 
-    if (fExecScoreThis  < fExecScoreOther)
+    if (fALessThanB(fExecScoreThis, fExecScoreOther))
     {
         return !true;
     }
-    else if (fExecScoreThis > fExecScoreOther)
+    else if (fAGreaterThanB(fExecScoreThis, fExecScoreOther))
     {
         return !false;
     }
 
     // 3rd criteria is the final Allround ranking
-    if (m_fAllroundScore < other.m_fAllroundScore)
+    if (fALessThanB(m_fAllroundScore, other.m_fAllroundScore))
     {
         return !true;
     }
-    else if (m_fAllroundScore > other.m_fAllroundScore)
+    else if (fAGreaterThanB(m_fAllroundScore, other.m_fAllroundScore))
     {
         return !false;
     }
 
 
     // 4th criteria is  "manual flag" a force_score that makes the difference
-    if (m_sScore.ForceScore < other.m_sScore.ForceScore)
+    if (fALessThanB(m_sScore.ForceScore, other.m_sScore.ForceScore))
     {
         return !true;
     }
-    else if (m_sScore.ForceScore > other.m_sScore.ForceScore)
+    else if (fAGreaterThanB(m_sScore.ForceScore, other.m_sScore.ForceScore))
     {
         return !false;
     }
