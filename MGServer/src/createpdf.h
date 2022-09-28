@@ -59,6 +59,8 @@ private:
     void AddHeader(bool p_bHFImages);
     void AddFooter(bool p_bHFImages);
 
+    void AddPageNumber();
+
     QTextStream m_textStream;
 
     QPainter m_painter;
@@ -66,6 +68,8 @@ private:
     QPrinter m_printer;
 
     GymnastRanking m_cRank;
+
+    int m_iPageNumber;
 };
 
 #endif // CREATEPDF_H

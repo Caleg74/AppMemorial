@@ -10,6 +10,7 @@ CreatePdf::CreatePdf()
 // , m_doc()
  , m_printer(QPrinter::PrinterResolution)
  , m_cRank()
+ , m_iPageNumber(0)
 {
 }
 
@@ -27,14 +28,14 @@ void CreatePdf::Print()
     // print 2 files,with and without header/footer
     for (int i=0; i<2; i++)
     {
-        bool bWithLogo = (i==0); // 1st time wizh logo
+        bool bWithLogo = (i==0); // 1st time with logo
 
         QString strFileName = QStandardPaths::writableLocation(QStandardPaths::DesktopLocation);
 
         if (bWithLogo)
-            strFileName += "/MemorialGander2018.pdf";
+            strFileName += "/MemorialGander2022.pdf";
         else
-            strFileName += "/MemorialGander2018_NoImage.pdf";
+            strFileName += "/MemorialGander2022_NoImage.pdf";
 
         m_printer.setOutputFormat(QPrinter::PdfFormat);
         m_printer.setPaperSize(QPrinter::A4);
@@ -45,6 +46,7 @@ void CreatePdf::Print()
             return;
         }
 
+       m_iPageNumber = 1;
        PrintMenAllround(bWithLogo);
 
         if (! m_printer.newPage()) {
@@ -278,6 +280,7 @@ void CreatePdf::PrintFooter(bool p_bHFImages, QTextStream& out)
     fileIn.close();
 
     AddFooter(p_bHFImages);
+    AddPageNumber();
 }
 
 void CreatePdf::PrintMenTableTitle(QTextStream& out)
@@ -562,8 +565,8 @@ void CreatePdf::AddHeader(bool p_bHFImages)
 {
     if (p_bHFImages)
     {
-        QRectF target(20.0, 0.0, 496.0/3, 223.0/3);
-        QRectF source(0.0, 0.0, 496.0, 223.0);
+        QRectF target(20.0, 0.0, 496.0/3, 239.0/3);
+        QRectF source(0.0, 0.0, 496.0, 239.0);
         QImage image = QImage("../MGServer/pdf/IN_Header_LogoMG.png");
         m_painter.drawImage(target, image, source);  // Paint the mask onto the image
     }
@@ -573,9 +576,23 @@ void CreatePdf::AddFooter(bool p_bHFImages)
 {
     if (p_bHFImages)
     {
-        QRectF target(20.0, 750.0, 2560.0/5, 286.0/5);
-        QRectF source(0.0, 0.0, 2560.0, 286.0);
+        QRectF target(20.0, 750.0, 2480.0/5, 283.0/5);
+        QRectF source(0.0, 0.0, 2480.0, 283.0);
         QImage image = QImage("../MGServer/pdf/IN_Footer_Sponsors.png");
         m_painter.drawImage(target, image, source);  // Paint the mask onto the image
     }
 }
+
+
+void CreatePdf::AddPageNumber()
+{
+    int x=m_printer.paperRect().width()-80;
+    int y=m_printer.paperRect().height()-40;
+    m_painter.setFont({"Arial", 10});
+    m_painter.setPen({0, 0, 128, 128});
+    m_painter.drawText(x, y, "Page " + QString::number(m_iPageNumber));
+
+    // inc for next page
+    m_iPageNumber++;
+}
+
