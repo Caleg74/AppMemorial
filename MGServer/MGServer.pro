@@ -17,6 +17,7 @@ SOURCES += \
     ../MGCommon/src/msgBox/messagebox.cpp \
     ../MGCommon/src/gymnast/athletedata.cpp \
     ../MGCommon/src/gymnast/singlemwdata.cpp \
+    ../MGCommon/src/arithmetictools.cpp \
     src/main.cpp \
     src/gymnastdata.cpp \
     src/gymnastdatamodel.cpp \
@@ -41,6 +42,7 @@ HEADERS += \
     ../MGCommon/src/msgBox/messagebox.h \
     ../MGCommon/src/gymnast/athletedata.h \
     ../MGCommon/src/gymnast/singlemwdata.h \
+    ../MGCommon/src/arithmetictools.h \
     src/gymnastdata.h \
     src/gymnastdatamodel.h \
     src/gymnastselectdata.h \
@@ -54,6 +56,7 @@ HEADERS += \
 
 
 INCLUDEPATH += \
+    ../MGCommon/src \
     ../MGCommon/src/db \
     ../MGCommon/src/cbbItems \
     ../MGCommon/src/msgBox \

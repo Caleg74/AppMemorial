@@ -312,8 +312,8 @@ bool AthleteData::operator<(const AthleteData other) const
             scoresOther << other.m_vecScore[i].FinalScore;
         }
         // sort the list in ascending order, then remove the lowest score
-        qSort(scoresThis);
-        qSort(scoresOther);
+        std::sort(scoresThis.begin(), scoresThis.end());
+        std::sort(scoresOther.begin(), scoresOther.end());
 
         while (scoresThis.size() > 1)
         {

@@ -77,7 +77,7 @@ void AllroundMenDataModel::updateScores()
     }
 
     // sort the list
-    qSort(m_rankingList);
+    std::sort(m_rankingList.begin(), m_rankingList.end());
 
     // the order defines the ranking as well
     int iRank = 1;

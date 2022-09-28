@@ -28,7 +28,7 @@ void dbIfaceBase::getCountriesList(QStringList* p_pList)
             *p_pList << name;
         }
 
-        qSort(*p_pList);
+        p_pList->sort(Qt::CaseInsensitive);
     }
     else
     {
@@ -54,7 +54,7 @@ void dbIfaceBase::getRegisterdGymnastList(QStringList* p_pList)
                     + strNationName.trimmed() + ")";
         }
 
-        qSort(*p_pList);
+        p_pList->sort(Qt::CaseInsensitive);
 
         // put it at the beginning
         p_pList->insert(p_pList->begin(), "Seleziona ginnasti..");
@@ -325,7 +325,8 @@ int dbIfaceBase::getCurrentEventId()
 
         while (query.next())
         {
-            if (query.value(1).toString().startsWith(QString::number(m_iCurrentYear, 10)))
+//            if (query.value(1).toString().startsWith(QString::number(m_iCurrentYear, 10)))    // ORI
+            if (query.value(1).toString().startsWith(QString::number(2018, 10)))    // just for test
             {
                 eventId = query.value(0).toInt();
             }

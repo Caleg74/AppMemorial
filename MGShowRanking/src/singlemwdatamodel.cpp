@@ -1,7 +1,6 @@
 #include "singlemwdatamodel.h"
 #include <QDebug>
 #include "dbinterface.h"
-#include "sortfilterproxymodel.h"
 
 //**** STATIC MEMBER INITIALIZATION *********************
 
@@ -101,7 +100,7 @@ void SingleMWDataModel::updateScores()
     }
 
     // sort the list
-    qSort(m_rankingList);
+    std::sort(m_rankingList.begin(), m_rankingList.end());
 
     // the order defines the ranking as well
     int iRank = 1;

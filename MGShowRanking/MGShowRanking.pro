@@ -16,6 +16,8 @@ SOURCES += \
     ../MGCommon/src/cbbItems/gymnasteventlist.cpp \
     ../MGCommon/src/gymnast/athletedata.cpp \
     ../MGCommon/src/gymnast/singlemwdata.cpp \
+    ../MGCommon/src/gymnast/chronolistdata.cpp \
+    ../MGCommon/src/arithmetictools.cpp \
     src/gymnastdatamodel.cpp \
     src/allroundmendatamodel.cpp \
     src/sortfilterproxymodel.cpp \
@@ -24,9 +26,7 @@ SOURCES += \
     src/coreapplication.cpp \
     src/dbinterface.cpp \
     src/chronolistdatamodel.cpp \
-    src/main.cpp \
-    ../MGCommon/src/gymnast/chronolistdata.cpp \
-    ../MGCommon/src/arithmetictools.cpp
+    src/main.cpp
 
 HEADERS += \
     ../MGCommon/src/cbbItems/apparatusdata.h \
@@ -38,6 +38,8 @@ HEADERS += \
     ../MGCommon/src/cbbItems/gymnasteventlist.h \
     ../MGCommon/src/gymnast/athletedata.h \
     ../MGCommon/src/gymnast/singlemwdata.h \
+    ../MGCommon/src/gymnast/chronolistdata.h \
+    ../MGCommon/src/arithmetictools.h \
     src/gymnastdatamodel.h \
     src/allroundmendatamodel.h \
     src/sortfilterproxymodel.h \
@@ -45,9 +47,8 @@ HEADERS += \
     src/singlemwdatamodel.h \
     src/coreapplication.h \
     src/dbinterface.h \
-    src/chronolistdatamodel.h \
-    ../MGCommon/src/gymnast/chronolistdata.h \
-    ../MGCommon/src/arithmetictools.h
+    src/chronolistdatamodel.h
+
 
 INCLUDEPATH += \
     ../MGCommon/src \

@@ -123,7 +123,7 @@ void GymnastRanking::updateSingleScores(int p_iApparatusId, QList<SingleMWData>*
     }
 
     // sort the list
-    qSort(*p_pList);
+    std::sort(p_pList->begin(), p_pList->end());
 
     // the order defines the ranking as well
     int iRank = 1;
@@ -155,7 +155,7 @@ void GymnastRanking::updateAllroundMenScores()
     }
 
     // sort the list
-    qSort(m_MenList);
+    std::sort(m_MenList.begin(), m_MenList.end());
 
     // the order defines the ranking as well
     int iRank = 1;
@@ -187,13 +187,14 @@ void GymnastRanking::updateAllroundWomenScores()
     }
 
     // sort the list
-    qSort(m_WomenList);
+    std::sort(m_WomenList.begin(), m_WomenList.end());
 
     // the order defines the ranking as well
     int iRank = 1;
     for (iter = m_WomenList.begin(); iter != m_WomenList.end(); ++iter)
     {
         iter->setRank(iRank);
+
         iRank++;
     }
 }
