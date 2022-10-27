@@ -5,7 +5,7 @@ import "qrc:/qml"
 Window {
     id: window
     width: 800
-    height: 320
+    height: 500
     visible: true
     title: qsTr("Memorial Gander - Insert Score")
 

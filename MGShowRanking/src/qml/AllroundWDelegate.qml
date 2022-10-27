@@ -37,7 +37,7 @@ Item {
 
             ScoreItem {
                 id: totId
-                startScore: StartScore_Total  // roleName
+                //startScore: StartScore_Total  // roleName
                 finalScore: FinalScore_Total  // roleName
                 isFinalApparatus: false
                 latestScore: false
