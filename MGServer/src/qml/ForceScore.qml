@@ -1,7 +1,6 @@
-import QtQuick 2.5
-import QtQuick.Controls 1.4
-import QtQuick.Controls.Styles 1.1
-import QtQuick.Layouts 1.3
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Layouts
 
 Item {
     width: parent.width
@@ -60,13 +59,11 @@ Item {
                     font.pointSize: 15
                 }
 
-                TextField {
+                StyleMGTextInput {
                     id: txtForceScore
                     width: 30
                     activeFocusOnPress: true
-                    style:textEditMGStyle
                     placeholderText: "0..X"
-                    font.pointSize: 15
                 }
 
                 StyleMGPushButton {

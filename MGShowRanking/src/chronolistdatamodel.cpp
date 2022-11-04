@@ -181,11 +181,11 @@ QModelIndex ChronoListDataModel::indexFromItem(const ChronoListData* item) const
 
 ChronoListData* ChronoListDataModel::GetItem(QString& nameFull)
 {
-    QList<ChronoListData>::const_iterator iter;
-    for (iter = m_chronoList.constBegin(); iter != m_chronoList.constEnd(); ++iter)
+    QList<ChronoListData>::iterator iter;
+    for (iter = m_chronoList.begin(); iter != m_chronoList.end(); ++iter)
     {
         if ((iter)->getNameFull() == nameFull)
-            return (ChronoListData*)iter.i->v;
+            return &(*iter);
     }
 
     return nullptr;

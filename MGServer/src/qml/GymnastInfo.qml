@@ -1,6 +1,5 @@
-import QtQuick 2.0
-import QtQuick.Controls 1.4
-import QtQuick.Controls.Styles 1.1
+import QtQuick
+import QtQuick.Controls
 
 Item {
     width: parent.width
@@ -33,22 +32,18 @@ Item {
                 anchors.centerIn: parent
                 anchors.verticalCenter: parent.verticalCenter
 
-                TextField {
+                StyleMGTextInput {
                     id: txtFirstName
                     width: parent.parent.width/4 - 50
                     activeFocusOnPress: true
-                    style:textEditMGStyle
                     placeholderText: "Nome.."
-                    font.pointSize: 15
                 }
 
-                TextField {
+                StyleMGTextInput {
                     id: txtLastName
                     width: parent.parent.width/4 - 50
                     activeFocusOnPress: true
-                    style:textEditMGStyle
                     placeholderText: "Cognome.."
-                    font.pointSize: 15
                 }
 
                 StyleMGComboBox {
@@ -114,7 +109,9 @@ Item {
             anchors.top: addGymnastSpace.bottom
             anchors.bottom: root.bottom
 
-            flickableItem.interactive: true
+            ScrollBar.horizontal.policy: ScrollBar.AlwaysOn
+            ScrollBar.vertical.policy: ScrollBar.AlwaysOn
+
 
             ListView {
     //            width: 200; height: 250
@@ -131,25 +128,25 @@ Item {
                 remove: Transition { NumberAnimation { property: "opacity"; to: 0; duration: 200 } }
             }
 
-            style: ScrollViewStyle {
-                transientScrollBars: true
-                handle: Item {
-                    implicitWidth: 14
-                    implicitHeight: 26
-                    Rectangle {
-                        color: "grey"
-                        anchors.fill: parent
-                        anchors.topMargin: 6
-                        anchors.leftMargin: 4
-                        anchors.rightMargin: 4
-                        anchors.bottomMargin: 6
-                    }
-                }
-                scrollBarBackground: Item {
-                    implicitWidth: 14
-                    implicitHeight: 26
-                }
-            }
+//            style: ScrollViewStyle {
+//                transientScrollBars: true
+//                handle: Item {
+//                    implicitWidth: 14
+//                    implicitHeight: 26
+//                    Rectangle {
+//                        color: "grey"
+//                        anchors.fill: parent
+//                        anchors.topMargin: 6
+//                        anchors.leftMargin: 4
+//                        anchors.rightMargin: 4
+//                        anchors.bottomMargin: 6
+//                    }
+//                }
+//                scrollBarBackground: Item {
+//                    implicitWidth: 14
+//                    implicitHeight: 26
+//                }
+//            }
         }
     }
 

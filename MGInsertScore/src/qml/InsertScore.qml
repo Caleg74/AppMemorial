@@ -1,12 +1,11 @@
-import QtQuick 2.0
-import QtQuick.Controls 1.4
-import QtQuick.Controls.Styles 1.1
+import QtQuick
+import QtQuick.Controls
 
 Item {
     width: parent.width
     height: parent.height
 
-    property string finalScore;
+    property string finalScore : "0.000";
     property bool gymnastDefined;
 
     function resetValues() {
@@ -92,7 +91,7 @@ Item {
                     currentIndex: 0
 
                     onCurrentIndexChanged: {
-                        if (currentIndex != 0)
+                        if (currentIndex !== 0)
                         {
                             gymnastDefined = true
                             console.log("gymnastDefined = true")
@@ -106,36 +105,10 @@ Item {
                     }
                 }
 
-                CheckBox {
+
+                StyleMGCheckbox {
                     id: chkFinalApparatus
                     text: "Attrezzo Finale"
-                    style: CheckBoxStyle {
-
-                    indicator: Rectangle {
-                           implicitWidth: 24
-                           implicitHeight: 24
-                           radius: 3
-                           border.color: control.activeFocus ? "grey" : "#0a3f60"
-                           border.width: 2
-                           Rectangle {
-                               visible: control.checked
-                               color: "#83d1f5"
-                               border.color: "#0a3f60"
-                               radius: 2
-                               anchors.margins: 4
-                               anchors.fill: parent
-                           }
-                   }
-
-                   spacing: 10
-
-                   label: Text {
-                           renderType: Text.NativeRendering
-                           font.pointSize: 15
-                           color: "#0a3f60"
-                           text: control.text
-                         }
-                    }
                 }
             }
 
@@ -151,11 +124,11 @@ Item {
                     color: "#0a3f60"
                   }
 
-                TextField {
+                StyleMGTextInput {
                     id: txtDifficultyScore
                     width: parent.parent.width/5
                     activeFocusOnPress: true
-                    style:textEditMGStyle
+//                    style:textEditMGStyle
 //                    placeholderText: "0.000"
                     text: "0.000"
                     font.pointSize: 15
@@ -170,11 +143,11 @@ Item {
                     color: "#0a3f60"
                   }
 
-                TextField {
+                StyleMGTextInput {
                     id: txtExecutionScore
                     width: parent.parent.width/5
                     activeFocusOnPress: true
-                    style:textEditMGStyle
+//                    style:textEditMGStyle
 //                    placeholderText: "0.000"
                     text: "0.000"
                     font.pointSize: 15
@@ -193,11 +166,11 @@ Item {
                     color: "#0a3f60"
                   }
 
-                TextField {
+                StyleMGTextInput {
                     id: txtPenaltyScore
                     width: parent.parent.width/5
                     activeFocusOnPress: true
-                    style:textEditMGStyle
+//                    style:textEditMGStyle
 //                    placeholderText: "0.000"
                     text: "0.000"
                     font.pointSize: 15
@@ -208,13 +181,11 @@ Item {
             Row {
                 spacing: 20
 
-                TextField {
+                StyleMGTextInput {
                     id: txtFinalScore
                     width: parent.parent.width/5
-                    height: 40
                     activeFocusOnPress: false
                     readOnly: true
-                    style:textEditMGStyle
                     text: finalScore
                     font.pointSize: 15
                     font.bold: true

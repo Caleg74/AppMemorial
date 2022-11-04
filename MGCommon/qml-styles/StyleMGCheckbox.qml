@@ -1,36 +1,38 @@
-import QtQuick 2.0
-import QtQuick.Controls 1.4
-import QtQuick.Controls.Styles 1.4
+import QtQuick
+import QtQuick.Controls
 
-Component {
-    CheckBox {
-        id:chkbox
-        text: "control.text"
+CheckBox {
+    id: control
+    text: qsTr("CheckBox")
+    checked: false
 
-        style: CheckBoxStyle {
+    indicator: Rectangle {
+        implicitWidth: 30
+        implicitHeight: 30
+        x: control.leftPadding
+        y: parent.height / 2 - height / 2
+        radius: 3
+        border.color: control.down ? "grey" : "#0a3f60"
 
-          indicator: Rectangle {
-                  implicitWidth: 24
-                  implicitHeight: 24
-                  radius: 3
-                  border.color: control.activeFocus ? "grey" : "#0a3f60"
-                  border.width: 2
-                  Rectangle {
-                      visible: control.checked
-                      color: "#83d1f5"
-                      border.color: "#0a3f60"
-                      radius: 2
-                      anchors.margins: 4
-                      anchors.fill: parent
-                  }
-          }
-
-          spacing: 10
-
-          label: Text {
-                  font.pointSize: 15
-                  text: control.text
-                }
+        Rectangle {
+            width: 20
+            height: 20
+            x: 5
+            y: 5
+            radius: 2
+            color: control.down ? "grey" : "#0a3f60"
+            visible: control.checked
         }
     }
+
+    contentItem: Text {
+        text: control.text
+        font.pointSize: 15
+        opacity: enabled ? 1.0 : 0.3
+        color: "#0a3f60"
+        verticalAlignment: Text.AlignVCenter
+        leftPadding: control.indicator.width + control.spacing
+    }
 }
+
+

@@ -1,6 +1,5 @@
-import QtQuick 2.0
-import QtQuick.Controls 1.4
-import QtQuick.Controls.Styles 1.1
+import QtQuick
+import QtQuick.Controls
 
 Item {
 //    width: parent.width
@@ -96,7 +95,9 @@ Item {
         anchors.top: singleWomenTitleleSpace.bottom
         anchors.bottom: parent.bottom
 
-        flickableItem.interactive: true
+        ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
+        ScrollBar.vertical.policy: ScrollBar.AlwaysOff
+
 
         ListView {
     //            width: 200; height: 250
@@ -113,25 +114,25 @@ Item {
     //                remove: Transition { NumberAnimation { property: "opacity"; to: 0; duration: 200 } }
         }
 
-        style: ScrollViewStyle {
-            transientScrollBars: true
-            handle: Item {
-                implicitWidth: 14
-                implicitHeight: 26
-                Rectangle {
-                    color: "grey"
-                    anchors.fill: parent
-                    anchors.topMargin: 6
-                    anchors.leftMargin: 4
-                    anchors.rightMargin: 4
-                    anchors.bottomMargin: 6
-                }
-            }
-            scrollBarBackground: Item {
-                implicitWidth: 14
-                implicitHeight: 26
-            }
-        }
+//        style: ScrollViewStyle {
+//            transientScrollBars: true
+//            handle: Item {
+//                implicitWidth: 14
+//                implicitHeight: 26
+//                Rectangle {
+//                    color: "grey"
+//                    anchors.fill: parent
+//                    anchors.topMargin: 6
+//                    anchors.leftMargin: 4
+//                    anchors.rightMargin: 4
+//                    anchors.bottomMargin: 6
+//                }
+//            }
+//            scrollBarBackground: Item {
+//                implicitWidth: 14
+//                implicitHeight: 26
+//            }
+//        }
     }
 
 }

@@ -1,5 +1,5 @@
-import QtQuick 2.0
-import QtQuick.Window 2.2
+import QtQuick
+import QtQuick.Window
 import "qrc:/qml"
 
 Window {
@@ -9,9 +9,9 @@ Window {
     visible: true
     title: qsTr("Memorial Gander - Insert Score")
 
-    StyleMGCheckbox { id: checkboxMGStyle }
+//    StyleMGCheckbox { id: checkboxMGStyle }
     StyleMGComboBox { id: comboBoxMGStyle}
-    StyleMGTextInput { id: textEditMGStyle}
+//    StyleMGTextInput { id: textEditMGStyle}
     StyleMGPushButton { id: buttonMGStyle}
 
     Rectangle {

@@ -143,11 +143,11 @@ QModelIndex GymnastSelectModel::indexFromItem(const GymnastSelectData *item) con
 
 GymnastSelectData* GymnastSelectModel::GetItem(QString& gymnastFullTxt)
 {
-    QList<GymnastSelectData>::const_iterator iter;
-    for (iter = m_gymnastList.constBegin(); iter != m_gymnastList.constEnd(); ++iter)
+    QList<GymnastSelectData>::iterator iter;
+    for (iter = m_gymnastList.begin(); iter != m_gymnastList.end(); ++iter)
     {
         if ((iter)->GymnastFullTxt() == gymnastFullTxt)
-            return (GymnastSelectData*)iter.i->v;
+            return &(*iter);
     }
 
     return NULL;

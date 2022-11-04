@@ -218,11 +218,11 @@ QModelIndex AllroundWomenDataModel::indexFromItem(const AthleteData* item) const
 
 AthleteData *AllroundWomenDataModel::GetItem(QString& nameFull)
 {
-    QList<AthleteData>::const_iterator iter;
-    for (iter = m_rankingList.constBegin(); iter != m_rankingList.constEnd(); ++iter)
+    QList<AthleteData>::iterator iter;
+    for (iter = m_rankingList.begin(); iter != m_rankingList.end(); ++iter)
     {
         if ((iter)->getNameFull() == nameFull)
-            return (AthleteData*)iter.i->v;
+            return &(*iter);
     }
 
     return nullptr;

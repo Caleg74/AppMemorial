@@ -25,10 +25,10 @@ ComboBox {
         height: 8
         contextType: "2d"
 
-        Connections {
-            target: control
-            onPressedChanged: canvas.requestPaint()
-        }
+//        Connections {
+//            target: control
+//            onPressedChanged: canvas.requestPaint()
+//        }
 
         onPaint: {
             context.reset();

@@ -2,7 +2,6 @@
 #include "dbinterface.h"
 #include "gymnastselectionlist.h"
 #include <QAbstractItemModel>
-#include "gymnastsortfilterproxymodel.h"
 
 //**** STATIC MEMBER INITIALIZATION *********************
 GymnastDataModel* GymnastDataModel::sm_pInstance = NULL;
@@ -127,11 +126,11 @@ QModelIndex GymnastDataModel::indexFromItem(const GymnastData* item) const
 
 GymnastData* GymnastDataModel::GetItem(QString& firstName, QString& lastName)
 {
-    QList<GymnastData>::const_iterator iter;
-    for (iter = m_gymnastList.constBegin(); iter != m_gymnastList.constEnd(); ++iter)
+    QList<GymnastData>::iterator iter;
+    for (iter = m_gymnastList.begin(); iter != m_gymnastList.end(); ++iter)
     {
         if (((iter)->FirstName() == firstName) && ((iter)->LastName() == lastName))
-            return (GymnastData*)iter.i->v;
+            return &(*iter);
     }
 
     return NULL;

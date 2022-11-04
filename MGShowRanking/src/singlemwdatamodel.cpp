@@ -191,11 +191,11 @@ QModelIndex SingleMWDataModel::indexFromItem(const SingleMWData* item) const
 
 SingleMWData* SingleMWDataModel::GetItem(QString& nameFull)
 {
-    QList<SingleMWData>::const_iterator iter;
-    for (iter = m_rankingList.constBegin(); iter != m_rankingList.constEnd(); ++iter)
+    QList<SingleMWData>::iterator iter;
+    for (iter = m_rankingList.begin(); iter != m_rankingList.end(); ++iter)
     {
         if ((iter)->getNameFull() == nameFull)
-            return (SingleMWData*)iter.i->v;
+            return &(*iter);
     }
 
     return NULL;
