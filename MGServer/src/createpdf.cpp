@@ -565,7 +565,7 @@ void CreatePdf::AddHeader(bool p_bHFImages)
 {
     if (p_bHFImages)
     {
-        QRectF target(20.0, 0.0, 496.0/3, 239.0/3);
+        QRectF target(20.0, 10.0, 496.0/3, 239.0/3);
         QRectF source(0.0, 0.0, 496.0, 239.0);
         QImage image = QImage("../MGServer/pdf/IN_Header_LogoMG.png");
         m_painter.drawImage(target, image, source);  // Paint the mask onto the image
@@ -586,8 +586,8 @@ void CreatePdf::AddFooter(bool p_bHFImages)
 
 void CreatePdf::AddPageNumber()
 {
-    int x=m_printer.pageRect(QPrinter::Point).width()-80;
-    int y=m_printer.pageRect(QPrinter::Point).height()-40;
+    int x=m_printer.pageRect(QPrinter::Point).width()-60;
+    int y=m_printer.pageRect(QPrinter::Point).height()-30;
     m_painter.setFont({"Arial", 10});
     m_painter.setPen({0, 0, 128, 128});
     m_painter.drawText(x, y, "Page " + QString::number(m_iPageNumber));
