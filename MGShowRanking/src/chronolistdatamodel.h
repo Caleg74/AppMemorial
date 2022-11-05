@@ -13,8 +13,9 @@ public:
         NameFullRole,
         CountryRole,
         ApparatusRole,
-        StartScoreRole,
+        DifficultyScoreRole,
         ExecutionScoreRole,
+        PenaltyScoreRole,
         FinalScoreRole,
         GymnastTotalScoreRole,
         LatestScoreRole

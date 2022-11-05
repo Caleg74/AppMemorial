@@ -6,7 +6,9 @@
 
 struct AllScores
 {
-    float StartScore;
+    float DifficultyScore;
+    float ExecutionScore;
+    float PenaltyScore;
     float FinalScore;
     int   ForceScore;   // to be used only in case of equal score
     bool  IsFinalApparatus;
@@ -60,7 +62,7 @@ public:
 
     void getApparatusList(QStringList* p_pList);
 
-    float getStartScore(const int p_iAthleteId, const int p_iApparatusId);
+    float getDifficultyScore(const int p_iAthleteId, const int p_iApparatusId);
 
     float getFinalScore(const int p_iAthleteId, const int p_iApparatusId);
 

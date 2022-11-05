@@ -52,7 +52,7 @@ SingleMWData::SingleMWData(const int p_iAthleteId,
     , m_nation(nation)
     , m_imagePath(imagePath)
 {
-    m_sScore.StartScore = 0;
+    m_sScore.DifficultyScore = 0;
     m_sScore.FinalScore = 0;
 
 }
@@ -86,14 +86,14 @@ QString SingleMWData::getImagePath() const
     return m_imagePath;
 }
 
-void SingleMWData::setStartScore(float p_fScore)
+void SingleMWData::setDifficultyScore(float p_fScore)
 {
-    m_sScore.StartScore = p_fScore;
+    m_sScore.DifficultyScore = p_fScore;
 }
 
-QString SingleMWData::getStartScore() const
+QString SingleMWData::getDifficultyScore() const
 {
-    return QString::number(m_sScore.StartScore, 'f', 3);
+    return QString::number(m_sScore.DifficultyScore, 'f', 3);
 }
 
 void SingleMWData::setFinalScore(float p_fScore)
@@ -129,8 +129,8 @@ bool SingleMWData::operator<(const SingleMWData other) const
     }
 
     // 2nd criteria is execution score
-    float fExecScoreThis = m_sScore.FinalScore - m_sScore.StartScore;
-    float fExecScoreOther = other.m_sScore.FinalScore - other.m_sScore.StartScore;
+    float fExecScoreThis = m_sScore.FinalScore - m_sScore.DifficultyScore;
+    float fExecScoreOther = other.m_sScore.FinalScore - other.m_sScore.DifficultyScore;
 
     if (fALessThanB(fExecScoreThis, fExecScoreOther))
     {
@@ -189,7 +189,7 @@ QDebug &operator<<(QDebug &stream, const SingleMWData &obj)
     stream << "{" << obj.m_nameFull << ", ";
     stream << obj.m_iRank << ", ";
     stream << obj.m_sScore.FinalScore << " (";
-    stream << obj.m_sScore.StartScore << ") }\n";
+    stream << obj.m_sScore.DifficultyScore << ") }\n";
 
     return stream;
 }

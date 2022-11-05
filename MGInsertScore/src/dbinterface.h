@@ -14,14 +14,18 @@ public:
     void setNewScore(const int p_iEventId,
                      const int p_iAthleteId,
                      const int p_iApparatusId,
-                     const float p_fStartScore,
+                     const float p_fDifficultyScore,
+                     const float p_fExecutionScore,
+                     const float p_fPenaltyScore,
                      const float p_fFinalScore,
                      const bool p_bFinalApparatus);
 
     void updateScore(const int p_iEventId,
                      const int p_iAthleteId,
                      const int p_iApparatusId,
-                     const float p_fStartScore,
+                     const float p_fDifficultyScore,
+                     const float p_fExecutionScore,
+                     const float p_fPenaltyScore,
                      const float p_fFinalScore,
                      const bool p_bFinalApparatus);
 

@@ -11,7 +11,7 @@ public:
 
     typedef struct
     {
-        float StartScore;
+        float DifficultyScore;
         float FinalScore;
         int   ForceScore;   // to be used only in case of equal score
     } SScore;
@@ -28,8 +28,8 @@ public:
     QString getNation() const;
     QString getImagePath() const;
 
-    void setStartScore(float p_fScore);
-    QString getStartScore() const;
+    void setDifficultyScore(float p_fScore);
+    QString getDifficultyScore() const;
 
     void setFinalScore(float p_fScore);
     QString getFinalScore() const;

@@ -88,13 +88,13 @@ void SingleMWDataModel::updateScores()
     for (iter = m_rankingList.begin(); iter != m_rankingList.end(); ++iter)
     {
         int iAthleteId = iter->getAthleteId();
-        float fStartScore = dbInterface::Instance()->getStartScore(iAthleteId, iAppId);
+        float fDifficultyScore = dbInterface::Instance()->getDifficultyScore(iAthleteId, iAppId);
         float fFinalScore = dbInterface::Instance()->getFinalScore(iAthleteId, iAppId);
         int iForceScore   = dbInterface::Instance()->getForceScore(iAthleteId, iAppId);
         float fTotalAllroundScore = dbInterface::Instance()->getAllroundTotalScore(iAthleteId);
 
         iter->setFinalScore(fFinalScore);
-        iter->setStartScore(fStartScore);
+        iter->setDifficultyScore(fDifficultyScore);
         iter->setForceScore(iForceScore);
         iter->setAllroundTotalScore(fTotalAllroundScore);
     }
@@ -159,8 +159,8 @@ QVariant SingleMWDataModel::data(const QModelIndex & index, int role) const {
         return gymnast.getNameFull();
     else if (role == FlagImageRole)
         return gymnast.getImagePath();
-    else if (role == StartScoreSingleMW)
-        return gymnast.getStartScore();
+    else if (role == DifficultyScoreSingleMW)
+        return gymnast.getDifficultyScore();
     else if (role == FinalScoreSingleMW)
         return gymnast.getFinalScore();
 
@@ -173,7 +173,7 @@ QHash<int, QByteArray> SingleMWDataModel::roleNames() const {
     roles[RankRole             ] = "Rank";
     roles[NameFullRole         ] = "NameFull";
     roles[FlagImageRole        ] = "FlagImage";
-    roles[StartScoreSingleMW   ] = "StartScore_SingleMW";
+    roles[DifficultyScoreSingleMW   ] = "DifficultyScore_SingleMW";
     roles[FinalScoreSingleMW   ] = "FinalScore_SingleMW";
 
     return roles;

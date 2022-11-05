@@ -199,7 +199,9 @@ Item {
                     buttonText: "Registra"
                     signal saveScore(string gymnastName,
                                      string apparatus,
-                                     string startScore,
+                                     string difficultyScore,
+                                     string executionScore,
+                                     string penaltyScore,
                                      string finalScore,
                                      bool finalApparatus)
 
@@ -210,6 +212,8 @@ Item {
                         saveScore(cbbGymnastSelection.currentText,
                                   cbbAppartus.currentText,
                                   txtDifficultyScore.text,
+                                  txtExecutionScore.text,
+                                  txtPenaltyScore.text,
                                   txtFinalScore.text,
                                   chkFinalApparatus.checked)
 

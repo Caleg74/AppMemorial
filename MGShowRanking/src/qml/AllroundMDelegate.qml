@@ -38,7 +38,7 @@ Item {
             ScoreItem {
                 id: totId
                 finalScore: FinalScore_Total  // roleName
-                //startScore: StartScore_Total  // roleName
+                //difficultyScore: DifficultyScore_Total  // roleName
                 isFinalApparatus: false
                 latestScore: false
                 fontSize: parent.fontSize
@@ -49,7 +49,7 @@ Item {
 
             ScoreItem {
                 id: floorId
-                startScore: StartScore_Floor  // roleName
+                difficultyScore: DifficultyScore_Floor  // roleName
                 finalScore: FinalScore_Floor  // roleName
                 isFinalApparatus: FinalApparatus_Floor // roleName
                 latestScore: LatestScore_Floor         // roleName
@@ -60,7 +60,7 @@ Item {
 
             ScoreItem {
                 id: phorseId
-                startScore: StartScore_PHorse  // roleName
+                difficultyScore: DifficultyScore_PHorse  // roleName
                 finalScore: FinalScore_PHorse  // roleName
                 isFinalApparatus: FinalApparatus_PHorse // roleName
                 latestScore: LatestScore_PHorse         // roleName
@@ -71,7 +71,7 @@ Item {
 
             ScoreItem {
                 id: ringsId
-                startScore: StartScore_Rings  // roleName
+                difficultyScore: DifficultyScore_Rings  // roleName
                 finalScore: FinalScore_Rings  // roleName
                 isFinalApparatus: FinalApparatus_Rings // roleName
                 latestScore: LatestScore_Rings         // roleName
@@ -82,7 +82,7 @@ Item {
 
             ScoreItem {
                 id: vaultId
-                startScore: StartScore_Vault  // roleName
+                difficultyScore: DifficultyScore_Vault  // roleName
                 finalScore: FinalScore_Vault  // roleName
                 isFinalApparatus: FinalApparatus_Vault // roleName
                 latestScore: LatestScore_Vault         // roleName
@@ -93,7 +93,7 @@ Item {
 
             ScoreItem {
                 id: pbarsId
-                startScore: StartScore_ParallelBars  // roleName
+                difficultyScore: DifficultyScore_ParallelBars  // roleName
                 finalScore: FinalScore_ParallelBars  // roleName
                 isFinalApparatus: FinalApparatus_ParallelBars // roleName
                 latestScore: LatestScore_ParallelBars         // roleName
@@ -104,7 +104,7 @@ Item {
 
             ScoreItem {
                 id: hbarId
-                startScore: StartScore_HBar  // roleName
+                difficultyScore: DifficultyScore_HBar  // roleName
                 finalScore: FinalScore_HBar  // roleName
                 isFinalApparatus: FinalApparatus_HBar // roleName
                 latestScore: LatestScore_HBar         // roleName

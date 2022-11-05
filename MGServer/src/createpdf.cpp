@@ -333,25 +333,25 @@ void CreatePdf::PrintMenTableBody(QTextStream& out)
 
         out << "\t<tr>" << Qt::endl;
         out << "\t  <td align=\"center\"><small>("
-            << pMenList->at(i).getStartScore(ApparatusList::AGTotalScore)
+            << pMenList->at(i).getDifficultyScore(ApparatusList::AGTotalScore)
             <<")</small></td> <!-- Total -->" << Qt::endl;
         out << "\t  <td align=\"center\"><small>("
-            << pMenList->at(i).getStartScore(ApparatusList::AMFloor)
+            << pMenList->at(i).getDifficultyScore(ApparatusList::AMFloor)
             <<")</small></td>  <!-- Floor -->" << Qt::endl;
         out << "\t  <td align=\"center\"><small>("
-            << pMenList->at(i).getStartScore(ApparatusList::AMPommelHorse)
+            << pMenList->at(i).getDifficultyScore(ApparatusList::AMPommelHorse)
             <<")</small></td>  <!-- Pommel Horse-->" << Qt::endl;
         out << "\t  <td align=\"center\"><small>("
-            << pMenList->at(i).getStartScore(ApparatusList::AMRings)
+            << pMenList->at(i).getDifficultyScore(ApparatusList::AMRings)
             <<")</small></td>  <!-- Rings-->" << Qt::endl;
         out << "\t  <td align=\"center\"><small>("
-            << pMenList->at(i).getStartScore(ApparatusList::AMVault)
+            << pMenList->at(i).getDifficultyScore(ApparatusList::AMVault)
             <<")</small></td>  <!-- Vault-->" << Qt::endl;
         out << "\t  <td align=\"center\"><small>("
-            << pMenList->at(i).getStartScore(ApparatusList::AMParallelBars)
+            << pMenList->at(i).getDifficultyScore(ApparatusList::AMParallelBars)
             <<")</small></td>  <!-- Parallel Bars-->" << Qt::endl;
         out << "\t  <td align=\"center\"><small>("
-            << pMenList->at(i).getStartScore(ApparatusList::AMHorizontalBar)
+            << pMenList->at(i).getDifficultyScore(ApparatusList::AMHorizontalBar)
             <<")</small></td>  <!-- Horizonatl Bar-->" << Qt::endl;
         out << "\t</tr>" << Qt::endl;
     }
@@ -401,19 +401,19 @@ void CreatePdf::PrintWomenTableBody(QTextStream& out)
 
         out << "\t<tr>" << Qt::endl;
         out << "\t  <td align=\"center\"><small>("
-            << pWomenList->at(i).getStartScore(ApparatusList::AGTotalScore)
+            << pWomenList->at(i).getDifficultyScore(ApparatusList::AGTotalScore)
             <<")</small></td> <!-- Total -->" << Qt::endl;
         out << "\t  <td align=\"center\"><small>("
-            << pWomenList->at(i).getStartScore(ApparatusList::AWVault)
+            << pWomenList->at(i).getDifficultyScore(ApparatusList::AWVault)
             <<")</small></td>  <!-- Vault -->" << Qt::endl;
         out << "\t  <td align=\"center\"><small>("
-            << pWomenList->at(i).getStartScore(ApparatusList::AWUnevenBars)
+            << pWomenList->at(i).getDifficultyScore(ApparatusList::AWUnevenBars)
             <<")</small></td>  <!-- Uneven Bars-->" << Qt::endl;
         out << "\t  <td align=\"center\"><small>("
-            << pWomenList->at(i).getStartScore(ApparatusList::AWBalanceBeam)
+            << pWomenList->at(i).getDifficultyScore(ApparatusList::AWBalanceBeam)
             <<")</small></td>  <!-- Balance Beam-->" << Qt::endl;
         out << "\t  <td align=\"center\"><small>("
-            << pWomenList->at(i).getStartScore(ApparatusList::AWFloor)
+            << pWomenList->at(i).getDifficultyScore(ApparatusList::AWFloor)
             <<")</small></td>  <!-- Floor-->" << Qt::endl;
 
         out << "\t</tr>" << Qt::endl;
@@ -487,7 +487,7 @@ void CreatePdf::PrintSingleMApparatusTableBody(QTextStream& out)
 
             out << "\t<tr>" << Qt::endl;
             out << "\t  <td align=\"center\"><small>("
-                << pMenList->at(i).getStartScore()
+                << pMenList->at(i).getDifficultyScore()
                 <<")</small></td> <!-- Single appparatus -->" << Qt::endl;
             out << "\t</tr>" << Qt::endl;
         }
@@ -554,7 +554,7 @@ void CreatePdf::PrintSingleWApparatusTableBody(QTextStream& out)
 
             out << "\t<tr>" << Qt::endl;
             out << "\t  <td align=\"center\" width=\"60\"><small>("
-                << pWomenList->at(i).getStartScore()
+                << pWomenList->at(i).getDifficultyScore()
                 <<")</small></td> <!-- Single appparatus -->" << Qt::endl;
             out << "\t</tr>" << Qt::endl;
         }

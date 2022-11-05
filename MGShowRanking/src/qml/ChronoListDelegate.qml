@@ -70,25 +70,32 @@ Item {
                 id: apparatusId
                 generalText: Apparatus   // roleName
                 fontSize: parent.fontSize
-                width: parent.colWidthUnit * 3
+                width: parent.colWidthUnit * 2
                 anchors.left: countryId.right
             }
 
             GeneralTxtItem {
-                id: startScoreId
-                generalText: StartScore   // roleName
+                id: difficultyScoreId
+                generalText: DifficultyScore   // roleName
                 fontSize: parent.fontSize
                 width: parent.colWidthUnit
                 anchors.left: apparatusId.right
             }
-
 
             GeneralTxtItem {
                 id: exeScoreId
                 generalText: ExecutionScore   // roleName
                 fontSize: parent.fontSize
                 width: parent.colWidthUnit
-                anchors.left: startScoreId.right
+                anchors.left: difficultyScoreId.right
+            }
+
+            GeneralTxtItem {
+                id: penaltyScoreId
+                generalText: PenaltyScore   // roleName
+                fontSize: parent.fontSize
+                width: parent.colWidthUnit
+                anchors.left: exeScoreId.right
             }
 
             GeneralTxtItem {
@@ -96,7 +103,7 @@ Item {
                 generalText: FinalScore   // roleName
                 fontSize: parent.fontSize
                 width: parent.colWidthUnit
-                anchors.left: exeScoreId.right
+                anchors.left: penaltyScoreId.right
             }
 
             GeneralTxtItem {

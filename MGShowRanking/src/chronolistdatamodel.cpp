@@ -1,7 +1,6 @@
 #include "chronolistdatamodel.h"
 #include <QDebug>
 #include "dbinterface.h"
-#include "sortfilterproxymodel.h"
 
 //**** STATIC MEMBER INITIALIZATION *********************
 
@@ -28,8 +27,9 @@ void ChronoListDataModel::FillChronoList()
         cChronoItem.setNameFull("- -");
         cChronoItem.setNationShort("-");
         cChronoItem.setApparatusName("-");
-        cChronoItem.setStartScore(0.0f);
+        cChronoItem.setDifficultyScore(0.0f);
         cChronoItem.setExecutionScore(0.0f);
+        cChronoItem.setPenaltyScore(0.0f);
         cChronoItem.setFinalScore(0.0f);
         cChronoItem.setIsLatestScore(false);
 //        cChronoItem.setRank(0);
@@ -68,9 +68,10 @@ void ChronoListDataModel::updateScores()
             iter->setNationShort(countryIoc);
 
             iter->setApparatusName(dbRawList.at(iObjIndex).at(4));
-            iter->setStartScore(dbRawList.at(iObjIndex).at(5).toFloat());
+            iter->setDifficultyScore(dbRawList.at(iObjIndex).at(5).toFloat());
             iter->setExecutionScore(dbRawList.at(iObjIndex).at(6).toFloat());
-            iter->setFinalScore(dbRawList.at(iObjIndex).at(7).toFloat());
+            iter->setPenaltyScore(dbRawList.at(iObjIndex).at(7).toFloat());
+            iter->setFinalScore(dbRawList.at(iObjIndex).at(8).toFloat());
             int iAthleteId = dbRawList.at(iObjIndex).at(0).toInt();
             iter->setTotScore(dbInterface::Instance()->getAllroundTotalScore(iAthleteId));
             iter->setIsLatestScore(iObjIndex == 0); // highlight only 1st row
@@ -133,10 +134,12 @@ QVariant ChronoListDataModel::data(const QModelIndex & index, int role) const {
         return chronoItem.getNationShort();
     else if (role == ApparatusRole)
         return chronoItem.getApparatusName();
-    else if (role == StartScoreRole)
-        return chronoItem.getStartScore();
+    else if (role == DifficultyScoreRole)
+        return chronoItem.getDifficultyScore();
     else if (role == ExecutionScoreRole)
         return chronoItem.getExecutionScore();
+    else if (role == PenaltyScoreRole)
+        return chronoItem.getPenaltyScore();
     else if (role == FinalScoreRole)
         return chronoItem.getFinalScore();
     else if (role == GymnastTotalScoreRole)
@@ -158,8 +161,9 @@ QHash<int, QByteArray> ChronoListDataModel::roleNames() const {
     roles[FlagImageRole        ]      = "FlagImage";
     roles[CountryRole          ]      = "Country";
     roles[ApparatusRole        ]      = "Apparatus";
-    roles[StartScoreRole       ]      = "StartScore";
+    roles[DifficultyScoreRole  ]      = "DifficultyScore";
     roles[ExecutionScoreRole   ]      = "ExecutionScore";
+    roles[PenaltyScoreRole     ]      = "PenaltyScore";
     roles[FinalScoreRole       ]      = "FinalScore";
     roles[GymnastTotalScoreRole]      = "GymnastTotalScore";
     roles[LatestScoreRole      ]      = "LatestScore";
@@ -173,8 +177,7 @@ QModelIndex ChronoListDataModel::indexFromItem(const ChronoListData* item) const
     Q_ASSERT(item);
     for(int row=0; row<m_chronoList.size(); ++row)
     {
-        // GCADBG todo
-//        if(m_chronoList.at(row) == (*item)) return index(row);
+        if(m_chronoList.at(row) == (*item)) return index(row);
     }
     return QModelIndex();
 }

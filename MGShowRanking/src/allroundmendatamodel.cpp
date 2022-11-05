@@ -66,7 +66,7 @@ void AllroundMenDataModel::updateScores()
 //            float fFinalRandom = (float)(qrand() % ((15000 + 1) - 10000) + 10000) / 1000;
 //            float fStartRandom = fFinalRandom - 10;
             iter->setFinalScore((ApparatusList::EApparatusMen)apparatus, sAllScore.FinalScore);
-            iter->setStartScore((ApparatusList::EApparatusMen)apparatus, sAllScore.StartScore);
+            iter->setDifficultyScore((ApparatusList::EApparatusMen)apparatus, sAllScore.DifficultyScore);
             iter->setExecutionScore((ApparatusList::EApparatusMen)apparatus);
             iter->setIsFinalApparatusScore((ApparatusList::EApparatusMen)apparatus, sAllScore.IsFinalApparatus);
 
@@ -136,52 +136,52 @@ QVariant AllroundMenDataModel::data(const QModelIndex & index, int role) const {
         return gymnast.getNameFull();
     else if (role == FlagImageRole)
         return gymnast.getImagePath();
-    else if (role == StartScoreTotalRole)
-        return gymnast.getStartScore(ApparatusList::AGTotalScore);
+    else if (role == DifficultyScoreTotalRole)
+        return gymnast.getDifficultyScore(ApparatusList::AGTotalScore);
     else if (role == FinalScoreTotalRole)
         return gymnast.getFinalScore(ApparatusList::AGTotalScore);
-    else if (role == StartScoreFloorRole)
-        return gymnast.getStartScore(ApparatusList::AMFloor);
+    else if (role == DifficultyScoreFloorRole)
+        return gymnast.getDifficultyScore(ApparatusList::AMFloor);
     else if (role == FinalScoreFloorRole)
         return gymnast.getFinalScore(ApparatusList::AMFloor);
     else if (role == FinalApparatusFloorRole)
         return gymnast.isFinalApparatusScore(ApparatusList::AMFloor);
     else if (role == LatestScoreFloorRole)
         return gymnast.isLatestScore(ApparatusList::AMFloor);
-    else if (role == StartScorePHorseRole)
-        return gymnast.getStartScore(ApparatusList::AMPommelHorse);
+    else if (role == DifficultyScorePHorseRole)
+        return gymnast.getDifficultyScore(ApparatusList::AMPommelHorse);
     else if (role == FinalScorePHorseRole)
         return gymnast.getFinalScore(ApparatusList::AMPommelHorse);
     else if (role == FinalApparatusPHorseRole)
         return gymnast.isFinalApparatusScore(ApparatusList::AMPommelHorse);
     else if (role == LatestScorePHorseRole)
         return gymnast.isLatestScore(ApparatusList::AMPommelHorse);
-    else if (role == StartScoreRingsRole)
-        return gymnast.getStartScore(ApparatusList::AMRings);
+    else if (role == DifficultyScoreRingsRole)
+        return gymnast.getDifficultyScore(ApparatusList::AMRings);
     else if (role == FinalScoreRingsRole)
         return gymnast.getFinalScore(ApparatusList::AMRings);
     else if (role == FinalApparatusRingsRole)
         return gymnast.isFinalApparatusScore(ApparatusList::AMRings);
     else if (role == LatestScoreRingsRole)
         return gymnast.isLatestScore(ApparatusList::AMRings);
-    else if (role == StartScoreVaultRole)
-        return gymnast.getStartScore(ApparatusList::AMVault);
+    else if (role == DifficultyScoreVaultRole)
+        return gymnast.getDifficultyScore(ApparatusList::AMVault);
     else if (role == FinalScoreVaultRole)
         return gymnast.getFinalScore(ApparatusList::AMVault);
     else if (role == FinalApparatusVaultRole)
         return gymnast.isFinalApparatusScore(ApparatusList::AMVault);
     else if (role == LatestScoreVaultRole)
         return gymnast.isLatestScore(ApparatusList::AMVault);
-    else if (role == StartScorePBarsRole)
-        return gymnast.getStartScore(ApparatusList::AMParallelBars);
+    else if (role == DifficultyScorePBarsRole)
+        return gymnast.getDifficultyScore(ApparatusList::AMParallelBars);
     else if (role == FinalScorePBarsRole)
         return gymnast.getFinalScore(ApparatusList::AMParallelBars);
     else if (role == FinalApparatusPBarsRole)
         return gymnast.isFinalApparatusScore(ApparatusList::AMParallelBars);
     else if (role == LatestScorePBarsRole)
         return gymnast.isLatestScore(ApparatusList::AMParallelBars);
-    else if (role == StartScoreHBarRole)
-        return gymnast.getStartScore(ApparatusList::AMHorizontalBar);
+    else if (role == DifficultyScoreHBarRole)
+        return gymnast.getDifficultyScore(ApparatusList::AMHorizontalBar);
     else if (role == FinalScoreHBarRole)
         return gymnast.getFinalScore(ApparatusList::AMHorizontalBar);
     else if (role == FinalApparatusHBarRole)
@@ -197,29 +197,29 @@ QHash<int, QByteArray> AllroundMenDataModel::roleNames() const {
     roles[RankRole            ]      = "Rank";
     roles[NameFullRole        ]      = "NameFull";
     roles[FlagImageRole       ]      = "FlagImage";
-    roles[StartScoreTotalRole ]      = "StartScore_Total";
+    roles[DifficultyScoreTotalRole ]      = "DifficultyScore_Total";
     roles[FinalScoreTotalRole ]      = "FinalScore_Total";
-    roles[StartScoreFloorRole ]      = "StartScore_Floor";
+    roles[DifficultyScoreFloorRole ]      = "DifficultyScore_Floor";
     roles[FinalScoreFloorRole ]      = "FinalScore_Floor";
     roles[FinalApparatusFloorRole ]  = "FinalApparatus_Floor";
     roles[LatestScoreFloorRole ]     = "LatestScore_Floor";
-    roles[StartScorePHorseRole]      = "StartScore_PHorse";
+    roles[DifficultyScorePHorseRole]      = "DifficultyScore_PHorse";
     roles[FinalScorePHorseRole]      = "FinalScore_PHorse";
     roles[FinalApparatusPHorseRole ] = "FinalApparatus_PHorse";
     roles[LatestScorePHorseRole ]    = "LatestScore_PHorse";
-    roles[StartScoreRingsRole ]      = "StartScore_Rings";
+    roles[DifficultyScoreRingsRole ]      = "DifficultyScore_Rings";
     roles[FinalScoreRingsRole ]      = "FinalScore_Rings";
     roles[FinalApparatusRingsRole ]  = "FinalApparatus_Rings";
     roles[LatestScoreRingsRole ]     = "LatestScore_Rings";
-    roles[StartScoreVaultRole ]      = "StartScore_Vault";
+    roles[DifficultyScoreVaultRole ]      = "DifficultyScore_Vault";
     roles[FinalScoreVaultRole ]      = "FinalScore_Vault";
     roles[FinalApparatusVaultRole ]  = "FinalApparatus_Vault";
     roles[LatestScoreVaultRole ]     = "LatestScore_Vault";
-    roles[StartScorePBarsRole ]      = "StartScore_ParallelBars";
+    roles[DifficultyScorePBarsRole ]      = "DifficultyScore_ParallelBars";
     roles[FinalScorePBarsRole ]      = "FinalScore_ParallelBars";
     roles[FinalApparatusPBarsRole ]  = "FinalApparatus_ParallelBars";
     roles[LatestScorePBarsRole ]     = "LatestScore_ParallelBars";
-    roles[StartScoreHBarRole  ]      = "StartScore_HBar";
+    roles[DifficultyScoreHBarRole  ]      = "DifficultyScore_HBar";
     roles[FinalScoreHBarRole  ]      = "FinalScore_HBar";
     roles[FinalApparatusHBarRole ]   = "FinalApparatus_HBar";
     roles[LatestScoreHBarRole ]      = "LatestScore_HBar";

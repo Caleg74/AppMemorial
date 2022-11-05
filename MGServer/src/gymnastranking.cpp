@@ -111,13 +111,13 @@ void GymnastRanking::updateSingleScores(int p_iApparatusId, QList<SingleMWData>*
     for (iter = p_pList->begin(); iter != p_pList->end(); ++iter)
     {
         int iAthleteId = iter->getAthleteId();
-        float fStartScore = dbInterface::Instance()->getStartScore(iAthleteId, p_iApparatusId);
+        float fDifficultyScore = dbInterface::Instance()->getDifficultyScore(iAthleteId, p_iApparatusId);
         float fFinalScore = dbInterface::Instance()->getFinalScore(iAthleteId, p_iApparatusId);
         int iForceScore   = dbInterface::Instance()->getForceScore(iAthleteId, p_iApparatusId);
         float fTotalAllroundScore = dbInterface::Instance()->getAllroundTotalScore(iAthleteId);
 
         iter->setFinalScore(fFinalScore);
-        iter->setStartScore(fStartScore);
+        iter->setDifficultyScore(fDifficultyScore);
         iter->setForceScore(iForceScore);
         iter->setAllroundTotalScore(fTotalAllroundScore);
     }
@@ -144,11 +144,11 @@ void GymnastRanking::updateAllroundMenScores()
         {
             int iAthleteId = iter->getAthleteId();
             int iAppId = ApparatusList::Instance()->getApparatusId((ApparatusList::EApparatusMen)apparatus);
-            float fStartScore = dbInterface::Instance()->getStartScore(iAthleteId, iAppId);
+            float fDifficultyScore = dbInterface::Instance()->getDifficultyScore(iAthleteId, iAppId);
             float fFinalScore = dbInterface::Instance()->getFinalScore(iAthleteId, iAppId);
 
             iter->setFinalScore((ApparatusList::EApparatusMen)apparatus, fFinalScore);
-            iter->setStartScore((ApparatusList::EApparatusMen)apparatus, fStartScore);
+            iter->setDifficultyScore((ApparatusList::EApparatusMen)apparatus, fDifficultyScore);
             iter->setExecutionScore((ApparatusList::EApparatusMen)apparatus);
         }
         iter->CalculateTotalScore();
@@ -176,11 +176,11 @@ void GymnastRanking::updateAllroundWomenScores()
         {
             int iAthleteId = iter->getAthleteId();
             int iAppId = ApparatusList::Instance()->getApparatusId((ApparatusList::EApparatusWomen)apparatus);
-            float fStartScore = dbInterface::Instance()->getStartScore(iAthleteId, iAppId);
+            float fDifficultyScore = dbInterface::Instance()->getDifficultyScore(iAthleteId, iAppId);
             float fFinalScore = dbInterface::Instance()->getFinalScore(iAthleteId, iAppId);
 
             iter->setFinalScore((ApparatusList::EApparatusWomen)apparatus, fFinalScore);
-            iter->setStartScore((ApparatusList::EApparatusWomen)apparatus, fStartScore);
+            iter->setDifficultyScore((ApparatusList::EApparatusWomen)apparatus, fDifficultyScore);
             iter->setExecutionScore((ApparatusList::EApparatusWomen)apparatus);
         }
         iter->CalculateTotalScore();

@@ -9,21 +9,21 @@ class AllroundWomenDataModel : public GymnastDataModel
     Q_OBJECT
 public:
     enum AllroundWRoles {
-        StartScoreTotalRole = LastGeneralRole,
+        DifficultyScoreTotalRole = LastGeneralRole,
         FinalScoreTotalRole,
-        StartScoreVaultRole,
+        DifficultyScoreVaultRole,
         FinalScoreVaultRole,
         FinalApparatusVaultRole,
         LatestScoreVaultRole,
-        StartScoreUnBarsRole,
+        DifficultyScoreUnBarsRole,
         FinalScoreUnBarsRole,
         FinalApparatusUnBarsRole,
         LatestScoreUnBarsRole,
-        StartScoreBalBeamRole,
+        DifficultyScoreBalBeamRole,
         FinalScoreBalBeamRole,
         FinalApparatusBalBeamRole,
         LatestScoreBalBeamRole,
-        StartScoreFloorRole,
+        DifficultyScoreFloorRole,
         FinalScoreFloorRole,
         FinalApparatusFloorRole,
         LatestScoreFloorRole

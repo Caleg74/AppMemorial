@@ -62,7 +62,7 @@ AthleteData::AthleteData(const Gender_t p_eGender,
 
     for (int i=0; i<iApparatusMax; i++)
     {
-        SScore score = {0.0, 0.0, 0.0, false, false};
+        SScore score = {0.0, 0.0, 0.0, 0.0, false, false};
         m_vecScore.push_back(score);
     }
 }
@@ -101,12 +101,12 @@ void AthleteData::setIsFinalApparatusScore(int p_iApparatus, bool p_bIsFinalAppa
     if (m_eGender == Male)
     {
         if (p_iApparatus >= (ApparatusList::AMApparatusMax))
-            qCritical() << "setStartScore(): p_iApparatus(M) " << p_iApparatus << " is out-of-range";
+            qCritical() << "setDifficultyScore(): p_iApparatus(M) " << p_iApparatus << " is out-of-range";
     }
     else
     {
         if (p_iApparatus >= (ApparatusList::AWApparatusMax))
-            qCritical() << "setStartScore(): p_iApparatus(W) " << p_iApparatus << " is out-of-range";
+            qCritical() << "setDifficultyScore(): p_iApparatus(W) " << p_iApparatus << " is out-of-range";
     }
 
     m_vecScore[p_iApparatus].IsFinalApparatus = p_bIsFinalApparatus;
@@ -133,12 +133,12 @@ void AthleteData::setIsLatestScore(int p_iApparatus, bool p_bIsLatestScore)
     if (m_eGender == Male)
     {
         if (p_iApparatus >= (ApparatusList::AMApparatusMax))
-            qCritical() << "setStartScore(): p_iApparatus(M) " << p_iApparatus << " is out-of-range";
+            qCritical() << "setDifficultyScore(): p_iApparatus(M) " << p_iApparatus << " is out-of-range";
     }
     else
     {
         if (p_iApparatus >= (ApparatusList::AWApparatusMax))
-            qCritical() << "setStartScore(): p_iApparatus(W) " << p_iApparatus << " is out-of-range";
+            qCritical() << "setDifficultyScore(): p_iApparatus(W) " << p_iApparatus << " is out-of-range";
     }
 
     m_vecScore[p_iApparatus].IsLatestScore = p_bIsLatestScore;
@@ -160,39 +160,39 @@ bool AthleteData::isLatestScore(int p_iApparatus) const
     return m_vecScore[p_iApparatus].IsLatestScore;
 }
 
-void AthleteData::setStartScore(int p_iApparatus, float p_fScore)
+void AthleteData::setDifficultyScore(int p_iApparatus, float p_fScore)
 {
     if (m_eGender == Male)
     {
         if (p_iApparatus >= (ApparatusList::AMApparatusMax))
-            qCritical() << "setStartScore(): p_iApparatus(M) " << p_iApparatus << " is out-of-range";
+            qCritical() << "setDifficultyScore(): p_iApparatus(M) " << p_iApparatus << " is out-of-range";
     }
     else
     {
         if (p_iApparatus >= (ApparatusList::AWApparatusMax))
-            qCritical() << "setStartScore(): p_iApparatus(W) " << p_iApparatus << " is out-of-range";
+            qCritical() << "setDifficultyScore(): p_iApparatus(W) " << p_iApparatus << " is out-of-range";
     }
 
-    m_vecScore[p_iApparatus].StartScore = p_fScore;
+    m_vecScore[p_iApparatus].DifficultyScore = p_fScore;
 }
 
-QString AthleteData::getStartScore(int p_iApparatus) const
+QString AthleteData::getDifficultyScore(int p_iApparatus) const
 {
     if (m_eGender == Male)
     {
         if (p_iApparatus >= (ApparatusList::AMApparatusMax))
-            qCritical() << "getStartScore(): p_iApparatus(M) " << p_iApparatus << " is out-of-range";
+            qCritical() << "getDifficultyScore(): p_iApparatus(M) " << p_iApparatus << " is out-of-range";
     }
     else
     {
         if (p_iApparatus >= (ApparatusList::AWApparatusMax))
-            qCritical() << "getStartScore(): p_iApparatus(W) " << p_iApparatus << " is out-of-range";
+            qCritical() << "getDifficultyScore(): p_iApparatus(W) " << p_iApparatus << " is out-of-range";
     }
 
-    if (fAreSame(m_vecScore[p_iApparatus].StartScore, 0.0f))
+    if (fAreSame(m_vecScore[p_iApparatus].DifficultyScore, 0.0f))
         return " - ";
     else
-        return QString::number(m_vecScore[p_iApparatus].StartScore, 'f', 3);
+        return QString::number(m_vecScore[p_iApparatus].DifficultyScore, 'f', 3);
 }
 
 void AthleteData::setExecutionScore(int p_iApparatus)
@@ -208,7 +208,7 @@ void AthleteData::setExecutionScore(int p_iApparatus)
             qCritical() << "setFinalScore(): p_iApparatus(W) " << p_iApparatus << " is out-of-range";
     }
 
-    m_vecScore[p_iApparatus].ExecutionScore = m_vecScore[p_iApparatus].FinalScore - m_vecScore[p_iApparatus].StartScore;
+    m_vecScore[p_iApparatus].ExecutionScore = m_vecScore[p_iApparatus].FinalScore - m_vecScore[p_iApparatus].DifficultyScore;
 }
 
 QString AthleteData::getExecutionScore(int p_iApparatus) const
@@ -216,18 +216,53 @@ QString AthleteData::getExecutionScore(int p_iApparatus) const
     if (m_eGender == Male)
     {
         if (p_iApparatus >= (ApparatusList::AMApparatusMax))
-            qCritical() << "getStartScore(): p_iApparatus(M) " << p_iApparatus << " is out-of-range";
+            qCritical() << "getDifficultyScore(): p_iApparatus(M) " << p_iApparatus << " is out-of-range";
     }
     else
     {
         if (p_iApparatus >= (ApparatusList::AWApparatusMax))
-            qCritical() << "getStartScore(): p_iApparatus(W) " << p_iApparatus << " is out-of-range";
+            qCritical() << "getDifficultyScore(): p_iApparatus(W) " << p_iApparatus << " is out-of-range";
     }
 
     if (fAreSame(m_vecScore[p_iApparatus].ExecutionScore, 0.0f))
         return " - ";
     else
         return QString::number(m_vecScore[p_iApparatus].ExecutionScore, 'f', 3);
+}
+
+void AthleteData::setPenaltyScore(int p_iApparatus)
+{
+    if (m_eGender == Male)
+    {
+        if (p_iApparatus >= (ApparatusList::AMApparatusMax))
+            qCritical() << "setFinalScore(): p_iApparatus(M) " << p_iApparatus << " is out-of-range";
+    }
+    else
+    {
+        if (p_iApparatus >= (ApparatusList::AWApparatusMax))
+            qCritical() << "setFinalScore(): p_iApparatus(W) " << p_iApparatus << " is out-of-range";
+    }
+
+    m_vecScore[p_iApparatus].PenaltyScore = m_vecScore[p_iApparatus].FinalScore - m_vecScore[p_iApparatus].DifficultyScore;
+}
+
+QString AthleteData::getPenaltyScore(int p_iApparatus) const
+{
+    if (m_eGender == Male)
+    {
+        if (p_iApparatus >= (ApparatusList::AMApparatusMax))
+            qCritical() << "getDifficultyScore(): p_iApparatus(M) " << p_iApparatus << " is out-of-range";
+    }
+    else
+    {
+        if (p_iApparatus >= (ApparatusList::AWApparatusMax))
+            qCritical() << "getDifficultyScore(): p_iApparatus(W) " << p_iApparatus << " is out-of-range";
+    }
+
+    if (fAreSame(m_vecScore[p_iApparatus].PenaltyScore, 0.0f))
+        return " - ";
+    else
+        return QString::number(m_vecScore[p_iApparatus].PenaltyScore, 'f', 3);
 }
 
 void AthleteData::setFinalScore(int p_iApparatus, float p_fScore)
@@ -277,11 +312,11 @@ void AthleteData::CalculateTotalScore()
 
     for (int i=ApparatusList::AGFirstApparatus; i<iApparatusMax; i++)
     {
-        fStartTot += m_vecScore[i].StartScore;
+        fStartTot += m_vecScore[i].DifficultyScore;
         fTot += m_vecScore[i].FinalScore;
     }
 
-    m_vecScore[ApparatusList::AGTotalScore].StartScore = fStartTot;
+    m_vecScore[ApparatusList::AGTotalScore].DifficultyScore = fStartTot;
     m_vecScore[ApparatusList::AGTotalScore].FinalScore = fTot;
 }
 
@@ -368,8 +403,8 @@ bool AthleteData::operator<(const AthleteData other) const
 
         for (int i=ApparatusList::AGFirstApparatus; i<iApparatusMax; i++)
         {
-            fSumStartThis += m_vecScore[i].StartScore;
-            fSumStartOther += other.m_vecScore[i].StartScore;
+            fSumStartThis += m_vecScore[i].DifficultyScore;
+            fSumStartOther += other.m_vecScore[i].DifficultyScore;
         }
 
         if (fALessThanB(fSumStartThis, fSumStartOther))

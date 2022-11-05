@@ -35,7 +35,7 @@ Item {
                 color: "#0a3f60"
                 horizontalAlignment: Text.AlignLeft
                 verticalAlignment: Text.AlignVCenter
-//                width: parent.width - startScore.width - separator.width
+//                width: parent.width - difficultyScore.width - separator.width
                 height: parent.height
                 anchors.left: parent.left
             }

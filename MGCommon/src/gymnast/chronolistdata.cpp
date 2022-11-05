@@ -11,7 +11,7 @@ ChronoListData::ChronoListData()
     , m_iRank(0)
     , m_bLatestScore(false)
 {
-    m_sScore.StartScore = 0.0f;
+    m_sScore.DifficultyScore = 0.0f;
     m_sScore.ExecutionScore = 0.0f;
     m_sScore.FinalScore = 0.0f;
     m_sScore.IsFinalApparatus = false;
@@ -67,22 +67,33 @@ QString ChronoListData::getNationShort() const
     return m_strNationShort;
 }
 
-void ChronoListData::setStartScore(const float p_fStartScore)
+void ChronoListData::setDifficultyScore(const float p_fDifficultyScore)
 {
-    m_sScore.StartScore = p_fStartScore;
+    m_sScore.DifficultyScore = p_fDifficultyScore;
 }
-QString ChronoListData::getStartScore() const
+QString ChronoListData::getDifficultyScore() const
 {
-    return QString::number(m_sScore.StartScore, 'f', 3);
+    return QString::number(m_sScore.DifficultyScore, 'f', 3);
 }
 
 void ChronoListData::setExecutionScore(const float p_fExecutionScore)
 {
     m_sScore.ExecutionScore = p_fExecutionScore;
 }
+
 QString ChronoListData::getExecutionScore() const
 {
     return QString::number(m_sScore.ExecutionScore, 'f', 3);
+}
+
+void ChronoListData::setPenaltyScore(const float p_fPenaltyScore)
+{
+    m_sScore.PenaltyScore = p_fPenaltyScore;
+}
+
+QString ChronoListData::getPenaltyScore() const
+{
+    return QString::number(m_sScore.PenaltyScore, 'f', 3);
 }
 
 void ChronoListData::setFinalScore(const float p_fFinalScore)
@@ -122,3 +133,19 @@ bool ChronoListData::isLatestScore() const
     return m_bLatestScore;
 }
 
+bool operator== (const ChronoListData& lhs, const ChronoListData& rhs)
+{
+    if ( (lhs.getNameFull() == rhs.getNameFull())
+      && (lhs.getApparatusName() == rhs.getApparatusName())
+      && (lhs.getDifficultyScore() == rhs.getDifficultyScore())
+      && (lhs.getExecutionScore() == rhs.getExecutionScore())
+      && (lhs.getPenaltyScore() == rhs.getPenaltyScore())
+      && (lhs.getFinalScore() == rhs.getFinalScore()))
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}

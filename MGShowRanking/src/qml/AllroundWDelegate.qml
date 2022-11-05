@@ -37,7 +37,7 @@ Item {
 
             ScoreItem {
                 id: totId
-                //startScore: StartScore_Total  // roleName
+                //difficultyScore: DifficultyScore_Total  // roleName
                 finalScore: FinalScore_Total  // roleName
                 isFinalApparatus: false
                 latestScore: false
@@ -49,7 +49,7 @@ Item {
 
             ScoreItem {
                 id: vaultId
-                startScore: StartScore_Vault  // roleName
+                difficultyScore: DifficultyScore_Vault  // roleName
                 finalScore: FinalScore_Vault  // roleName
                 isFinalApparatus: FinalApparatus_Vault // roleName
                 latestScore: LatestScore_Vault         // roleName
@@ -60,7 +60,7 @@ Item {
 
             ScoreItem {
                 id: unevBarsId
-                startScore: StartScore_UnBars  // roleName
+                difficultyScore: DifficultyScore_UnBars  // roleName
                 finalScore: FinalScore_UnBars  // roleName
                 isFinalApparatus: FinalApparatus_UnBars // roleName
                 latestScore: LatestScore_UnBars         // roleName
@@ -71,7 +71,7 @@ Item {
 
             ScoreItem {
                 id: balanceBId
-                startScore: StartScore_BalBeam  // roleName
+                difficultyScore: DifficultyScore_BalBeam  // roleName
                 finalScore: FinalScore_BalBeam  // roleName
                 isFinalApparatus: FinalApparatus_BalBeam // roleName
                 latestScore: LatestScore_BalBeam         // roleName
@@ -82,7 +82,7 @@ Item {
 
             ScoreItem {
                 id: floorId
-                startScore: StartScore_Floor  // roleName
+                difficultyScore: DifficultyScore_Floor  // roleName
                 finalScore: FinalScore_Floor  // roleName
                 isFinalApparatus: FinalApparatus_Floor // roleName
                 latestScore: LatestScore_Floor         // roleName

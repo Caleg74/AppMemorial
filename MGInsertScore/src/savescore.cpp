@@ -26,24 +26,40 @@ SaveScore* SaveScore::Instance()
 
 void SaveScore::onSaveScore(QString p_strGymnastFullTxt,
                             QString p_strApparatus,
-                            QString p_strStartScore,
+                            QString p_strDifficultyScore,
+                            QString p_strExecutionScore,
+                            QString p_strPenaltyScore,
                             QString p_strFinalScore,
                             bool p_bFinalApparatus)
 {
     QString strFinalApparatus = p_bFinalApparatus ? "FinalApparatus" : "";
     qDebug() << "onSaveScore(): " << p_strGymnastFullTxt <<  ", "
                 << p_strApparatus <<  ", "
-                << p_strStartScore <<  ", "
+                << p_strDifficultyScore <<  ", "
                 << p_strFinalScore <<   ", "
                 << strFinalApparatus;
 
     QString strErr = "";
-    bool bConvStartScoreOk = false;
-    float fStartScore = CheckStartScore(p_strStartScore, &bConvStartScoreOk);
-
-    if (!bConvStartScoreOk)
+    bool bConvDifficultyScoreOk = false;
+    float fDifficultyScore = CheckDifficultyScore(p_strDifficultyScore, &bConvDifficultyScoreOk);
+    if (!bConvDifficultyScoreOk)
     {
         strErr = "Nota di partenza non é tra 0 e 10";
+    }
+
+    bool bConvExecutionScoreOk = false;
+    float fExecutionScore = CheckExecutionScore(p_strExecutionScore, &bConvExecutionScoreOk);
+    if (!bConvExecutionScoreOk)
+    {
+        strErr = "Nota di esecuzione non é tra 0 e 20";
+    }
+
+    bool bConvPenaltyScoreOk = false;
+    float fPenaltyScore = CheckPenaltyScore(p_strPenaltyScore, &bConvPenaltyScoreOk);
+    fPenaltyScore *= -1;    // store it as negative value
+    if (!bConvPenaltyScoreOk)
+    {
+        strErr = "Nota di esecuzione non é tra 0 e 10";
     }
 
     bool bConvFinalScoreOk = false;
@@ -54,14 +70,14 @@ void SaveScore::onSaveScore(QString p_strGymnastFullTxt,
         if (!strErr.isEmpty())
             strErr += "\n";
 
-        strErr += "Nota finale non é tra 0 e 20";
+        strErr += "La nota finale non é tra 0 e 20";
     }
 
     // save it to DB
-    SendToDb(p_strGymnastFullTxt, p_strApparatus, fStartScore, fFinalScore, p_bFinalApparatus);
+    SendToDb(p_strGymnastFullTxt, p_strApparatus, fDifficultyScore, fExecutionScore, fPenaltyScore, fFinalScore, p_bFinalApparatus);
 
     // Show it to the user
-    if ((!bConvStartScoreOk) || (!bConvFinalScoreOk))
+    if ((!bConvDifficultyScoreOk) || (!bConvExecutionScoreOk) || (!bConvPenaltyScoreOk) || (!bConvFinalScoreOk))
     {
         MessageBox cMsgBox;
         cMsgBox.SetTitle("Warning");
@@ -70,7 +86,35 @@ void SaveScore::onSaveScore(QString p_strGymnastFullTxt,
     }
 }
 
-float SaveScore::CheckStartScore(QString p_strInputVal, bool* bOk)
+float SaveScore::CheckDifficultyScore(QString p_strInputVal, bool* bOk)
+{
+    float fScore = p_strInputVal.toFloat(bOk);
+    if (*bOk)
+    {
+        if ((fScore < 0.0) || (fScore > 10.0))
+        {
+            *bOk = false;
+        }
+    }
+
+    return fScore;
+}
+
+float SaveScore::CheckExecutionScore(QString p_strInputVal, bool* bOk)
+{
+    float fScore = p_strInputVal.toFloat(bOk);
+    if (*bOk)
+    {
+        if ((fScore < 0.0) || (fScore > 20.0))
+        {
+            *bOk = false;
+        }
+    }
+
+    return fScore;
+}
+
+float SaveScore::CheckPenaltyScore(QString p_strInputVal, bool* bOk)
 {
     float fScore = p_strInputVal.toFloat(bOk);
     if (*bOk)
@@ -100,7 +144,9 @@ float SaveScore::CheckFinalScore(QString p_strInputVal, bool* bOk)
 
 void SaveScore::SendToDb(QString& p_strGymnastFullTxt,
                          QString& p_strApparatus,
-                         float p_fStartScore,
+                         float p_fDifficultyScore,
+                         float p_fExecutionScore,
+                         float p_fPenaltyScore,
                          float p_fFinalScore,
                          bool p_bFinalApparatus)
 {
@@ -125,12 +171,14 @@ void SaveScore::SendToDb(QString& p_strGymnastFullTxt,
     {
         // update existing score
         dbInterface::Instance()->updateScore(iEventId, iAthleteId,
-                                         iApparatusId, p_fStartScore, p_fFinalScore, p_bFinalApparatus);
+                                             iApparatusId, p_fDifficultyScore, p_fExecutionScore,
+                                             p_fPenaltyScore, p_fFinalScore, p_bFinalApparatus);
     }
     else
     {
         // insert a new one
         dbInterface::Instance()->setNewScore(iEventId, iAthleteId,
-                                         iApparatusId, p_fStartScore, p_fFinalScore, p_bFinalApparatus);
+                                             iApparatusId, p_fDifficultyScore, p_fExecutionScore,
+                                             p_fPenaltyScore, p_fFinalScore, p_bFinalApparatus);
     }
 }

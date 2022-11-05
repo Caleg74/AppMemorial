@@ -25,7 +25,7 @@ Item {
             property int fontSize:  Math.max(parent.width / 120, 6)
 
 /*
-            Sesso | Nome Cognome | Nazione | Attrezzo | Coeff. difficoltà | Esecuzione | Nota finale | Totale
+            Sesso | Nome Cognome | Nazione | Attrezzo | Coeff. difficoltà | Esecuzione | Penalty | Nota finale | Totale
  */
             TableTitleItem {
                 id: mwId
@@ -65,14 +65,14 @@ Item {
                 text: "Attrezzo"
                 fontSize: parent.fontSize
                 height: parent.height
-                width: parent.colWidthUnit * 3
+                width: parent.colWidthUnit * 2
 //                imageSource: "/images/Empty.svg"
                 anchors.left: countryId.right
             }
 
             TableTitleItem {
-                id: startScoreId
-                objectName: "startScoreId"
+                id: difficultyScoreId
+                objectName: "difficultyScoreId"
                 text: "Coeff. \ndiff."
                 fontSize: parent.fontSize
                 height: parent.height
@@ -89,9 +89,19 @@ Item {
                 height: parent.height
                 width: parent.colWidthUnit
 //                imageSource: "/images/Empty.svg"
-                anchors.left: startScoreId.right
+                anchors.left: difficultyScoreId.right
             }
 
+            TableTitleItem {
+                id: penaltyScoreId
+                objectName: "PenaltyScoreId"
+                text: "Penalty"
+                fontSize: parent.fontSize
+                height: parent.height
+                width: parent.colWidthUnit
+//                imageSource: "/images/Empty.svg"
+                anchors.left: exeScoreId.right
+            }
             TableTitleItem {
                 id: finalScoreId
                 objectName: "finalScoreId"
@@ -100,7 +110,7 @@ Item {
                 height: parent.height
                 width: parent.colWidthUnit
 //                imageSource: "/images/Empty.svg"
-                anchors.left: exeScoreId.right
+                anchors.left: penaltyScoreId.right
             }
 
             TableTitleItem {

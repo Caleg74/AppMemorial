@@ -27,11 +27,14 @@ public:
     void setNationShort(const QString& p_strNationShort);
     QString getNationShort() const;
 
-    void setStartScore(const float p_fStartScore);
-    QString getStartScore() const;
+    void setDifficultyScore(const float p_fDifficultyScore);
+    QString getDifficultyScore() const;
 
     void setExecutionScore(const float p_fExecutionScore);
     QString getExecutionScore() const;
+
+    void setPenaltyScore(const float p_fPenaltyScore);
+    QString getPenaltyScore() const;
 
     void setFinalScore(const float p_fFinalScore);
     QString getFinalScore() const;
@@ -44,6 +47,8 @@ public:
 
     void setIsLatestScore(bool p_bIsLatestScore);
     bool isLatestScore() const;
+
+    friend bool operator== (const ChronoListData& lhs, const ChronoListData& rhs);
 
 private:
     QString m_strGender;

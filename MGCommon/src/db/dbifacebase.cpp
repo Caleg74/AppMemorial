@@ -402,7 +402,7 @@ void dbIfaceBase::getApparatusList(QStringList* p_pList)
     }
 }
 
-float dbIfaceBase::getStartScore(const int p_iAthleteId, const int p_iApparatusId)
+float dbIfaceBase::getDifficultyScore(const int p_iAthleteId, const int p_iApparatusId)
 {
     float fScore = 0.0;
 
@@ -413,7 +413,7 @@ float dbIfaceBase::getStartScore(const int p_iAthleteId, const int p_iApparatusI
 
         int iEventId = getCurrentEventId();
 
-         QString strQuery = "SELECT start_score FROM scores WHERE "
+         QString strQuery = "SELECT difficulty_score FROM scores WHERE "
                    " sport_event_id = "   + QString::number(iEventId, 10) +
                    " AND athlete_id = "   + QString::number(p_iAthleteId, 10)+
                    " AND apparatus_id = " + QString::number(p_iApparatusId, 10);
@@ -434,7 +434,7 @@ float dbIfaceBase::getStartScore(const int p_iAthleteId, const int p_iApparatusI
     }
     else
     {
-        qInfo() << "dbInterface::getStartScore(): Db not initialized";
+        qInfo() << "dbInterface::getDifficultyScore(): Db not initialized";
     }
 
     return fScore;
@@ -478,7 +478,7 @@ float dbIfaceBase::getFinalScore(const int p_iAthleteId, const int p_iApparatusI
 
 AllScores dbIfaceBase::getAllScores(const int p_iAthleteId, const int p_iApparatusId)
 {
-    AllScores allScores = {0.0, 0.0, 0, false};
+    AllScores allScores = {0.0, 0.0, 0.0, 0.0, 0, false};
 
     if (m_bInitialized)
     {
@@ -487,7 +487,7 @@ AllScores dbIfaceBase::getAllScores(const int p_iAthleteId, const int p_iApparat
 
         int iEventId = getCurrentEventId();
 
-        QString strQuery = "SELECT start_score, final_score, force_score, final_apparatus FROM scores WHERE "
+        QString strQuery = "SELECT difficulty_score, execution_score, penalty_score, final_score, force_score, final_apparatus FROM scores WHERE "
                   " sport_event_id = "   + QString::number(iEventId, 10) +
                   " AND athlete_id = "   + QString::number(p_iAthleteId, 10)+
                   " AND apparatus_id = " + QString::number(p_iApparatusId, 10);
@@ -496,10 +496,12 @@ AllScores dbIfaceBase::getAllScores(const int p_iAthleteId, const int p_iApparat
 
         while (query.next())
         {
-            allScores.StartScore = query.value(0).toFloat();
-            allScores.FinalScore = query.value(1).toFloat();
-            allScores.ForceScore = query.value(2).toInt();
-            allScores.IsFinalApparatus = query.value(3).toBool();
+            allScores.DifficultyScore = query.value(0).toFloat();
+            allScores.ExecutionScore = query.value(1).toFloat();
+            allScores.PenaltyScore = query.value(2).toFloat();
+            allScores.FinalScore = query.value(3).toFloat();
+            allScores.ForceScore = query.value(4).toInt();
+            allScores.IsFinalApparatus = query.value(5).toBool();
         }
 
         if (iEventId == 0)
@@ -594,7 +596,7 @@ void dbIfaceBase::retrieveChronologicalList(QList<QStringList>& p_strChronoList)
         QSqlQuery query(db);
         int iEventId = getCurrentEventId();
 
-        QString strQuery = "SELECT id, gender, fullname, nation, apparatus, start_score, execution_score, final_score, total_score FROM chrono_list_vw WHERE "
+        QString strQuery = "SELECT id, gender, fullname, nation, apparatus, difficulty_score, execution_score, penalty_score, final_score, total_score FROM chrono_list_vw WHERE "
                    "event_id = "   + QString::number(iEventId, 10);
         query.exec(strQuery);
 
@@ -606,10 +608,11 @@ void dbIfaceBase::retrieveChronologicalList(QList<QStringList>& p_strChronoList)
                     << query.value(2).toString().trimmed()  // fullname
                     << query.value(3).toString().trimmed()  // nation
                     << query.value(4).toString().trimmed()  // apparatus
-                    << query.value(5).toString().trimmed()  // start_score
+                    << query.value(5).toString().trimmed()  // difficulty_score
                     << query.value(6).toString().trimmed()  // execution_score
-                    << query.value(7).toString().trimmed()  // final_score
-                    << query.value(8).toString().trimmed();  // total_score
+                    << query.value(7).toString().trimmed()  // penalty_score
+                    << query.value(8).toString().trimmed()  // final_score
+                    << query.value(9).toString().trimmed(); // total_score
 
             p_strChronoList << strData;
 //            qInfo() << "Athlete retrieved: " << strData;

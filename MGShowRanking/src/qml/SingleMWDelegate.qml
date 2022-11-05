@@ -38,7 +38,7 @@ Item {
 
             ScoreItem {
                 id: singleScoreMId
-                startScore: StartScore_SingleMW  // roleName
+                difficultyScore: DifficultyScore_SingleMW  // roleName
                 finalScore: FinalScore_SingleMW  // roleName
                 fontSize: parent.fontSize
                 width: parent.apparatusWidth

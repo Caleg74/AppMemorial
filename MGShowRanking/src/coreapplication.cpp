@@ -149,7 +149,7 @@ void CoreApplication::Connect()
 
     if (window)
     {
-        connect(topLevel, SIGNAL(afterRendering()), this, SLOT(onWindowLoaded()));
+        connect(topLevel, SIGNAL(afterRenderPassRecording()), this, SLOT(onWindowLoaded()));
         connect(topLevel, SIGNAL(closing(QQuickCloseEvent*)), this, SLOT(onWindowClosing(QQuickCloseEvent*)));
     }
 

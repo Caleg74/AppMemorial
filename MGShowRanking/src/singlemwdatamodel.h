@@ -12,7 +12,7 @@ public:
     enum SingleMWRoles
     {
         FinalScoreTotalRole = LastGeneralRole,
-        StartScoreSingleMW,
+        DifficultyScoreSingleMW,
         FinalScoreSingleMW
      };
 

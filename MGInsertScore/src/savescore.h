@@ -12,20 +12,26 @@ public:
 public slots:
     void onSaveScore(QString p_strGymnastFullTxt,
                      QString p_strApparatus,
-                     QString p_strStartScore,
+                     QString p_strDifficultyScore,
+                     QString p_strExecutionScore,
+                     QString p_strPenaltyScore,
                      QString p_strFinalScore,
                      bool p_bFinalApparatus);
 
 private:
     SaveScore(QObject* parent = NULL);
 
-    float CheckStartScore(QString p_strInputVal, bool* bOk);
+    float CheckDifficultyScore(QString p_strInputVal, bool* bOk);
+    float CheckExecutionScore(QString p_strInputVal, bool* bOk);
+    float CheckPenaltyScore(QString p_strInputVal, bool* bOk);
 
     float CheckFinalScore(QString p_strInputVal, bool* bOk);
 
     void SendToDb(QString& p_strGymnastFullTxt,
                   QString& p_strApparatus,
-                  float p_fStartScore,
+                  float p_fDifficultyScore,
+                  float p_fExecutionScore,
+                  float p_fPenaltyScore,
                   float p_fFinalScore,
                   bool p_bFinalApparatus);
 

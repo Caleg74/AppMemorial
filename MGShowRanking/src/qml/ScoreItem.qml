@@ -5,7 +5,7 @@ import QtQuick.Controls 2.0
 Item {
     id: root
     property string finalScore;
-    property string startScore;
+    property string difficultyScore;
     property bool separatorVisible: true;
     property int fontSize: 15;
     property bool fontBold: false;
@@ -55,16 +55,16 @@ Item {
                 color:  "#0a3f60"
                 horizontalAlignment: Text.AlignLeft
                 verticalAlignment: Text.AlignVCenter
-//                width: parent.width - startScore.width - separator.width
+//                width: parent.width - difficultyScore.width - separator.width
                 height: parent.height
                 anchors.left: parent.left
-                anchors.right: startScore.left
+                anchors.right: difficultyScore.left
             }
 
             Text {
-                id: startScore
+                id: difficultyScore
                 renderType: Text.NativeRendering
-                text: root.startScore // root.startScore !== "0" ? "("+ root.startScore +")" : ""
+                text: root.difficultyScore // root.difficultyScore !== "0" ? "("+ root.difficultyScore +")" : ""
                 font.pointSize: fontSize * 3/4
                 font.bold: false
                 font.italic: isFinalApparatus

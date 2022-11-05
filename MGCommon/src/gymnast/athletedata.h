@@ -18,8 +18,9 @@ public:
 
     typedef struct
     {
-        float StartScore;
+        float DifficultyScore;
         float ExecutionScore;
+        float PenaltyScore;
         float FinalScore;
         bool  IsFinalApparatus; // mark if score id fromthe final apparatus
         bool  IsLatestScore;    // true if last-inserted score
@@ -44,11 +45,14 @@ public:
     void setIsLatestScore(int p_iApparatus, bool p_bIsLatestScore);
     bool isLatestScore(int p_iApparatus) const;
 
-    void setStartScore(int p_iApparatus, float p_fScore);
-    QString getStartScore(int p_iApparatus) const;
+    void setDifficultyScore(int p_iApparatus, float p_fScore);
+    QString getDifficultyScore(int p_iApparatus) const;
 
     void setExecutionScore(int p_iApparatus);
     QString getExecutionScore(int p_iApparatus) const;
+
+    void setPenaltyScore(int p_iApparatus);
+    QString getPenaltyScore(int p_iApparatus) const;
 
     void setFinalScore(int p_iApparatus, float p_fScore);
     QString getFinalScore(int p_iApparatus) const;
