@@ -95,7 +95,7 @@ Item {
             TableTitleItem {
                 id: penaltyScoreId
                 objectName: "PenaltyScoreId"
-                text: "Penalty"
+                text: "Penalità"
                 fontSize: parent.fontSize
                 height: parent.height
                 width: parent.colWidthUnit

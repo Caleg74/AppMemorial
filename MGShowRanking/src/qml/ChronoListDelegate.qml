@@ -78,6 +78,7 @@ Item {
                 id: difficultyScoreId
                 generalText: DifficultyScore   // roleName
                 fontSize: parent.fontSize
+                fontBold: true
                 width: parent.colWidthUnit
                 anchors.left: apparatusId.right
             }
@@ -102,6 +103,7 @@ Item {
                 id: finalScoreId
                 generalText: FinalScore   // roleName
                 fontSize: parent.fontSize
+                fontBold: true
                 width: parent.colWidthUnit
                 anchors.left: penaltyScoreId.right
             }
