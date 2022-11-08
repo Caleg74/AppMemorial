@@ -94,8 +94,15 @@ void dbInterface::deleteGymnast(QString& p_strFirstName, QString& p_strLastName)
     {
         QSqlDatabase db = QSqlDatabase::database("ConnMG");
         QSqlQuery query(db);
-        QString strQuery = "DELETE FROM athlete WHERE first_name='" + p_strFirstName
-                + "' AND last_name='" + p_strLastName.trimmed() + "'";
+
+        // SQL quesries with Apostrophe doesn't work, you need to double it
+        QString strQueryFirstName = p_strFirstName;
+        QString strQueryLastName = p_strLastName;
+        strQueryFirstName.trimmed().replace("'", "''");
+        strQueryLastName.trimmed().replace("'", "''");
+
+        QString strQuery = "DELETE FROM athlete WHERE first_name='" + strQueryFirstName
+                + "' AND last_name='" + strQueryLastName + "'";
         bool bRet = query.exec(strQuery);
 
         if (bRet)
@@ -143,11 +150,15 @@ void dbInterface::retrieveGymnastSubscriptionList(QList<QStringList>& p_strGymnL
             if (queryAthlete.first())
             {
 
+                // SQL quesries with Apostrophe doesn't work, you need to double it
+                QString firstName = queryAthlete.value(1).toString().trimmed();
+                QString lastName = queryAthlete.value(2).toString().trimmed();
+
                 // add full name
                 gymnastSubscript << athleteId
                                  << eventId
-                                 << queryAthlete.value(1).toString().trimmed()
-                                 << queryAthlete.value(2).toString().trimmed()
+                                 << firstName
+                                 << lastName
                                  << getNationName(queryAthlete.value(3).toInt(), NI_IocName);
             }
             else

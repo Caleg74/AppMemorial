@@ -42,15 +42,18 @@ void dbIfaceBase::getRegisterdGymnastList(QStringList* p_pList)
     {
         QSqlDatabase db = QSqlDatabase::database("ConnMG");
         QSqlQuery query(db);
+
+
         query.exec("SELECT first_name, last_name, gender, nation_id FROM athlete");
 
         while(query.next())
         {
             // Convert NationId to nicename
             QString strNationName = getNationName(query.value(3).toInt(), NI_IocName);
+            QString firstName = query.value(0).toString().trimmed();
+            QString lastName = query.value(1).toString().trimmed();
 
-            *p_pList << query.value(0).toString().trimmed() + ", "
-                    + query.value(1).toString().trimmed() + ", ("
+            *p_pList << firstName + ", "  +  lastName + ", ("
                     + strNationName.trimmed() + ")";
         }
 
@@ -80,9 +83,10 @@ void dbIfaceBase::getEventSelectedGymnastList(QStringList* p_pList)
 
         while(query.next())
         {
+            QString firstName = query.value(0).toString().trimmed();
+            QString lastName = query.value(1).toString().trimmed();
             QString countryIoc = getNationName(query.value(3).toString().trimmed().toInt(), dbIfaceBase::NI_IocName);
-            *p_pList << query.value(0).toString().trimmed() + ", "
-                    + query.value(1).toString().trimmed() + ", ("
+            *p_pList << firstName + ", " + lastName + ", ("
                     + countryIoc + ")";
         }
 
@@ -174,8 +178,14 @@ int dbIfaceBase::getGymnastId(QString& p_firstName, QString& p_lastName)
         QSqlDatabase db = QSqlDatabase::database("ConnMG");
         QSqlQuery query(db);
 
-        query.exec("SELECT id, first_name, last_name FROM athlete WHERE first_name = '" + p_firstName + "'"
-                   " AND last_name = '" + p_lastName + "'");
+        // SQL quesries with Apostrophe doesn't work, you need to double it
+        QString strQueryFirstName = p_firstName;
+        QString strQueryLastName = p_lastName;
+        strQueryFirstName.replace("'", "''");
+        strQueryLastName.replace("'", "''");
+
+        query.exec("SELECT id, first_name, last_name FROM athlete WHERE first_name = '" + strQueryFirstName + "'"
+                   " AND last_name = '" + strQueryLastName + "'");
 
         if (query.first())
         {
