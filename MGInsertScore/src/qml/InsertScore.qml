@@ -133,6 +133,10 @@ Item {
                     text: "0.000"
                     font.pointSize: 15
                     onTextChanged: calcFinalScore()
+                    onFocusChanged:{
+                        if(focus)
+                           selectAll()
+                    }
                 }
 
                 Text {
@@ -152,6 +156,10 @@ Item {
                     text: "0.000"
                     font.pointSize: 15
                     onTextChanged: calcFinalScore()
+                    onFocusChanged:{
+                        if(focus)
+                           selectAll()
+                    }
                 }
             }
 
@@ -175,6 +183,10 @@ Item {
                     text: "0.000"
                     font.pointSize: 15
                     onTextChanged: calcFinalScore()
+                    onFocusChanged:{
+                        if(focus)
+                           selectAll()
+                    }
                 }
             }
 
