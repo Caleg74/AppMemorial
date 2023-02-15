@@ -96,6 +96,26 @@ QString SingleMWData::getDifficultyScore() const
     return QString::number(m_sScore.DifficultyScore, 'f', 3);
 }
 
+void SingleMWData::setExecutionScore(float p_fScore)
+{
+    m_sScore.ExecutionScore = p_fScore;
+}
+
+QString SingleMWData::getExecutionScore() const
+{
+    return QString::number(m_sScore.ExecutionScore, 'f', 3);
+}
+
+void SingleMWData::setPenaltyScore(float p_fScore)
+{
+    m_sScore.PenaltyScore = p_fScore;
+}
+
+QString SingleMWData::getPenaltyScore() const
+{
+    return QString::number(abs(m_sScore.PenaltyScore), 'f', 3);
+}
+
 void SingleMWData::setFinalScore(float p_fScore)
 {
     m_sScore.FinalScore = p_fScore;

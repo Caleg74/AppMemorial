@@ -111,14 +111,15 @@ void GymnastRanking::updateSingleScores(int p_iApparatusId, QList<SingleMWData>*
     for (iter = p_pList->begin(); iter != p_pList->end(); ++iter)
     {
         int iAthleteId = iter->getAthleteId();
-        float fDifficultyScore = dbInterface::Instance()->getDifficultyScore(iAthleteId, p_iApparatusId);
-        float fFinalScore = dbInterface::Instance()->getFinalScore(iAthleteId, p_iApparatusId);
-        int iForceScore   = dbInterface::Instance()->getForceScore(iAthleteId, p_iApparatusId);
+        AllScores sAllScores = dbInterface::Instance()->getAllScores(iAthleteId, p_iApparatusId);
         float fTotalAllroundScore = dbInterface::Instance()->getAllroundTotalScore(iAthleteId);
 
-        iter->setFinalScore(fFinalScore);
-        iter->setDifficultyScore(fDifficultyScore);
-        iter->setForceScore(iForceScore);
+        iter->setFinalScore(sAllScores.FinalScore);
+        iter->setDifficultyScore(sAllScores.DifficultyScore);
+        iter->setExecutionScore(sAllScores.ExecutionScore);
+        iter->setPenaltyScore(sAllScores.PenaltyScore);
+        iter->setForceScore(sAllScores.ForceScore);
+
         iter->setAllroundTotalScore(fTotalAllroundScore);
     }
 

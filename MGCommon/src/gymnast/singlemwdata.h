@@ -12,6 +12,8 @@ public:
     typedef struct
     {
         float DifficultyScore;
+        float ExecutionScore;
+        float PenaltyScore;
         float FinalScore;
         int   ForceScore;   // to be used only in case of equal score
     } SScore;
@@ -30,6 +32,12 @@ public:
 
     void setDifficultyScore(float p_fScore);
     QString getDifficultyScore() const;
+
+    void setExecutionScore(float p_fScore);
+    QString getExecutionScore() const;
+
+    void setPenaltyScore(float p_fScore);
+    QString getPenaltyScore() const;
 
     void setFinalScore(float p_fScore);
     QString getFinalScore() const;

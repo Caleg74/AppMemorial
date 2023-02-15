@@ -486,9 +486,13 @@ void CreatePdf::PrintSingleMApparatusTableBody(QTextStream& out)
             out << "\t</tr>" << Qt::endl;
 
             out << "\t<tr>" << Qt::endl;
-            out << "\t  <td align=\"center\"><small>("
+            out << "\t  <td align=\"center\"><small>(Difficulty="
                 << pMenList->at(i).getDifficultyScore()
-                <<")</small></td> <!-- Single appparatus -->" << Qt::endl;
+                <<", Execution="
+                << pMenList->at(i).getExecutionScore()
+                <<", Penalty="
+                << pMenList->at(i).getPenaltyScore()
+                << ")</small></td> <!-- Single appparatus -->" << Qt::endl;
             out << "\t</tr>" << Qt::endl;
         }
     }
@@ -553,9 +557,13 @@ void CreatePdf::PrintSingleWApparatusTableBody(QTextStream& out)
             out << "\t</tr>" << Qt::endl;
 
             out << "\t<tr>" << Qt::endl;
-            out << "\t  <td align=\"center\" width=\"60\"><small>("
+            out << "\t  <td align=\"center\"><small>(Difficulty="
                 << pWomenList->at(i).getDifficultyScore()
-                <<")</small></td> <!-- Single appparatus -->" << Qt::endl;
+                <<", Execution="
+                << pWomenList->at(i).getExecutionScore()
+                <<", Penalty="
+                << pWomenList->at(i).getPenaltyScore()
+                << ")</small></td> <!-- Single appparatus -->" << Qt::endl;
             out << "\t</tr>" << Qt::endl;
         }
     }
