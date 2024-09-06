@@ -7,12 +7,68 @@ Item {
 
     property string finalScore : "0.000";
     property bool gymnastDefined;
+    property int nbrOfReferees : 4;
 
     function resetValues() {
         txtDifficultyScore.text = "0.000"
         txtExecutionScore.text = "0.000"
         txtFinalScore.text = "0.000"
         txtPenaltyScore.text = "0.000"
+        txtAvgPenalty.text = "0.000"
+        txtPenalty1.text = "0.000"
+        txtPenalty2.text = "0.000"
+        txtPenalty3.text = "0.000"
+        txtPenalty4.text = "0.000"
+        txtPenalty1.backColor = "white"
+        txtPenalty2.backColor = "white"
+        txtPenalty3.backColor = "white"
+        txtPenalty4.backColor = "white"
+    }
+
+    function setExclBackground(score)
+    {
+        var penaltylist2 = [txtPenalty1, txtPenalty2, txtPenalty3, txtPenalty4]
+
+        var i
+        for (i=penaltylist2.length-1; i>=0; i--)
+        {
+            if (parseFloat(penaltylist2[i].text.replace(",", ".")) === parseFloat(score))
+            {
+                if (Qt.colorEqual(penaltylist2[i].backColor, "#ffffff"))
+                {
+                    penaltylist2[i].backColor = "#20ff0000"
+                    break // exit for loop
+                }
+            }
+        }
+    }
+
+    function sortPenaltyScores() {
+        var precision = 4;
+        // var penaltylist = [parseFloat(txtPenalty1.text.replace(",", ".")),
+        //                    parseFloat(txtPenalty2.text.replace(",", ".")),
+        //                    parseFloat(txtPenalty3.text.replace(",", ".")),
+        //                    parseFloat(txtPenalty4.text.replace(",", "."))]
+
+        var penaltylist1 = [parseFloat(txtPenalty1.text.replace(",", ".")),
+                           parseFloat(txtPenalty2.text.replace(",", ".")),
+                           parseFloat(txtPenalty3.text.replace(",", ".")),
+                           parseFloat(txtPenalty4.text.replace(",", "."))]
+
+
+
+        penaltylist1.sort()
+        console.log(penaltylist1)
+
+        txtPenalty1.backColor = "white"
+        txtPenalty2.backColor = "white"
+        txtPenalty3.backColor = "white"
+        txtPenalty4.backColor = "white"
+        setExclBackground(penaltylist1[0])
+        setExclBackground(penaltylist1[3])
+
+        txtAvgPenalty.text = floatToString((penaltylist1[1]+penaltylist1[2])/2, precision)
+
     }
 
     function floatToString(num, precision) {
@@ -27,14 +83,25 @@ Item {
         var precision = 4;
         if (gymnastDefined)
         {
+            if (nbrOfReferees == 2)
+            {
+                txtAvgPenalty.text = floatToString((parseFloat(txtPenalty1.text.replace(",", "."))
+                                + parseFloat(txtPenalty2.text.replace(",", "."))) / 2, precision)
+            }
+            else if (nbrOfReferees == 4)
+            {
+                sortPenaltyScores()
+            }
+
+            txtExecutionScore.text = floatToString(10.000 - parseFloat(txtAvgPenalty.text), precision)
+
             var fFinalScore = ( parseFloat(txtDifficultyScore.text.replace(",", "."))
                               + parseFloat(txtExecutionScore.text.replace(",", "."))
                               - parseFloat(txtPenaltyScore.text.replace(",", ".")))
 
             finalScore = floatToString(fFinalScore, precision);
 
-//            console.log(fFinalScore)
-//            console.log(finalScore)
+            //console.log(fFinalScore)
 
             if (finalScore === "NaN")
             {
@@ -112,80 +179,234 @@ Item {
                 }
             }
 
-            Row
-            {
-                spacing: 10
-
-                Text {
-                    width: 160
-                    text: "Difficoltà"
-                    renderType: Text.NativeRendering
-                    font.pointSize: 15
-                    color: "#0a3f60"
-                  }
-
-                StyleMGTextInput {
-                    id: txtDifficultyScore
-                    width: parent.parent.width/5
-                    activeFocusOnPress: true
-//                    style:textEditMGStyle
-//                    placeholderText: "0.000"
-                    text: "0.000"
-                    font.pointSize: 15
-                    onTextChanged: calcFinalScore()
-                    onFocusChanged:{
-                        if(focus)
-                           selectAll()
-                    }
-                }
-
-                Text {
-                    width: 160
-                    text: "+  Esecuzione"
-                    renderType: Text.NativeRendering
-                    font.pointSize: 15
-                    color: "#0a3f60"
-                  }
-
-                StyleMGTextInput {
-                    id: txtExecutionScore
-                    width: parent.parent.width/5
-                    activeFocusOnPress: true
-//                    style:textEditMGStyle
-//                    placeholderText: "0.000"
-                    text: "0.000"
-                    font.pointSize: 15
-                    onTextChanged: calcFinalScore()
-                    onFocusChanged:{
-                        if(focus)
-                           selectAll()
-                    }
-                }
-            }
-
             Row {
-                spacing: 10
+                Column {    // colonna 1
+                    spacing: 10
+                    Row {
+                        spacing: 10
+                        Text {
+                            width: 120
+                            text: "Difficoltà"
+                            renderType: Text.NativeRendering
+                            font.pointSize: 15
+                            color: "#0a3f60"
+                          }
 
-                Text {
-                    width: 160
-                    text: "-  ev. Penalità"
-                    renderType: Text.NativeRendering
-                    font.pointSize: 15
-                    color: "#0a3f60"
-                  }
+                        StyleMGTextInput {
+                            id: txtDifficultyScore
+                            width: 100
+                            activeFocusOnPress: true
+        //                    style:textEditMGStyle
+        //                    placeholderText: "0.000"
+                            text: "0.000"
+                            font.pointSize: 15
+                            onTextChanged: calcFinalScore()
+                            onFocusChanged:{
+                                if(focus)
+                                   selectAll()
+                            }
+                        }
 
-                StyleMGTextInput {
-                    id: txtPenaltyScore
-                    width: parent.parent.width/5
-                    activeFocusOnPress: true
-//                    style:textEditMGStyle
-//                    placeholderText: "0.000"
-                    text: "0.000"
-                    font.pointSize: 15
-                    onTextChanged: calcFinalScore()
-                    onFocusChanged:{
-                        if(focus)
-                           selectAll()
+                        Text {
+                            width: 20
+                            text: "  "  // just to create a space
+                            renderType: Text.NativeRendering
+                        }
+                    }
+
+                    Row {
+                        spacing: 10
+                        Text {
+                            width: 120
+                            text: "+  Esecuzione"
+                            renderType: Text.NativeRendering
+                            font.pointSize: 15
+                            color: "#0a3f60"
+                          }
+
+                        StyleMGTextInput {
+                            id: txtExecutionScore
+                            width: 100
+                            activeFocusOnPress: false
+        //                    style:textEditMGStyle
+        //                    placeholderText: "0.000"
+                            text: "0.000"
+                            readOnly: true
+                            font.pointSize: 15
+                        }
+                    }
+
+                    Row {
+                        spacing: 10
+
+                        Text {
+                            width: 120
+                            text: "-  ev. Penalità"
+                            renderType: Text.NativeRendering
+                            font.pointSize: 15
+                            color: "#0a3f60"
+                          }
+
+                        StyleMGTextInput {
+                            id: txtPenaltyScore
+                            width: 100
+                            activeFocusOnPress: true
+        //                    style:textEditMGStyle
+        //                    placeholderText: "0.000"
+                            text: "0.000"
+                            font.pointSize: 15
+                            onTextChanged: calcFinalScore()
+                            onFocusChanged:{
+                                if(focus)
+                                   selectAll()
+                            }
+                        }
+                    }
+                }
+
+                Column {    // colonna 2
+                    spacing: 10
+                    Row {
+                        spacing: 10
+
+                        Text {
+                            width: 80
+                            text: "Media ded."
+                            renderType: Text.NativeRendering
+                            font.pointSize: 12
+                            color: "#0a3f60"
+                          }
+
+                        StyleMGTextInput {
+                            id: txtAvgPenalty
+                            width: parent.parent.width/3
+                            activeFocusOnPress: false
+        //                    style:textEditMGStyle
+        //                    placeholderText: "0.000"
+                            text: "0.000"
+                            readOnly: true
+                            font.pointSize: 12
+                            focus: false
+                        }
+
+                        Text {
+                            width: 20
+                            text: "  "  // just to create a space
+                            renderType: Text.NativeRendering
+                        }
+                    }
+                }
+
+                Column {    // colonna 3
+                    spacing: 10
+                    Row {
+                        spacing: 10
+
+                        Text {
+                            width: 120
+                            text: "Deduzione 1"
+                            renderType: Text.NativeRendering
+                            font.pointSize: 15
+                            color: "#0a3f60"
+                          }
+
+                        StyleMGTextInput {
+                            id: txtPenalty1
+                            width: 100
+                            activeFocusOnPress: true
+        //                    style:textEditMGStyle
+        //                    placeholderText: "0.000"
+                            text: "0.000"
+                            font.pointSize: 15
+                            onTextChanged: calcFinalScore()
+                            onFocusChanged:{
+                                if(focus)
+                                   selectAll()
+                            }
+                        }
+                    }
+
+                    Row {
+                        spacing: 10
+
+                        Text {
+                            width: 120
+                            text: "Deduzione 2"
+                            renderType: Text.NativeRendering
+                            font.pointSize: 15
+                            color: "#0a3f60"
+                          }
+
+                        StyleMGTextInput {
+                            id: txtPenalty2
+                            width: 100
+                            activeFocusOnPress: true
+        //                    style:textEditMGStyle
+        //                    placeholderText: "0.000"
+                            text: "0.000"
+                            font.pointSize: 15
+                            onTextChanged: calcFinalScore()
+                            onFocusChanged:{
+                                if(focus)
+                                   selectAll()
+                            }
+                        }
+                    }
+
+                    Row {
+                        id: rowReferee3
+                        spacing: 10
+
+                        Text {
+                            width: 120
+                            text: "Deduzione 3"
+                            renderType: Text.NativeRendering
+                            font.pointSize: 15
+                            color: "#0a3f60"
+                          }
+
+                        StyleMGTextInput {
+                            id: txtPenalty3
+                            width: 100
+                            activeFocusOnPress: true
+        //                    style:textEditMGStyle
+        //                    placeholderText: "0.000"
+                            text: "0.000"
+                            font.pointSize: 15
+                            onTextChanged: calcFinalScore()
+                            onFocusChanged:{
+                                if(focus)
+                                   selectAll()
+                            }
+                        }
+                    }
+
+                    Row {
+                        id: rowReferee4
+                        spacing: 10
+
+                        Text {
+                            width: 120
+                            text: "Deduzione 4"
+                            renderType: Text.NativeRendering
+                            font.pointSize: 15
+                            color: "#0a3f60"
+                          }
+
+                        StyleMGTextInput {
+                            id: txtPenalty4
+                            width: 100
+                            activeFocusOnPress: true
+        //                    style:textEditMGStyle
+        //                    placeholderText: "0.000"
+                            text: "0.000"
+                            font.pointSize: 15
+                            onTextChanged: calcFinalScore()
+                            onFocusChanged:{
+                                if(focus)
+                                   selectAll()
+                            }
+                        }
                     }
                 }
             }
@@ -235,11 +456,116 @@ Item {
 
                     }
                 }
+
+            }
+        }
+
+        //************************************************************************************
+
+        Popup {
+            id: popup
+            x: root.width-btnSettings.width-width-5
+            y: btnSettings.height
+            width: 250
+            height: 160
+            modal: true
+            focus: true
+            spacing: 10
+            background: Rectangle {
+                    color: "#e0e0e0"
+                    border.color: "darkgrey"
+                }
+            enter: Transition {
+                   NumberAnimation { property: "opacity"; from: 0.0; to: 1.0; duration: 300 }
+               }
+            exit: Transition {
+                NumberAnimation { property: "opacity"; from: 1.0; to: 0.0; duration: 300 }
+            }
+            Column {
+                spacing: 10
+                Row {
+                    Text {
+                        text: "Impostazioni:"
+                        renderType: Text.NativeRendering
+                        font.pointSize: 12
+                        font.bold: true
+                        color: "#0a3f60"
+                      }
+                }
+
+                Row {
+                    Text {
+                        width: 150
+                        text: "Numero giurati"
+                        renderType: Text.NativeRendering
+                        font.pointSize: 12
+                        color: "#0a3f60"
+                      }
+
+                    StyleMGComboBox {
+                        id: cbbRefereeNbr
+                        objectName: "cbbGymnastSelection"
+                        //model: gymnastEventModel.comboList
+                        width: 40
+                        font.pointSize: 12
+                        model: ["2", "4"]
+        //                    activeFocusOnPress: true
+                        currentIndex: 0
+                        signal selectedTextChanged(string currentTxt)
+                        onCurrentTextChanged: {
+                            selectedTextChanged(currentText)
+                        }
+                    }
+                }
+
+                Row {
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    StyleMGPushButton {
+                        id:btnSaveSettings
+                        width: 70
+                        height: 40
+                        buttonText: "Chiudi"
+                        onClicked: {
+                            popup.close()
+                        }
+                    }
+                }
+            }
+            closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutsideParent
+            onClosed: {
+                if (cbbRefereeNbr.currentIndex === 0) // = 2 referrees
+                {
+                    nbrOfReferees = 2;
+                    rowReferee3.visible = false;
+                    rowReferee4.visible = false;
+                }
+                else if (cbbRefereeNbr.currentIndex === 1) // = 4 referres
+                {
+                    nbrOfReferees = 4;
+                    rowReferee3.visible = true;
+                    rowReferee4.visible = true;
+                }
+
+                resetValues()
             }
         }
 
         StyleMGMsgBox {
             visible: false
+        }
+        Button {
+            id: btnSettings
+            anchors.right: parent.right
+            anchors.top: parent.top
+            text: qsTr("...")
+            font.bold: true
+            font.pointSize: 18
+
+            background: Rectangle {
+                    color: parent.down ? "#bbbbbb" :
+                            (parent.hovered ? "#d6d6d6" : "transparent")
+            }
+            onClicked: popup.open()
         }
     }
 }
