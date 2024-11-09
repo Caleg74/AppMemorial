@@ -336,7 +336,7 @@ int dbIfaceBase::getCurrentEventId()
         while (query.next())
         {
 //            if (query.value(1).toString().startsWith(QString::number(m_iCurrentYear, 10)))    // ORI
-            if (query.value(1).toString().startsWith(QString::number(2022, 10)))    // just for test
+            if (query.value(1).toString().startsWith(QString::number(2024, 10)))    // just for test
             {
                 eventId = query.value(0).toInt();
             }
