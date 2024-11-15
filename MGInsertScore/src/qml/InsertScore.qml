@@ -175,6 +175,7 @@ Item {
 
                 StyleMGCheckbox {
                     id: chkFinalApparatus
+                    visible: false
                     text: "Attrezzo Finale"
                 }
             }
