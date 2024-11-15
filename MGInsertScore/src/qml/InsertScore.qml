@@ -5,9 +5,10 @@ Item {
     width: parent.width
     height: parent.height
 
-    property string finalScore : "0.000";
-    property bool gymnastDefined;
-    property int nbrOfReferees : 4;
+    property string finalScore : "0.000"
+    property bool gymnastDefined
+    property int nbrOfReferees : 4
+    property bool allowEmptyScore: false
 
     function resetValues() {
         txtDifficultyScore.text = "0.000"
@@ -110,6 +111,25 @@ Item {
             }
             txtFinalScore.text = finalScore
         }
+    }
+
+    function enableSaveEmptyScore(allowEmpty)
+    {
+        allowEmptyScore = allowEmpty
+    }
+
+    function timerCallback() {
+        // When closing the settings popup a 60s timer allows to "delete" the score for a selected user
+        enableSaveEmptyScore(false)
+    }
+
+    Timer {
+        id: timer
+        interval: 60*1000        // 60s
+        running: false
+        repeat: false
+        onTriggered: timerCallback()
+        onTriggeredOnStartChanged: console.log("Timer"+timer.running)
     }
 
     Rectangle {
@@ -439,7 +459,7 @@ Item {
                                      string finalScore,
                                      bool finalApparatus)
 
-                    enabled: (parseFloat(txtDifficultyScore.text.replace(",", ".")) > 0.0)
+                    enabled: ((parseFloat(txtDifficultyScore.text.replace(",", ".")) > 0.0) || allowEmptyScore)
                              && (cbbGymnastSelection.currentIndex >= 0)
                              && (cbbAppartus.currentIndex >= 0)
                     onClicked: {
@@ -576,6 +596,9 @@ Item {
                 resetValues()
 
                 settingsChanged(chkListM.checked, chkListF.checked)
+
+                enableSaveEmptyScore(true)
+                timer.start()
             }
         }
 
