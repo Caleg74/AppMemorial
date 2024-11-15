@@ -158,6 +158,7 @@ Item {
                     model: gymnastEventModel.comboList
                     width: parent.parent.width/2
 //                    activeFocusOnPress: true
+                    KeyNavigation.tab: cbbAppartus
                     currentIndex: 0
                     signal selectedTextChanged(string currentTxt)
                     onCurrentTextChanged: {
@@ -175,6 +176,7 @@ Item {
                     width: parent.parent.width/10*4
 //                    activeFocusOnPress: true
 //                    visible: cbbGymnastSelection.currentIndex > 0
+                    KeyNavigation.tab: txtDifficultyScore
                     currentIndex: 0
 
                     onCurrentIndexChanged: {
@@ -221,6 +223,7 @@ Item {
         //                    placeholderText: "0.000"
                             text: "0.000"
                             font.pointSize: 15
+                            KeyNavigation.tab: txtPenalty1
                             onTextChanged: calcFinalScore()
                             onFocusChanged:{
                                 if(focus)
@@ -276,6 +279,7 @@ Item {
         //                    placeholderText: "0.000"
                             text: "0.000"
                             font.pointSize: 15
+                            KeyNavigation.tab: txtDifficultyScore
                             onTextChanged: calcFinalScore()
                             onFocusChanged:{
                                 if(focus)
@@ -339,6 +343,7 @@ Item {
         //                    placeholderText: "0.000"
                             text: "0.000"
                             font.pointSize: 15
+                            KeyNavigation.tab: txtPenalty2
                             onTextChanged: calcFinalScore()
                             onFocusChanged:{
                                 if(focus)
@@ -366,6 +371,7 @@ Item {
         //                    placeholderText: "0.000"
                             text: "0.000"
                             font.pointSize: 15
+                            KeyNavigation.tab: txtPenalty3
                             onTextChanged: calcFinalScore()
                             onFocusChanged:{
                                 if(focus)
@@ -394,6 +400,7 @@ Item {
         //                    placeholderText: "0.000"
                             text: "0.000"
                             font.pointSize: 15
+                            KeyNavigation.tab: txtPenalty4
                             onTextChanged: calcFinalScore()
                             onFocusChanged:{
                                 if(focus)
@@ -422,6 +429,7 @@ Item {
         //                    placeholderText: "0.000"
                             text: "0.000"
                             font.pointSize: 15
+                            KeyNavigation.tab: txtPenaltyScore
                             onTextChanged: calcFinalScore()
                             onFocusChanged:{
                                 if(focus)
