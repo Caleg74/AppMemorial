@@ -35,7 +35,7 @@ public:
     void getRegisterdGymnastList(QStringList* p_pList);
 
     // for cbb (gymnast list for this event only)
-    void getEventSelectedGymnastList(QStringList* p_pList);
+    void getEventSelectedGymnastList(QStringList* p_pList, bool p_bMen, bool p_bWomen);
 
     int getGymnastId(QString& p_firstName, QString& p_lastName);
 

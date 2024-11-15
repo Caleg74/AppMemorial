@@ -2,7 +2,6 @@
 #include <QQmlApplicationEngine>
 #include <QDebug>
 #include "coreapplication.h"
-#include "apparatuslist.h"
 #include "gymnasteventlist.h"
 
 int main(int argc, char *argv[])

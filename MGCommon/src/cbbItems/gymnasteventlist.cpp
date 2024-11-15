@@ -26,13 +26,13 @@ void GymnastEventList::Init(QQmlApplicationEngine &p_qEngine)
     pComboContext->setContextProperty("gymnastEventModel", &m_cCbbModel);
 
     // move after mySQL read-out
-    FillList();
+    FillList(true, true);
 }
 
-void GymnastEventList::FillList()
+void GymnastEventList::FillList(bool p_bMen, bool p_bWomen)
 {
     QStringList tmp;
-    dbInterface::Instance()->getEventSelectedGymnastList(&tmp);
+    dbInterface::Instance()->getEventSelectedGymnastList(&tmp, p_bMen, p_bWomen);
 
     m_cCbbModel.setComboList(tmp);
 }

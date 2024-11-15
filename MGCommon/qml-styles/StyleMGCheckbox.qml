@@ -1,5 +1,5 @@
 import QtQuick
-import QtQuick.Controls
+import QtQuick.Controls.Basic
 
 CheckBox {
     id: control
@@ -10,7 +10,7 @@ CheckBox {
         implicitWidth: 30
         implicitHeight: 30
         x: control.leftPadding
-        y: parent.height / 2 - height / 2
+        y: (parent.height / 2) - (height / 2)
         radius: 3
         border.color: control.down ? "grey" : "#0a3f60"
 
@@ -27,12 +27,10 @@ CheckBox {
 
     contentItem: Text {
         text: control.text
-        font.pointSize: 15
+        font: control.font
         opacity: enabled ? 1.0 : 0.3
         color: "#0a3f60"
         verticalAlignment: Text.AlignVCenter
         leftPadding: control.indicator.width + control.spacing
     }
 }
-
-

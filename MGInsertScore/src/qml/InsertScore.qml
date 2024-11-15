@@ -119,7 +119,7 @@ Item {
         color: "#d0d0d0"
         anchors.fill: parent
         anchors.leftMargin: 20
-
+        opacity: 1
         Column
         {
             width: parent.width
@@ -439,7 +439,7 @@ Item {
                                      string finalScore,
                                      bool finalApparatus)
 
-                    enabled: (txtDifficultyScore.text.length) && (txtExecutionScore.text.length)
+                    enabled: (parseFloat(txtDifficultyScore.text.replace(",", ".")) > 0.0)
                              && (cbbGymnastSelection.currentIndex >= 0)
                              && (cbbAppartus.currentIndex >= 0)
                     onClicked: {
@@ -464,14 +464,17 @@ Item {
         //************************************************************************************
 
         Popup {
-            id: popup
+            id: popupSettings
+            objectName: "popupSettings"
             x: root.width-btnSettings.width-width-5
             y: btnSettings.height
-            width: 250
-            height: 160
+            width: 270
+            height: 190
             modal: true
             focus: true
             spacing: 10
+            signal settingsChanged(bool MList, bool FList)
+
             background: Rectangle {
                     color: "#e0e0e0"
                     border.color: "darkgrey"
@@ -496,7 +499,7 @@ Item {
 
                 Row {
                     Text {
-                        width: 150
+                        width: 130
                         text: "Numero giurati"
                         renderType: Text.NativeRendering
                         font.pointSize: 12
@@ -520,6 +523,27 @@ Item {
                 }
 
                 Row {
+                    Text {
+                        width: 130
+                        text: "Lista ginnastisti"
+                        renderType: Text.NativeRendering
+                        font.pointSize: 12
+                        color: "#0a3f60"
+                      }
+
+                    StyleMGCheckbox {
+                        id: chkListM
+                        checked: true
+                        text: "M"
+                    }
+                    StyleMGCheckbox {
+                        id: chkListF
+                        checked: true
+                        text: "F"
+                    }
+                }
+
+                Row {
                     anchors.horizontalCenter: parent.horizontalCenter
                     StyleMGPushButton {
                         id:btnSaveSettings
@@ -527,13 +551,15 @@ Item {
                         height: 40
                         buttonText: "Chiudi"
                         onClicked: {
-                            popup.close()
+                            popupSettings.close()
                         }
                     }
                 }
             }
             closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutsideParent
+            onOpened: { root.opacity = 0.5}
             onClosed: {
+                root.opacity = 1
                 if (cbbRefereeNbr.currentIndex === 0) // = 2 referrees
                 {
                     nbrOfReferees = 2;
@@ -548,6 +574,8 @@ Item {
                 }
 
                 resetValues()
+
+                settingsChanged(chkListM.checked, chkListF.checked)
             }
         }
 
@@ -566,7 +594,7 @@ Item {
                     color: parent.down ? "#bbbbbb" :
                             (parent.hovered ? "#d6d6d6" : "transparent")
             }
-            onClicked: popup.open()
+            onClicked: popupSettings.open()
         }
     }
 }

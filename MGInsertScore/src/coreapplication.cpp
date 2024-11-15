@@ -1,11 +1,12 @@
 #include "coreapplication.h"
 #include <QQmlContext>
+#include <QQuickView>
 #include "dbinterface.h"
 #include "savescore.h"
 #include "messagebox.h"
 #include <qquickitem.h>
 #include "apparatuslist.h"
-
+#include "gymnasteventlist.h"
 
 CoreApplication::CoreApplication(QObject *parent)
     : QObject(parent)
@@ -68,6 +69,13 @@ void CoreApplication::Connect()
         connect(cbbGymnast, SIGNAL(selectedTextChanged(QString)),
                 this, SLOT(onGymnastChanged(QString)));
     }
+
+    QObject* settingsPopup = m_pAppEngine->rootObjects().first()->findChild<QObject*>("popupSettings");
+    if (settingsPopup)
+    {
+        QObject::connect(settingsPopup, SIGNAL(settingsChanged(bool, bool)),
+                     this, SLOT(onSettingsChanged(bool, bool)));
+    }
 }
 
 void CoreApplication::onGymnastChanged(QString p_currentTxt)
@@ -94,4 +102,9 @@ void CoreApplication::onGymnastChanged(QString p_currentTxt)
             qDebug() << "onGymnastChanged(): first/last name is empty";
         }
     }
+}
+
+void CoreApplication::onSettingsChanged(bool p_bMlistSelected, bool p_bFlistSelected)
+{
+    GymnastEventList::Instance()->FillList(p_bMlistSelected, p_bFlistSelected);
 }

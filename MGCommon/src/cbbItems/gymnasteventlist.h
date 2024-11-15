@@ -13,7 +13,8 @@ public:
     /** Initializes the core application components */
     void Init(QQmlApplicationEngine &p_qEngine);
 
-    void FillList();
+    /* File the gymnast List for Men or Women or both */
+    void FillList(bool p_bMen, bool p_bWomen);
 
 private:
 

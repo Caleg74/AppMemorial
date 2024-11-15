@@ -23,6 +23,7 @@ signals:
 
 public slots:
     void onGymnastChanged(QString p_currentTxt);
+    void onSettingsChanged(bool p_bMlistSelected, bool p_bFlistSelected);
 
 private:
     QQmlApplicationEngine* m_pAppEngine;

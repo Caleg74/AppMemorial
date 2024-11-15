@@ -68,7 +68,7 @@ void dbIfaceBase::getRegisterdGymnastList(QStringList* p_pList)
     }
 }
 
-void dbIfaceBase::getEventSelectedGymnastList(QStringList* p_pList)
+void dbIfaceBase::getEventSelectedGymnastList(QStringList* p_pList, bool p_bMen, bool p_bWomen)
 {
     if (m_bInitialized)
     {
@@ -76,8 +76,28 @@ void dbIfaceBase::getEventSelectedGymnastList(QStringList* p_pList)
         QSqlQuery query(db);
         int iEventId = getCurrentEventId();
 
-        QString strQuery = "SELECT first_name, last_name, gender, nation_id FROM event_athlete_vw WHERE"
-                           " sport_event_id = "   + QString::number(iEventId, 10);
+        QString strQuery = "";
+        if (p_bMen && p_bWomen)
+        {
+            strQuery = "SELECT first_name, last_name, gender, nation_id FROM event_athlete_vw WHERE"
+                               " sport_event_id = "   + QString::number(iEventId, 10);
+        }
+        else if (p_bMen)
+        {
+            strQuery = "SELECT first_name, last_name, gender, nation_id FROM event_athlete_vw WHERE"
+                               " sport_event_id = "   + QString::number(iEventId, 10) +
+                               " AND gender = 'M'"; // as CHAR
+        }
+        else if (p_bWomen)
+        {
+            strQuery = "SELECT first_name, last_name, gender, nation_id FROM event_athlete_vw WHERE"
+                               " sport_event_id = "   + QString::number(iEventId, 10) +
+                               " AND gender = 'F'"; // as CHAR
+        }
+        else
+        {
+            qWarning() << "At least M o F must be selected";
+        }
 
         query.exec(strQuery);
 
